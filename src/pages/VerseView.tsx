@@ -1,10 +1,9 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, ChevronLeft, ChevronRight, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { chapters } from "@/data/gita";
+import { chapters, getChapterName, pickText } from "@/data/gita";
 import { useBookmarks } from "@/hooks/useBookmarks";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { chapterNames } from "@/i18n/translations";
 
 const VerseView = () => {
   const { chapterId, verseId } = useParams();
@@ -27,7 +26,9 @@ const VerseView = () => {
   const bookmarked = isBookmarked(chapter.id, verse.id);
   const hasPrev = verseIdx > 0;
   const hasNext = verseIdx < chapter.verses.length - 1;
-  const chapterName = chapterNames[chapter.id]?.[language] ?? chapter.nameBengali;
+  const chapterName = getChapterName(chapter, language);
+  const translation = pickText(verse.translation, language);
+  const explanation = pickText(verse.explanation, language);
 
   const goPrev = () => {
     if (hasPrev) navigate(`/chapters/${chapter.id}/verses/${chapter.verses[verseIdx - 1].id}`, { replace: true });
@@ -76,38 +77,39 @@ const VerseView = () => {
         </p>
       </section>
 
-      {/* Transliteration (Bengali script) */}
-      <section className="rounded-2xl bg-secondary/40 p-5 mb-4">
-        <p className="text-sm text-muted-foreground mb-2 font-semibold uppercase tracking-wide">
-          {t("transliteration")}
-        </p>
-        <p
-          className="text-lg text-foreground whitespace-pre-line leading-relaxed"
-          style={{ fontFamily: "'Noto Serif Bengali', serif" }}
-        >
-          {verse.bengaliTransliteration}
-        </p>
-      </section>
+      {/* Transliteration */}
+      {verse.transliteration && (
+        <section className="rounded-2xl bg-secondary/40 p-5 mb-4">
+          <p className="text-sm text-muted-foreground mb-2 font-semibold uppercase tracking-wide">
+            {t("transliteration")}
+          </p>
+          <p className="text-lg text-foreground whitespace-pre-line leading-relaxed italic">
+            {verse.transliteration}
+          </p>
+        </section>
+      )}
 
       {/* Translation */}
       <section className="rounded-2xl border-2 border-border bg-card p-5 mb-4">
         <p className="text-sm text-primary mb-2 font-semibold uppercase tracking-wide">
           {t("translation")}
         </p>
-        <p className="text-lg text-foreground leading-relaxed">
-          {verse.bengaliTranslation}
+        <p className="text-lg text-foreground leading-relaxed whitespace-pre-line">
+          {translation}
         </p>
       </section>
 
       {/* Explanation */}
-      <section className="rounded-2xl border-2 border-border bg-card p-5 mb-8">
-        <p className="text-sm text-primary mb-2 font-semibold uppercase tracking-wide">
-          {t("explanation")}
-        </p>
-        <p className="text-lg text-foreground leading-relaxed">
-          {verse.bengaliExplanation}
-        </p>
-      </section>
+      {explanation && (
+        <section className="rounded-2xl border-2 border-border bg-card p-5 mb-8">
+          <p className="text-sm text-primary mb-2 font-semibold uppercase tracking-wide">
+            {t("explanation")}
+          </p>
+          <p className="text-lg text-foreground leading-relaxed whitespace-pre-line">
+            {explanation}
+          </p>
+        </section>
+      )}
 
       {/* Prev / Next */}
       <div className="flex items-center justify-between gap-3">

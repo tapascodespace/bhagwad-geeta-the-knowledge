@@ -1,8 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
-import { chapters } from "@/data/gita";
+import { chapters, getChapterName } from "@/data/gita";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { chapterNames } from "@/i18n/translations";
 
 const ChapterList = () => {
   const navigate = useNavigate();
@@ -16,7 +15,7 @@ const ChapterList = () => {
 
       <div className="space-y-4">
         {chapters.map((ch) => {
-          const name = chapterNames[ch.id]?.[language] ?? ch.nameBengali;
+          const name = getChapterName(ch, language);
           return (
             <button
               key={ch.id}
