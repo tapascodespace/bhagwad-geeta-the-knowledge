@@ -1,49 +1,68 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { chapters } from "@/data/gita";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { chapters } from "@/data/gita";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { chapterNames, chapterSummaries } from "@/i18n/translations";
 
 const ChapterDetail = () => {
   const { chapterId } = useParams();
   const navigate = useNavigate();
+  const { t, language } = useLanguage();
   const chapter = chapters.find((c) => c.id === Number(chapterId));
 
   if (!chapter) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <p className="text-muted-foreground">অধ্যায় পাওয়া যায়নি</p>
+        <p className="text-muted-foreground text-lg">{t("notFound")}</p>
       </div>
     );
   }
 
+  const name = chapterNames[chapter.id]?.[language] ?? chapter.nameBengali;
+  const summary = chapterSummaries[chapter.id]?.[language] ?? chapter.summary;
+
   return (
-    <div className="pb-24 px-4 pt-4">
-      <Button variant="ghost" size="sm" className="mb-3 -ml-2" onClick={() => navigate("/chapters")}>
-        <ArrowLeft className="w-4 h-4 mr-1" /> ফিরে যান
+    <div className="pb-28 px-4 pt-4">
+      <Button
+        variant="ghost"
+        size="lg"
+        className="mb-4 -ml-2 text-base h-12"
+        onClick={() => navigate("/chapters")}
+      >
+        <ArrowLeft className="w-5 h-5 mr-2" /> {t("back")}
       </Button>
 
-      <div className="mb-4">
-        <p className="text-xs text-primary font-medium">অধ্যায় {chapter.id}</p>
-        <h2
-          className="text-xl font-bold text-foreground"
-          style={{ fontFamily: "'Noto Serif Bengali', serif" }}
-        >
-          {chapter.nameBengali}
+      <div className="mb-6 px-1">
+        <p className="text-base text-primary font-semibold mb-1">
+          {t("chapter")} {chapter.id}
+        </p>
+        <h2 className="text-3xl font-bold text-foreground leading-tight">
+          {name}
         </h2>
-        <p className="text-sm text-muted-foreground mt-1">{chapter.summary}</p>
+        <p className="text-lg text-muted-foreground mt-3 leading-relaxed">
+          {summary}
+        </p>
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-3">
         {chapter.verses.map((verse) => (
           <button
             key={verse.id}
             onClick={() => navigate(`/chapters/${chapter.id}/verses/${verse.id}`)}
-            className="w-full text-left rounded-xl border border-border bg-card p-4 shadow-sm active:scale-[0.98] transition-transform"
+            className="w-full text-left rounded-2xl border-2 border-border bg-card p-5 shadow-sm active:scale-[0.98] transition-transform"
           >
-            <p className="text-xs text-primary font-medium mb-1">শ্লোক {verse.id}</p>
-            <p className="text-sm text-foreground line-clamp-2 leading-relaxed">
-              {verse.bengaliTranslation}
-            </p>
+            <div className="flex items-start gap-3">
+              <div className="flex-1 min-w-0">
+                <p className="text-base text-primary font-semibold mb-2">
+                  {t("verse")} {verse.id}
+                </p>
+                <p className="text-base text-foreground line-clamp-3 leading-relaxed">
+                  {verse.bengaliTranslation}
+                </p>
+              </div>
+              <ChevronRight className="w-6 h-6 text-muted-foreground shrink-0 mt-1" />
+            </div>
           </button>
         ))}
       </div>
