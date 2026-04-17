@@ -1,9 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { Heart, ChevronRight } from "lucide-react";
 import { useBookmarks } from "@/hooks/useBookmarks";
-import { chapters } from "@/data/gita";
+import { chapters, getChapterName, pickText } from "@/data/gita";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { chapterNames } from "@/i18n/translations";
 
 const Bookmarks = () => {
   const navigate = useNavigate();
@@ -36,7 +35,8 @@ const Bookmarks = () => {
       ) : (
         <div className="space-y-3">
           {items.map(({ chapter, verse }) => {
-            const chName = chapterNames[chapter.id]?.[language] ?? chapter.nameBengali;
+            const chName = getChapterName(chapter, language);
+            const preview = pickText(verse.translation, language);
             return (
               <button
                 key={`${chapter.id}-${verse.id}`}
@@ -49,7 +49,7 @@ const Bookmarks = () => {
                       {chName} · {t("verse")} {verse.id}
                     </p>
                     <p className="text-base text-foreground line-clamp-3 leading-relaxed">
-                      {verse.bengaliTranslation}
+                      {preview}
                     </p>
                   </div>
                   <ChevronRight className="w-6 h-6 text-muted-foreground shrink-0 mt-1" />
