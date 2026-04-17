@@ -52,8 +52,10 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Noto Sans Bengali', 'Noto Sans', sans-serif;
+    font-family: 'Noto Sans Bengali', 'Noto Sans Devanagari', 'Noto Sans', sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
   }
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;500;600;700&family=Noto+Serif+Bengali:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;500;600;700&family=Noto+Serif+Bengali:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@400;500;600;700&display=swap');

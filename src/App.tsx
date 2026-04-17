@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -9,9 +9,20 @@ import ChapterList from "@/pages/ChapterList";
 import ChapterDetail from "@/pages/ChapterDetail";
 import VerseView from "@/pages/VerseView";
 import Bookmarks from "@/pages/Bookmarks";
+import LanguageSelect from "@/pages/LanguageSelect";
 import NotFound from "@/pages/NotFound";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const queryClient = new QueryClient();
+
+const RequireLanguage = ({ children }: { children: JSX.Element }) => {
+  const { hasChosen } = useLanguage();
+  const location = useLocation();
+  if (!hasChosen && location.pathname !== "/welcome") {
+    return <Navigate to="/welcome" replace />;
+  }
+  return children;
+};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -21,11 +32,13 @@ const App = () => (
       <BrowserRouter>
         <div className="max-w-lg mx-auto min-h-screen">
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/chapters" element={<ChapterList />} />
-            <Route path="/chapters/:chapterId" element={<ChapterDetail />} />
-            <Route path="/chapters/:chapterId/verses/:verseId" element={<VerseView />} />
-            <Route path="/bookmarks" element={<Bookmarks />} />
+            <Route path="/welcome" element={<LanguageSelect initial />} />
+            <Route path="/settings/language" element={<LanguageSelect />} />
+            <Route path="/" element={<RequireLanguage><Home /></RequireLanguage>} />
+            <Route path="/chapters" element={<RequireLanguage><ChapterList /></RequireLanguage>} />
+            <Route path="/chapters/:chapterId" element={<RequireLanguage><ChapterDetail /></RequireLanguage>} />
+            <Route path="/chapters/:chapterId/verses/:verseId" element={<RequireLanguage><VerseView /></RequireLanguage>} />
+            <Route path="/bookmarks" element={<RequireLanguage><Bookmarks /></RequireLanguage>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <BottomNav />

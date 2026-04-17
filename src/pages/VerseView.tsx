@@ -1,13 +1,16 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { chapters } from "@/data/gita";
-import { useBookmarks } from "@/hooks/useBookmarks";
 import { ArrowLeft, ChevronLeft, ChevronRight, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { chapters } from "@/data/gita";
+import { useBookmarks } from "@/hooks/useBookmarks";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { chapterNames } from "@/i18n/translations";
 
 const VerseView = () => {
   const { chapterId, verseId } = useParams();
   const navigate = useNavigate();
   const { isBookmarked, toggleBookmark } = useBookmarks();
+  const { t, language } = useLanguage();
 
   const chapter = chapters.find((c) => c.id === Number(chapterId));
   const verseIdx = chapter?.verses.findIndex((v) => v.id === Number(verseId)) ?? -1;
@@ -16,7 +19,7 @@ const VerseView = () => {
   if (!chapter || !verse) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <p className="text-muted-foreground">শ্লোক পাওয়া যায়নি</p>
+        <p className="text-muted-foreground text-lg">{t("notFound")}</p>
       </div>
     );
   }
@@ -24,6 +27,7 @@ const VerseView = () => {
   const bookmarked = isBookmarked(chapter.id, verse.id);
   const hasPrev = verseIdx > 0;
   const hasNext = verseIdx < chapter.verses.length - 1;
+  const chapterName = chapterNames[chapter.id]?.[language] ?? chapter.nameBengali;
 
   const goPrev = () => {
     if (hasPrev) navigate(`/chapters/${chapter.id}/verses/${chapter.verses[verseIdx - 1].id}`, { replace: true });
@@ -35,58 +39,95 @@ const VerseView = () => {
   return (
     <div className="pb-28 px-4 pt-4">
       <div className="flex items-center justify-between mb-4">
-        <Button variant="ghost" size="sm" className="-ml-2" onClick={() => navigate(`/chapters/${chapter.id}`)}>
-          <ArrowLeft className="w-4 h-4 mr-1" /> অধ্যায় {chapter.id}
+        <Button
+          variant="ghost"
+          size="lg"
+          className="-ml-2 text-base h-12"
+          onClick={() => navigate(`/chapters/${chapter.id}`)}
+        >
+          <ArrowLeft className="w-5 h-5 mr-2" /> {t("chapter")} {chapter.id}
         </Button>
         <Button
           variant="ghost"
           size="icon"
+          className="h-14 w-14"
           onClick={() => toggleBookmark(chapter.id, verse.id)}
+          aria-label="bookmark"
         >
-          <Heart className={`w-5 h-5 ${bookmarked ? "fill-primary text-primary" : "text-muted-foreground"}`} />
+          <Heart
+            className={`!w-7 !h-7 ${bookmarked ? "fill-primary text-primary" : "text-muted-foreground"}`}
+          />
         </Button>
       </div>
 
-      <p className="text-xs text-primary font-medium mb-1">
-        অধ্যায় {chapter.id} · শ্লোক {verse.id}
-      </p>
-
-      {/* Sanskrit */}
-      <div className="rounded-xl bg-secondary/50 p-4 mb-4">
-        <p className="text-xs text-muted-foreground mb-1 font-medium">সংস্কৃত</p>
-        <p className="text-base text-foreground whitespace-pre-line leading-relaxed">{verse.sanskrit}</p>
+      <div className="mb-5 px-1">
+        <p className="text-base text-primary font-semibold mb-1">
+          {chapterName} · {t("verse")} {verse.id}
+        </p>
       </div>
 
-      {/* Bengali Transliteration */}
-      <div className="rounded-xl bg-secondary/50 p-4 mb-4">
-        <p className="text-xs text-muted-foreground mb-1 font-medium">বাংলা লিপি</p>
+      {/* Sanskrit */}
+      <section className="rounded-2xl bg-secondary/60 p-5 mb-4">
+        <p className="text-sm text-muted-foreground mb-2 font-semibold uppercase tracking-wide">
+          {t("sanskrit")}
+        </p>
+        <p className="text-xl text-foreground whitespace-pre-line leading-loose font-medium">
+          {verse.sanskrit}
+        </p>
+      </section>
+
+      {/* Transliteration (Bengali script) */}
+      <section className="rounded-2xl bg-secondary/40 p-5 mb-4">
+        <p className="text-sm text-muted-foreground mb-2 font-semibold uppercase tracking-wide">
+          {t("transliteration")}
+        </p>
         <p
-          className="text-base text-foreground whitespace-pre-line leading-relaxed"
+          className="text-lg text-foreground whitespace-pre-line leading-relaxed"
           style={{ fontFamily: "'Noto Serif Bengali', serif" }}
         >
           {verse.bengaliTransliteration}
         </p>
-      </div>
+      </section>
 
       {/* Translation */}
-      <div className="rounded-xl border border-border bg-card p-4 mb-4">
-        <p className="text-xs text-primary mb-1 font-medium">বাংলা অনুবাদ</p>
-        <p className="text-base text-foreground leading-relaxed">{verse.bengaliTranslation}</p>
-      </div>
+      <section className="rounded-2xl border-2 border-border bg-card p-5 mb-4">
+        <p className="text-sm text-primary mb-2 font-semibold uppercase tracking-wide">
+          {t("translation")}
+        </p>
+        <p className="text-lg text-foreground leading-relaxed">
+          {verse.bengaliTranslation}
+        </p>
+      </section>
 
       {/* Explanation */}
-      <div className="rounded-xl border border-border bg-card p-4 mb-6">
-        <p className="text-xs text-primary mb-1 font-medium">ব্যাখ্যা</p>
-        <p className="text-sm text-foreground leading-relaxed">{verse.bengaliExplanation}</p>
-      </div>
+      <section className="rounded-2xl border-2 border-border bg-card p-5 mb-8">
+        <p className="text-sm text-primary mb-2 font-semibold uppercase tracking-wide">
+          {t("explanation")}
+        </p>
+        <p className="text-lg text-foreground leading-relaxed">
+          {verse.bengaliExplanation}
+        </p>
+      </section>
 
       {/* Prev / Next */}
-      <div className="flex items-center justify-between">
-        <Button variant="outline" size="sm" disabled={!hasPrev} onClick={goPrev}>
-          <ChevronLeft className="w-4 h-4 mr-1" /> পূর্ববর্তী
+      <div className="flex items-center justify-between gap-3">
+        <Button
+          variant="outline"
+          size="lg"
+          className="flex-1 h-14 text-base border-2"
+          disabled={!hasPrev}
+          onClick={goPrev}
+        >
+          <ChevronLeft className="w-5 h-5 mr-1" /> {t("previous")}
         </Button>
-        <Button variant="outline" size="sm" disabled={!hasNext} onClick={goNext}>
-          পরবর্তী <ChevronRight className="w-4 h-4 ml-1" />
+        <Button
+          variant="outline"
+          size="lg"
+          className="flex-1 h-14 text-base border-2"
+          disabled={!hasNext}
+          onClick={goNext}
+        >
+          {t("next")} <ChevronRight className="w-5 h-5 ml-1" />
         </Button>
       </div>
     </div>
