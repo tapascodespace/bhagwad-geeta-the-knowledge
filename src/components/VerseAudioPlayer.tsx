@@ -16,14 +16,27 @@ interface Props {
 
 const audioCache = new Map<string, string>(); // key -> object URL
 
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string;
+const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string;
+
 const fetchPart = async (part: Part, text: string, key: string): Promise<string> => {
   if (audioCache.has(key)) return audioCache.get(key)!;
-  const { data, error } = await supabase.functions.invoke("tts", {
-    body: { text, part },
+  const { data: sessionData } = await supabase.auth.getSession();
+  const token = sessionData.session?.access_token ?? SUPABASE_KEY;
+  const res = await fetch(`${SUPABASE_URL}/functions/v1/tts`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      apikey: SUPABASE_KEY,
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ text, part }),
   });
-  if (error) throw error;
-  // data is a Blob when the function returns binary
-  const blob = data instanceof Blob ? data : new Blob([data as ArrayBuffer], { type: "audio/mpeg" });
+  if (!res.ok) {
+    const errText = await res.text();
+    throw new Error(errText || `TTS failed: ${res.status}`);
+  }
+  const blob = await res.blob();
   const url = URL.createObjectURL(blob);
   audioCache.set(key, url);
   return url;
