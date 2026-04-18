@@ -1,13 +1,17 @@
-// Global single-audio controller. Ensures that across the entire app,
-// only ONE audio plays at a time and switching verses/parts always stops
-// any previously playing audio cleanly.
+// Global single-audio controller. Ensures only ONE audio plays at a time
+// across the app and switching verses/parts always stops previous playback.
 
-type Listener = (state: { activeId: string | null; isPlaying: boolean }) => void;
+export interface AudioState {
+  activeId: string | null;
+  isPlaying: boolean;
+}
+
+type Listener = () => void;
 
 class AudioController {
   private audio: HTMLAudioElement | null = null;
-  private activeId: string | null = null;
   private listeners = new Set<Listener>();
+  private snapshot: AudioState = { activeId: null, isPlaying: false };
 
   private ensureAudio() {
     if (!this.audio) {
@@ -17,22 +21,36 @@ class AudioController {
     return this.audio;
   }
 
-  subscribe(l: Listener) {
+  subscribe = (l: Listener) => {
     this.listeners.add(l);
-    return () => this.listeners.delete(l);
-  }
+    return () => {
+      this.listeners.delete(l);
+    };
+  };
 
-  private emit() {
-    const state = { activeId: this.activeId, isPlaying: !!this.audio && !this.audio.paused };
-    this.listeners.forEach((l) => l(state));
+  getSnapshot = (): AudioState => this.snapshot;
+
+  private update(next: Partial<AudioState>) {
+    const merged = { ...this.snapshot, ...next };
+    if (merged.activeId === this.snapshot.activeId && merged.isPlaying === this.snapshot.isPlaying) {
+      return;
+    }
+    this.snapshot = merged;
+    this.listeners.forEach((l) => l());
   }
 
   isActive(id: string) {
-    return this.activeId === id && !!this.audio && !this.audio.paused;
+    return this.snapshot.activeId === id && this.snapshot.isPlaying;
   }
 
   isPaused(id: string) {
-    return this.activeId === id && !!this.audio && this.audio.paused && this.audio.currentTime > 0;
+    return (
+      this.snapshot.activeId === id &&
+      !this.snapshot.isPlaying &&
+      !!this.audio &&
+      this.audio.currentTime > 0 &&
+      !this.audio.ended
+    );
   }
 
   stop() {
@@ -42,38 +60,35 @@ class AudioController {
       this.audio.load();
       this.audio.onended = null;
     }
-    this.activeId = null;
-    this.emit();
+    this.update({ activeId: null, isPlaying: false });
   }
 
   pause() {
     if (this.audio && !this.audio.paused) {
       this.audio.pause();
-      this.emit();
+      this.update({ isPlaying: false });
     }
   }
 
   async resume(id: string) {
-    if (this.activeId === id && this.audio) {
+    if (this.snapshot.activeId === id && this.audio) {
       await this.audio.play();
-      this.emit();
+      this.update({ isPlaying: true });
     }
   }
 
   async play(id: string, url: string, onEnded?: () => void) {
-    // Always stop whatever was playing before
     const a = this.ensureAudio();
     a.pause();
     a.onended = null;
-    this.activeId = id;
     a.src = url;
     a.currentTime = 0;
     a.onended = () => {
-      this.emit();
+      this.update({ isPlaying: false, activeId: null });
       onEnded?.();
     };
     await a.play();
-    this.emit();
+    this.update({ activeId: id, isPlaying: true });
   }
 }
 
