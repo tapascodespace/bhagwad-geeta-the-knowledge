@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { Pause, Play, Loader2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { toast } from "@/hooks/use-toast";
@@ -8,13 +7,13 @@ import { toast } from "@/hooks/use-toast";
 type Part = "sanskrit" | "translation" | "explanation";
 
 interface Props {
-  cacheKey: string; // unique per verse + language
+  cacheKey: string;
   sanskrit: string;
   translation: string;
   explanation?: string;
 }
 
-const audioCache = new Map<string, string>(); // key -> object URL
+const audioCache = new Map<string, string>();
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string;
 const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string;
@@ -42,6 +41,12 @@ const fetchPart = async (part: Part, text: string, key: string): Promise<string>
   return url;
 };
 
+const PART_LABEL: Record<Part, string> = {
+  sanskrit: "Sanskrit",
+  translation: "Translation",
+  explanation: "Explanation",
+};
+
 const VerseAudioPlayer = ({ cacheKey, sanskrit, translation, explanation }: Props) => {
   const { t } = useLanguage();
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -54,16 +59,13 @@ const VerseAudioPlayer = ({ cacheKey, sanskrit, translation, explanation }: Prop
   const stoppedRef = useRef(false);
 
   useEffect(() => {
-    if (!audioRef.current) {
-      audioRef.current = new Audio();
-    }
+    if (!audioRef.current) audioRef.current = new Audio();
     return () => {
       audioRef.current?.pause();
       audioRef.current = null;
     };
   }, []);
 
-  // Reset when verse changes
   useEffect(() => {
     audioRef.current?.pause();
     setIsPlaying(false);
@@ -93,7 +95,6 @@ const VerseAudioPlayer = ({ cacheKey, sanskrit, translation, explanation }: Prop
       a.src = url;
       a.onended = async () => {
         idxRef.current += 1;
-        // small pause between sections
         await new Promise((r) => setTimeout(r, 600));
         playNext();
       };
@@ -118,13 +119,11 @@ const VerseAudioPlayer = ({ cacheKey, sanskrit, translation, explanation }: Prop
       setIsPlaying(false);
       return;
     }
-    // resume if paused mid-track
     if (a.src && a.currentTime > 0 && !a.ended) {
       await a.play();
       setIsPlaying(true);
       return;
     }
-    // fresh start
     stoppedRef.current = false;
     const q: { part: Part; text: string }[] = [
       { part: "sanskrit", text: sanskrit },
@@ -138,29 +137,64 @@ const VerseAudioPlayer = ({ cacheKey, sanskrit, translation, explanation }: Prop
     playNext();
   };
 
-  const label = isLoading
-    ? "Loading..."
-    : isPlaying
-    ? `Playing ${currentPart ?? ""}`
-    : "Play Audio";
+  const parts: Part[] = explanation && explanation.trim()
+    ? ["sanskrit", "translation", "explanation"]
+    : ["sanskrit", "translation"];
 
   return (
-    <Button
-      variant="default"
-      size="lg"
-      className="w-full h-14 text-base mb-4 gap-2"
-      onClick={handleClick}
-      disabled={isLoading && !isPlaying}
-    >
-      {isLoading ? (
-        <Loader2 className="w-5 h-5 animate-spin" />
-      ) : isPlaying ? (
-        <Pause className="w-5 h-5" />
-      ) : (
-        <Play className="w-5 h-5" />
-      )}
-      {label}
-    </Button>
+    <div className="rounded-3xl bg-gradient-card border border-gold/30 p-5 mb-5 shadow-card">
+      <div className="flex items-center gap-4">
+        {/* Big circular play button */}
+        <button
+          onClick={handleClick}
+          disabled={isLoading && !isPlaying}
+          aria-label={isPlaying ? "Pause" : "Play"}
+          className={`relative shrink-0 w-16 h-16 rounded-full bg-gradient-primary flex items-center justify-center text-primary-foreground shadow-elegant active:scale-95 transition-all ${
+            isPlaying ? "animate-soft-pulse" : ""
+          } ${isLoading && !isPlaying ? "opacity-70" : ""}`}
+        >
+          {isLoading ? (
+            <Loader2 className="w-7 h-7 animate-spin" />
+          ) : isPlaying ? (
+            <Pause className="w-7 h-7" fill="currentColor" />
+          ) : (
+            <Play className="w-7 h-7 ml-0.5" fill="currentColor" />
+          )}
+        </button>
+
+        <div className="flex-1 min-w-0">
+          <p className="text-xs text-gold font-semibold uppercase tracking-widest mb-1">
+            ✦ Sacred Recitation
+          </p>
+          <p className="text-sm text-muted-foreground">
+            {isPlaying && currentPart
+              ? `Now playing · ${PART_LABEL[currentPart]}`
+              : isLoading
+              ? "Preparing audio..."
+              : "Tap to listen"}
+          </p>
+        </div>
+      </div>
+
+      {/* Section pills */}
+      <div className="flex items-center gap-2 mt-4">
+        {parts.map((p) => {
+          const active = currentPart === p && (isPlaying || isLoading);
+          return (
+            <span
+              key={p}
+              className={`flex-1 text-center text-xs font-medium py-1.5 px-2 rounded-full border transition-all ${
+                active
+                  ? "bg-gradient-primary text-primary-foreground border-transparent shadow-soft"
+                  : "bg-background/60 text-muted-foreground border-border/60"
+              }`}
+            >
+              {PART_LABEL[p]}
+            </span>
+          );
+        })}
+      </div>
+    </div>
   );
 };
 
