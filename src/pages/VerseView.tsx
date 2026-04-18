@@ -118,11 +118,6 @@ const VerseView = () => {
         <p className="font-display text-xl text-foreground/85 mt-1">
           {chapterName}
         </p>
-        {chapter.subtitle && (
-          <p className="text-sm text-muted-foreground italic mt-1">
-            {pickText(chapter.subtitle, language)}
-          </p>
-        )}
       </div>
 
       {/* Main verse card */}
