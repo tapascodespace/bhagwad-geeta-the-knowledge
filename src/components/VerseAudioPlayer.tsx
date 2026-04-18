@@ -49,9 +49,9 @@ const fetchAudio = async (part: Part, text: string, key: string): Promise<string
 // Subscribe to global audio state via useSyncExternalStore
 const useAudioState = () =>
   useSyncExternalStore(
-    (cb) => audioController.subscribe(cb),
-    () => ({ activeId: (audioController as any).activeId as string | null, isPlaying: !(audioController as any).audio?.paused }),
-    () => ({ activeId: null, isPlaying: false })
+    audioController.subscribe,
+    audioController.getSnapshot,
+    audioController.getSnapshot
   );
 
 const VerseAudioPlayer = ({ cacheKey, sanskrit, translation, explanation }: Props) => {
@@ -63,7 +63,7 @@ const VerseAudioPlayer = ({ cacheKey, sanskrit, translation, explanation }: Prop
   // the previous verse so it can never keep playing in the background.
   useEffect(() => {
     return () => {
-      const active = (audioController as any).activeId as string | null;
+      const active = audioController.getSnapshot().activeId;
       if (active && active.startsWith(cacheKey)) {
         audioController.stop();
       }
