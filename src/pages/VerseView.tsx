@@ -5,6 +5,7 @@ import { chapters, getChapterName, pickText } from "@/data/gita";
 import { useBookmarks } from "@/hooks/useBookmarks";
 import { useLanguage } from "@/contexts/LanguageContext";
 import VerseAudioPlayer from "@/components/VerseAudioPlayer";
+import { BookOpen, Headphones, Lightbulb, Bookmark, Share2, Copy, ArrowRight, Settings } from "lucide-react";
 
 const VerseView = () => {
   const { chapterId, verseId } = useParams();

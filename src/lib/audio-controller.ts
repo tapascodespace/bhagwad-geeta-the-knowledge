@@ -30,6 +30,8 @@ class AudioController {
 
   getSnapshot = (): AudioState => this.snapshot;
 
+  getAudioElement = (): HTMLAudioElement | null => this.audio;
+
   private update(next: Partial<AudioState>) {
     const merged = { ...this.snapshot, ...next };
     if (merged.activeId === this.snapshot.activeId && merged.isPlaying === this.snapshot.isPlaying) {
