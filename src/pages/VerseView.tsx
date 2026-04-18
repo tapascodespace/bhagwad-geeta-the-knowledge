@@ -1,10 +1,20 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, ChevronLeft, ChevronRight, Heart } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import {
+  ArrowLeft,
+  Bookmark,
+  Settings,
+  BookOpen,
+  Headphones,
+  Lightbulb,
+  Share2,
+  Copy,
+  ArrowRight,
+} from "lucide-react";
 import { chapters, getChapterName, pickText } from "@/data/gita";
 import { useBookmarks } from "@/hooks/useBookmarks";
 import { useLanguage } from "@/contexts/LanguageContext";
 import VerseAudioPlayer from "@/components/VerseAudioPlayer";
+import { toast } from "@/hooks/use-toast";
 
 const VerseView = () => {
   const { chapterId, verseId } = useParams();
@@ -25,142 +35,247 @@ const VerseView = () => {
   }
 
   const bookmarked = isBookmarked(chapter.id, verse.id);
-  const hasPrev = verseIdx > 0;
   const hasNext = verseIdx < chapter.verses.length - 1;
   const chapterName = getChapterName(chapter, language);
   const translation = pickText(verse.translation, language);
   const explanation = pickText(verse.explanation, language);
 
-  const goPrev = () => {
-    if (hasPrev) navigate(`/chapters/${chapter.id}/verses/${chapter.verses[verseIdx - 1].id}`, { replace: true });
-  };
   const goNext = () => {
     if (hasNext) navigate(`/chapters/${chapter.id}/verses/${chapter.verses[verseIdx + 1].id}`, { replace: true });
   };
 
+  const handleCopy = async () => {
+    const text = `${verse.sanskrit}\n\n${translation}${explanation ? `\n\n${explanation}` : ""}`;
+    try {
+      await navigator.clipboard.writeText(text);
+      toast({ title: "Copied", description: "Verse copied to clipboard" });
+    } catch {
+      toast({ title: "Copy failed", variant: "destructive" });
+    }
+  };
+
+  const handleShare = async () => {
+    const text = `${chapterName} • ${t("verse")} ${verse.id}\n\n${verse.sanskrit}\n\n${translation}`;
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: `Bhagavad Gita ${chapter.id}.${verse.id}`, text });
+      } else {
+        await navigator.clipboard.writeText(text);
+        toast({ title: "Copied to clipboard" });
+      }
+    } catch {
+      /* user dismissed */
+    }
+  };
+
+  const cacheKey = `${chapter.id}-${verse.id}-${language}`;
+
   return (
-    <div key={`${chapter.id}-${verse.id}`} className="pb-28 px-4 pt-4 animate-fade-in">
-      <div className="flex items-center justify-between mb-4">
-        <Button
-          variant="ghost"
-          size="lg"
-          className="-ml-2 text-base h-12 rounded-full"
+    <div key={`${chapter.id}-${verse.id}`} className="pb-28 animate-fade-in">
+      {/* Top bar */}
+      <div className="flex items-center justify-between px-4 pt-4 pb-2">
+        <button
           onClick={() => navigate(`/chapters/${chapter.id}`)}
+          className="w-11 h-11 rounded-full bg-card border border-border/60 flex items-center justify-center shadow-soft active:scale-95 transition-all"
+          aria-label="Back"
         >
-          <ArrowLeft className="w-5 h-5 mr-2" /> {t("chapter")} {chapter.id}
-        </Button>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="h-14 w-14 rounded-full"
-          onClick={() => toggleBookmark(chapter.id, verse.id)}
-          aria-label="bookmark"
-        >
-          <Heart
-            className={`!w-7 !h-7 transition-all ${bookmarked ? "fill-primary text-primary scale-110" : "text-muted-foreground"}`}
-          />
-        </Button>
+          <ArrowLeft className="w-5 h-5 text-foreground" />
+        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => toggleBookmark(chapter.id, verse.id)}
+            className="w-11 h-11 rounded-full bg-card border border-border/60 flex items-center justify-center shadow-soft active:scale-95 transition-all"
+            aria-label="Bookmark"
+          >
+            <Bookmark
+              className={`w-5 h-5 transition-all ${
+                bookmarked ? "fill-primary text-primary" : "text-foreground"
+              }`}
+            />
+          </button>
+          <button
+            onClick={() => navigate("/settings/language")}
+            className="w-11 h-11 rounded-full bg-card border border-border/60 flex items-center justify-center shadow-soft active:scale-95 transition-all"
+            aria-label="Settings"
+          >
+            <Settings className="w-5 h-5 text-foreground" />
+          </button>
+        </div>
       </div>
 
-      {/* Verse header */}
-      <div className="rounded-3xl bg-gradient-header p-5 mb-5 shadow-elegant text-center">
-        <p className="text-primary-foreground/80 text-xs uppercase tracking-widest font-medium mb-1">
+      {/* Decorative title */}
+      <div className="text-center px-4 mb-2">
+        <p className="font-sanskrit text-gold text-base tracking-wider">
+          ॥ श्रीमद्भगवद्गीता ॥
+        </p>
+        <div className="text-gold/70 text-xs mt-1">━━━━ ✦ ━━━━</div>
+      </div>
+
+      <div className="text-center px-4 mb-5">
+        <h1 className="font-display text-4xl font-semibold text-foreground leading-tight">
+          {t("chapter")} {chapter.id}
+        </h1>
+        <p className="font-display text-xl text-foreground/85 mt-1">
           {chapterName}
         </p>
-        <p className="font-display text-2xl text-primary-foreground font-semibold">
-          {t("verse")} {verse.id}
-        </p>
       </div>
 
-      {/* Audio Player */}
-      <VerseAudioPlayer
-        cacheKey={`${chapter.id}-${verse.id}-${language}`}
-        sanskrit={verse.sanskrit}
-        translation={translation}
-        explanation={explanation}
-      />
+      {/* Main verse card */}
+      <div className="mx-4 rounded-3xl bg-gradient-card border border-gold/30 shadow-card p-6">
+        {/* Verse pill */}
+        <div className="flex items-center justify-center gap-3 mb-5">
+          <span className="text-gold/60 text-sm">━ ✦ ━</span>
+          <span className="px-4 py-1 rounded-full border border-gold/50 bg-gold/10 text-xs font-semibold tracking-widest text-gold uppercase">
+            {t("verse")} {chapter.id}.{verse.id}
+          </span>
+          <span className="text-gold/60 text-sm">━ ✦ ━</span>
+        </div>
 
-      {/* Sanskrit - centered, devotional */}
-      <section
-        data-part="sanskrit"
-        className="rounded-3xl bg-gradient-card border border-gold/30 p-7 mb-5 shadow-card text-center relative overflow-hidden"
-      >
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-px bg-gradient-to-r from-transparent via-gold to-transparent" />
-        <p className="text-xs text-gold mb-3 font-semibold uppercase tracking-widest">
-          ✦ {t("sanskrit")} ✦
-        </p>
-        <p className="font-sanskrit text-2xl text-foreground whitespace-pre-line leading-loose font-medium">
-          {verse.sanskrit}
-        </p>
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-32 h-px bg-gradient-to-r from-transparent via-gold to-transparent" />
-      </section>
-
-      {/* Transliteration */}
-      {verse.transliteration && (
-        <section className="rounded-2xl bg-secondary/50 p-5 mb-5 border border-border/50">
-          <p className="text-xs text-muted-foreground mb-2 font-semibold uppercase tracking-widest">
-            {t("transliteration")}
-          </p>
-          <p className="text-base text-foreground/90 whitespace-pre-line leading-relaxed italic">
-            {verse.transliteration}
-          </p>
-        </section>
-      )}
-
-      {/* Translation */}
-      <section
-        data-part="translation"
-        className="rounded-2xl bg-card border border-border/60 p-6 mb-5 shadow-soft"
-      >
-        <div className="flex items-center gap-2 mb-3">
-          <div className="w-1 h-5 bg-gradient-primary rounded-full" />
-          <p className="text-xs text-primary font-semibold uppercase tracking-widest">
-            {t("translation")}
+        {/* Sanskrit shloka with side marks */}
+        <div className="relative px-2 mb-5">
+          <span className="absolute left-0 top-1/2 -translate-y-1/2 font-sanskrit text-gold/70 text-2xl select-none">
+            ॥
+          </span>
+          <span className="absolute right-0 top-1/2 -translate-y-1/2 font-sanskrit text-gold/70 text-2xl select-none">
+            ॥
+          </span>
+          <p className="font-sanskrit text-center text-2xl sm:text-[26px] text-foreground font-semibold leading-loose whitespace-pre-line px-6">
+            {verse.sanskrit}
           </p>
         </div>
-        <p className="text-lg text-foreground leading-relaxed whitespace-pre-line">
-          {translation}
-        </p>
-      </section>
 
-      {/* Explanation */}
-      {explanation && (
-        <section
-          data-part="explanation"
-          className="rounded-2xl bg-card border border-border/60 p-6 mb-8 shadow-soft"
-        >
-          <div className="flex items-center gap-2 mb-3">
-            <div className="w-1 h-5 bg-gold rounded-full" />
-            <p className="text-xs text-gold font-semibold uppercase tracking-widest">
-              {t("explanation")}
-            </p>
-          </div>
-          <p className="text-base text-foreground/90 leading-relaxed whitespace-pre-line">
-            {explanation}
+        {/* Transliteration */}
+        {verse.transliteration && (
+          <p className="text-center italic text-foreground/70 text-sm leading-relaxed whitespace-pre-line mb-2">
+            {verse.transliteration}
           </p>
-        </section>
-      )}
+        )}
 
-      {/* Prev / Next */}
-      <div className="flex items-center justify-between gap-3">
-        <Button
-          variant="outline"
-          size="lg"
-          className="flex-1 h-14 text-base border-2 rounded-full hover:border-primary hover:text-primary"
-          disabled={!hasPrev}
-          onClick={goPrev}
-        >
-          <ChevronLeft className="w-5 h-5 mr-1" /> {t("previous")}
-        </Button>
-        <Button
-          variant="outline"
-          size="lg"
-          className="flex-1 h-14 text-base border-2 rounded-full hover:border-primary hover:text-primary"
-          disabled={!hasNext}
-          onClick={goNext}
-        >
-          {t("next")} <ChevronRight className="w-5 h-5 ml-1" />
-        </Button>
+        {/* Sanskrit audio */}
+        <VerseAudioPlayer
+          cacheKey={cacheKey}
+          part="sanskrit"
+          text={verse.sanskrit}
+          meta={{
+            key: "sanskrit",
+            title: "Listen to Sanskrit",
+            subtitle: "Traditional Chant • Sacred Recitation",
+            icon: BookOpen,
+          }}
+        />
+
+        {/* Divider */}
+        <div className="ornament-divider my-6">
+          <span className="px-3 text-gold/70 text-sm bg-card relative">✦</span>
+        </div>
+
+        {/* Translation */}
+        <div className="mb-1">
+          <p className="text-xs text-primary font-bold uppercase tracking-widest mb-3">
+            {t("translation")}
+          </p>
+          <p className="text-base text-foreground leading-relaxed whitespace-pre-line">
+            {translation}
+          </p>
+        </div>
+
+        <VerseAudioPlayer
+          cacheKey={cacheKey}
+          part="translation"
+          text={translation}
+          meta={{
+            key: "translation",
+            title: "Listen to Translation",
+            subtitle: "Clear Narration • Spoken Voice",
+            icon: Headphones,
+          }}
+        />
+
+        {/* Divider */}
+        {explanation && (
+          <>
+            <div className="ornament-divider my-6">
+              <span className="px-3 text-gold/70 text-sm bg-card relative">✦</span>
+            </div>
+
+            <div className="mb-1">
+              <p className="text-xs text-gold font-bold uppercase tracking-widest mb-3">
+                {t("explanation")}
+              </p>
+              <p className="text-[15px] text-foreground/90 leading-relaxed whitespace-pre-line">
+                {explanation}
+              </p>
+            </div>
+
+            <VerseAudioPlayer
+              cacheKey={cacheKey}
+              part="explanation"
+              text={explanation}
+              meta={{
+                key: "explanation",
+                title: "Listen to Explanation",
+                subtitle: "Simple Explanation • Friendly Voice",
+                icon: Lightbulb,
+              }}
+            />
+          </>
+        )}
+
+        {/* Action row */}
+        <div className="grid grid-cols-4 gap-2 pt-6 mt-6 border-t border-gold/20">
+          <button
+            onClick={() => toggleBookmark(chapter.id, verse.id)}
+            className="flex flex-col items-center gap-1.5 py-2 active:scale-95 transition-all"
+          >
+            <span className="w-11 h-11 rounded-full bg-gradient-primary text-primary-foreground flex items-center justify-center shadow-soft">
+              <Bookmark className={`w-5 h-5 ${bookmarked ? "fill-current" : ""}`} />
+            </span>
+            <span className="text-xs text-foreground/80 font-medium">
+              {t("bookmark") || "Bookmark"}
+            </span>
+          </button>
+          <button
+            onClick={handleShare}
+            className="flex flex-col items-center gap-1.5 py-2 active:scale-95 transition-all"
+          >
+            <span className="w-11 h-11 rounded-full bg-gradient-primary text-primary-foreground flex items-center justify-center shadow-soft">
+              <Share2 className="w-5 h-5" />
+            </span>
+            <span className="text-xs text-foreground/80 font-medium">Share</span>
+          </button>
+          <button
+            onClick={handleCopy}
+            className="flex flex-col items-center gap-1.5 py-2 active:scale-95 transition-all"
+          >
+            <span className="w-11 h-11 rounded-full bg-gradient-primary text-primary-foreground flex items-center justify-center shadow-soft">
+              <Copy className="w-5 h-5" />
+            </span>
+            <span className="text-xs text-foreground/80 font-medium">Copy</span>
+          </button>
+          <button
+            onClick={goNext}
+            disabled={!hasNext}
+            className="flex flex-col items-center gap-1.5 py-2 active:scale-95 transition-all disabled:opacity-40"
+          >
+            <span className="w-11 h-11 rounded-full bg-gradient-primary text-primary-foreground flex items-center justify-center shadow-soft">
+              <ArrowRight className="w-5 h-5" />
+            </span>
+            <span className="text-xs text-foreground/80 font-medium">
+              {t("next")} {t("verse")}
+            </span>
+          </button>
+        </div>
+      </div>
+
+      {/* Footer quote */}
+      <div className="text-center px-6 mt-8">
+        <p className="font-display text-lg text-foreground/85">
+          Reflect. Understand. Apply.
+        </p>
+        <p className="text-sm text-muted-foreground italic mt-1">
+          The wisdom is timeless. The journey is yours.
+        </p>
+        <div className="text-gold/60 text-xs mt-3">━━━ ✦ ━━━</div>
       </div>
     </div>
   );

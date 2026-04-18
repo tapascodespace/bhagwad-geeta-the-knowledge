@@ -1,5 +1,5 @@
-import { useEffect, useState, useSyncExternalStore } from "react";
-import { Pause, Play, Loader2, ListMusic } from "lucide-react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { Pause, Play, Loader2, AudioLines, BookOpen, Headphones, Lightbulb } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { audioController } from "@/lib/audio-controller";
@@ -7,21 +7,22 @@ import { getCachedAudio, setCachedAudio } from "@/lib/audio-cache";
 
 type Part = "sanskrit" | "translation" | "explanation";
 
+interface SectionMeta {
+  key: Part;
+  title: string;
+  subtitle: string;
+  icon: typeof BookOpen;
+}
+
 interface Props {
-  cacheKey: string; // e.g. "1-1-en"
-  sanskrit: string;
-  translation: string;
-  explanation?: string;
+  cacheKey: string;
+  part: Part;
+  text: string;
+  meta: SectionMeta;
 }
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string;
 const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string;
-
-const PART_LABEL: Record<Part, string> = {
-  sanskrit: "Sanskrit",
-  translation: "Translation",
-  explanation: "Explanation",
-};
 
 const fetchAudio = async (part: Part, text: string, key: string): Promise<string> => {
   const cached = getCachedAudio(key);
@@ -46,7 +47,6 @@ const fetchAudio = async (part: Part, text: string, key: string): Promise<string
   return setCachedAudio(key, buf);
 };
 
-// Subscribe to global audio state via useSyncExternalStore
 const useAudioState = () =>
   useSyncExternalStore(
     audioController.subscribe,
@@ -54,38 +54,69 @@ const useAudioState = () =>
     audioController.getSnapshot
   );
 
-const VerseAudioPlayer = ({ cacheKey, sanskrit, translation, explanation }: Props) => {
-  const state = useAudioState();
-  const [loadingPart, setLoadingPart] = useState<Part | null>(null);
-  const [playAllMode, setPlayAllMode] = useState(false);
+const formatTime = (s: number) => {
+  if (!isFinite(s) || s < 0) s = 0;
+  const m = Math.floor(s / 60);
+  const sec = Math.floor(s % 60);
+  return `${m}:${sec.toString().padStart(2, "0")}`;
+};
 
-  // When the user navigates to another verse, stop any audio that belongs to
-  // the previous verse so it can never keep playing in the background.
+const VerseAudioPlayer = ({ cacheKey, part, text, meta }: Props) => {
+  const state = useAudioState();
+  const [loading, setLoading] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const id = `${cacheKey}:${part}`;
+  const isActive = state.activeId === id;
+  const isPlaying = isActive && state.isPlaying;
+  const rafRef = useRef<number | null>(null);
+
+  // Track progress while active
+  useEffect(() => {
+    if (!isActive) {
+      setProgress(0);
+      setDuration(0);
+      return;
+    }
+    const tick = () => {
+      const a = audioController.getAudioElement();
+      if (a) {
+        setProgress(a.currentTime || 0);
+        if (a.duration && isFinite(a.duration)) setDuration(a.duration);
+      }
+      rafRef.current = requestAnimationFrame(tick);
+    };
+    rafRef.current = requestAnimationFrame(tick);
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [isActive]);
+
+  // Stop our audio when component unmounts (verse change)
   useEffect(() => {
     return () => {
       const active = audioController.getSnapshot().activeId;
-      if (active && active.startsWith(cacheKey)) {
-        audioController.stop();
-      }
+      if (active === id) audioController.stop();
     };
-  }, [cacheKey]);
+  }, [id]);
 
-  const idFor = (part: Part) => `${cacheKey}:${part}`;
-
-  const playPart = async (part: Part, text: string, onEnded?: () => void) => {
-    const id = idFor(part);
-    // Resume if the SAME part is paused
+  const toggle = async () => {
+    if (!text || !text.trim()) return;
+    if (audioController.isActive(id)) {
+      audioController.pause();
+      return;
+    }
     if (audioController.isPaused(id)) {
       await audioController.resume(id);
       return;
     }
     try {
-      setLoadingPart(part);
+      setLoading(true);
       const url = await fetchAudio(part, text, id);
-      setLoadingPart(null);
-      await audioController.play(id, url, onEnded);
+      setLoading(false);
+      await audioController.play(id, url);
     } catch (e: any) {
-      setLoadingPart(null);
+      setLoading(false);
       console.error(e);
       toast({
         title: "Audio error",
@@ -95,132 +126,85 @@ const VerseAudioPlayer = ({ cacheKey, sanskrit, translation, explanation }: Prop
     }
   };
 
-  const togglePart = async (part: Part, text: string) => {
-    if (!text || !text.trim()) return;
-    const id = idFor(part);
-    setPlayAllMode(false);
-    if (audioController.isActive(id)) {
-      audioController.pause();
-      return;
-    }
-    await playPart(part, text);
-  };
-
-  const handlePlayAll = async () => {
-    // If currently playing in playAll mode, stop everything
-    if (playAllMode && state.isPlaying) {
-      audioController.stop();
-      setPlayAllMode(false);
-      return;
-    }
-    setPlayAllMode(true);
-    const queue: { part: Part; text: string }[] = [
-      { part: "sanskrit", text: sanskrit },
-      { part: "translation", text: translation },
-    ];
-    if (explanation && explanation.trim()) {
-      queue.push({ part: "explanation", text: explanation });
-    }
-    const runAt = async (i: number) => {
-      if (i >= queue.length) {
-        setPlayAllMode(false);
-        return;
-      }
-      const { part, text } = queue[i];
-      await playPart(part, text, () => {
-        setTimeout(() => runAt(i + 1), 500);
-      });
-    };
-    runAt(0);
-  };
-
-  const parts: { key: Part; text: string }[] = [
-    { key: "sanskrit", text: sanskrit },
-    { key: "translation", text: translation },
-  ];
-  if (explanation && explanation.trim()) {
-    parts.push({ key: "explanation", text: explanation });
-  }
+  const Icon = meta.icon;
+  const pct = duration > 0 ? (progress / duration) * 100 : 0;
 
   return (
-    <div className="rounded-3xl bg-gradient-card border border-gold/30 p-5 mb-5 shadow-card">
-      <div className="flex items-center justify-between mb-4">
-        <div>
-          <p className="text-xs text-gold font-semibold uppercase tracking-widest mb-0.5">
-            ✦ Sacred Recitation
+    <div
+      className={`mt-4 rounded-2xl border p-4 transition-all ${
+        isActive
+          ? "bg-gold/5 border-gold/40 shadow-soft"
+          : "bg-secondary/40 border-border/50"
+      }`}
+    >
+      <div className="flex items-center gap-3">
+        {/* Thumbnail circle */}
+        <div
+          className={`shrink-0 w-14 h-14 rounded-full flex items-center justify-center border-2 ${
+            isActive
+              ? "border-gold/60 bg-gradient-primary text-primary-foreground"
+              : "border-gold/30 bg-gradient-card text-primary"
+          }`}
+        >
+          <Icon className="w-6 h-6" strokeWidth={1.8} />
+        </div>
+
+        {/* Title + subtitle */}
+        <div className="flex-1 min-w-0">
+          <p className="font-display font-semibold text-foreground text-base leading-tight truncate">
+            {meta.title}
           </p>
-          <p className="text-xs text-muted-foreground">
-            Tap a section to listen, or play all
+          <p className="text-xs text-muted-foreground mt-0.5 truncate">
+            {meta.subtitle}
           </p>
         </div>
+
+        {/* Play button */}
         <button
-          onClick={handlePlayAll}
-          className={`shrink-0 inline-flex items-center gap-2 px-4 h-10 rounded-full text-sm font-medium border transition-all active:scale-95 ${
-            playAllMode
-              ? "bg-gradient-primary text-primary-foreground border-transparent shadow-soft"
-              : "bg-background/70 text-foreground border-border hover:border-primary"
+          onClick={toggle}
+          disabled={loading}
+          aria-label={isPlaying ? "Pause" : "Play"}
+          className={`shrink-0 w-11 h-11 rounded-full flex items-center justify-center transition-all active:scale-95 ${
+            isPlaying
+              ? "bg-gradient-primary text-primary-foreground shadow-soft animate-soft-pulse"
+              : "bg-gradient-primary text-primary-foreground shadow-soft hover:opacity-95"
           }`}
-          aria-label="Play all"
         >
-          <ListMusic className="w-4 h-4" />
-          {playAllMode && state.isPlaying ? "Stop" : "Play All"}
+          {loading ? (
+            <Loader2 className="w-5 h-5 animate-spin" />
+          ) : isPlaying ? (
+            <Pause className="w-5 h-5" fill="currentColor" />
+          ) : (
+            <Play className="w-5 h-5 ml-0.5" fill="currentColor" />
+          )}
         </button>
+
+        {/* Waveform decoration */}
+        <AudioLines
+          className={`shrink-0 w-5 h-5 ${
+            isPlaying ? "text-gold animate-pulse" : "text-gold/50"
+          }`}
+        />
       </div>
 
-      <div className="flex flex-col gap-2">
-        {parts.map(({ key, text }) => {
-          const id = idFor(key);
-          const isActive = state.activeId === id;
-          const isThisPlaying = isActive && state.isPlaying;
-          const isThisLoading = loadingPart === key;
-          return (
-            <button
-              key={key}
-              onClick={() => togglePart(key, text)}
-              disabled={isThisLoading}
-              className={`flex items-center gap-3 p-3 rounded-2xl border transition-all active:scale-[0.98] ${
-                isActive
-                  ? "bg-gradient-primary/10 border-primary/50 shadow-soft"
-                  : "bg-background/60 border-border/60 hover:border-primary/40"
-              }`}
-            >
-              <span
-                className={`shrink-0 w-11 h-11 rounded-full flex items-center justify-center transition-all ${
-                  isThisPlaying
-                    ? "bg-gradient-primary text-primary-foreground animate-soft-pulse"
-                    : isActive
-                    ? "bg-gradient-primary text-primary-foreground"
-                    : "bg-muted text-foreground"
-                }`}
-              >
-                {isThisLoading ? (
-                  <Loader2 className="w-5 h-5 animate-spin" />
-                ) : isThisPlaying ? (
-                  <Pause className="w-5 h-5" fill="currentColor" />
-                ) : (
-                  <Play className="w-5 h-5 ml-0.5" fill="currentColor" />
-                )}
-              </span>
-              <span className="flex-1 text-left">
-                <span className="block text-sm font-semibold text-foreground">
-                  {PART_LABEL[key]}
-                </span>
-                <span className="block text-xs text-muted-foreground">
-                  {isThisLoading
-                    ? "Preparing..."
-                    : isThisPlaying
-                    ? "Now playing"
-                    : isActive
-                    ? "Paused — tap to resume"
-                    : "Tap to play"}
-                </span>
-              </span>
-            </button>
-          );
-        })}
+      {/* Progress bar */}
+      <div className="flex items-center gap-3 mt-3 px-1">
+        <span className="text-[11px] text-muted-foreground tabular-nums w-9">
+          {formatTime(progress)}
+        </span>
+        <div className="flex-1 h-1 rounded-full bg-border/60 overflow-hidden">
+          <div
+            className="h-full bg-gradient-primary transition-all"
+            style={{ width: `${pct}%` }}
+          />
+        </div>
+        <span className="text-[11px] text-muted-foreground tabular-nums w-9 text-right">
+          {formatTime(duration)}
+        </span>
       </div>
     </div>
   );
 };
 
+export const SECTION_META = { BookOpen, Headphones, Lightbulb };
 export default VerseAudioPlayer;
