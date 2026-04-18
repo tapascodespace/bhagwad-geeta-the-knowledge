@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { chapters, getChapterName, pickText } from "@/data/gita";
 import { useBookmarks } from "@/hooks/useBookmarks";
 import { useLanguage } from "@/contexts/LanguageContext";
+import VerseAudioPlayer from "@/components/VerseAudioPlayer";
 
 const VerseView = () => {
   const { chapterId, verseId } = useParams();
@@ -66,6 +67,14 @@ const VerseView = () => {
           {chapterName} · {t("verse")} {verse.id}
         </p>
       </div>
+
+      {/* Audio Player */}
+      <VerseAudioPlayer
+        cacheKey={`${chapter.id}-${verse.id}-${language}`}
+        sanskrit={verse.sanskrit}
+        translation={translation}
+        explanation={explanation}
+      />
 
       {/* Sanskrit */}
       <section className="rounded-2xl bg-secondary/60 p-5 mb-4">
