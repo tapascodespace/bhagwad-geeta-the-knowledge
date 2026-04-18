@@ -1,25 +1,32 @@
-import { useEffect, useRef, useState } from "react";
-import { Pause, Play, Loader2 } from "lucide-react";
+import { useEffect, useState, useSyncExternalStore } from "react";
+import { Pause, Play, Loader2, ListMusic } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { useLanguage } from "@/contexts/LanguageContext";
 import { toast } from "@/hooks/use-toast";
+import { audioController } from "@/lib/audio-controller";
+import { getCachedAudio, setCachedAudio } from "@/lib/audio-cache";
 
 type Part = "sanskrit" | "translation" | "explanation";
 
 interface Props {
-  cacheKey: string;
+  cacheKey: string; // e.g. "1-1-en"
   sanskrit: string;
   translation: string;
   explanation?: string;
 }
 
-const audioCache = new Map<string, string>();
-
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string;
 const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string;
 
-const fetchPart = async (part: Part, text: string, key: string): Promise<string> => {
-  if (audioCache.has(key)) return audioCache.get(key)!;
+const PART_LABEL: Record<Part, string> = {
+  sanskrit: "Sanskrit",
+  translation: "Translation",
+  explanation: "Explanation",
+};
+
+const fetchAudio = async (part: Part, text: string, key: string): Promise<string> => {
+  const cached = getCachedAudio(key);
+  if (cached) return cached;
+
   const { data: sessionData } = await supabase.auth.getSession();
   const token = sessionData.session?.access_token ?? SUPABASE_KEY;
   const res = await fetch(`${SUPABASE_URL}/functions/v1/tts`, {
@@ -35,74 +42,50 @@ const fetchPart = async (part: Part, text: string, key: string): Promise<string>
     const errText = await res.text();
     throw new Error(errText || `TTS failed: ${res.status}`);
   }
-  const blob = await res.blob();
-  const url = URL.createObjectURL(blob);
-  audioCache.set(key, url);
-  return url;
+  const buf = await res.arrayBuffer();
+  return setCachedAudio(key, buf);
 };
 
-const PART_LABEL: Record<Part, string> = {
-  sanskrit: "Sanskrit",
-  translation: "Translation",
-  explanation: "Explanation",
-};
+// Subscribe to global audio state via useSyncExternalStore
+const useAudioState = () =>
+  useSyncExternalStore(
+    (cb) => audioController.subscribe(cb),
+    () => ({ activeId: (audioController as any).activeId as string | null, isPlaying: !(audioController as any).audio?.paused }),
+    () => ({ activeId: null, isPlaying: false })
+  );
 
 const VerseAudioPlayer = ({ cacheKey, sanskrit, translation, explanation }: Props) => {
-  const { t } = useLanguage();
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [currentPart, setCurrentPart] = useState<Part | null>(null);
+  const state = useAudioState();
+  const [loadingPart, setLoadingPart] = useState<Part | null>(null);
+  const [playAllMode, setPlayAllMode] = useState(false);
 
-  const queueRef = useRef<{ part: Part; text: string }[]>([]);
-  const idxRef = useRef(0);
-  const stoppedRef = useRef(false);
-
+  // When the user navigates to another verse, stop any audio that belongs to
+  // the previous verse so it can never keep playing in the background.
   useEffect(() => {
-    if (!audioRef.current) audioRef.current = new Audio();
     return () => {
-      audioRef.current?.pause();
-      audioRef.current = null;
+      const active = (audioController as any).activeId as string | null;
+      if (active && active.startsWith(cacheKey)) {
+        audioController.stop();
+      }
     };
-  }, []);
-
-  useEffect(() => {
-    audioRef.current?.pause();
-    setIsPlaying(false);
-    setCurrentPart(null);
-    idxRef.current = 0;
-    stoppedRef.current = false;
   }, [cacheKey]);
 
-  const playNext = async () => {
-    if (stoppedRef.current) return;
-    const queue = queueRef.current;
-    if (idxRef.current >= queue.length) {
-      setIsPlaying(false);
-      setCurrentPart(null);
-      idxRef.current = 0;
+  const idFor = (part: Part) => `${cacheKey}:${part}`;
+
+  const playPart = async (part: Part, text: string, onEnded?: () => void) => {
+    const id = idFor(part);
+    // Resume if the SAME part is paused
+    if (audioController.isPaused(id)) {
+      await audioController.resume(id);
       return;
     }
-    const { part, text } = queue[idxRef.current];
-    setCurrentPart(part);
     try {
-      setIsLoading(true);
-      const key = `${cacheKey}:${part}`;
-      const url = await fetchPart(part, text, key);
-      setIsLoading(false);
-      if (stoppedRef.current) return;
-      const a = audioRef.current!;
-      a.src = url;
-      a.onended = async () => {
-        idxRef.current += 1;
-        await new Promise((r) => setTimeout(r, 600));
-        playNext();
-      };
-      await a.play();
-      setIsPlaying(true);
+      setLoadingPart(part);
+      const url = await fetchAudio(part, text, id);
+      setLoadingPart(null);
+      await audioController.play(id, url, onEnded);
     } catch (e: any) {
-      setIsLoading(false);
-      setIsPlaying(false);
+      setLoadingPart(null);
       console.error(e);
       toast({
         title: "Audio error",
@@ -112,85 +95,127 @@ const VerseAudioPlayer = ({ cacheKey, sanskrit, translation, explanation }: Prop
     }
   };
 
-  const handleClick = async () => {
-    const a = audioRef.current!;
-    if (isPlaying) {
-      a.pause();
-      setIsPlaying(false);
+  const togglePart = async (part: Part, text: string) => {
+    if (!text || !text.trim()) return;
+    const id = idFor(part);
+    setPlayAllMode(false);
+    if (audioController.isActive(id)) {
+      audioController.pause();
       return;
     }
-    if (a.src && a.currentTime > 0 && !a.ended) {
-      await a.play();
-      setIsPlaying(true);
+    await playPart(part, text);
+  };
+
+  const handlePlayAll = async () => {
+    // If currently playing in playAll mode, stop everything
+    if (playAllMode && state.isPlaying) {
+      audioController.stop();
+      setPlayAllMode(false);
       return;
     }
-    stoppedRef.current = false;
-    const q: { part: Part; text: string }[] = [
+    setPlayAllMode(true);
+    const queue: { part: Part; text: string }[] = [
       { part: "sanskrit", text: sanskrit },
       { part: "translation", text: translation },
     ];
     if (explanation && explanation.trim()) {
-      q.push({ part: "explanation", text: explanation });
+      queue.push({ part: "explanation", text: explanation });
     }
-    queueRef.current = q;
-    idxRef.current = 0;
-    playNext();
+    const runAt = async (i: number) => {
+      if (i >= queue.length) {
+        setPlayAllMode(false);
+        return;
+      }
+      const { part, text } = queue[i];
+      await playPart(part, text, () => {
+        setTimeout(() => runAt(i + 1), 500);
+      });
+    };
+    runAt(0);
   };
 
-  const parts: Part[] = explanation && explanation.trim()
-    ? ["sanskrit", "translation", "explanation"]
-    : ["sanskrit", "translation"];
+  const parts: { key: Part; text: string }[] = [
+    { key: "sanskrit", text: sanskrit },
+    { key: "translation", text: translation },
+  ];
+  if (explanation && explanation.trim()) {
+    parts.push({ key: "explanation", text: explanation });
+  }
 
   return (
     <div className="rounded-3xl bg-gradient-card border border-gold/30 p-5 mb-5 shadow-card">
-      <div className="flex items-center gap-4">
-        {/* Big circular play button */}
-        <button
-          onClick={handleClick}
-          disabled={isLoading && !isPlaying}
-          aria-label={isPlaying ? "Pause" : "Play"}
-          className={`relative shrink-0 w-16 h-16 rounded-full bg-gradient-primary flex items-center justify-center text-primary-foreground shadow-elegant active:scale-95 transition-all ${
-            isPlaying ? "animate-soft-pulse" : ""
-          } ${isLoading && !isPlaying ? "opacity-70" : ""}`}
-        >
-          {isLoading ? (
-            <Loader2 className="w-7 h-7 animate-spin" />
-          ) : isPlaying ? (
-            <Pause className="w-7 h-7" fill="currentColor" />
-          ) : (
-            <Play className="w-7 h-7 ml-0.5" fill="currentColor" />
-          )}
-        </button>
-
-        <div className="flex-1 min-w-0">
-          <p className="text-xs text-gold font-semibold uppercase tracking-widest mb-1">
+      <div className="flex items-center justify-between mb-4">
+        <div>
+          <p className="text-xs text-gold font-semibold uppercase tracking-widest mb-0.5">
             ✦ Sacred Recitation
           </p>
-          <p className="text-sm text-muted-foreground">
-            {isPlaying && currentPart
-              ? `Now playing · ${PART_LABEL[currentPart]}`
-              : isLoading
-              ? "Preparing audio..."
-              : "Tap to listen"}
+          <p className="text-xs text-muted-foreground">
+            Tap a section to listen, or play all
           </p>
         </div>
+        <button
+          onClick={handlePlayAll}
+          className={`shrink-0 inline-flex items-center gap-2 px-4 h-10 rounded-full text-sm font-medium border transition-all active:scale-95 ${
+            playAllMode
+              ? "bg-gradient-primary text-primary-foreground border-transparent shadow-soft"
+              : "bg-background/70 text-foreground border-border hover:border-primary"
+          }`}
+          aria-label="Play all"
+        >
+          <ListMusic className="w-4 h-4" />
+          {playAllMode && state.isPlaying ? "Stop" : "Play All"}
+        </button>
       </div>
 
-      {/* Section pills */}
-      <div className="flex items-center gap-2 mt-4">
-        {parts.map((p) => {
-          const active = currentPart === p && (isPlaying || isLoading);
+      <div className="flex flex-col gap-2">
+        {parts.map(({ key, text }) => {
+          const id = idFor(key);
+          const isActive = state.activeId === id;
+          const isThisPlaying = isActive && state.isPlaying;
+          const isThisLoading = loadingPart === key;
           return (
-            <span
-              key={p}
-              className={`flex-1 text-center text-xs font-medium py-1.5 px-2 rounded-full border transition-all ${
-                active
-                  ? "bg-gradient-primary text-primary-foreground border-transparent shadow-soft"
-                  : "bg-background/60 text-muted-foreground border-border/60"
+            <button
+              key={key}
+              onClick={() => togglePart(key, text)}
+              disabled={isThisLoading}
+              className={`flex items-center gap-3 p-3 rounded-2xl border transition-all active:scale-[0.98] ${
+                isActive
+                  ? "bg-gradient-primary/10 border-primary/50 shadow-soft"
+                  : "bg-background/60 border-border/60 hover:border-primary/40"
               }`}
             >
-              {PART_LABEL[p]}
-            </span>
+              <span
+                className={`shrink-0 w-11 h-11 rounded-full flex items-center justify-center transition-all ${
+                  isThisPlaying
+                    ? "bg-gradient-primary text-primary-foreground animate-soft-pulse"
+                    : isActive
+                    ? "bg-gradient-primary text-primary-foreground"
+                    : "bg-muted text-foreground"
+                }`}
+              >
+                {isThisLoading ? (
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                ) : isThisPlaying ? (
+                  <Pause className="w-5 h-5" fill="currentColor" />
+                ) : (
+                  <Play className="w-5 h-5 ml-0.5" fill="currentColor" />
+                )}
+              </span>
+              <span className="flex-1 text-left">
+                <span className="block text-sm font-semibold text-foreground">
+                  {PART_LABEL[key]}
+                </span>
+                <span className="block text-xs text-muted-foreground">
+                  {isThisLoading
+                    ? "Preparing..."
+                    : isThisPlaying
+                    ? "Now playing"
+                    : isActive
+                    ? "Paused — tap to resume"
+                    : "Tap to play"}
+                </span>
+              </span>
+            </button>
           );
         })}
       </div>
