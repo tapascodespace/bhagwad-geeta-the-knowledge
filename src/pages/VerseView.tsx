@@ -186,6 +186,14 @@ const VerseView = () => {
           </p>
         )}
 
+        {/* Play All — sequential audio for the whole verse, auto-advances */}
+        <PlayAllButton
+          sessionId={cacheKey}
+          segments={playAllSegments}
+          onVerseComplete={handleVerseAudioComplete}
+          autoStartKey={autoStartKey}
+        />
+
         {/* Sanskrit audio */}
         <VerseAudioPlayer
           cacheKey={cacheKey}
