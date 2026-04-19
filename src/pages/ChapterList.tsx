@@ -20,6 +20,10 @@ const ChapterList = () => {
         </h2>
       </div>
 
+      <div className="mb-6">
+        <VerseOfTheDay />
+      </div>
+
       <div className="space-y-3">
         {chapters.map((ch, i) => {
           const name = getChapterName(ch, language);
