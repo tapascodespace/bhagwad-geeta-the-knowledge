@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
 import { chapters, getChapterName } from "@/data/gita";
 import { useLanguage } from "@/contexts/LanguageContext";
+import VerseOfTheDay from "@/components/VerseOfTheDay";
 
 const ChapterList = () => {
   const navigate = useNavigate();
@@ -17,6 +18,10 @@ const ChapterList = () => {
         <h2 className="font-display text-3xl font-semibold text-primary-foreground leading-tight">
           {t("allChapters")}
         </h2>
+      </div>
+
+      <div className="mb-6">
+        <VerseOfTheDay />
       </div>
 
       <div className="space-y-3">
