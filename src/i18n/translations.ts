@@ -85,6 +85,16 @@ export const t: Record<string, Dict> = {
     en: "Not found",
   },
   save: { bn: "সংরক্ষণ করুন", hi: "सहेजें", en: "Save" },
+  verseOfTheDay: {
+    bn: "আজকের শ্লোক",
+    hi: "आज का श्लोक",
+    en: "Verse of the Day",
+  },
+  readFullVerse: {
+    bn: "সম্পূর্ণ শ্লোক পড়ুন",
+    hi: "पूरा श्लोक पढ़ें",
+    en: "Read Full Verse",
+  },
 };
 
 // Chapter names per language
