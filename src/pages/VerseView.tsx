@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   ArrowLeft,
@@ -14,6 +15,7 @@ import { chapters, getChapterName, pickText } from "@/data/gita";
 import { useBookmarks } from "@/hooks/useBookmarks";
 import { useLanguage } from "@/contexts/LanguageContext";
 import VerseAudioPlayer from "@/components/VerseAudioPlayer";
+import PlayAllButton from "@/components/PlayAllButton";
 import { toast } from "@/hooks/use-toast";
 
 const VerseView = () => {
