@@ -3,7 +3,7 @@ import { BookOpen, Languages, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LANGUAGES } from "@/i18n/translations";
-import VerseOfTheDay from "@/components/VerseOfTheDay";
+
 
 const Home = () => {
   const navigate = useNavigate();
