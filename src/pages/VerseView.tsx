@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   ArrowLeft,
@@ -14,6 +15,7 @@ import { chapters, getChapterName, pickText } from "@/data/gita";
 import { useBookmarks } from "@/hooks/useBookmarks";
 import { useLanguage } from "@/contexts/LanguageContext";
 import VerseAudioPlayer from "@/components/VerseAudioPlayer";
+import PlayAllButton from "@/components/PlayAllButton";
 import { toast } from "@/hooks/use-toast";
 
 const VerseView = () => {
@@ -26,6 +28,23 @@ const VerseView = () => {
   const verseIdx = chapter?.verses.findIndex((v) => v.id === Number(verseId)) ?? -1;
   const verse = chapter?.verses[verseIdx];
 
+  // Hooks must run unconditionally — keep them above any early return.
+  const cacheKey = `${chapterId}-${verseId}-${language}`;
+  const AUTOPLAY_FLAG = "gita-autoplay-chain";
+  const [autoStartKey, setAutoStartKey] = useState<string | null>(null);
+  const hasNext = !!chapter && verseIdx >= 0 && verseIdx < chapter.verses.length - 1;
+  const hasNextRef = useRef(hasNext);
+  hasNextRef.current = hasNext;
+
+  useEffect(() => {
+    if (sessionStorage.getItem(AUTOPLAY_FLAG) === "1") {
+      sessionStorage.removeItem(AUTOPLAY_FLAG);
+      setAutoStartKey(cacheKey);
+    } else {
+      setAutoStartKey(null);
+    }
+  }, [cacheKey]);
+
   if (!chapter || !verse) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
@@ -35,7 +54,6 @@ const VerseView = () => {
   }
 
   const bookmarked = isBookmarked(chapter.id, verse.id);
-  const hasNext = verseIdx < chapter.verses.length - 1;
   const chapterName = getChapterName(chapter, language);
   const translation = pickText(verse.translation, language);
   const explanation = pickText(verse.explanation, language);
@@ -68,7 +86,24 @@ const VerseView = () => {
     }
   };
 
-  const cacheKey = `${chapter.id}-${verse.id}-${language}`;
+  const handleVerseAudioComplete = () => {
+    if (!hasNextRef.current) return;
+    sessionStorage.setItem(AUTOPLAY_FLAG, "1");
+    setTimeout(() => {
+      navigate(
+        `/chapters/${chapter.id}/verses/${chapter.verses[verseIdx + 1].id}`,
+        { replace: true }
+      );
+    }, 350);
+  };
+
+  const playAllSegments = [
+    { part: "sanskrit" as const, text: verse.sanskrit, cacheKey: `${cacheKey}:sanskrit` },
+    { part: "translation" as const, text: translation, cacheKey: `${cacheKey}:translation` },
+    ...(explanation
+      ? [{ part: "explanation" as const, text: explanation, cacheKey: `${cacheKey}:explanation` }]
+      : []),
+  ];
 
   return (
     <div key={`${chapter.id}-${verse.id}`} className="pb-28 animate-fade-in">
@@ -150,6 +185,14 @@ const VerseView = () => {
             {verse.transliteration}
           </p>
         )}
+
+        {/* Play All — sequential audio for the whole verse, auto-advances */}
+        <PlayAllButton
+          sessionId={cacheKey}
+          segments={playAllSegments}
+          onVerseComplete={handleVerseAudioComplete}
+          autoStartKey={autoStartKey}
+        />
 
         {/* Sanskrit audio */}
         <VerseAudioPlayer
