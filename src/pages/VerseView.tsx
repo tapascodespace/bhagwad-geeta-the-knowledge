@@ -72,6 +72,42 @@ const VerseView = () => {
 
   const cacheKey = `${chapter.id}-${verse.id}-${language}`;
 
+  // Sequential Play-All across verses: when the current verse finishes,
+  // navigate to the next verse and signal it to auto-start.
+  const AUTOPLAY_FLAG = "gita-autoplay-chain";
+  const [autoStartKey, setAutoStartKey] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (sessionStorage.getItem(AUTOPLAY_FLAG) === "1") {
+      sessionStorage.removeItem(AUTOPLAY_FLAG);
+      setAutoStartKey(cacheKey);
+    } else {
+      setAutoStartKey(null);
+    }
+  }, [cacheKey]);
+
+  const hasNextRef = useRef(hasNext);
+  hasNextRef.current = hasNext;
+
+  const handleVerseAudioComplete = () => {
+    if (!hasNextRef.current) return;
+    sessionStorage.setItem(AUTOPLAY_FLAG, "1");
+    setTimeout(() => {
+      navigate(
+        `/chapters/${chapter.id}/verses/${chapter.verses[verseIdx + 1].id}`,
+        { replace: true }
+      );
+    }, 350);
+  };
+
+  const playAllSegments = [
+    { part: "sanskrit" as const, text: verse.sanskrit, cacheKey: `${cacheKey}:sanskrit` },
+    { part: "translation" as const, text: translation, cacheKey: `${cacheKey}:translation` },
+    ...(explanation
+      ? [{ part: "explanation" as const, text: explanation, cacheKey: `${cacheKey}:explanation` }]
+      : []),
+  ];
+
   return (
     <div key={`${chapter.id}-${verse.id}`} className="pb-28 animate-fade-in">
       {/* Top bar */}
