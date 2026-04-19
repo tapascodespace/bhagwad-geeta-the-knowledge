@@ -28,6 +28,23 @@ const VerseView = () => {
   const verseIdx = chapter?.verses.findIndex((v) => v.id === Number(verseId)) ?? -1;
   const verse = chapter?.verses[verseIdx];
 
+  // Hooks must run unconditionally — keep them above any early return.
+  const cacheKey = `${chapterId}-${verseId}-${language}`;
+  const AUTOPLAY_FLAG = "gita-autoplay-chain";
+  const [autoStartKey, setAutoStartKey] = useState<string | null>(null);
+  const hasNext = !!chapter && verseIdx >= 0 && verseIdx < chapter.verses.length - 1;
+  const hasNextRef = useRef(hasNext);
+  hasNextRef.current = hasNext;
+
+  useEffect(() => {
+    if (sessionStorage.getItem(AUTOPLAY_FLAG) === "1") {
+      sessionStorage.removeItem(AUTOPLAY_FLAG);
+      setAutoStartKey(cacheKey);
+    } else {
+      setAutoStartKey(null);
+    }
+  }, [cacheKey]);
+
   if (!chapter || !verse) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
