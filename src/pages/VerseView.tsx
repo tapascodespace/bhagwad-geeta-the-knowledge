@@ -54,7 +54,6 @@ const VerseView = () => {
   }
 
   const bookmarked = isBookmarked(chapter.id, verse.id);
-  const hasNext = verseIdx < chapter.verses.length - 1;
   const chapterName = getChapterName(chapter, language);
   const translation = pickText(verse.translation, language);
   const explanation = pickText(verse.explanation, language);
@@ -86,25 +85,6 @@ const VerseView = () => {
       /* user dismissed */
     }
   };
-
-  const cacheKey = `${chapter.id}-${verse.id}-${language}`;
-
-  // Sequential Play-All across verses: when the current verse finishes,
-  // navigate to the next verse and signal it to auto-start.
-  const AUTOPLAY_FLAG = "gita-autoplay-chain";
-  const [autoStartKey, setAutoStartKey] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (sessionStorage.getItem(AUTOPLAY_FLAG) === "1") {
-      sessionStorage.removeItem(AUTOPLAY_FLAG);
-      setAutoStartKey(cacheKey);
-    } else {
-      setAutoStartKey(null);
-    }
-  }, [cacheKey]);
-
-  const hasNextRef = useRef(hasNext);
-  hasNextRef.current = hasNext;
 
   const handleVerseAudioComplete = () => {
     if (!hasNextRef.current) return;
