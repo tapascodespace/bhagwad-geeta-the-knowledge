@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { Pause, Play, Loader2, AudioLines, BookOpen, Headphones, Lightbulb } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { audioController } from "@/lib/audio-controller";
-import { getCachedAudio, setCachedAudio } from "@/lib/audio-cache";
+import { fetchTtsAudio } from "@/lib/tts-fetch";
 
 type Part = "sanskrit" | "translation" | "explanation";
 
@@ -21,31 +20,8 @@ interface Props {
   meta: SectionMeta;
 }
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string;
-const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string;
-
-const fetchAudio = async (part: Part, text: string, key: string): Promise<string> => {
-  const cached = getCachedAudio(key);
-  if (cached) return cached;
-
-  const { data: sessionData } = await supabase.auth.getSession();
-  const token = sessionData.session?.access_token ?? SUPABASE_KEY;
-  const res = await fetch(`${SUPABASE_URL}/functions/v1/tts`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      apikey: SUPABASE_KEY,
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify({ text, part }),
-  });
-  if (!res.ok) {
-    const errText = await res.text();
-    throw new Error(errText || `TTS failed: ${res.status}`);
-  }
-  const buf = await res.arrayBuffer();
-  return setCachedAudio(key, buf);
-};
+const fetchAudio = (part: Part, text: string, key: string) =>
+  fetchTtsAudio(part, text, key);
 
 const useAudioState = () =>
   useSyncExternalStore(
