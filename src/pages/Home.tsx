@@ -56,9 +56,6 @@ const Home = () => {
           {t("viewChapters")}
         </Button>
 
-        <div className="w-full max-w-md mt-10">
-          <VerseOfTheDay />
-        </div>
       </div>
     </div>
   );
