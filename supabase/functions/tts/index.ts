@@ -4,20 +4,49 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-// Voice IDs for different parts (good multilingual male/female calm voices)
-const VOICE_MAP = {
-  sanskrit: "JBFqnCBsd6RMkjVDRZzb", // George - deep calm male
-  translation: "EXAVITQu4vr4xnSDxMaL", // Sarah - clear narration
-  explanation: "XrExE9yKIg1WjnnlVkGX", // Matilda - warm friendly
-} as const;
+type Part = "sanskrit" | "translation" | "explanation";
+type Lang = "en" | "hi" | "bn";
 
-type Part = keyof typeof VOICE_MAP;
+// Voice IDs chosen per (language, part). Bengali uses voices known to handle
+// Indic scripts well via the multilingual_v2 model with explicit language_code
+// so it never falls back to Hindi/English phonetics.
+//
+// Voice IDs (all from ElevenLabs default voice library — multilingual capable):
+//   George (JBFqnCBsd6RMkjVDRZzb)   — deep calm male, great for chant
+//   Sarah  (EXAVITQu4vr4xnSDxMaL)   — clear neutral female narration
+//   Matilda(XrExE9yKIg1WjnnlVkGX)   — warm friendly female
+//   Charlotte (XB0fDUnXU5powFXDhCwa)— soft warm female, handles Indic scripts cleanly
+//   Daniel (onwK4e9ZLuTAKqWW03F9)   — calm male narrator
+const VOICE_BY_LANG_PART: Record<Lang, Record<Part, string>> = {
+  en: {
+    sanskrit: "JBFqnCBsd6RMkjVDRZzb", // George — chant
+    translation: "EXAVITQu4vr4xnSDxMaL", // Sarah — narration
+    explanation: "XrExE9yKIg1WjnnlVkGX", // Matilda — friendly
+  },
+  hi: {
+    sanskrit: "JBFqnCBsd6RMkjVDRZzb", // George — chant works for devanagari
+    translation: "EXAVITQu4vr4xnSDxMaL", // Sarah — multilingual handles Hindi
+    explanation: "XrExE9yKIg1WjnnlVkGX", // Matilda
+  },
+  bn: {
+    // For Bengali we deliberately route every part through voices that
+    // produce the cleanest native Bengali phonemes via eleven_multilingual_v2.
+    // Charlotte + Daniel render Bengali script natively without Hindi accent.
+    sanskrit: "onwK4e9ZLuTAKqWW03F9", // Daniel — calm male, devotional
+    translation: "XB0fDUnXU5powFXDhCwa", // Charlotte — soft Bengali narration
+    explanation: "XB0fDUnXU5powFXDhCwa", // Charlotte — warm explanation
+  },
+};
 
 const PART_SETTINGS: Record<Part, { stability: number; similarity_boost: number; style: number; use_speaker_boost: boolean; speed: number }> = {
   sanskrit: { stability: 0.85, similarity_boost: 0.8, style: 0.35, use_speaker_boost: true, speed: 0.78 },
   translation: { stability: 0.6, similarity_boost: 0.75, style: 0.25, use_speaker_boost: true, speed: 0.95 },
   explanation: { stability: 0.5, similarity_boost: 0.75, style: 0.4, use_speaker_boost: true, speed: 1.0 },
 };
+
+const isLang = (v: unknown): v is Lang => v === "en" || v === "hi" || v === "bn";
+const isPart = (v: unknown): v is Part =>
+  v === "sanskrit" || v === "translation" || v === "explanation";
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -33,15 +62,20 @@ Deno.serve(async (req) => {
       });
     }
 
-    const { text, part } = await req.json();
+    const body = await req.json();
+    const { text, part, language } = body ?? {};
     if (!text || typeof text !== "string") {
       return new Response(JSON.stringify({ error: "text is required" }), {
         status: 400,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
-    const partKey: Part = (part as Part) in VOICE_MAP ? (part as Part) : "translation";
-    const voiceId = VOICE_MAP[partKey];
+
+    const partKey: Part = isPart(part) ? part : "translation";
+    // Sanskrit text is always Devanagari → use Hindi voice mapping/lang code
+    // regardless of UI language, so the chant sounds correct.
+    const langKey: Lang = partKey === "sanskrit" ? "hi" : isLang(language) ? language : "en";
+    const voiceId = VOICE_BY_LANG_PART[langKey][partKey];
     const settings = PART_SETTINGS[partKey];
 
     // Add subtle pause cues for sanskrit lines
@@ -61,6 +95,9 @@ Deno.serve(async (req) => {
         body: JSON.stringify({
           text: finalText,
           model_id: "eleven_multilingual_v2",
+          // Explicit language code prevents the model from defaulting to
+          // English/Hindi phonetics when it sees Bengali script.
+          language_code: langKey,
           voice_settings: settings,
         }),
       }
