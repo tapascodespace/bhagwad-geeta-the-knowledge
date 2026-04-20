@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { Pause, Play, Loader2, AudioLines, BookOpen, Headphones, Lightbulb } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { audioController } from "@/lib/audio-controller";
-import { fetchTtsAudio } from "@/lib/tts-fetch";
+import { fetchTtsAudio, type TtsLang } from "@/lib/tts-fetch";
 
 type Part = "sanskrit" | "translation" | "explanation";
 
@@ -18,10 +18,11 @@ interface Props {
   part: Part;
   text: string;
   meta: SectionMeta;
+  language: TtsLang;
 }
 
-const fetchAudio = (part: Part, text: string, key: string) =>
-  fetchTtsAudio(part, text, key);
+const fetchAudio = (part: Part, text: string, key: string, language: TtsLang) =>
+  fetchTtsAudio(part, text, key, language);
 
 const useAudioState = () =>
   useSyncExternalStore(
@@ -37,7 +38,7 @@ const formatTime = (s: number) => {
   return `${m}:${sec.toString().padStart(2, "0")}`;
 };
 
-const VerseAudioPlayer = ({ cacheKey, part, text, meta }: Props) => {
+const VerseAudioPlayer = ({ cacheKey, part, text, meta, language }: Props) => {
   const state = useAudioState();
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -88,7 +89,7 @@ const VerseAudioPlayer = ({ cacheKey, part, text, meta }: Props) => {
     }
     try {
       setLoading(true);
-      const url = await fetchAudio(part, text, id);
+      const url = await fetchAudio(part, text, id, language);
       setLoading(false);
       await audioController.play(id, url);
     } catch (e: any) {

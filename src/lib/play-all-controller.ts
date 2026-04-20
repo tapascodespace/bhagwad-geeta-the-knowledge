@@ -2,12 +2,13 @@
 // for the current verse, then triggers an onComplete callback so the page
 // can advance to the next verse and resume the chain seamlessly.
 import { audioController } from "@/lib/audio-controller";
-import { fetchTtsAudio, type TtsPart } from "@/lib/tts-fetch";
+import { fetchTtsAudio, type TtsPart, type TtsLang } from "@/lib/tts-fetch";
 
 export interface PlayAllSegment {
   part: TtsPart;
   text: string;
   cacheKey: string; // unique id per (verse, part, language)
+  language: TtsLang;
 }
 
 type Listener = () => void;
@@ -77,7 +78,7 @@ class PlayAllController {
 
       try {
         this.update({ isLoading: true, currentPart: seg.part });
-        const url = await fetchTtsAudio(seg.part, seg.text, seg.cacheKey);
+        const url = await fetchTtsAudio(seg.part, seg.text, seg.cacheKey, seg.language);
         if (this.cancelled) return false;
 
         this.update({ isLoading: false });
