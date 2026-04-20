@@ -83,6 +83,21 @@ Deno.serve(async (req) => {
         ? text.replace(/\n+/g, " ... ").replace(/।/g, "। ... ").replace(/॥/g, "॥ ... ")
         : text;
 
+    // eleven_multilingual_v2 doesn't support Bengali. Use turbo_v2_5 for bn
+    // (covers 32 langs incl. Bengali) and multilingual_v2 for en/hi quality.
+    // language_code is only valid on turbo/flash models — omit for v2.
+    const useTurbo = langKey === "bn";
+    const modelId = useTurbo ? "eleven_turbo_v2_5" : "eleven_multilingual_v2";
+    const requestBody: Record<string, unknown> = {
+      text: finalText,
+      model_id: modelId,
+      voice_settings: settings,
+    };
+    if (useTurbo) {
+      // Force native Bengali phonemes — never fallback to Hindi/English.
+      requestBody.language_code = "bn";
+    }
+
     const r = await fetch(
       `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}?output_format=mp3_44100_128`,
       {
@@ -91,14 +106,7 @@ Deno.serve(async (req) => {
           "xi-api-key": apiKey,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          text: finalText,
-          model_id: "eleven_multilingual_v2",
-          // Explicit language code prevents the model from defaulting to
-          // English/Hindi phonetics when it sees Bengali script.
-          language_code: langKey,
-          voice_settings: settings,
-        }),
+        body: JSON.stringify(requestBody),
       }
     );
 
