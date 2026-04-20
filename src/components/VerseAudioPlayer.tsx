@@ -2,27 +2,27 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { Pause, Play, Loader2, AudioLines, BookOpen, Headphones, Lightbulb } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { audioController } from "@/lib/audio-controller";
-import { fetchTtsAudio, type TtsLang } from "@/lib/tts-fetch";
-
-type Part = "sanskrit" | "translation" | "explanation";
+import {
+  resolveVerseAudio,
+  AudioNotAvailableError,
+  type AudioPart,
+  type AudioLang,
+} from "@/lib/audio-url";
 
 interface SectionMeta {
-  key: Part;
+  key: AudioPart;
   title: string;
   subtitle: string;
   icon: typeof BookOpen;
 }
 
 interface Props {
-  cacheKey: string;
-  part: Part;
-  text: string;
+  chapter: number;
+  verse: number;
+  part: AudioPart;
   meta: SectionMeta;
-  language: TtsLang;
+  language: AudioLang;
 }
-
-const fetchAudio = (part: Part, text: string, key: string, language: TtsLang) =>
-  fetchTtsAudio(part, text, key, language);
 
 const useAudioState = () =>
   useSyncExternalStore(
@@ -38,17 +38,16 @@ const formatTime = (s: number) => {
   return `${m}:${sec.toString().padStart(2, "0")}`;
 };
 
-const VerseAudioPlayer = ({ cacheKey, part, text, meta, language }: Props) => {
+const VerseAudioPlayer = ({ chapter, verse, part, meta, language }: Props) => {
   const state = useAudioState();
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
-  const id = `${cacheKey}:${part}`;
+  const id = `ch${chapter}-v${verse}-${part === "shloka" ? "shloka" : `${language}-${part}`}`;
   const isActive = state.activeId === id;
   const isPlaying = isActive && state.isPlaying;
   const rafRef = useRef<number | null>(null);
 
-  // Track progress while active
   useEffect(() => {
     if (!isActive) {
       setProgress(0);
@@ -69,7 +68,6 @@ const VerseAudioPlayer = ({ cacheKey, part, text, meta, language }: Props) => {
     };
   }, [isActive]);
 
-  // Stop our audio when component unmounts (verse change)
   useEffect(() => {
     return () => {
       const active = audioController.getSnapshot().activeId;
@@ -78,7 +76,6 @@ const VerseAudioPlayer = ({ cacheKey, part, text, meta, language }: Props) => {
   }, [id]);
 
   const toggle = async () => {
-    if (!text || !text.trim()) return;
     if (audioController.isActive(id)) {
       audioController.pause();
       return;
@@ -89,17 +86,24 @@ const VerseAudioPlayer = ({ cacheKey, part, text, meta, language }: Props) => {
     }
     try {
       setLoading(true);
-      const url = await fetchAudio(part, text, id, language);
+      const url = await resolveVerseAudio(chapter, verse, part, language);
       setLoading(false);
       await audioController.play(id, url);
     } catch (e: any) {
       setLoading(false);
-      console.error(e);
-      toast({
-        title: "Audio error",
-        description: e?.message || "Could not play audio",
-        variant: "destructive",
-      });
+      if (e instanceof AudioNotAvailableError) {
+        toast({
+          title: "Audio not available yet",
+          description: "This verse hasn't been recorded in the selected language.",
+        });
+      } else {
+        console.error(e);
+        toast({
+          title: "Audio error",
+          description: e?.message || "Could not play audio",
+          variant: "destructive",
+        });
+      }
     }
   };
 
@@ -115,7 +119,6 @@ const VerseAudioPlayer = ({ cacheKey, part, text, meta, language }: Props) => {
       }`}
     >
       <div className="flex items-center gap-3">
-        {/* Thumbnail circle */}
         <div
           className={`shrink-0 w-14 h-14 rounded-full flex items-center justify-center border-2 ${
             isActive
@@ -126,7 +129,6 @@ const VerseAudioPlayer = ({ cacheKey, part, text, meta, language }: Props) => {
           <Icon className="w-6 h-6" strokeWidth={1.8} />
         </div>
 
-        {/* Title + subtitle */}
         <div className="flex-1 min-w-0">
           <p className="font-display font-semibold text-foreground text-base leading-tight truncate">
             {meta.title}
@@ -136,7 +138,6 @@ const VerseAudioPlayer = ({ cacheKey, part, text, meta, language }: Props) => {
           </p>
         </div>
 
-        {/* Play button */}
         <button
           onClick={toggle}
           disabled={loading}
@@ -156,7 +157,6 @@ const VerseAudioPlayer = ({ cacheKey, part, text, meta, language }: Props) => {
           )}
         </button>
 
-        {/* Waveform decoration */}
         <AudioLines
           className={`shrink-0 w-5 h-5 ${
             isPlaying ? "text-gold animate-pulse" : "text-gold/50"
@@ -164,7 +164,6 @@ const VerseAudioPlayer = ({ cacheKey, part, text, meta, language }: Props) => {
         />
       </div>
 
-      {/* Progress bar */}
       <div className="flex items-center gap-3 mt-3 px-1">
         <span className="text-[11px] text-muted-foreground tabular-nums w-9">
           {formatTime(progress)}
