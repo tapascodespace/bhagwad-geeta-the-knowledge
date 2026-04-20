@@ -3,7 +3,10 @@
 // L2: localStorage<key, base64 dataUrl> — persists across reloads so we
 //     never re-spend ElevenLabs credits for verses already generated.
 
-const LS_PREFIX = "gita-audio:v1:";
+// Bumped to v2 after Bengali source text was corrected — old cached
+// Bengali audio (which was Hindi pronounced with Bengali letters) must
+// be discarded so users hear the regenerated, properly-Bengali audio.
+const LS_PREFIX = "gita-audio:v2:";
 // Cap stored audio entries to avoid blowing past localStorage quota (~5MB).
 const MAX_ENTRIES = 60;
 
