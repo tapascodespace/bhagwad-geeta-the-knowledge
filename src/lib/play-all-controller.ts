@@ -1,14 +1,19 @@
-// Orchestrates sequential playback of (sanskrit → translation → explanation)
+// Orchestrates sequential playback of (shloka → translation → explanation)
 // for the current verse, then triggers an onComplete callback so the page
 // can advance to the next verse and resume the chain seamlessly.
 import { audioController } from "@/lib/audio-controller";
-import { fetchTtsAudio, type TtsPart, type TtsLang } from "@/lib/tts-fetch";
+import {
+  resolveVerseAudio,
+  AudioNotAvailableError,
+  type AudioPart,
+  type AudioLang,
+} from "@/lib/audio-url";
 
 export interface PlayAllSegment {
-  part: TtsPart;
-  text: string;
-  cacheKey: string; // unique id per (verse, part, language)
-  language: TtsLang;
+  part: AudioPart;
+  chapter: number;
+  verse: number;
+  language: AudioLang;
 }
 
 type Listener = () => void;
@@ -16,9 +21,12 @@ type Listener = () => void;
 interface PlayAllState {
   isActive: boolean;
   isLoading: boolean;
-  currentPart: TtsPart | null;
-  sessionId: string | null; // verse cache key prefix
+  currentPart: AudioPart | null;
+  sessionId: string | null;
 }
+
+const segmentId = (s: PlayAllSegment) =>
+  `ch${s.chapter}-v${s.verse}-${s.part === "shloka" ? "shloka" : `${s.language}-${s.part}`}`;
 
 class PlayAllController {
   private listeners = new Set<Listener>();
@@ -62,7 +70,7 @@ class PlayAllController {
   /**
    * Play a verse's segments in order. Returns true if the chain completed
    * naturally (so the caller can advance to the next verse), false if it
-   * was cancelled.
+   * was cancelled or any segment was unavailable.
    */
   async playVerse(
     sessionId: string,
@@ -74,22 +82,26 @@ class PlayAllController {
 
     for (const seg of segments) {
       if (this.cancelled) return false;
-      if (!seg.text || !seg.text.trim()) continue;
+      const id = segmentId(seg);
 
       try {
         this.update({ isLoading: true, currentPart: seg.part });
-        const url = await fetchTtsAudio(seg.part, seg.text, seg.cacheKey, seg.language);
+        const url = await resolveVerseAudio(seg.chapter, seg.verse, seg.part, seg.language);
         if (this.cancelled) return false;
 
         this.update({ isLoading: false });
         await new Promise<void>((resolve, reject) => {
           audioController
-            .play(seg.cacheKey, url, () => resolve())
+            .play(id, url, () => resolve())
             .catch(reject);
         });
         if (this.cancelled) return false;
       } catch (e) {
         this.stop();
+        if (e instanceof AudioNotAvailableError) {
+          // Re-throw so caller can show a friendly message, but don't advance.
+          throw e;
+        }
         throw e;
       }
     }

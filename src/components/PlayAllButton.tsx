@@ -1,6 +1,7 @@
 import { useEffect, useSyncExternalStore } from "react";
 import { Loader2, Play, Square } from "lucide-react";
 import { playAllController, type PlayAllSegment } from "@/lib/play-all-controller";
+import { AudioNotAvailableError } from "@/lib/audio-url";
 import { toast } from "@/hooks/use-toast";
 
 interface Props {
@@ -19,7 +20,7 @@ const useState_ = () =>
   );
 
 const PARTS_LABEL: Record<string, string> = {
-  sanskrit: "Sanskrit",
+  shloka: "Shloka",
   translation: "Translation",
   explanation: "Explanation",
 };
@@ -37,11 +38,18 @@ const PlayAllButton = ({
     try {
       await playAllController.playVerse(sessionId, segments, onVerseComplete);
     } catch (e: any) {
-      toast({
-        title: "Audio error",
-        description: e?.message || "Could not play audio",
-        variant: "destructive",
-      });
+      if (e instanceof AudioNotAvailableError) {
+        toast({
+          title: "Audio not available yet",
+          description: "This verse hasn't been recorded in the selected language.",
+        });
+      } else {
+        toast({
+          title: "Audio error",
+          description: e?.message || "Could not play audio",
+          variant: "destructive",
+        });
+      }
     }
   };
 
@@ -75,7 +83,7 @@ const PlayAllButton = ({
       : state.currentPart
         ? `Playing ${PARTS_LABEL[state.currentPart]}…`
         : "Playing…"
-    : "Play Sanskrit, Translation & Explanation in order";
+    : "Play Shloka, Translation & Explanation in order";
 
   return (
     <button
