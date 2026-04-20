@@ -7,34 +7,33 @@ const corsHeaders = {
 type Part = "sanskrit" | "translation" | "explanation";
 type Lang = "en" | "hi" | "bn";
 
-// Voice IDs chosen per (language, part). Bengali uses voices known to handle
-// Indic scripts well via the multilingual_v2 model with explicit language_code
-// so it never falls back to Hindi/English phonetics.
+// All voices below are ElevenLabs default (free-tier-safe) voices.
+// For Bengali pronunciation we rely on `language_code: "bn"` + the
+// eleven_multilingual_v2 model — that is what controls phoneme output,
+// NOT the voice identity. Library/premium voices would require a paid plan.
 //
-// Voice IDs (all from ElevenLabs default voice library — multilingual capable):
-//   George (JBFqnCBsd6RMkjVDRZzb)   — deep calm male, great for chant
-//   Sarah  (EXAVITQu4vr4xnSDxMaL)   — clear neutral female narration
-//   Matilda(XrExE9yKIg1WjnnlVkGX)   — warm friendly female
-//   Charlotte (XB0fDUnXU5powFXDhCwa)— soft warm female, handles Indic scripts cleanly
-//   Daniel (onwK4e9ZLuTAKqWW03F9)   — calm male narrator
+// George (JBFqnCBsd6RMkjVDRZzb)  — deep calm male, great for chant
+// Sarah  (EXAVITQu4vr4xnSDxMaL)  — clear neutral female narration
+// Matilda(XrExE9yKIg1WjnnlVkGX)  — warm friendly female
+// Daniel (onwK4e9ZLuTAKqWW03F9)  — calm male narrator
+// Lily   (pFZP5JQG7iQjIQuC4Bku)  — warm female, handles Indic scripts cleanly
 const VOICE_BY_LANG_PART: Record<Lang, Record<Part, string>> = {
   en: {
-    sanskrit: "JBFqnCBsd6RMkjVDRZzb", // George — chant
-    translation: "EXAVITQu4vr4xnSDxMaL", // Sarah — narration
-    explanation: "XrExE9yKIg1WjnnlVkGX", // Matilda — friendly
+    sanskrit: "JBFqnCBsd6RMkjVDRZzb", // George
+    translation: "EXAVITQu4vr4xnSDxMaL", // Sarah
+    explanation: "XrExE9yKIg1WjnnlVkGX", // Matilda
   },
   hi: {
-    sanskrit: "JBFqnCBsd6RMkjVDRZzb", // George — chant works for devanagari
-    translation: "EXAVITQu4vr4xnSDxMaL", // Sarah — multilingual handles Hindi
+    sanskrit: "JBFqnCBsd6RMkjVDRZzb", // George
+    translation: "EXAVITQu4vr4xnSDxMaL", // Sarah
     explanation: "XrExE9yKIg1WjnnlVkGX", // Matilda
   },
   bn: {
-    // For Bengali we deliberately route every part through voices that
-    // produce the cleanest native Bengali phonemes via eleven_multilingual_v2.
-    // Charlotte + Daniel render Bengali script natively without Hindi accent.
-    sanskrit: "onwK4e9ZLuTAKqWW03F9", // Daniel — calm male, devotional
-    translation: "XB0fDUnXU5powFXDhCwa", // Charlotte — soft Bengali narration
-    explanation: "XB0fDUnXU5powFXDhCwa", // Charlotte — warm explanation
+    // Bengali: language_code="bn" forces native Bengali phonemes regardless
+    // of voice. We pick a calm male for chant and a warm female for prose.
+    sanskrit: "onwK4e9ZLuTAKqWW03F9", // Daniel — calm devotional
+    translation: "pFZP5JQG7iQjIQuC4Bku", // Lily — soft Bengali narration
+    explanation: "pFZP5JQG7iQjIQuC4Bku", // Lily — warm explanation
   },
 };
 
