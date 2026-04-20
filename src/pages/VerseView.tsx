@@ -97,11 +97,12 @@ const VerseView = () => {
     }, 350);
   };
 
+  const ttsLang = (language === "hi" || language === "bn" ? language : "en") as "en" | "hi" | "bn";
   const playAllSegments = [
-    { part: "sanskrit" as const, text: verse.sanskrit, cacheKey: `${cacheKey}:sanskrit` },
-    { part: "translation" as const, text: translation, cacheKey: `${cacheKey}:translation` },
+    { part: "sanskrit" as const, text: verse.sanskrit, cacheKey: `${cacheKey}:sanskrit`, language: ttsLang },
+    { part: "translation" as const, text: translation, cacheKey: `${cacheKey}:translation`, language: ttsLang },
     ...(explanation
-      ? [{ part: "explanation" as const, text: explanation, cacheKey: `${cacheKey}:explanation` }]
+      ? [{ part: "explanation" as const, text: explanation, cacheKey: `${cacheKey}:explanation`, language: ttsLang }]
       : []),
   ];
 
@@ -199,6 +200,7 @@ const VerseView = () => {
           cacheKey={cacheKey}
           part="sanskrit"
           text={verse.sanskrit}
+          language={ttsLang}
           meta={{
             key: "sanskrit",
             title: "Listen to Sanskrit",
@@ -226,6 +228,7 @@ const VerseView = () => {
           cacheKey={cacheKey}
           part="translation"
           text={translation}
+          language={ttsLang}
           meta={{
             key: "translation",
             title: "Listen to Translation",
@@ -254,6 +257,7 @@ const VerseView = () => {
               cacheKey={cacheKey}
               part="explanation"
               text={explanation}
+              language={ttsLang}
               meta={{
                 key: "explanation",
                 title: "Listen to Explanation",
