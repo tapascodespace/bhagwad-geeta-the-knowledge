@@ -97,12 +97,12 @@ const VerseView = () => {
     }, 350);
   };
 
-  const ttsLang = (language === "hi" || language === "bn" ? language : "en") as "en" | "hi" | "bn";
+  const audioLang = (language === "hi" || language === "bn" ? language : "en") as "en" | "hi" | "bn";
   const playAllSegments = [
-    { part: "sanskrit" as const, text: verse.sanskrit, cacheKey: `${cacheKey}:sanskrit`, language: ttsLang },
-    { part: "translation" as const, text: translation, cacheKey: `${cacheKey}:translation`, language: ttsLang },
+    { part: "shloka" as const, chapter: chapter.id, verse: verse.id, language: audioLang },
+    { part: "translation" as const, chapter: chapter.id, verse: verse.id, language: audioLang },
     ...(explanation
-      ? [{ part: "explanation" as const, text: explanation, cacheKey: `${cacheKey}:explanation`, language: ttsLang }]
+      ? [{ part: "explanation" as const, chapter: chapter.id, verse: verse.id, language: audioLang }]
       : []),
   ];
 
@@ -195,14 +195,14 @@ const VerseView = () => {
           autoStartKey={autoStartKey}
         />
 
-        {/* Sanskrit audio */}
+        {/* Shloka (Sanskrit) audio */}
         <VerseAudioPlayer
-          cacheKey={cacheKey}
-          part="sanskrit"
-          text={verse.sanskrit}
-          language={ttsLang}
+          chapter={chapter.id}
+          verse={verse.id}
+          part="shloka"
+          language={audioLang}
           meta={{
-            key: "sanskrit",
+            key: "shloka",
             title: "Listen to Sanskrit",
             subtitle: "Traditional Chant • Sacred Recitation",
             icon: BookOpen,
@@ -225,10 +225,10 @@ const VerseView = () => {
         </div>
 
         <VerseAudioPlayer
-          cacheKey={cacheKey}
+          chapter={chapter.id}
+          verse={verse.id}
           part="translation"
-          text={translation}
-          language={ttsLang}
+          language={audioLang}
           meta={{
             key: "translation",
             title: "Listen to Translation",
@@ -254,10 +254,10 @@ const VerseView = () => {
             </div>
 
             <VerseAudioPlayer
-              cacheKey={cacheKey}
+              chapter={chapter.id}
+              verse={verse.id}
               part="explanation"
-              text={explanation}
-              language={ttsLang}
+              language={audioLang}
               meta={{
                 key: "explanation",
                 title: "Listen to Explanation",
