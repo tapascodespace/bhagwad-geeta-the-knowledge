@@ -83,18 +83,19 @@ Deno.serve(async (req) => {
         ? text.replace(/\n+/g, " ... ").replace(/।/g, "। ... ").replace(/॥/g, "॥ ... ")
         : text;
 
-    // eleven_multilingual_v2 doesn't support Bengali. Use turbo_v2_5 for bn
-    // (covers 32 langs incl. Bengali) and multilingual_v2 for en/hi quality.
-    // language_code is only valid on turbo/flash models — omit for v2.
-    const useTurbo = langKey === "bn";
-    const modelId = useTurbo ? "eleven_turbo_v2_5" : "eleven_multilingual_v2";
+    // Model selection per language:
+    //   • Bengali → eleven_v3 (the only model that natively supports `bn`).
+    //     Forces correct Bengali phonemes via language_code="bn", so the
+    //     output never falls back to Hindi/English accent.
+    //   • English/Hindi → eleven_multilingual_v2 (best quality for those).
+    const useV3ForBengali = langKey === "bn";
+    const modelId = useV3ForBengali ? "eleven_v3" : "eleven_multilingual_v2";
     const requestBody: Record<string, unknown> = {
       text: finalText,
       model_id: modelId,
       voice_settings: settings,
     };
-    if (useTurbo) {
-      // Force native Bengali phonemes — never fallback to Hindi/English.
+    if (useV3ForBengali) {
       requestBody.language_code = "bn";
     }
 
