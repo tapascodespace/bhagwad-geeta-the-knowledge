@@ -168,14 +168,14 @@ const VerseView = () => {
         </div>
 
         {/* Sanskrit shloka with side marks */}
-        <div className="relative px-2 mb-5">
-          <span className="absolute left-0 top-1/2 -translate-y-1/2 font-sanskrit text-gold/70 text-2xl select-none">
+        <div className="relative px-1 mb-5">
+          <span className="absolute left-0 top-1/2 -translate-y-1/2 font-sanskrit text-gold/70 text-lg select-none">
             ॥
           </span>
-          <span className="absolute right-0 top-1/2 -translate-y-1/2 font-sanskrit text-gold/70 text-2xl select-none">
+          <span className="absolute right-0 top-1/2 -translate-y-1/2 font-sanskrit text-gold/70 text-lg select-none">
             ॥
           </span>
-          <p className="font-sanskrit text-center text-2xl sm:text-[26px] text-foreground font-semibold leading-loose whitespace-pre-line px-6">
+          <p className="font-sanskrit text-center text-[17px] sm:text-lg text-foreground font-medium leading-[1.9] whitespace-pre-line px-5 tracking-normal">
             {verse.sanskrit}
           </p>
         </div>
