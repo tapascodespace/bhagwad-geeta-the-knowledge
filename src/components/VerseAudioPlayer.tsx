@@ -108,7 +108,7 @@ const VerseAudioPlayer = ({ chapter, verse, part, meta, language }: Props) => {
   };
 
   const Icon = meta.icon;
-  const pct = duration > 0 ? (progress / duration) * 100 : 0;
+  const pct = duration > 0 ? Math.min(100, (progress / duration) * 100) : 0;
 
   return (
     <div
