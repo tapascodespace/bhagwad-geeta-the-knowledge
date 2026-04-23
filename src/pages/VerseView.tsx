@@ -10,7 +10,6 @@ import {
   Share2,
   Copy,
   ArrowRight,
-  ArrowLeftCircle,
 } from "lucide-react";
 import { chapters, getChapterName, pickText } from "@/data/gita";
 import { useBookmarks } from "@/hooks/useBookmarks";
@@ -282,7 +281,7 @@ const VerseView = () => {
             className="flex flex-col items-center gap-1.5 py-2 active:scale-95 transition-all disabled:opacity-40"
           >
             <span className="w-11 h-11 rounded-full bg-gradient-primary text-primary-foreground flex items-center justify-center shadow-soft">
-              <ArrowLeftCircle className="w-5 h-5" />
+              <ArrowLeft className="w-5 h-5" />
             </span>
             <span className="text-xs text-foreground/80 font-medium text-center leading-tight">
               {t("previous")} {t("verse")}
