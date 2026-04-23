@@ -285,7 +285,7 @@ const VerseView = () => {
               <ArrowLeftCircle className="w-5 h-5" />
             </span>
             <span className="text-xs text-foreground/80 font-medium text-center leading-tight">
-              {t("previous") || "Prev"}
+              {t("previous")} {t("verse")}
             </span>
           </button>
           <button
@@ -326,7 +326,7 @@ const VerseView = () => {
               <ArrowRight className="w-5 h-5" />
             </span>
             <span className="text-xs text-foreground/80 font-medium text-center leading-tight">
-              {t("next")}
+              {t("next")} {t("verse")}
             </span>
           </button>
         </div>
