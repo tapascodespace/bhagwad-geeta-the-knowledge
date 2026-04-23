@@ -10,6 +10,7 @@ import {
   Share2,
   Copy,
   ArrowRight,
+  ArrowLeftCircle,
 } from "lucide-react";
 import { chapters, getChapterName, pickText } from "@/data/gita";
 import { useBookmarks } from "@/hooks/useBookmarks";
@@ -33,6 +34,7 @@ const VerseView = () => {
   const AUTOPLAY_FLAG = "gita-autoplay-chain";
   const [autoStartKey, setAutoStartKey] = useState<string | null>(null);
   const hasNext = !!chapter && verseIdx >= 0 && verseIdx < chapter.verses.length - 1;
+  const hasPrev = !!chapter && verseIdx > 0;
   const hasNextRef = useRef(hasNext);
   hasNextRef.current = hasNext;
 
@@ -60,6 +62,10 @@ const VerseView = () => {
 
   const goNext = () => {
     if (hasNext) navigate(`/chapters/${chapter.id}/verses/${chapter.verses[verseIdx + 1].id}`, { replace: true });
+  };
+
+  const goPrev = () => {
+    if (hasPrev) navigate(`/chapters/${chapter.id}/verses/${chapter.verses[verseIdx - 1].id}`, { replace: true });
   };
 
   const handleCopy = async () => {
@@ -269,7 +275,19 @@ const VerseView = () => {
         )}
 
         {/* Action row */}
-        <div className="grid grid-cols-4 gap-2 pt-6 mt-6 border-t border-gold/20">
+        <div className="grid grid-cols-5 gap-2 pt-6 mt-6 border-t border-gold/20">
+          <button
+            onClick={goPrev}
+            disabled={!hasPrev}
+            className="flex flex-col items-center gap-1.5 py-2 active:scale-95 transition-all disabled:opacity-40"
+          >
+            <span className="w-11 h-11 rounded-full bg-gradient-primary text-primary-foreground flex items-center justify-center shadow-soft">
+              <ArrowLeftCircle className="w-5 h-5" />
+            </span>
+            <span className="text-xs text-foreground/80 font-medium text-center leading-tight">
+              {t("previous") || "Prev"}
+            </span>
+          </button>
           <button
             onClick={() => toggleBookmark(chapter.id, verse.id)}
             className="flex flex-col items-center gap-1.5 py-2 active:scale-95 transition-all"
@@ -277,7 +295,7 @@ const VerseView = () => {
             <span className="w-11 h-11 rounded-full bg-gradient-primary text-primary-foreground flex items-center justify-center shadow-soft">
               <Bookmark className={`w-5 h-5 ${bookmarked ? "fill-current" : ""}`} />
             </span>
-            <span className="text-xs text-foreground/80 font-medium">
+            <span className="text-xs text-foreground/80 font-medium text-center leading-tight">
               {t("bookmark") || "Bookmark"}
             </span>
           </button>
@@ -288,7 +306,7 @@ const VerseView = () => {
             <span className="w-11 h-11 rounded-full bg-gradient-primary text-primary-foreground flex items-center justify-center shadow-soft">
               <Share2 className="w-5 h-5" />
             </span>
-            <span className="text-xs text-foreground/80 font-medium">Share</span>
+            <span className="text-xs text-foreground/80 font-medium text-center leading-tight">Share</span>
           </button>
           <button
             onClick={handleCopy}
@@ -297,7 +315,7 @@ const VerseView = () => {
             <span className="w-11 h-11 rounded-full bg-gradient-primary text-primary-foreground flex items-center justify-center shadow-soft">
               <Copy className="w-5 h-5" />
             </span>
-            <span className="text-xs text-foreground/80 font-medium">Copy</span>
+            <span className="text-xs text-foreground/80 font-medium text-center leading-tight">Copy</span>
           </button>
           <button
             onClick={goNext}
@@ -307,8 +325,8 @@ const VerseView = () => {
             <span className="w-11 h-11 rounded-full bg-gradient-primary text-primary-foreground flex items-center justify-center shadow-soft">
               <ArrowRight className="w-5 h-5" />
             </span>
-            <span className="text-xs text-foreground/80 font-medium">
-              {t("next")} {t("verse")}
+            <span className="text-xs text-foreground/80 font-medium text-center leading-tight">
+              {t("next")}
             </span>
           </button>
         </div>
