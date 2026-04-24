@@ -12,6 +12,10 @@ import Bookmarks from "@/pages/Bookmarks";
 import LanguageSelect from "@/pages/LanguageSelect";
 import NotFound from "@/pages/NotFound";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { backgroundMusic } from "@/lib/background-music";
+
+// Wire background music to follow voice playback (verse audio + Play All).
+backgroundMusic.wire();
 
 const queryClient = new QueryClient();
 
