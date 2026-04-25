@@ -7,8 +7,8 @@ import bansuriUrl from "@/assets/bansuri-drift.mp3";
 import { audioController } from "@/lib/audio-controller";
 import { playAllController } from "@/lib/play-all-controller";
 
-const BASE_VOLUME = 0.15;       // default music volume (15%)
-const DUCKED_VOLUME = 0.07;     // while voice is audible (~7%)
+const BASE_VOLUME = 0.55;       // default music volume (55%) — audible at ~50–60% phone volume
+const DUCKED_VOLUME = 0.32;     // while voice is audible (~32%) — present but never masks voice
 const FADE_MS = 700;            // fade in/out duration
 
 class BackgroundMusic {
