@@ -62,11 +62,6 @@ export const resolveVerseAudio = async (
   part: AudioPart,
   language: AudioLang
 ): Promise<string> => {
-  if (chapter === 1 && language === "hi" && part !== "shloka") {
-    const cleanUrl = getVerseAudioUrl(chapter, verse, part, language, true);
-    if (await checkAudioAvailable(cleanUrl)) return cleanUrl;
-  }
-
   const url = getVerseAudioUrl(chapter, verse, part, language);
   const ok = await checkAudioAvailable(url);
   if (!ok) throw new AudioNotAvailableError();
