@@ -28,7 +28,13 @@ const PlayAllButton = ({
   autoStartKey,
 }: Props) => {
   const state = useState_();
+  const { t } = useLanguage();
   const isThisSession = state.sessionId === sessionId && state.isActive;
+  const partLabel = (p?: string | null) =>
+    p === "shloka" ? t("partShloka")
+    : p === "translation" ? t("partTranslation")
+    : p === "explanation" ? t("partExplanation")
+    : "";
 
   const start = async () => {
     try {
