@@ -71,9 +71,9 @@ const VerseView = () => {
     const text = `${verse.sanskrit}\n\n${translation}${explanation ? `\n\n${explanation}` : ""}`;
     try {
       await navigator.clipboard.writeText(text);
-      toast({ title: "Copied", description: "Verse copied to clipboard" });
+      toast({ title: t("copied"), description: t("copiedDesc") });
     } catch {
-      toast({ title: "Copy failed", variant: "destructive" });
+      toast({ title: t("copyFailed"), variant: "destructive" });
     }
   };
 
@@ -84,7 +84,7 @@ const VerseView = () => {
         await navigator.share({ title: `Bhagavad Gita ${chapter.id}.${verse.id}`, text });
       } else {
         await navigator.clipboard.writeText(text);
-        toast({ title: "Copied to clipboard" });
+        toast({ title: t("copied") });
       }
     } catch {
       /* user dismissed */
