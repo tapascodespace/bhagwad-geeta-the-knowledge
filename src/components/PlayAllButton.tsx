@@ -81,11 +81,11 @@ const PlayAllButton = ({
 
   const status = isThisSession
     ? state.isLoading
-      ? `Preparing ${PARTS_LABEL[state.currentPart ?? ""] ?? ""}…`
+      ? `${t("preparing")} ${partLabel(state.currentPart)}…`
       : state.currentPart
-        ? `Playing ${PARTS_LABEL[state.currentPart]}…`
-        : "Playing…"
-    : "Play Shloka, Translation & Explanation in order";
+        ? `${t("playing")} ${partLabel(state.currentPart)}…`
+        : `${t("playing")}…`
+    : t("playAllHint");
 
   return (
     <button
