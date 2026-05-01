@@ -95,6 +95,48 @@ export const t: Record<string, Dict> = {
     en: "Verse copied to clipboard",
   },
   copyFailed: { bn: "কপি ব্যর্থ", hi: "कॉपी विफल", en: "Copy failed" },
+  playAll: { bn: "সব শুনুন", hi: "सब सुनें", en: "Play All" },
+  stopAutoPlay: { bn: "অটো-প্লে বন্ধ", hi: "ऑटो-प्ले बंद करें", en: "Stop Auto-Play" },
+  playAllHint: {
+    bn: "শ্লোক, অনুবাদ ও ব্যাখ্যা ক্রমে শুনুন",
+    hi: "श्लोक, अनुवाद और व्याख्या क्रम से सुनें",
+    en: "Play Shloka, Translation & Explanation in order",
+  },
+  preparing: { bn: "প্রস্তুত হচ্ছে", hi: "तैयार हो रहा है", en: "Preparing" },
+  playing: { bn: "চলছে", hi: "चल रहा है", en: "Playing" },
+  partShloka: { bn: "শ্লোক", hi: "श्लोक", en: "Shloka" },
+  partTranslation: { bn: "অনুবাদ", hi: "अनुवाद", en: "Translation" },
+  partExplanation: { bn: "ব্যাখ্যা", hi: "व्याख्या", en: "Explanation" },
+  listenToShloka: {
+    bn: "শ্লোক শুনুন",
+    hi: "श्लोक सुनें",
+    en: "Listen to Shloka",
+  },
+  listenToTranslation: {
+    bn: "অনুবাদ শুনুন",
+    hi: "अनुवाद सुनें",
+    en: "Listen to Translation",
+  },
+  listenToExplanation: {
+    bn: "ব্যাখ্যা শুনুন",
+    hi: "व्याख्या सुनें",
+    en: "Listen to Explanation",
+  },
+  shlokaSubtitle: {
+    bn: "ঐতিহ্যবাহী পাঠ • পবিত্র উচ্চারণ",
+    hi: "पारंपरिक पाठ • पवित्र उच्चारण",
+    en: "Traditional Chant • Sacred Recitation",
+  },
+  translationSubtitle: {
+    bn: "স্পষ্ট বর্ণনা • উচ্চারিত কণ্ঠস্বর",
+    hi: "स्पष्ट वर्णन • बोला गया स्वर",
+    en: "Clear Narration • Spoken Voice",
+  },
+  explanationSubtitle: {
+    bn: "সরল ব্যাখ্যা • বন্ধুত্বপূর্ণ কণ্ঠস্বর",
+    hi: "सरल व्याख्या • मित्रवत स्वर",
+    en: "Simple Explanation • Friendly Voice",
+  },
   verseOfTheDay: {
     bn: "আজকের শ্লোক",
     hi: "आज का श्लोक",
