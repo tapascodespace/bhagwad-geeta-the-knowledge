@@ -265,8 +265,8 @@ const VerseView = () => {
               language={audioLang}
               meta={{
                 key: "explanation",
-                title: "Listen to Explanation",
-                subtitle: "Simple Explanation • Friendly Voice",
+                title: t("listenToExplanation"),
+                subtitle: t("explanationSubtitle"),
                 icon: Lightbulb,
               }}
             />
