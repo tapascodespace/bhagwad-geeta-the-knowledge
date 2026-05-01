@@ -108,7 +108,7 @@ const PlayAllButton = ({
       </span>
       <div className="flex-1 min-w-0 text-left">
         <p className="font-display font-semibold text-base leading-tight">
-          {isThisSession ? "Stop Auto-Play" : "Play All"}
+          {isThisSession ? t("stopAutoPlay") : t("playAll")}
         </p>
         <p className="text-xs opacity-90 mt-0.5 truncate">{status}</p>
       </div>
