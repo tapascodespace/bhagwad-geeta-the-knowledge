@@ -3,6 +3,7 @@ import { Loader2, Play, Square } from "lucide-react";
 import { playAllController, type PlayAllSegment } from "@/lib/play-all-controller";
 import { AudioNotAvailableError } from "@/lib/audio-url";
 import { toast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Props {
   sessionId: string;
