@@ -85,6 +85,16 @@ export const t: Record<string, Dict> = {
     en: "Not found",
   },
   save: { bn: "সংরক্ষণ করুন", hi: "सहेजें", en: "Save" },
+  bookmark: { bn: "পছন্দ", hi: "पसंद", en: "Bookmark" },
+  share: { bn: "শেয়ার", hi: "साझा करें", en: "Share" },
+  copy: { bn: "কপি", hi: "कॉपी", en: "Copy" },
+  copied: { bn: "কপি হয়েছে", hi: "कॉपी हो गया", en: "Copied" },
+  copiedDesc: {
+    bn: "শ্লোক ক্লিপবোর্ডে কপি হয়েছে",
+    hi: "श्लोक क्लिपबोर्ड पर कॉपी हो गया",
+    en: "Verse copied to clipboard",
+  },
+  copyFailed: { bn: "কপি ব্যর্থ", hi: "कॉपी विफल", en: "Copy failed" },
   verseOfTheDay: {
     bn: "আজকের শ্লোক",
     hi: "आज का श्लोक",
