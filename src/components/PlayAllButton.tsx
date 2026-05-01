@@ -20,11 +20,6 @@ const useState_ = () =>
     playAllController.getSnapshot
   );
 
-const PARTS_LABEL: Record<string, string> = {
-  shloka: "Shloka",
-  translation: "Translation",
-  explanation: "Explanation",
-};
 
 const PlayAllButton = ({
   sessionId,
