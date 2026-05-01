@@ -95,7 +95,7 @@ const PlayAllButton = ({
           ? "bg-gradient-primary text-primary-foreground border-gold/50 animate-soft-pulse"
           : "bg-gradient-primary text-primary-foreground border-gold/40 hover:opacity-95"
       }`}
-      aria-label={isThisSession ? "Stop Play All" : "Play All"}
+      aria-label={isThisSession ? t("stopAutoPlay") : t("playAll")}
     >
       <span className="shrink-0 w-12 h-12 rounded-full bg-primary-foreground/15 flex items-center justify-center">
         {isThisSession && state.isLoading ? (
