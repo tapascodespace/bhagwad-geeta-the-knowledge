@@ -208,8 +208,8 @@ const VerseView = () => {
           language={audioLang}
           meta={{
             key: "shloka",
-            title: "Listen to Sanskrit",
-            subtitle: "Traditional Chant • Sacred Recitation",
+            title: t("listenToShloka"),
+            subtitle: t("shlokaSubtitle"),
             icon: BookOpen,
           }}
         />
@@ -236,8 +236,8 @@ const VerseView = () => {
           language={audioLang}
           meta={{
             key: "translation",
-            title: "Listen to Translation",
-            subtitle: "Clear Narration • Spoken Voice",
+            title: t("listenToTranslation"),
+            subtitle: t("translationSubtitle"),
             icon: Headphones,
           }}
         />
@@ -265,8 +265,8 @@ const VerseView = () => {
               language={audioLang}
               meta={{
                 key: "explanation",
-                title: "Listen to Explanation",
-                subtitle: "Simple Explanation • Friendly Voice",
+                title: t("listenToExplanation"),
+                subtitle: t("explanationSubtitle"),
                 icon: Lightbulb,
               }}
             />

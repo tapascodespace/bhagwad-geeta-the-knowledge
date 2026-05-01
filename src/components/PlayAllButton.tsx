@@ -3,6 +3,7 @@ import { Loader2, Play, Square } from "lucide-react";
 import { playAllController, type PlayAllSegment } from "@/lib/play-all-controller";
 import { AudioNotAvailableError } from "@/lib/audio-url";
 import { toast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Props {
   sessionId: string;
@@ -19,11 +20,6 @@ const useState_ = () =>
     playAllController.getSnapshot
   );
 
-const PARTS_LABEL: Record<string, string> = {
-  shloka: "Shloka",
-  translation: "Translation",
-  explanation: "Explanation",
-};
 
 const PlayAllButton = ({
   sessionId,
@@ -32,7 +28,13 @@ const PlayAllButton = ({
   autoStartKey,
 }: Props) => {
   const state = useState_();
+  const { t } = useLanguage();
   const isThisSession = state.sessionId === sessionId && state.isActive;
+  const partLabel = (p?: string | null) =>
+    p === "shloka" ? t("partShloka")
+    : p === "translation" ? t("partTranslation")
+    : p === "explanation" ? t("partExplanation")
+    : "";
 
   const start = async () => {
     try {
@@ -79,11 +81,11 @@ const PlayAllButton = ({
 
   const status = isThisSession
     ? state.isLoading
-      ? `Preparing ${PARTS_LABEL[state.currentPart ?? ""] ?? ""}…`
+      ? `${t("preparing")} ${partLabel(state.currentPart)}…`
       : state.currentPart
-        ? `Playing ${PARTS_LABEL[state.currentPart]}…`
-        : "Playing…"
-    : "Play Shloka, Translation & Explanation in order";
+        ? `${t("playing")} ${partLabel(state.currentPart)}…`
+        : `${t("playing")}…`
+    : t("playAllHint");
 
   return (
     <button
@@ -93,7 +95,7 @@ const PlayAllButton = ({
           ? "bg-gradient-primary text-primary-foreground border-gold/50 animate-soft-pulse"
           : "bg-gradient-primary text-primary-foreground border-gold/40 hover:opacity-95"
       }`}
-      aria-label={isThisSession ? "Stop Play All" : "Play All"}
+      aria-label={isThisSession ? t("stopAutoPlay") : t("playAll")}
     >
       <span className="shrink-0 w-12 h-12 rounded-full bg-primary-foreground/15 flex items-center justify-center">
         {isThisSession && state.isLoading ? (
@@ -106,7 +108,7 @@ const PlayAllButton = ({
       </span>
       <div className="flex-1 min-w-0 text-left">
         <p className="font-display font-semibold text-base leading-tight">
-          {isThisSession ? "Stop Auto-Play" : "Play All"}
+          {isThisSession ? t("stopAutoPlay") : t("playAll")}
         </p>
         <p className="text-xs opacity-90 mt-0.5 truncate">{status}</p>
       </div>
