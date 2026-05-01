@@ -208,8 +208,8 @@ const VerseView = () => {
           language={audioLang}
           meta={{
             key: "shloka",
-            title: "Listen to Sanskrit",
-            subtitle: "Traditional Chant • Sacred Recitation",
+            title: t("listenToShloka"),
+            subtitle: t("shlokaSubtitle"),
             icon: BookOpen,
           }}
         />
