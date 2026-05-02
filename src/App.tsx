@@ -11,6 +11,7 @@ import VerseView from "@/pages/VerseView";
 import Bookmarks from "@/pages/Bookmarks";
 import Library from "@/pages/Library";
 import BookReader from "@/pages/BookReader";
+import BookDetail from "@/pages/BookDetail";
 import LanguageSelect from "@/pages/LanguageSelect";
 import NotFound from "@/pages/NotFound";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -46,7 +47,8 @@ const App = () => (
             <Route path="/chapters/:chapterId/verses/:verseId" element={<RequireLanguage><VerseView /></RequireLanguage>} />
             <Route path="/bookmarks" element={<RequireLanguage><Bookmarks /></RequireLanguage>} />
             <Route path="/library" element={<RequireLanguage><Library /></RequireLanguage>} />
-            <Route path="/library/:bookId" element={<RequireLanguage><BookReader /></RequireLanguage>} />
+            <Route path="/library/:bookId" element={<RequireLanguage><BookDetail /></RequireLanguage>} />
+            <Route path="/library/:bookId/read" element={<RequireLanguage><BookReader /></RequireLanguage>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <BottomNav />
