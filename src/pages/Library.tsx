@@ -1,73 +1,79 @@
 import { useNavigate } from "react-router-dom";
-import { BookOpen, Lock, Check } from "lucide-react";
-import { books } from "@/data/books";
+import { BookOpen, Lock } from "lucide-react";
+import { books, CATEGORIES, type Book } from "@/data/books";
 import { useUnlockedBooks } from "@/hooks/useLibrary";
-import { Card } from "@/components/ui/card";
+
+const BookCard = ({ book, onClick, unlocked }: { book: Book; onClick: () => void; unlocked: boolean }) => (
+  <button
+    onClick={onClick}
+    className="group shrink-0 w-32 sm:w-36 snap-start text-left active:scale-[0.97] transition-transform duration-200"
+    aria-label={book.title}
+  >
+    <div
+      className={`relative w-full aspect-[2/3] rounded-xl overflow-hidden bg-gradient-to-br ${book.cover} shadow-card group-hover:shadow-elegant transition-shadow flex items-center justify-center`}
+    >
+      {book.coverImage ? (
+        <img
+          src={book.coverImage}
+          alt={book.title}
+          loading="lazy"
+          className="w-full h-full object-cover"
+        />
+      ) : (
+        <BookOpen className="w-8 h-8 text-foreground/40" />
+      )}
+
+      {!unlocked && (
+        <span className="absolute top-2 right-2 inline-flex items-center gap-1 text-[10px] font-semibold text-amber-900 bg-white/90 backdrop-blur px-1.5 py-0.5 rounded-full shadow-soft">
+          <Lock className="w-2.5 h-2.5" />₹{book.price}
+        </span>
+      )}
+    </div>
+    <p className="mt-2 text-xs font-medium text-foreground line-clamp-2 leading-snug">
+      {book.title}
+    </p>
+  </button>
+);
 
 const Library = () => {
   const navigate = useNavigate();
   const { isUnlocked } = useUnlockedBooks();
 
+  const rows = CATEGORIES.map((c) => ({
+    ...c,
+    items: books.filter((b) => b.category === c.id),
+  })).filter((r) => r.items.length > 0);
+
   return (
-    <main className="min-h-screen pb-28 px-5 pt-8 max-w-lg mx-auto">
-      <header className="mb-6">
+    <main className="min-h-screen pb-28 pt-8 max-w-lg mx-auto">
+      <header className="mb-6 px-5">
         <h1 className="font-display text-3xl font-bold text-foreground">पुस्तकालय</h1>
         <p className="text-sm text-muted-foreground mt-1">
           आध्यात्मिक ज्ञान की चुनिंदा ई-पुस्तकें
         </p>
       </header>
 
-      <div className="space-y-4">
-        {books.map((book) => {
-          const unlocked = isUnlocked(book.id);
-          return (
-            <Card
-              key={book.id}
-              onClick={() => navigate(`/library/${book.id}`)}
-              className="overflow-hidden cursor-pointer active:scale-[0.99] transition-transform shadow-card hover:shadow-elegant"
+      <div className="space-y-7">
+        {rows.map((row) => (
+          <section key={row.id}>
+            <h2 className="px-5 mb-3 font-display text-lg font-semibold text-foreground">
+              {row.label}
+            </h2>
+            <div
+              className="flex gap-3 overflow-x-auto px-5 pb-2 snap-x snap-mandatory scrollbar-none"
+              style={{ scrollbarWidth: "none" }}
             >
-              <div className="flex gap-4 p-4">
-                <div
-                  className={`shrink-0 w-20 h-28 rounded-lg overflow-hidden bg-gradient-to-br ${book.cover} flex items-center justify-center shadow-soft`}
-                >
-                  {book.coverImage ? (
-                    <img
-                      src={book.coverImage}
-                      alt={book.title}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                    />
-                  ) : (
-                    <BookOpen className="w-8 h-8 text-foreground/60" />
-                  )}
-                </div>
-                <div className="flex-1 min-w-0 flex flex-col justify-between">
-                  <div>
-                    <h2 className="font-display text-lg font-semibold leading-tight text-foreground">
-                      {book.title}
-                    </h2>
-                    <p className="text-xs text-muted-foreground mt-0.5">{book.author}</p>
-                    <p className="text-sm text-foreground/80 mt-2 line-clamp-2 leading-snug">
-                      {book.description}
-                    </p>
-                  </div>
-                  <div className="flex items-center justify-between mt-3">
-                    <span className="text-base font-semibold text-primary">₹{book.price}</span>
-                    {unlocked ? (
-                      <span className="inline-flex items-center gap-1 text-xs font-medium text-emerald-700 bg-emerald-100 px-2 py-1 rounded-full">
-                        <Check className="w-3 h-3" /> उपलब्ध
-                      </span>
-                    ) : (
-                      <span className="inline-flex items-center gap-1 text-xs font-medium text-amber-800 bg-amber-100 px-2 py-1 rounded-full">
-                        <Lock className="w-3 h-3" /> ख़रीदें
-                      </span>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </Card>
-          );
-        })}
+              {row.items.map((book) => (
+                <BookCard
+                  key={book.id}
+                  book={book}
+                  unlocked={isUnlocked(book.id)}
+                  onClick={() => navigate(`/library/${book.id}`)}
+                />
+              ))}
+            </div>
+          </section>
+        ))}
       </div>
     </main>
   );
