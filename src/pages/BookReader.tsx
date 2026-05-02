@@ -4,20 +4,15 @@ import {
   ArrowLeft,
   ArrowRight,
   ChevronLeft,
-  Lock,
   Minus,
   Plus,
   Sun,
   Moon,
-  BookOpen,
-  Clock,
-  Sparkles,
 } from "lucide-react";
 import { getBook } from "@/data/books";
 import { useReaderPrefs, useReadingProgress, useUnlockedBooks } from "@/hooks/useLibrary";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { toast } from "sonner";
 
 const readingTime = (text: string) => {
   const words = text.trim().split(/\s+/).length;
