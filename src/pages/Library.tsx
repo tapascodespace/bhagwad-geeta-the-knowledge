@@ -28,9 +28,18 @@ const Library = () => {
             >
               <div className="flex gap-4 p-4">
                 <div
-                  className={`shrink-0 w-20 h-28 rounded-lg bg-gradient-to-br ${book.cover} flex items-center justify-center shadow-soft`}
+                  className={`shrink-0 w-20 h-28 rounded-lg overflow-hidden bg-gradient-to-br ${book.cover} flex items-center justify-center shadow-soft`}
                 >
-                  <BookOpen className="w-8 h-8 text-foreground/60" />
+                  {book.coverImage ? (
+                    <img
+                      src={book.coverImage}
+                      alt={book.title}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <BookOpen className="w-8 h-8 text-foreground/60" />
+                  )}
                 </div>
                 <div className="flex-1 min-w-0 flex flex-col justify-between">
                   <div>
