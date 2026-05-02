@@ -1,5 +1,6 @@
 // Library data — books with sectioned content optimized for mobile reading.
 // Content is in Hindi (per user's request). Each section ~100-150 words.
+import gitaSimplifiedCover from "@/assets/book-gita-simplified-cover.png";
 
 export interface BookSection {
   id: number;
@@ -14,7 +15,8 @@ export interface Book {
   author: string;
   description: string;
   price: number; // INR. 0 = free.
-  cover: string; // gradient class
+  cover: string; // gradient class (fallback)
+  coverImage?: string; // optional image URL
   sections: BookSection[];
 }
 
@@ -183,6 +185,7 @@ export const books: Book[] = [
     description: "गीता की संपूर्ण शिक्षा सरल हिंदी में — 22 छोटे अध्यायों में।",
     price: 49,
     cover: "from-amber-200 via-orange-200 to-rose-200",
+    coverImage: gitaSimplifiedCover,
     sections: gitaSimplifiedSections,
   },
   {
