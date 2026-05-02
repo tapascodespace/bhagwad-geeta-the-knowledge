@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { Home, BookOpen, Heart } from "lucide-react";
+import { Home, BookOpen, Heart, Library as LibraryIcon } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const BottomNav = () => {
@@ -10,6 +10,7 @@ const BottomNav = () => {
   const tabs = [
     { path: "/", label: t("home"), icon: Home },
     { path: "/chapters", label: t("chapters"), icon: BookOpen },
+    { path: "/library", label: t("library"), icon: LibraryIcon },
     { path: "/bookmarks", label: t("bookmarks"), icon: Heart },
   ];
 

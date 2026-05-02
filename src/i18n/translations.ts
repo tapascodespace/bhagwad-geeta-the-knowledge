@@ -32,6 +32,7 @@ export const t: Record<string, Dict> = {
   home: { bn: "হোম", hi: "होम", en: "Home" },
   chapters: { bn: "অধ্যায়", hi: "अध्याय", en: "Chapters" },
   bookmarks: { bn: "পছন্দ", hi: "पसंद", en: "Bookmarks" },
+  library: { bn: "পুস্তকালয়", hi: "पुस्तकें", en: "Library" },
   settings: { bn: "সেটিংস", hi: "सेटिंग्स", en: "Settings" },
   chooseLanguage: {
     bn: "ভাষা নির্বাচন করুন",
