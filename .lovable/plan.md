@@ -1,46 +1,46 @@
+## Goal
 
+Use your new ElevenLabs API key (with the 200k credits) to batch-generate the missing verse MP3s and upload them to the `verse-audio` storage bucket so the app plays them instantly with no runtime credit cost.
 
-## Bhagavad Gita Bengali App — Implementation Plan
+## Current state
 
-### Overview
-A React-based Bhagavad Gita app with Bengali content, wrapped with Capacitor for native Android deployment. Clean, minimal UI inspired by the "Bhagavad Gita for All" style. Audio will be skipped for now.
+- Frontend reads pre-generated MP3s from the public `verse-audio` bucket.
+- Two existing TTS proxy functions:
+  - `tts-default` → uses `ELEVENLABS_API_KEY`
+  - `tts-account1` → uses `ELEVENLABS_API_KEY_ACCOUNT1`
+- Both keys are already configured, but you say the new key has the credits.
 
-### Content & Data
-- Local JSON data for all 18 chapters with: chapter name (Bengali), Sanskrit slokas, Bengali transliteration, Bengali translation, and simple Bengali explanation
-- Sample full content for chapters 1-3; remaining chapters with 5+ verses each as a starting point
-- All text in Bengali script (বাংলা)
+## Plan
 
-### Screens & Navigation
+### 1. Add the new key as a secret
+Prompt you to save the new key as `ELEVENLABS_API_KEY_ACCOUNT2` (keeps existing keys intact so we can fall back).
 
-1. **Home Screen** — App logo/title "শ্রীমদ্ভগবদ্গীতা", a brief intro in Bengali, and a "অধ্যায় দেখুন" (View Chapters) button. Warm, spiritual color palette (saffron/orange accents on cream background).
+### 2. Create a new edge function `tts-account2`
+Same shape as `tts-account1`, but reads `ELEVENLABS_API_KEY_ACCOUNT2`. Acts as the TTS proxy for the generation script.
 
-2. **Chapter List** — Grid/list of 18 chapters showing chapter number, Bengali name, Sanskrit name, and verse count. Tappable cards.
+### 3. Generation script (sandbox, one-off)
+Run a Node script in `/tmp` that:
+- Iterates all chapters/verses in `src/data/gita.ts`.
+- For each verse + part (`shloka`, `hi-translation`, `hi-explanation`, and optionally `en-*`/`bn-*` if you want), checks `verse-audio` bucket via HEAD for the expected filename.
+- If missing, calls `tts-account2` with the right text, voice, and `language_code`.
+- Uploads the returned MP3 to `verse-audio` using the service role key with the exact naming convention:
+  - `ch{c}-v{v}-shloka.mp3`
+  - `ch{c}-v{v}-{lang}-{part}.mp3`
+- Logs progress + remaining-credits estimate, retries on 429, skips on 4xx.
 
-3. **Chapter Detail / Verse List** — Chapter header with name and summary. List of all verses (শ্লোক) with preview text. Tap to read full verse.
+### 4. Confirm before bulk run
+Before generating thousands of files, ask which scope to generate:
+- Only Hindi (translation + explanation) — smallest, matches the Library/Hindi-only direction.
+- Hindi + Sanskrit shlokas.
+- All three languages (en/hi/bn) for every verse.
 
-4. **Verse View** — Full verse display: Sanskrit sloka, Bengali transliteration, Bengali translation, and Bengali explanation. Swipe or prev/next buttons to navigate between verses. Bookmark/favorite button.
+### 5. Verify
+After generation, spot-check a few verses in the app (e.g. Chapter 2, Verse 47) to confirm they play without the "Audio not available yet" toast.
 
-5. **Bookmarks Screen** — List of all bookmarked/favorited verses, stored in localStorage. Tap to jump to the verse.
+## Questions for you before I start
 
-### Navigation
-- Bottom tab bar with: Home (হোম), Chapters (অধ্যায়), Bookmarks (পছন্দ)
-- Back navigation within chapter → verse flow
+1. What name should the new key be saved as? (Default: `ELEVENLABS_API_KEY_ACCOUNT2`.)
+2. Which scope should I generate? (Hindi only / Hindi + Sanskrit / all languages.)
+3. Same voice as before (`JBFqnCBsd6RMkjVDRZzb` — George) or a different one?
 
-### Design
-- Warm spiritual theme: cream/saffron background, dark text, orange accent color
-- Clean card-based layouts with good typography for Bengali script
-- Mobile-first responsive design optimized for phone screens
-
-### Capacitor Setup
-- Install Capacitor dependencies and configure for Android
-- Provide instructions for the user to build and run on Android device/emulator
-
-### Features Summary
-- ✅ 18 chapters with Bengali content
-- ✅ Verse-by-verse reading
-- ✅ Bookmark/favorite system (localStorage)
-- ✅ Clean minimal UI
-- ✅ No login required
-- ✅ Local data (fast, offline-capable)
-- ⏭️ Audio playback (future addition)
-
+Once you approve, I'll: add the secret request, create `tts-account2`, then run the generator.
