@@ -65,8 +65,12 @@ const BookReader = () => {
           <ChevronLeft className="w-4 h-4" /> पुस्तकालय
         </button>
 
-        <div className={`w-full aspect-[3/4] max-w-[220px] mx-auto rounded-2xl bg-gradient-to-br ${book.cover} flex items-center justify-center shadow-elegant`}>
-          <BookOpen className="w-16 h-16 text-foreground/50" />
+        <div className={`w-full aspect-[3/4] max-w-[220px] mx-auto rounded-2xl overflow-hidden bg-gradient-to-br ${book.cover} flex items-center justify-center shadow-elegant`}>
+          {book.coverImage ? (
+            <img src={book.coverImage} alt={book.title} className="w-full h-full object-cover" />
+          ) : (
+            <BookOpen className="w-16 h-16 text-foreground/50" />
+          )}
         </div>
 
         <h1 className="font-display text-2xl font-bold text-center mt-6">{book.title}</h1>
