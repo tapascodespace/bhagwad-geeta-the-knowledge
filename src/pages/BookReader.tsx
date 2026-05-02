@@ -92,7 +92,7 @@ const BookReader = () => {
         }}>
           <div className="max-w-lg mx-auto px-4 py-3 flex items-center gap-2">
             <button
-              onClick={() => navigate("/library")}
+              onClick={() => navigate(`/library/${book.id}`)}
               className="p-2 -ml-2 rounded-full hover:bg-foreground/5"
               aria-label="वापस"
             >
