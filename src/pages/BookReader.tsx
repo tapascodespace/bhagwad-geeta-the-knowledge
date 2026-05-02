@@ -4,20 +4,15 @@ import {
   ArrowLeft,
   ArrowRight,
   ChevronLeft,
-  Lock,
   Minus,
   Plus,
   Sun,
   Moon,
-  BookOpen,
-  Clock,
-  Sparkles,
 } from "lucide-react";
 import { getBook } from "@/data/books";
 import { useReaderPrefs, useReadingProgress, useUnlockedBooks } from "@/hooks/useLibrary";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { toast } from "sonner";
 
 const readingTime = (text: string) => {
   const words = text.trim().split(/\s+/).length;
@@ -54,64 +49,14 @@ const BookReader = () => {
   const unlocked = isUnlocked(book.id);
   const total = book.sections.length;
 
-  // Paywall
-  if (!unlocked) {
-    return (
-      <main className="min-h-screen pb-28 px-5 pt-6 max-w-lg mx-auto">
-        <button
-          onClick={() => navigate("/library")}
-          className="inline-flex items-center gap-1 text-sm text-muted-foreground mb-6"
-        >
-          <ChevronLeft className="w-4 h-4" /> पुस्तकालय
-        </button>
+  // If not unlocked, redirect to the detail/paywall page.
+  useEffect(() => {
+    if (!unlocked) {
+      navigate(`/library/${book.id}`, { replace: true });
+    }
+  }, [unlocked, book.id, navigate]);
 
-        <div className={`w-full aspect-[3/4] max-w-[220px] mx-auto rounded-2xl overflow-hidden bg-gradient-to-br ${book.cover} flex items-center justify-center shadow-elegant`}>
-          {book.coverImage ? (
-            <img src={book.coverImage} alt={book.title} className="w-full h-full object-cover" />
-          ) : (
-            <BookOpen className="w-16 h-16 text-foreground/50" />
-          )}
-        </div>
-
-        <h1 className="font-display text-2xl font-bold text-center mt-6">{book.title}</h1>
-        <p className="text-center text-sm text-muted-foreground mt-1">{book.author}</p>
-        <p className="text-center text-foreground/80 mt-4 px-4 leading-relaxed">{book.description}</p>
-
-        <div className="mt-8 mx-auto max-w-sm rounded-2xl border border-border bg-card p-6 shadow-card">
-          <div className="flex items-center gap-2 text-amber-700">
-            <Lock className="w-4 h-4" />
-            <span className="text-sm font-medium">यह पुस्तक लॉक है</span>
-          </div>
-          <div className="mt-3 flex items-baseline gap-2">
-            <span className="text-3xl font-bold text-primary">₹{book.price}</span>
-            <span className="text-sm text-muted-foreground">एक बार का भुगतान</span>
-          </div>
-          <ul className="mt-4 space-y-2 text-sm text-foreground/80">
-            <li className="flex items-center gap-2"><Sparkles className="w-4 h-4 text-gold" /> {total || 22} सरल अध्याय</li>
-            <li className="flex items-center gap-2"><Clock className="w-4 h-4 text-gold" /> मोबाइल पर पढ़ने के लिए डिज़ाइन किया गया</li>
-            <li className="flex items-center gap-2"><BookOpen className="w-4 h-4 text-gold" /> लाइट / डार्क मोड और फ़ॉन्ट कंट्रोल</li>
-          </ul>
-          <Button
-            className="w-full mt-5"
-            size="lg"
-            onClick={() => {
-              if (book.sections.length === 0) {
-                toast.info("यह पुस्तक जल्द ही उपलब्ध होगी");
-                return;
-              }
-              unlock(book.id);
-              toast.success("पुस्तक अनलॉक हो गई!");
-            }}
-          >
-            अभी ख़रीदें
-          </Button>
-          <p className="text-[11px] text-muted-foreground text-center mt-3">
-            डेमो: यह बटन भुगतान के बिना पुस्तक अनलॉक कर देता है।
-          </p>
-        </div>
-      </main>
-    );
-  }
+  if (!unlocked) return null;
 
   if (total === 0) {
     return (
@@ -147,7 +92,7 @@ const BookReader = () => {
         }}>
           <div className="max-w-lg mx-auto px-4 py-3 flex items-center gap-2">
             <button
-              onClick={() => navigate("/library")}
+              onClick={() => navigate(`/library/${book.id}`)}
               className="p-2 -ml-2 rounded-full hover:bg-foreground/5"
               aria-label="वापस"
             >

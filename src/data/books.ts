@@ -9,6 +9,13 @@ export interface BookSection {
   takeaway: string;
 }
 
+export type BookCategory =
+  | "bhagavad-gita"
+  | "stories-epics"
+  | "spiritual-guides"
+  | "for-students"
+  | "short-reads";
+
 export interface Book {
   id: string;
   title: string;
@@ -17,8 +24,17 @@ export interface Book {
   price: number; // INR. 0 = free.
   cover: string; // gradient class (fallback)
   coverImage?: string; // optional image URL
+  category: BookCategory;
   sections: BookSection[];
 }
+
+export const CATEGORIES: { id: BookCategory; label: string }[] = [
+  { id: "bhagavad-gita", label: "भगवद्गीता" },
+  { id: "stories-epics", label: "कथाएँ और महाकाव्य" },
+  { id: "spiritual-guides", label: "आध्यात्मिक मार्गदर्शिका" },
+  { id: "for-students", label: "विद्यार्थियों के लिए" },
+  { id: "short-reads", label: "लघु पठन" },
+];
 
 const gitaSimplifiedSections: BookSection[] = [
   {
@@ -186,7 +202,18 @@ export const books: Book[] = [
     price: 49,
     cover: "from-amber-200 via-orange-200 to-rose-200",
     coverImage: gitaSimplifiedCover,
+    category: "bhagavad-gita",
     sections: gitaSimplifiedSections,
+  },
+  {
+    id: "gita-essence",
+    title: "गीता का सार",
+    author: "संक्षिप्त संस्करण",
+    description: "गीता के मुख्य श्लोकों का सार — एक बैठक में पढ़ने योग्य।",
+    price: 49,
+    cover: "from-amber-300 via-yellow-200 to-orange-200",
+    category: "bhagavad-gita",
+    sections: [],
   },
   {
     id: "krishna-leelas",
@@ -195,6 +222,27 @@ export const books: Book[] = [
     description: "बाल-कृष्ण की प्रिय कहानियाँ — सरल भाषा में, हर उम्र के लिए।",
     price: 99,
     cover: "from-sky-200 via-indigo-200 to-violet-200",
+    category: "stories-epics",
+    sections: [],
+  },
+  {
+    id: "ramayana-tales",
+    title: "रामायण की कहानियाँ",
+    author: "महाकाव्य संग्रह",
+    description: "श्रीराम के जीवन की प्रेरक कथाएँ, सरल हिंदी में।",
+    price: 99,
+    cover: "from-rose-200 via-pink-200 to-amber-200",
+    category: "stories-epics",
+    sections: [],
+  },
+  {
+    id: "mahabharata-glimpses",
+    title: "महाभारत की झलकियाँ",
+    author: "चयनित प्रसंग",
+    description: "महाभारत के सबसे महत्वपूर्ण प्रसंगों का संग्रह।",
+    price: 99,
+    cover: "from-stone-300 via-amber-200 to-orange-300",
+    category: "stories-epics",
     sections: [],
   },
   {
@@ -204,8 +252,60 @@ export const books: Book[] = [
     description: "गीता के सिद्धांतों को आधुनिक जीवन में कैसे उतारें।",
     price: 199,
     cover: "from-emerald-200 via-teal-200 to-cyan-200",
+    category: "spiritual-guides",
+    sections: [],
+  },
+  {
+    id: "meditation-basics",
+    title: "ध्यान का अभ्यास",
+    author: "शुरुआती गाइड",
+    description: "रोज़ाना ध्यान शुरू करने की सरल विधियाँ।",
+    price: 99,
+    cover: "from-violet-200 via-purple-200 to-indigo-200",
+    category: "spiritual-guides",
+    sections: [],
+  },
+  {
+    id: "students-focus",
+    title: "विद्यार्थियों के लिए गीता",
+    author: "अध्ययन सहायक",
+    description: "एकाग्रता, परिश्रम और परीक्षा के तनाव पर गीता की शिक्षा।",
+    price: 49,
+    cover: "from-blue-200 via-sky-200 to-cyan-200",
+    category: "for-students",
+    sections: [],
+  },
+  {
+    id: "students-discipline",
+    title: "अनुशासन और सफलता",
+    author: "युवाओं के लिए",
+    description: "विद्यार्थी जीवन में संयम और लक्ष्य की शक्ति।",
+    price: 49,
+    cover: "from-teal-200 via-emerald-200 to-lime-200",
+    category: "for-students",
+    sections: [],
+  },
+  {
+    id: "short-wisdom",
+    title: "10 मिनट का ज्ञान",
+    author: "लघु पाठ",
+    description: "व्यस्त जीवन के लिए छोटे, गहरे विचार।",
+    price: 49,
+    cover: "from-yellow-200 via-amber-200 to-orange-200",
+    category: "short-reads",
+    sections: [],
+  },
+  {
+    id: "short-mantras",
+    title: "दैनिक मंत्र",
+    author: "त्वरित संदर्भ",
+    description: "रोज़मर्रा के लिए शक्तिशाली मंत्र और उनके अर्थ।",
+    price: 49,
+    cover: "from-orange-200 via-rose-200 to-pink-200",
+    category: "short-reads",
     sections: [],
   },
 ];
 
 export const getBook = (id: string) => books.find((b) => b.id === id);
+export const getBooksByCategory = (cat: BookCategory) => books.filter((b) => b.category === cat);
