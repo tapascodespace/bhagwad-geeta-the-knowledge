@@ -11,7 +11,6 @@ import {
 } from "lucide-react";
 import { getBook } from "@/data/books";
 import { useReaderPrefs, useReadingProgress, useUnlockedBooks } from "@/hooks/useLibrary";
-import { useTheme } from "@/contexts/ThemeContext";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 
@@ -24,16 +23,24 @@ const BookReader = () => {
   const { bookId = "" } = useParams();
   const navigate = useNavigate();
   const book = useMemo(() => getBook(bookId), [bookId]);
-  const { isUnlocked, unlock } = useUnlockedBooks();
+  const { isUnlocked } = useUnlockedBooks();
   const { section, setSection } = useReadingProgress(bookId);
   const { prefs, update } = useReaderPrefs();
-  const { theme, toggleTheme } = useTheme();
   const [animKey, setAnimKey] = useState(0);
 
   useEffect(() => {
     setAnimKey((k) => k + 1);
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [section]);
+
+  const unlocked = book ? isUnlocked(book.id) : false;
+
+  // If not unlocked, redirect to the detail/paywall page.
+  useEffect(() => {
+    if (book && !unlocked) {
+      navigate(`/library/${book.id}`, { replace: true });
+    }
+  }, [unlocked, book, navigate]);
 
   if (!book) {
     return (
@@ -48,15 +55,7 @@ const BookReader = () => {
     );
   }
 
-  const unlocked = isUnlocked(book.id);
   const total = book.sections.length;
-
-  // If not unlocked, redirect to the detail/paywall page.
-  useEffect(() => {
-    if (!unlocked) {
-      navigate(`/library/${book.id}`, { replace: true });
-    }
-  }, [unlocked, book.id, navigate]);
 
   if (!unlocked) return null;
 
@@ -77,21 +76,15 @@ const BookReader = () => {
   const isDark = prefs.theme === "dark";
   const goPrev = () => section > 1 && setSection(section - 1);
   const goNext = () => section < total && setSection(section + 1);
+  const toggleReaderTheme = () => update({ theme: isDark ? "light" : "dark" });
 
   return (
+    // Scope `dark` class to this subtree only so the reader theme stays
+    // independent from the global app theme.
     <div className={isDark ? "dark" : ""}>
-      <main
-        className="min-h-screen pb-32 transition-colors"
-        style={{
-          background: isDark ? "hsl(24 18% 8%)" : "hsl(38 44% 96%)",
-          color: isDark ? "hsl(40 30% 92%)" : "hsl(24 30% 14%)",
-        }}
-      >
+      <main className="min-h-screen pb-32 bg-background text-foreground transition-colors">
         {/* Top toolbar */}
-        <div className="sticky top-0 z-20 backdrop-blur-md border-b" style={{
-          background: isDark ? "hsl(24 16% 12% / 0.85)" : "hsl(38 50% 98% / 0.85)",
-          borderColor: isDark ? "hsl(24 14% 22%)" : "hsl(32 28% 86%)",
-        }}>
+        <div className="sticky top-0 z-20 backdrop-blur-md border-b border-border bg-card/85">
           <div className="max-w-lg mx-auto px-4 py-3 flex items-center gap-2">
             <button
               onClick={() => navigate(`/library/${book.id}`)}
@@ -119,11 +112,12 @@ const BookReader = () => {
               <Plus className="w-4 h-4" />
             </button>
             <button
-              onClick={toggleTheme}
+              onClick={toggleReaderTheme}
               className="p-2 rounded-full hover:bg-foreground/5"
-              aria-label="थीम बदलें"
+              aria-label="रीडर थीम बदलें"
+              aria-pressed={isDark}
             >
-              {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              {isDark ? <Sun className="w-4 h-4 text-gold" /> : <Moon className="w-4 h-4" />}
             </button>
           </div>
           <div className="px-4 pb-3 max-w-lg mx-auto">
@@ -153,13 +147,7 @@ const BookReader = () => {
             {current.body}
           </p>
 
-          <div
-            className="mt-8 rounded-2xl border p-5"
-            style={{
-              borderColor: isDark ? "hsl(42 80% 58% / 0.4)" : "hsl(42 78% 52% / 0.4)",
-              background: isDark ? "hsl(42 80% 58% / 0.08)" : "hsl(42 78% 52% / 0.08)",
-            }}
-          >
+          <div className="mt-8 rounded-2xl border border-gold/40 bg-gold/10 p-5">
             <p className="text-[11px] uppercase tracking-widest font-semibold text-gold">
               मुख्य संदेश
             </p>
@@ -175,13 +163,7 @@ const BookReader = () => {
         {/* Bottom nav for sections */}
         <div className="fixed bottom-20 left-0 right-0 z-20">
           <div className="max-w-lg mx-auto px-4">
-            <div
-              className="flex items-center gap-2 rounded-full p-1.5 shadow-elegant border backdrop-blur-md"
-              style={{
-                background: isDark ? "hsl(24 16% 12% / 0.9)" : "hsl(38 50% 98% / 0.9)",
-                borderColor: isDark ? "hsl(24 14% 22%)" : "hsl(32 28% 86%)",
-              }}
-            >
+            <div className="flex items-center gap-2 rounded-full p-1.5 shadow-elegant border border-border bg-card/90 backdrop-blur-md">
               <Button
                 onClick={goPrev}
                 disabled={section === 1}
