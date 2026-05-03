@@ -1,5 +1,5 @@
 // Library data — books with sectioned content optimized for mobile reading.
-// Content is in Hindi (per user's request). Each section ~100-150 words.
+// Each book has separate Hindi and English versions.
 import gitaSimplifiedCover from "@/assets/book-gita-simplified-cover.png";
 
 export interface BookSection {
@@ -8,6 +8,8 @@ export interface BookSection {
   body: string;
   takeaway: string;
 }
+
+export type BookLanguage = "hi" | "en";
 
 export type BookCategory = "bhagavad-gita" | "stories-epics" | "spiritual-guides" | "for-students" | "short-reads";
 
@@ -20,7 +22,8 @@ export interface Book {
   cover: string; // gradient class (fallback)
   coverImage?: string; // optional image URL
   category: BookCategory;
-  sections: BookSection[];
+  hindiSections: BookSection[];
+  englishSections: BookSection[];
 }
 
 export const CATEGORIES: { id: BookCategory; label: string }[] = [
@@ -31,7 +34,7 @@ export const CATEGORIES: { id: BookCategory; label: string }[] = [
   { id: "short-reads", label: "लघु पठन" },
 ];
 
-const gitaSimplifiedSections: BookSection[] = [
+const gitaSimplifiedHindi: BookSection[] = [
   {
     id: 1,
     title: "गीता क्या है?",
@@ -166,7 +169,142 @@ const gitaSimplifiedSections: BookSection[] = [
   },
 ];
 
-const gitaEssenceSections: BookSection[] = [
+const gitaSimplifiedEnglish: BookSection[] = [
+  {
+    id: 1,
+    title: "What Is the Gita?",
+    body: "The Bhagavad Gita is a conversation between Krishna and Arjuna held just before the great Mahabharata war. It has 18 chapters and 700 verses. But it is not only a religious text — it is a guide to the art of living. When Arjuna froze on the battlefield, looking at his own family on the other side, Krishna taught him about duty, knowledge, devotion, and mastery of the mind. Those teachings still apply to our daily stress, decisions, and relationships, just as they did thousands of years ago. The Gita does not tell you exactly what to do — it teaches you how to think.",
+    takeaway: "The Gita is a practical guide to living, not just a religious book.",
+  },
+  {
+    id: 2,
+    title: "Arjuna's Crisis",
+    body: 'Just before the war, Arjuna placed his chariot between the two armies. Standing across from him were his teachers, uncles, brothers, and friends. His hands trembled, his bow slipped, and a deep despair filled him. He told Krishna, "I will not fight." We meet the same moment in our own lives — when we must choose between right and wrong, when we must stand against people we love, or when our duty feels too heavy. Arjuna\'s crisis is really every human being\'s crisis. The Gita begins exactly here — with our weakness.',
+    takeaway: "Everyone faces moments of crisis and doubt — that is where self-discovery begins.",
+  },
+  {
+    id: 3,
+    title: "The Soul Is Eternal",
+    body: "The first truth Krishna gave Arjuna was about the soul. The body is temporary, but the soul is eternal. Just as we take off old clothes and put on new ones, the soul leaves one body and takes another. No weapon can cut it, no fire can burn it, no water can wet it. Understanding this frees us from the fear of death. When we know that our true self is not the body but consciousness, small worries naturally lose their weight. This knowledge ends sorrow.",
+    takeaway: "You are not the body — you are the eternal soul. This understanding reduces fear.",
+  },
+  {
+    id: 4,
+    title: "Act Without Worrying About the Result",
+    body: 'The most famous line in the Gita says: "You have the right to act, but never to the fruits of your action." This does not mean being lazy. It means working with full effort while staying free from the stress of outcomes. When we keep thinking, "What will I get? What will I lose?", our attention leaves the work. But when we focus only on the action itself, the work becomes better and the mind stays calm. Exam, job, relationships — this principle works everywhere. The effort is yours; the result belongs to the divine.',
+    takeaway: "Give your full effort, drop the worry about results — that is the real formula for success.",
+  },
+  {
+    id: 5,
+    title: "Know Your Own Dharma",
+    body: "Dharma does not just mean rituals. Dharma means your duty, your role, your nature. A student's dharma is to study; a parent's dharma is to care for their children; a doctor's dharma is to heal. Krishna says it is better to follow your own dharma imperfectly than to copy someone else's. Understanding who you are matters more than imitating others. When you do the work that fits your nature and situation, life flows easily. First know yourself; then the path will reveal itself.",
+    takeaway: "Know your role — don't lose your real strength trying to be someone else.",
+  },
+  {
+    id: 6,
+    title: "The Mind: Greatest Friend, Greatest Enemy",
+    body: 'Krishna says: "Lift yourself by yourself." The mind is both our closest friend and our worst enemy. When the mind is under control, it lifts us to great heights. When the mind is scattered, it drops us into deep holes. Fighting outer enemies is easy; fighting our own anger, greed, and jealousy is much harder. Arjuna asked, "The mind is more restless than the wind — how can I control it?" Krishna replied: through practice and detachment. A little practice every day, and a little check on desires.',
+    takeaway: "Conquering your own mind is the greatest victory.",
+  },
+  {
+    id: 7,
+    title: "The Three Qualities — Sattva, Rajas, Tamas",
+    body: "The Gita says nature has three qualities: sattva (purity), rajas (activity), and tamas (inertia). Each person has all three; only the proportions differ. Sattva brings clarity and peace. Rajas brings drive and ambition. Tamas brings laziness and confusion. Our food, company, thoughts, and work either increase or decrease these qualities. Fresh food, good company, and positive thoughts strengthen sattva. Stale food, useless arguments, and procrastination strengthen tamas. Moving your life toward sattva is real progress.",
+    takeaway: "Use your food, company, and thoughts to make your inner nature more sattvic.",
+  },
+  {
+    id: 8,
+    title: "Why Meditation Matters",
+    body: "In the sixth chapter, Krishna explains how to meditate. Choose a quiet place, sit upright, close your eyes, and rest the mind on a single point. Don't eat too much or too little; don't sleep too much or stay awake too long — keep balance in everything. Meditation is not magic. It is exercise for the mind. Just as the body needs walking, the mind needs meditation. At first the mind will run; bring it back, again and again, with patience. Even ten minutes a day reduces stress, improves sleep, and sharpens decision-making.",
+    takeaway: "Ten minutes of meditation a day can change your life.",
+  },
+  {
+    id: 9,
+    title: "The Simple Path of Devotion",
+    body: 'Krishna said the simplest way to reach the Divine is through devotion. Devotion means love — without conditions and without fear. You don\'t need a difficult yoga or deep scripture. Krishna says, "A leaf, a flower, a fruit, water — whatever you offer me with love, I accept." A heart full of feeling is worth more than expensive rituals. Devotion is not only going to a temple — offering every action to the Divine is also devotion. A mother feeding her child, a teacher teaching, a farmer working in the field — when done with love, all of it becomes devotion.',
+    takeaway: "Any action done with love is devotion — feeling matters more than ritual.",
+  },
+  {
+    id: 10,
+    title: "The Cycle of Anger",
+    body: "In the second chapter, Krishna describes the dangerous chain of anger. First, thinking about an object creates attachment; from attachment comes desire; when desire is blocked, anger arises; from anger comes loss of judgment; and from lost judgment, the person falls completely. We see this every day — in traffic, at the office, at home. The way to stop anger is to catch it early. The moment the thought arises, pause. Take a deep breath, count to ten, stay silent for a while. The longer anger grows, the more damage it does. Stop it at the first step.",
+    takeaway: "Catch anger at the first step — once it grows, even your judgment goes under.",
+  },
+  {
+    id: 11,
+    title: "Sthitaprajna — The Steady Person",
+    body: "The Gita paints a picture of the ideal person: sthitaprajna — one whose mind is steady. Such a person does not get carried away in pleasure or crushed in pain. They feel no pride in praise and no pain in criticism. Success and failure look the same to them. This is not coldness; it is inner steadiness. They do not make decisions in waves of emotion. In a world where moods change every five minutes, this steadiness is real strength. It does not come in a day — it is built through daily practice.",
+    takeaway: "Staying steady through joy, sorrow, success, and failure is real strength.",
+  },
+  {
+    id: 12,
+    title: "Letting Go of Ego",
+    body: 'Krishna says again and again that the real obstacle is ego — the thought "I did it." Anything we accomplish involves nature, circumstance, the help of others, and grace. Yet we take all the credit ourselves. This ego is the root of suffering. When we believe "I am the doer," failure breaks us and success makes us proud. But when we know we are only an instrument, both situations leave us calm. This humility is not weakness — it is the deepest strength.',
+    takeaway: "Let go of ego — you are not the doer, you are an instrument.",
+  },
+  {
+    id: 13,
+    title: "The Power of Company",
+    body: "The Gita reminds us again and again that we slowly become like the people we spend time with. Bad company quietly erases good habits, and good company can make even a weak person strong. Today, your company is not just people — what you watch, what you read, who you follow on social media is also your company. Negative news, angry videos, and gossiping people drain your energy. Positive people, good books, and uplifting ideas raise you up. Choose your company very carefully.",
+    takeaway: "You become like the people you spend time with — choose your company wisely.",
+  },
+  {
+    id: 14,
+    title: "Food and Inner Nature",
+    body: "The Gita says we become what we eat. Sattvic food — fresh fruits, vegetables, milk, grains — keeps the mind calm and the body healthy. Rajasic food — very spicy, sour, or salty — increases agitation and restlessness. Tamasic food — stale, deep-fried, or overly sweet — brings dullness and lethargy. People who eat only for taste rarely understand why they feel irritable. Food is not only for the stomach; it shapes the mind. Eating fresh, balanced meals on time keeps your inner nature positive.",
+    takeaway: "How you eat shapes how you feel — choose food like medicine.",
+  },
+  {
+    id: 15,
+    title: "Renounce Attachment, Not Things",
+    body: "Many people think renunciation means leaving home and family for the forest. The Gita disagrees. Real renunciation is inner, not outer. You can be a sannyasi while living at home, and you can sit in a forest while burning with desire. Renounce attachment, not things. Earn money, raise a family, enjoy life — but do not depend on these for your peace. What is here today may be gone tomorrow. Whoever is free inside is the true sannyasi. This is a very practical teaching — even a householder can be deeply spiritual.",
+    takeaway: "Don't renounce things — renounce your dependence on them.",
+  },
+  {
+    id: 16,
+    title: "Vishvarupa — God in Everything",
+    body: "In the eleventh chapter, Krishna shows Arjuna his cosmic form. He reveals that the entire universe is within him — sun, moon, stars, mountains, rivers, every living being. This vision teaches us that God is not limited to one statue or one temple — God is everywhere, in every person. When we truly understand this, the way we treat others changes. We cannot be cruel to anyone, because the same consciousness lives in them too. This vision brings unity and compassion. It is not just religion — it is one of the most beautiful truths of life.",
+    takeaway: "The same consciousness lives in every person — treat everyone with love and respect.",
+  },
+  {
+    id: 17,
+    title: "Three Kinds of Faith",
+    body: "In the seventeenth chapter, Krishna describes three kinds of faith. Sattvic faith is pure, selfless, and rooted in understanding. Rajasic faith chases results or seeks show. Tamasic faith comes from fear, superstition, or blind habit. We see all three today — some pray only to get something, some go to temples for show, and some follow rituals without thinking. True devotion comes from love and clarity. Your faith shows up in how you think, eat, give, and speak. Make your faith sattvic.",
+    takeaway: "True faith is born from understanding and love, not fear or greed.",
+  },
+  {
+    id: 18,
+    title: "The Discipline of Speech",
+    body: "The Gita says speech itself is a kind of discipline. Speak words that are true, kind, helpful, and never hurtful to the listener. Just speaking the truth is not enough — how you say it also matters. Even hard truths can be spoken with love. In today's digital world, we talk for hours, send messages, leave comments — but rarely pause to think. One harsh word can break a relationship; one kind word can win a heart. Pause before you speak, think, then speak. Silence too is a great discipline.",
+    takeaway: "Think before you speak — words can build relationships or break them.",
+  },
+  {
+    id: 19,
+    title: "The Right Way to Give",
+    body: "Krishna says giving also has three forms. Sattvic giving is given at the right time, to the right person, without expecting anything in return. Rajasic giving expects something back, or is given reluctantly. Tamasic giving is given at the wrong time, to the wrong person, or without respect. Giving is not only money — your time, knowledge, smile, and help are also gifts. When a tired person asks you for directions and you explain patiently — that is giving too. Always protect the dignity of the receiver. Show-off giving brings no real reward.",
+    takeaway: "Giving without show or expectation is the only real giving.",
+  },
+  {
+    id: 20,
+    title: "The Truth About Death",
+    body: "The Gita removes the fear of death completely. Krishna says: whoever is born must die, and whoever has died must be born again. So why grieve? Death is not the end — it is a passing, like changing clothes. But this does not mean living carelessly. Every moment is precious, so live it fully. Remembering death actually makes life more beautiful — we stop fighting over small things, and we learn to forgive. What is here today will not always remain — this very thought makes life deeper.",
+    takeaway: "Let go of the fear of death — it is not the end, only a passage.",
+  },
+  {
+    id: 21,
+    title: "God's Promise",
+    body: 'Krishna says: "Whenever dharma declines and adharma rises, I appear." This promise is not only about avatars — it is for all of us. When your life is dark, when defeat presses on you, when no path is visible — an inner light always rises, if you trust. History shows that the greatest inspiration comes in the hardest times. The Divine is always with you — not in a temple, but inside you. You only need to quiet the mind a little to hear that voice.',
+    takeaway: "Never feel alone in the dark — the inner light is always with you.",
+  },
+  {
+    id: 22,
+    title: "The Essence of the Gita — In One Line",
+    body: 'At the end of the eighteenth chapter, Krishna gives the essence of the entire Gita: "Let go of all worries and take refuge in me." This is not a religious order — it is the deepest relief life can offer. We have all seen that no matter how much we plan, some things are simply not in our hands. So do your very best, and leave the result to the Divine. This surrender is not weakness — it is the deepest understanding. The essence of the Gita is this: act, love, stay balanced, and leave the rest to God. That is the whole secret of life.',
+    takeaway: "Do your best, leave the rest to the Divine — that is the essence of the Gita.",
+  },
+];
+
+const gitaEssenceHindi: BookSection[] = [
   {
     id: 1,
     title: "जीवन का संघर्ष",
@@ -229,6 +367,69 @@ const gitaEssenceSections: BookSection[] = [
   },
 ];
 
+const gitaEssenceEnglish: BookSection[] = [
+  {
+    id: 1,
+    title: "The Struggle of Life",
+    body: "Every person goes through some kind of struggle in life. Arjuna's battle was not only outside; it was also inside. When we face hard decisions, we too feel afraid and confused. The Gita teaches us not to run from struggle. Struggle is what makes us stronger and shows us the right path. Every problem in life is also an opportunity — to understand yourself and to grow.",
+    takeaway: "Don't run from struggle — it is what makes you strong.",
+  },
+  {
+    id: 2,
+    title: "The Importance of Duty",
+    body: "The main message of the Gita is to do your duty. Duty means the work that is your responsibility. Whether you feel like it or not, do your work with honesty. When we focus on duty, life becomes simpler. Worrying about results makes us weak; doing the work makes us strong.",
+    takeaway: "Focus on your duty, and the results will follow.",
+  },
+  {
+    id: 3,
+    title: "Control of the Mind",
+    body: "The mind is very restless. Sometimes happy, sometimes sad, sometimes calm, sometimes uneasy. The Gita teaches that controlling the mind is essential. If the mind is in our control, life becomes easy. If the mind controls us, we stay disturbed. With meditation, discipline, and daily practice, the mind can be calmed.",
+    takeaway: "Control the mind, or it will control you.",
+  },
+  {
+    id: 4,
+    title: "Let Go of the Worry About Results",
+    body: "We often worry about what we will get. This thought brings stress. The Gita says to focus only on the action. When we give our full effort and let go of the worry about results, the mind stays calm. This is real freedom.",
+    takeaway: "Work hard, but don't worry about the result.",
+  },
+  {
+    id: 5,
+    title: "A Balanced Life",
+    body: "Balance is essential in life. Too much work is harmful; so is laziness. The Gita teaches that everything needs balance — food, sleep, work, and thoughts. When life is balanced, we are happier and more peaceful.",
+    takeaway: "Balance is the key to a happy life.",
+  },
+  {
+    id: 6,
+    title: "Freedom From Fear",
+    body: "Fear stops us from moving forward. The Gita teaches us to understand our fear and face it. When we see the truth of the soul, fear gets smaller. We see that our true self never dies.",
+    takeaway: "Face your fear — that is the only way it ends.",
+  },
+  {
+    id: 7,
+    title: "Right Thinking",
+    body: "Our thoughts shape our world. If our thinking is positive, life feels easier. The Gita teaches us to keep our thoughts clean and clear. Negative thinking makes us weak.",
+    takeaway: "As you think, so your life becomes.",
+  },
+  {
+    id: 8,
+    title: "Letting Go of Ego",
+    body: "Ego pushes others away from us. We start thinking we did everything ourselves. But the Gita teaches that we are only an instrument. When we drop the ego, life becomes lighter and calmer.",
+    takeaway: "Drop the ego, and life becomes easier.",
+  },
+  {
+    id: 9,
+    title: "Love and Devotion",
+    body: "Devotion means love. Loving without conditions is true devotion. The Gita teaches that when we do our work with love, that work itself becomes worship.",
+    takeaway: "Any action done with love is devotion.",
+  },
+  {
+    id: 10,
+    title: "The Essence of Life",
+    body: "The essence of the Gita is simple — do your duty, keep the mind calm, and live with balance. You don't need to overthink. Just keep taking small steps in the right direction.",
+    takeaway: "Simple living, calm mind — this is the essence of the Gita.",
+  },
+];
+
 export const books: Book[] = [
   {
     id: "gita-simplified",
@@ -239,7 +440,8 @@ export const books: Book[] = [
     cover: "from-amber-200 via-orange-200 to-rose-200",
     coverImage: gitaSimplifiedCover,
     category: "bhagavad-gita",
-    sections: gitaSimplifiedSections,
+    hindiSections: gitaSimplifiedHindi,
+    englishSections: gitaSimplifiedEnglish,
   },
   {
     id: "gita-essence",
@@ -249,7 +451,8 @@ export const books: Book[] = [
     price: 49,
     cover: "from-amber-300 via-yellow-200 to-orange-200",
     category: "bhagavad-gita",
-    sections: gitaEssenceSections,
+    hindiSections: gitaEssenceHindi,
+    englishSections: gitaEssenceEnglish,
   },
   {
     id: "krishna-leelas",
@@ -259,7 +462,8 @@ export const books: Book[] = [
     price: 99,
     cover: "from-sky-200 via-indigo-200 to-violet-200",
     category: "stories-epics",
-    sections: [],
+    hindiSections: [],
+    englishSections: [],
   },
   {
     id: "ramayana-tales",
@@ -269,7 +473,8 @@ export const books: Book[] = [
     price: 99,
     cover: "from-rose-200 via-pink-200 to-amber-200",
     category: "stories-epics",
-    sections: [],
+    hindiSections: [],
+    englishSections: [],
   },
   {
     id: "mahabharata-glimpses",
@@ -279,7 +484,8 @@ export const books: Book[] = [
     price: 99,
     cover: "from-stone-300 via-amber-200 to-orange-300",
     category: "stories-epics",
-    sections: [],
+    hindiSections: [],
+    englishSections: [],
   },
   {
     id: "yoga-of-life",
@@ -289,7 +495,8 @@ export const books: Book[] = [
     price: 199,
     cover: "from-emerald-200 via-teal-200 to-cyan-200",
     category: "spiritual-guides",
-    sections: [],
+    hindiSections: [],
+    englishSections: [],
   },
   {
     id: "meditation-basics",
@@ -299,7 +506,8 @@ export const books: Book[] = [
     price: 99,
     cover: "from-violet-200 via-purple-200 to-indigo-200",
     category: "spiritual-guides",
-    sections: [],
+    hindiSections: [],
+    englishSections: [],
   },
   {
     id: "students-focus",
@@ -309,7 +517,8 @@ export const books: Book[] = [
     price: 49,
     cover: "from-blue-200 via-sky-200 to-cyan-200",
     category: "for-students",
-    sections: [],
+    hindiSections: [],
+    englishSections: [],
   },
   {
     id: "students-discipline",
@@ -319,7 +528,8 @@ export const books: Book[] = [
     price: 49,
     cover: "from-teal-200 via-emerald-200 to-lime-200",
     category: "for-students",
-    sections: [],
+    hindiSections: [],
+    englishSections: [],
   },
   {
     id: "short-wisdom",
@@ -329,7 +539,8 @@ export const books: Book[] = [
     price: 49,
     cover: "from-yellow-200 via-amber-200 to-orange-200",
     category: "short-reads",
-    sections: [],
+    hindiSections: [],
+    englishSections: [],
   },
   {
     id: "short-mantras",
@@ -339,9 +550,23 @@ export const books: Book[] = [
     price: 49,
     cover: "from-orange-200 via-rose-200 to-pink-200",
     category: "short-reads",
-    sections: [],
+    hindiSections: [],
+    englishSections: [],
   },
 ];
 
 export const getBook = (id: string) => books.find((b) => b.id === id);
 export const getBooksByCategory = (cat: BookCategory) => books.filter((b) => b.category === cat);
+
+/** Get sections for a book in the requested language. Falls back to the
+ *  other language if the requested one has no content yet. */
+export const getBookSections = (book: Book, lang: BookLanguage): BookSection[] => {
+  if (lang === "en") {
+    return book.englishSections.length > 0 ? book.englishSections : book.hindiSections;
+  }
+  return book.hindiSections.length > 0 ? book.hindiSections : book.englishSections;
+};
+
+/** True if the book has any readable content in either language. */
+export const hasContent = (book: Book) =>
+  book.hindiSections.length > 0 || book.englishSections.length > 0;
