@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ChevronLeft, Lock, BookOpen, Clock, Sparkles, Check, ArrowRight } from "lucide-react";
-import { getBook } from "@/data/books";
+import { getBook, hasContent } from "@/data/books";
 import { useUnlockedBooks } from "@/hooks/useLibrary";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -26,10 +26,11 @@ const BookDetail = () => {
   }
 
   const unlocked = isUnlocked(book.id);
-  const total = book.sections.length;
+  const total = Math.max(book.hindiSections.length, book.englishSections.length);
+  const available = hasContent(book);
 
   const handleUnlock = () => {
-    if (book.sections.length === 0) {
+    if (!available) {
       toast.info("यह पुस्तक जल्द ही उपलब्ध होगी");
       return;
     }
@@ -38,7 +39,7 @@ const BookDetail = () => {
   };
 
   const handleRead = () => {
-    if (book.sections.length === 0) {
+    if (!available) {
       toast.info("यह पुस्तक जल्द ही उपलब्ध होगी");
       return;
     }

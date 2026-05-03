@@ -9,8 +9,9 @@ import {
   Sun,
   Moon,
 } from "lucide-react";
-import { getBook } from "@/data/books";
+import { getBook, getBookSections, type BookLanguage } from "@/data/books";
 import { useReaderPrefs, useReadingProgress, useUnlockedBooks } from "@/hooks/useLibrary";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 
@@ -19,6 +20,8 @@ const readingTime = (text: string) => {
   return Math.max(1, Math.round(words / 120));
 };
 
+const READER_LANG_KEY = "library:reader-lang";
+
 const BookReader = () => {
   const { bookId = "" } = useParams();
   const navigate = useNavigate();
@@ -26,12 +29,34 @@ const BookReader = () => {
   const { isUnlocked } = useUnlockedBooks();
   const { section, setSection } = useReadingProgress(bookId);
   const { prefs, update } = useReaderPrefs();
+  const { language: appLang } = useLanguage();
   const [animKey, setAnimKey] = useState(0);
+
+  // Per-book language preference. Defaults to the app language
+  // (Bengali/Hindi → Hindi version, English → English version).
+  const [bookLang, setBookLangState] = useState<BookLanguage>(() => {
+    try {
+      const raw = localStorage.getItem(READER_LANG_KEY);
+      const map = raw ? (JSON.parse(raw) as Record<string, BookLanguage>) : {};
+      if (map[bookId]) return map[bookId];
+    } catch { /* ignore */ }
+    return appLang === "en" ? "en" : "hi";
+  });
+
+  const setBookLang = (lang: BookLanguage) => {
+    setBookLangState(lang);
+    try {
+      const raw = localStorage.getItem(READER_LANG_KEY);
+      const map = raw ? (JSON.parse(raw) as Record<string, BookLanguage>) : {};
+      map[bookId] = lang;
+      localStorage.setItem(READER_LANG_KEY, JSON.stringify(map));
+    } catch { /* ignore */ }
+  };
 
   useEffect(() => {
     setAnimKey((k) => k + 1);
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [section]);
+  }, [section, bookLang]);
 
   const unlocked = book ? isUnlocked(book.id) : false;
 
@@ -55,7 +80,8 @@ const BookReader = () => {
     );
   }
 
-  const total = book.sections.length;
+  const sections = getBookSections(book, bookLang);
+  const total = sections.length;
 
   if (!unlocked) return null;
 
@@ -72,7 +98,7 @@ const BookReader = () => {
     );
   }
 
-  const current = book.sections[section - 1];
+  const current = sections[Math.min(section, total) - 1];
   const isDark = prefs.theme === "dark";
   const goPrev = () => section > 1 && setSection(section - 1);
   const goNext = () => section < total && setSection(section + 1);
@@ -120,6 +146,31 @@ const BookReader = () => {
               {isDark ? <Sun className="w-4 h-4 text-gold" /> : <Moon className="w-4 h-4" />}
             </button>
           </div>
+          {/* Language toggle (Hindi / English) */}
+          <div className="px-4 pb-2 max-w-lg mx-auto flex justify-center">
+            <div role="tablist" aria-label="Reader language" className="inline-flex rounded-full border border-border bg-background/60 p-0.5 text-xs">
+              <button
+                role="tab"
+                aria-selected={bookLang === "hi"}
+                onClick={() => setBookLang("hi")}
+                className={`px-3 py-1 rounded-full transition-colors ${
+                  bookLang === "hi" ? "bg-primary text-primary-foreground" : "opacity-70 hover:opacity-100"
+                }`}
+              >
+                हिन्दी
+              </button>
+              <button
+                role="tab"
+                aria-selected={bookLang === "en"}
+                onClick={() => setBookLang("en")}
+                className={`px-3 py-1 rounded-full transition-colors ${
+                  bookLang === "en" ? "bg-primary text-primary-foreground" : "opacity-70 hover:opacity-100"
+                }`}
+              >
+                English
+              </button>
+            </div>
+          </div>
           <div className="px-4 pb-3 max-w-lg mx-auto">
             <Progress value={(section / total) * 100} className="h-1" />
           </div>
@@ -132,7 +183,7 @@ const BookReader = () => {
         >
           <div className="text-center mb-6">
             <span className="inline-block text-[11px] uppercase tracking-widest opacity-60">
-              अध्याय {section} • {readingTime(current.body)} मिनट का पाठ
+              {bookLang === "en" ? `Chapter ${section} • ${readingTime(current.body)} min read` : `अध्याय ${section} • ${readingTime(current.body)} मिनट का पाठ`}
             </span>
             <h1 className="font-display text-3xl font-bold mt-2 leading-tight">
               {current.title}
@@ -149,7 +200,7 @@ const BookReader = () => {
 
           <div className="mt-8 rounded-2xl border border-gold/40 bg-gold/10 p-5">
             <p className="text-[11px] uppercase tracking-widest font-semibold text-gold">
-              मुख्य संदेश
+              {bookLang === "en" ? "Key Message" : "मुख्य संदेश"}
             </p>
             <p
               className="mt-2 font-medium"
@@ -170,7 +221,7 @@ const BookReader = () => {
                 variant="ghost"
                 className="flex-1 rounded-full"
               >
-                <ArrowLeft className="w-4 h-4" /> पिछला
+                <ArrowLeft className="w-4 h-4" /> {bookLang === "en" ? "Previous" : "पिछला"}
               </Button>
               <div className="text-xs opacity-70 px-2 whitespace-nowrap">
                 {section} / {total}
@@ -180,7 +231,7 @@ const BookReader = () => {
                 disabled={section === total}
                 className="flex-1 rounded-full"
               >
-                अगला <ArrowRight className="w-4 h-4" />
+                {bookLang === "en" ? "Next" : "अगला"} <ArrowRight className="w-4 h-4" />
               </Button>
             </div>
           </div>
