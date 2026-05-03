@@ -98,7 +98,7 @@ const BookReader = () => {
     );
   }
 
-  const current = book.sections[section - 1];
+  const current = sections[Math.min(section, total) - 1];
   const isDark = prefs.theme === "dark";
   const goPrev = () => section > 1 && setSection(section - 1);
   const goNext = () => section < total && setSection(section + 1);
