@@ -17,7 +17,7 @@ const BookCard = ({ book, onClick, unlocked }: { book: Book; onClick: () => void
           src={book.coverImage}
           alt={book.title}
           loading="lazy"
-          className="w-full h-full object-cover"
+          className="book-cover-img w-full h-full object-cover"
         />
       ) : (
         <BookOpen className="w-8 h-8 text-foreground/40" />

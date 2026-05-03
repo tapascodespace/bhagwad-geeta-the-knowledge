@@ -58,7 +58,7 @@ const BookDetail = () => {
         className={`w-full aspect-[3/4] max-w-[220px] mx-auto rounded-2xl overflow-hidden bg-gradient-to-br ${book.cover} flex items-center justify-center shadow-elegant`}
       >
         {book.coverImage ? (
-          <img src={book.coverImage} alt={book.title} className="w-full h-full object-cover" />
+          <img src={book.coverImage} alt={book.title} className="book-cover-img w-full h-full object-cover" />
         ) : (
           <BookOpen className="w-16 h-16 text-foreground/50" />
         )}
