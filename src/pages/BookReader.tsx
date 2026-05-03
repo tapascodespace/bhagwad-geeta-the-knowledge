@@ -9,8 +9,9 @@ import {
   Sun,
   Moon,
 } from "lucide-react";
-import { getBook } from "@/data/books";
+import { getBook, getBookSections, type BookLanguage } from "@/data/books";
 import { useReaderPrefs, useReadingProgress, useUnlockedBooks } from "@/hooks/useLibrary";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 
