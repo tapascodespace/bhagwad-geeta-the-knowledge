@@ -1,7 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import { BookOpen, Lock } from "lucide-react";
-import { books, CATEGORIES, type Book } from "@/data/books";
+import { books, CATEGORIES, type Book, type BookCategory } from "@/data/books";
 import { useUnlockedBooks } from "@/hooks/useLibrary";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const CATEGORY_LABEL_KEYS: Record<BookCategory, "catBhagavadGita" | "catStoriesEpics" | "catSpiritualGuides" | "catForStudents" | "catShortReads"> = {
+  "bhagavad-gita": "catBhagavadGita",
+  "stories-epics": "catStoriesEpics",
+  "spiritual-guides": "catSpiritualGuides",
+  "for-students": "catForStudents",
+  "short-reads": "catShortReads",
+};
 
 const BookCard = ({ book, onClick, unlocked }: { book: Book; onClick: () => void; unlocked: boolean }) => (
   <button
@@ -38,6 +47,7 @@ const BookCard = ({ book, onClick, unlocked }: { book: Book; onClick: () => void
 const Library = () => {
   const navigate = useNavigate();
   const { isUnlocked } = useUnlockedBooks();
+  const { t } = useLanguage();
 
   const rows = CATEGORIES.map((c) => ({
     ...c,
@@ -47,9 +57,9 @@ const Library = () => {
   return (
     <main className="min-h-screen pb-28 pt-8 max-w-lg mx-auto">
       <header className="mb-6 px-5">
-        <h1 className="font-display text-3xl font-bold text-foreground">पुस्तकालय</h1>
+        <h1 className="font-display text-3xl font-bold text-foreground">{t("libraryTitle")}</h1>
         <p className="text-sm text-muted-foreground mt-1">
-          आध्यात्मिक ज्ञान की चुनिंदा ई-पुस्तकें
+          {t("librarySubtitle")}
         </p>
       </header>
 
@@ -57,7 +67,7 @@ const Library = () => {
         {rows.map((row) => (
           <section key={row.id}>
             <h2 className="px-5 mb-3 font-display text-lg font-semibold text-foreground">
-              {row.label}
+              {t(CATEGORY_LABEL_KEYS[row.id])}
             </h2>
             <div
               className="flex gap-3 overflow-x-auto px-5 pb-2 snap-x snap-mandatory scrollbar-none"
