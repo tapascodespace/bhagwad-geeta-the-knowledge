@@ -20,6 +20,8 @@ const readingTime = (text: string) => {
   return Math.max(1, Math.round(words / 120));
 };
 
+const READER_LANG_KEY = "library:reader-lang";
+
 const BookReader = () => {
   const { bookId = "" } = useParams();
   const navigate = useNavigate();
@@ -27,12 +29,34 @@ const BookReader = () => {
   const { isUnlocked } = useUnlockedBooks();
   const { section, setSection } = useReadingProgress(bookId);
   const { prefs, update } = useReaderPrefs();
+  const { language: appLang } = useLanguage();
   const [animKey, setAnimKey] = useState(0);
+
+  // Per-book language preference. Defaults to the app language
+  // (Bengali/Hindi → Hindi version, English → English version).
+  const [bookLang, setBookLangState] = useState<BookLanguage>(() => {
+    try {
+      const raw = localStorage.getItem(READER_LANG_KEY);
+      const map = raw ? (JSON.parse(raw) as Record<string, BookLanguage>) : {};
+      if (map[bookId]) return map[bookId];
+    } catch { /* ignore */ }
+    return appLang === "en" ? "en" : "hi";
+  });
+
+  const setBookLang = (lang: BookLanguage) => {
+    setBookLangState(lang);
+    try {
+      const raw = localStorage.getItem(READER_LANG_KEY);
+      const map = raw ? (JSON.parse(raw) as Record<string, BookLanguage>) : {};
+      map[bookId] = lang;
+      localStorage.setItem(READER_LANG_KEY, JSON.stringify(map));
+    } catch { /* ignore */ }
+  };
 
   useEffect(() => {
     setAnimKey((k) => k + 1);
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [section]);
+  }, [section, bookLang]);
 
   const unlocked = book ? isUnlocked(book.id) : false;
 
