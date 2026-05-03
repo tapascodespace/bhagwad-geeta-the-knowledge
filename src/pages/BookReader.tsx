@@ -146,6 +146,31 @@ const BookReader = () => {
               {isDark ? <Sun className="w-4 h-4 text-gold" /> : <Moon className="w-4 h-4" />}
             </button>
           </div>
+          {/* Language toggle (Hindi / English) */}
+          <div className="px-4 pb-2 max-w-lg mx-auto flex justify-center">
+            <div role="tablist" aria-label="Reader language" className="inline-flex rounded-full border border-border bg-background/60 p-0.5 text-xs">
+              <button
+                role="tab"
+                aria-selected={bookLang === "hi"}
+                onClick={() => setBookLang("hi")}
+                className={`px-3 py-1 rounded-full transition-colors ${
+                  bookLang === "hi" ? "bg-primary text-primary-foreground" : "opacity-70 hover:opacity-100"
+                }`}
+              >
+                हिन्दी
+              </button>
+              <button
+                role="tab"
+                aria-selected={bookLang === "en"}
+                onClick={() => setBookLang("en")}
+                className={`px-3 py-1 rounded-full transition-colors ${
+                  bookLang === "en" ? "bg-primary text-primary-foreground" : "opacity-70 hover:opacity-100"
+                }`}
+              >
+                English
+              </button>
+            </div>
+          </div>
           <div className="px-4 pb-3 max-w-lg mx-auto">
             <Progress value={(section / total) * 100} className="h-1" />
           </div>
