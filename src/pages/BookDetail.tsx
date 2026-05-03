@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ChevronLeft, Lock, BookOpen, Clock, Sparkles, Check, ArrowRight } from "lucide-react";
-import { getBook } from "@/data/books";
+import { getBook, hasContent } from "@/data/books";
 import { useUnlockedBooks } from "@/hooks/useLibrary";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
