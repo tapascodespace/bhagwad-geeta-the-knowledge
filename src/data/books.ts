@@ -179,7 +179,7 @@ const gitaSimplifiedEnglish: BookSection[] = [
   {
     id: 2,
     title: "Arjuna's Crisis",
-    body: 'Just before the war, Arjuna placed his chariot between the two armies. Standing across from him were his teachers, uncles, brothers, and friends. His hands trembled, his bow slipped, and a deep despair filled him. He told Krishna, "I will not fight." We meet the same moment in our own lives — when we must choose between right and wrong, when we must stand against people we love, or when our duty feels too heavy. Arjuna\'s crisis is really every human being\'s crisis. The Gita begins exactly here — with our weakness.',
+    body: "Just before the war, Arjuna placed his chariot between the two armies. Standing across from him were his teachers, uncles, brothers, and friends. His hands trembled, his bow slipped, and a deep despair filled him. He told Krishna, \"I will not fight.\" We meet the same moment in our own lives — when we must choose between right and wrong, when we must stand against people we love, or when our duty feels too heavy. Arjuna's crisis is really every human being's crisis. The Gita begins exactly here — with our weakness.",
     takeaway: "Everyone faces moments of crisis and doubt — that is where self-discovery begins.",
   },
   {
@@ -436,7 +436,7 @@ export const books: Book[] = [
     title: "भगवद्गीता सरलीकृत",
     author: "शुरुआती संस्करण",
     description: "गीता की संपूर्ण शिक्षा सरल हिंदी में — 22 छोटे अध्यायों में।",
-    price: 49,
+    price: 499,
     cover: "from-amber-200 via-orange-200 to-rose-200",
     coverImage: gitaSimplifiedCover,
     category: "bhagavad-gita",
@@ -568,5 +568,4 @@ export const getBookSections = (book: Book, lang: BookLanguage): BookSection[] =
 };
 
 /** True if the book has any readable content in either language. */
-export const hasContent = (book: Book) =>
-  book.hindiSections.length > 0 || book.englishSections.length > 0;
+export const hasContent = (book: Book) => book.hindiSections.length > 0 || book.englishSections.length > 0;
