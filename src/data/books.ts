@@ -572,3 +572,14 @@ export const getBookSections = (book: Book, lang: BookLanguage): BookSection[] =
 
 /** True if the book has any readable content in either language. */
 export const hasContent = (book: Book) => book.hindiSections.length > 0 || book.englishSections.length > 0;
+
+/** Get localized title/author/description. 'en' uses English fields when available;
+ *  any other language falls back to the default (Hindi) fields. */
+export const getBookMeta = (book: Book, lang: string) => {
+  const useEn = lang === "en";
+  return {
+    title: useEn && book.titleEn ? book.titleEn : book.title,
+    author: useEn && book.authorEn ? book.authorEn : book.author,
+    description: useEn && book.descriptionEn ? book.descriptionEn : book.description,
+  };
+};
