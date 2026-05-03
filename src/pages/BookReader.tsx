@@ -200,7 +200,7 @@ const BookReader = () => {
 
           <div className="mt-8 rounded-2xl border border-gold/40 bg-gold/10 p-5">
             <p className="text-[11px] uppercase tracking-widest font-semibold text-gold">
-              मुख्य संदेश
+              {bookLang === "en" ? "Key Message" : "मुख्य संदेश"}
             </p>
             <p
               className="mt-2 font-medium"
