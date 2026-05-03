@@ -80,7 +80,8 @@ const BookReader = () => {
     );
   }
 
-  const total = book.sections.length;
+  const sections = getBookSections(book, bookLang);
+  const total = sections.length;
 
   if (!unlocked) return null;
 
