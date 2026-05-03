@@ -183,7 +183,7 @@ const BookReader = () => {
         >
           <div className="text-center mb-6">
             <span className="inline-block text-[11px] uppercase tracking-widest opacity-60">
-              अध्याय {section} • {readingTime(current.body)} मिनट का पाठ
+              {bookLang === "en" ? `Chapter ${section} • ${readingTime(current.body)} min read` : `अध्याय ${section} • ${readingTime(current.body)} मिनट का पाठ`}
             </span>
             <h1 className="font-display text-3xl font-bold mt-2 leading-tight">
               {current.title}
