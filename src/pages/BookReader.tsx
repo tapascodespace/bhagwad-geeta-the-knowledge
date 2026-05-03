@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { getBook } from "@/data/books";
 import { useReaderPrefs, useReadingProgress, useUnlockedBooks } from "@/hooks/useLibrary";
+import { useTheme } from "@/contexts/ThemeContext";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 
@@ -26,6 +27,7 @@ const BookReader = () => {
   const { isUnlocked, unlock } = useUnlockedBooks();
   const { section, setSection } = useReadingProgress(bookId);
   const { prefs, update } = useReaderPrefs();
+  const { theme, toggleTheme } = useTheme();
   const [animKey, setAnimKey] = useState(0);
 
   useEffect(() => {
@@ -117,7 +119,7 @@ const BookReader = () => {
               <Plus className="w-4 h-4" />
             </button>
             <button
-              onClick={() => update({ theme: isDark ? "light" : "dark" })}
+              onClick={toggleTheme}
               className="p-2 rounded-full hover:bg-foreground/5"
               aria-label="थीम बदलें"
             >

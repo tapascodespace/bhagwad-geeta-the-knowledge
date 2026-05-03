@@ -3,6 +3,7 @@ import { BookOpen, Languages, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LANGUAGES } from "@/i18n/translations";
+import ThemeToggle from "@/components/ThemeToggle";
 
 
 const Home = () => {
@@ -13,7 +14,8 @@ const Home = () => {
   return (
     <div className="min-h-[calc(100vh-5rem)] flex flex-col px-6 pt-6 pb-8 animate-fade-in-slow">
       {/* Top bar */}
-      <div className="flex justify-end mb-2">
+      <div className="flex justify-end items-center gap-2 mb-2">
+        <ThemeToggle ariaLabel={t("changeLanguage")} />
         <button
           onClick={() => navigate("/settings/language")}
           className="flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/80 backdrop-blur text-secondary-foreground active:scale-95 transition-all hover:bg-secondary border border-border/50"
