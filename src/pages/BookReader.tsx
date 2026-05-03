@@ -221,7 +221,7 @@ const BookReader = () => {
                 variant="ghost"
                 className="flex-1 rounded-full"
               >
-                <ArrowLeft className="w-4 h-4" /> पिछला
+                <ArrowLeft className="w-4 h-4" /> {bookLang === "en" ? "Previous" : "पिछला"}
               </Button>
               <div className="text-xs opacity-70 px-2 whitespace-nowrap">
                 {section} / {total}
