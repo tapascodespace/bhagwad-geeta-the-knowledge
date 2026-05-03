@@ -30,7 +30,7 @@ const BookDetail = () => {
   const available = hasContent(book);
 
   const handleUnlock = () => {
-    if (book.sections.length === 0) {
+    if (!available) {
       toast.info("यह पुस्तक जल्द ही उपलब्ध होगी");
       return;
     }
@@ -39,7 +39,7 @@ const BookDetail = () => {
   };
 
   const handleRead = () => {
-    if (book.sections.length === 0) {
+    if (!available) {
       toast.info("यह पुस्तक जल्द ही उपलब्ध होगी");
       return;
     }
