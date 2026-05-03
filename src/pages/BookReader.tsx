@@ -231,7 +231,7 @@ const BookReader = () => {
                 disabled={section === total}
                 className="flex-1 rounded-full"
               >
-                अगला <ArrowRight className="w-4 h-4" />
+                {bookLang === "en" ? "Next" : "अगला"} <ArrowRight className="w-4 h-4" />
               </Button>
             </div>
           </div>
