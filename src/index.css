@@ -121,6 +121,23 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
+  /* Smooth theme transition across the whole app (skip transforms/opacity to avoid jank) */
+  html.theme-ready *,
+  html.theme-ready *::before,
+  html.theme-ready *::after {
+    transition: background-color 300ms ease, border-color 300ms ease, color 200ms ease, fill 200ms ease, stroke 200ms ease, box-shadow 300ms ease;
+  }
+
+  html, body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+  }
+
+  /* Subtle glow under book covers in dark mode (covers themselves untouched) */
+  .dark .book-cover-img {
+    box-shadow: 0 8px 30px -8px hsl(42 80% 55% / 0.25), 0 2px 10px -2px hsl(0 0% 0% / 0.6);
+  }
 }
 
 @layer utilities {
