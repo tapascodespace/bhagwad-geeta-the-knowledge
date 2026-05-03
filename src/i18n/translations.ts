@@ -148,6 +148,41 @@ export const t: Record<string, Dict> = {
     hi: "पूरा श्लोक पढ़ें",
     en: "Read Full Verse",
   },
+  libraryTitle: {
+    bn: "পুস্তকালয়",
+    hi: "पुस्तकालय",
+    en: "Library",
+  },
+  librarySubtitle: {
+    bn: "আধ্যাত্মিক জ্ঞানের নির্বাচিত ই-বুক",
+    hi: "आध्यात्मिक ज्ञान की चुनिंदा ई-पुस्तकें",
+    en: "A curated collection of spiritual e-books",
+  },
+  catBhagavadGita: {
+    bn: "ভগবদ্গীতা",
+    hi: "भगवद्गीता",
+    en: "Bhagavad Gita",
+  },
+  catStoriesEpics: {
+    bn: "কাহিনি ও মহাকাব্য",
+    hi: "कथाएँ और महाकाव्य",
+    en: "Stories & Epics",
+  },
+  catSpiritualGuides: {
+    bn: "আধ্যাত্মিক নির্দেশিকা",
+    hi: "आध्यात्मिक मार्गदर्शिका",
+    en: "Spiritual Guides",
+  },
+  catForStudents: {
+    bn: "শিক্ষার্থীদের জন্য",
+    hi: "विद्यार्थियों के लिए",
+    en: "For Students",
+  },
+  catShortReads: {
+    bn: "ছোট পাঠ",
+    hi: "लघु पठन",
+    en: "Short Reads",
+  },
 };
 
 // Chapter names per language
