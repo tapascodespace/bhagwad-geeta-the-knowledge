@@ -18,6 +18,9 @@ export interface Book {
   title: string;
   author: string;
   description: string;
+  titleEn?: string;
+  authorEn?: string;
+  descriptionEn?: string;
   price: number; // INR. 0 = free.
   cover: string; // gradient class (fallback)
   coverImage?: string; // optional image URL
