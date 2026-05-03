@@ -32,6 +32,14 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     applyTheme(theme);
   }, [theme]);
 
+  // Enable transition class after first paint to avoid initial flicker
+  useEffect(() => {
+    const id = window.requestAnimationFrame(() => {
+      document.documentElement.classList.add("theme-ready");
+    });
+    return () => window.cancelAnimationFrame(id);
+  }, []);
+
   const setTheme = useCallback((t: Theme) => {
     setThemeState(t);
     try { localStorage.setItem(STORAGE_KEY, t); } catch { /* ignore */ }
