@@ -26,7 +26,8 @@ const BookDetail = () => {
   }
 
   const unlocked = isUnlocked(book.id);
-  const total = book.sections.length;
+  const total = Math.max(book.hindiSections.length, book.englishSections.length);
+  const available = hasContent(book);
 
   const handleUnlock = () => {
     if (book.sections.length === 0) {
