@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { BookOpen, Lock } from "lucide-react";
-import { books, CATEGORIES, type Book, type BookCategory } from "@/data/books";
+import { books, CATEGORIES, getBookMeta, type Book, type BookCategory } from "@/data/books";
 import { useUnlockedBooks } from "@/hooks/useLibrary";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -12,42 +12,45 @@ const CATEGORY_LABEL_KEYS: Record<BookCategory, "catBhagavadGita" | "catStoriesE
   "short-reads": "catShortReads",
 };
 
-const BookCard = ({ book, onClick, unlocked }: { book: Book; onClick: () => void; unlocked: boolean }) => (
-  <button
-    onClick={onClick}
-    className="group shrink-0 w-32 sm:w-36 snap-start text-left active:scale-[0.97] transition-transform duration-200"
-    aria-label={book.title}
-  >
-    <div
-      className={`relative w-full aspect-[2/3] rounded-xl overflow-hidden bg-gradient-to-br ${book.cover} shadow-card group-hover:shadow-elegant transition-shadow flex items-center justify-center`}
+const BookCard = ({ book, onClick, unlocked, lang }: { book: Book; onClick: () => void; unlocked: boolean; lang: string }) => {
+  const meta = getBookMeta(book, lang);
+  return (
+    <button
+      onClick={onClick}
+      className="group shrink-0 w-32 sm:w-36 snap-start text-left active:scale-[0.97] transition-transform duration-200"
+      aria-label={meta.title}
     >
-      {book.coverImage ? (
-        <img
-          src={book.coverImage}
-          alt={book.title}
-          loading="lazy"
-          className="book-cover-img w-full h-full object-cover"
-        />
-      ) : (
-        <BookOpen className="w-8 h-8 text-foreground/40" />
-      )}
+      <div
+        className={`relative w-full aspect-[2/3] rounded-xl overflow-hidden bg-gradient-to-br ${book.cover} shadow-card group-hover:shadow-elegant transition-shadow flex items-center justify-center`}
+      >
+        {book.coverImage ? (
+          <img
+            src={book.coverImage}
+            alt={meta.title}
+            loading="lazy"
+            className="book-cover-img w-full h-full object-cover"
+          />
+        ) : (
+          <BookOpen className="w-8 h-8 text-foreground/40" />
+        )}
 
-      {!unlocked && (
-        <span className="absolute top-2 right-2 inline-flex items-center gap-1 text-[10px] font-semibold text-amber-900 bg-white/90 backdrop-blur px-1.5 py-0.5 rounded-full shadow-soft">
-          <Lock className="w-2.5 h-2.5" />₹{book.price}
-        </span>
-      )}
-    </div>
-    <p className="mt-2 text-xs font-medium text-foreground line-clamp-2 leading-snug">
-      {book.title}
-    </p>
-  </button>
-);
+        {!unlocked && (
+          <span className="absolute top-2 right-2 inline-flex items-center gap-1 text-[10px] font-semibold text-amber-900 bg-white/90 backdrop-blur px-1.5 py-0.5 rounded-full shadow-soft">
+            <Lock className="w-2.5 h-2.5" />₹{book.price}
+          </span>
+        )}
+      </div>
+      <p className="mt-2 text-xs font-medium text-foreground line-clamp-2 leading-snug">
+        {meta.title}
+      </p>
+    </button>
+  );
+};
 
 const Library = () => {
   const navigate = useNavigate();
   const { isUnlocked } = useUnlockedBooks();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const rows = CATEGORIES.map((c) => ({
     ...c,
@@ -77,6 +80,7 @@ const Library = () => {
                 <BookCard
                   key={book.id}
                   book={book}
+                  lang={language}
                   unlocked={isUnlocked(book.id)}
                   onClick={() => navigate(`/library/${book.id}`)}
                 />
