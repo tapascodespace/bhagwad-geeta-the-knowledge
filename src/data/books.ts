@@ -688,7 +688,7 @@ export const books: Book[] = [
     titleEn: "Bhagavad Gita Simplified",
     authorEn: "Beginner's Edition",
     descriptionEn: "The complete teachings of the Gita in simple English — across 22 short chapters.",
-    price: 499,
+    price: 299,
     cover: "from-amber-200 via-orange-200 to-rose-200",
     coverImage: gitaSimplifiedCover,
     category: "bhagavad-gita",
