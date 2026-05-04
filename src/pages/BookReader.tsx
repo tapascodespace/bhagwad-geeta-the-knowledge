@@ -8,12 +8,15 @@ import {
   Plus,
   Sun,
   Moon,
+  Bookmark,
+  BookmarkCheck,
 } from "lucide-react";
-import { getBook, getBookSections, type BookLanguage } from "@/data/books";
-import { useReaderPrefs, useReadingProgress, useUnlockedBooks } from "@/hooks/useLibrary";
+import { getBook, getBookMeta, getBookSections, type BookLanguage } from "@/data/books";
+import { useBookBookmarks, useReaderPrefs, useReadingProgress, useUnlockedBooks } from "@/hooks/useLibrary";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { toast } from "sonner";
 
 const readingTime = (text: string) => {
   const words = text.trim().split(/\s+/).length;
@@ -29,7 +32,8 @@ const BookReader = () => {
   const { isUnlocked } = useUnlockedBooks();
   const { section, setSection } = useReadingProgress(bookId);
   const { prefs, update } = useReaderPrefs();
-  const { language: appLang } = useLanguage();
+  const { language: appLang, t } = useLanguage();
+  const { isBookmarked, toggle } = useBookBookmarks();
   const [animKey, setAnimKey] = useState(0);
 
   // Per-book language preference. Defaults to the app language
@@ -103,6 +107,19 @@ const BookReader = () => {
   const goPrev = () => section > 1 && setSection(section - 1);
   const goNext = () => section < total && setSection(section + 1);
   const toggleReaderTheme = () => update({ theme: isDark ? "light" : "dark" });
+  const meta = getBookMeta(book, bookLang);
+  const bookmarked = isBookmarked(book.id, bookLang, current.id);
+  const handleBookmark = () => {
+    toggle({
+      bookId: book.id,
+      lang: bookLang,
+      sectionId: current.id,
+      title: current.title,
+      bookTitle: meta.title,
+      savedAt: Date.now(),
+    });
+    toast.success(bookmarked ? t("bookmarkRemoved") : t("bookmarkAdded"));
+  };
 
   return (
     // Scope `dark` class to this subtree only so the reader theme stays
@@ -144,6 +161,14 @@ const BookReader = () => {
               aria-pressed={isDark}
             >
               {isDark ? <Sun className="w-4 h-4 text-gold" /> : <Moon className="w-4 h-4" />}
+            </button>
+            <button
+              onClick={handleBookmark}
+              className="p-2 rounded-full hover:bg-foreground/5"
+              aria-label="bookmark"
+              aria-pressed={bookmarked}
+            >
+              {bookmarked ? <BookmarkCheck className="w-4 h-4 text-primary" /> : <Bookmark className="w-4 h-4" />}
             </button>
           </div>
           {/* Language toggle (Hindi / English) */}
