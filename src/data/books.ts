@@ -679,6 +679,252 @@ const krishnaLeelasEnglish: BookSection[] = [
   },
 ];
 
+const meditationBasicsHindi: BookSection[] = [
+  {
+    id: 1,
+    title: "ध्यान(मेडिटेशन) क्या है?",
+    body: "ध्यान का मतलब मन को पूरी तरह खाली करना नहीं है। इसका अर्थ है अपने विचारों को बिना उलझे देखना। जैसे आसमान में बादल आते-जाते हैं, वैसे ही विचार आते हैं। अभ्यास से आप अपने विचारों से दूरी बना पाते हैं और शांत रहना सीखते हैं।",
+    takeaway: "ध्यान आपको विचारों को देखने की क्षमता देता है।",
+  },
+  {
+    id: 2,
+    title: "ध्यान(मेडिटेशन) क्यों जरूरी है?",
+    body: "आज की दुनिया में हमारा मन लगातार व्यस्त रहता है। ध्यान एक रीसेट बटन की तरह काम करता है। यह मन को शांत करता है और सोचने की क्षमता को बेहतर बनाता है।",
+    takeaway: "ध्यान मन को आराम देता है।",
+  },
+  {
+    id: 3,
+    title: "छोटे से शुरुआत",
+    body: "ध्यान के लिए घंटों बैठना जरूरी नहीं है। आप रोज़ 5 मिनट से शुरुआत कर सकते हैं। धीरे-धीरे इसे बढ़ा सकते हैं।",
+    takeaway: "छोटे कदम से शुरुआत करें।",
+  },
+  {
+    id: 4,
+    title: "सांस पर ध्यान",
+    body: "सांस पर ध्यान देना सबसे आसान तरीका है। हर सांस को महसूस करें और ध्यान भटकने पर वापस सांस पर लाएं।",
+    takeaway: "सांस आपको वर्तमान में रखती है।",
+  },
+  {
+    id: 5,
+    title: "ध्यान(मेडिटेशन) भटकना",
+    body: "ध्यान के दौरान मन का भटकना सामान्य है। इसे असफलता न समझें। हर बार ध्यान वापस लाना ही अभ्यास है।",
+    takeaway: "हर बार ध्यान लौटाना ही प्रगति है।",
+  },
+  {
+    id: 6,
+    title: "सही मुद्रा",
+    body: "आरामदायक और सीधी मुद्रा में बैठें। इससे आप लंबे समय तक ध्यान में रह सकते हैं।",
+    takeaway: "सही मुद्रा ध्यान को आसान बनाती है।",
+  },
+  {
+    id: 7,
+    title: "नियमितता",
+    body: "हर दिन ध्यान करना सबसे महत्वपूर्ण है। भले ही समय कम हो, नियमितता बनाए रखें।",
+    takeaway: "नियमित अभ्यास ही सफलता है।",
+  },
+  {
+    id: 8,
+    title: "समय का चयन",
+    body: "सुबह ध्यान करने से दिन अच्छा शुरू होता है, और रात को करने से तनाव कम होता है।",
+    takeaway: "एक निश्चित समय चुनें।",
+  },
+  {
+    id: 9,
+    title: "बेचैनी से निपटना",
+    body: "ध्यान के दौरान बेचैनी महसूस होना सामान्य है। इसे महसूस करें और धीरे-धीरे शांत होने दें।",
+    takeaway: "बेचैनी को देखें, उससे लड़ें नहीं।",
+  },
+  {
+    id: 10,
+    title: "मौन की शक्ति",
+    body: "मौन में मन को शांति मिलती है। ध्यान आपको मौन को स्वीकार करना सिखाता है।",
+    takeaway: "मौन में स्पष्टता मिलती है।",
+  },
+  {
+    id: 11,
+    title: "भावनाओं को समझना",
+    body: "ध्यान आपको अपनी भावनाओं को समझने में मदद करता है। इससे आप तुरंत प्रतिक्रिया देने के बजाय सोचकर निर्णय लेते हैं।",
+    takeaway: "ध्यान भावनाओं पर नियंत्रण देता है।",
+  },
+  {
+    id: 12,
+    title: "नियंत्रण छोड़ना",
+    body: "हर विचार को नियंत्रित करने की कोशिश न करें। उन्हें आने-जाने दें।",
+    takeaway: "विचारों को जाने दें।",
+  },
+  {
+    id: 13,
+    title: "गाइडेड ध्यान",
+    body: "शुरुआत में गाइडेड ध्यान मदद कर सकता है। इससे ध्यान लगाना आसान होता है।",
+    takeaway: "शुरुआत में मार्गदर्शन सहायक है।",
+  },
+  {
+    id: 14,
+    title: "धैर्य रखें",
+    body: "ध्यान का असर धीरे-धीरे दिखता है। इसलिए धैर्य रखें और अभ्यास जारी रखें।",
+    takeaway: "धैर्य से ही परिणाम मिलते हैं।",
+  },
+  {
+    id: 15,
+    title: "तनाव कम करना",
+    body: "ध्यान तनाव को कम करता है और मन को शांत करता है।",
+    takeaway: "ध्यान तनाव कम करता है।",
+  },
+  {
+    id: 16,
+    title: "दैनिक जीवन में ध्यान",
+    body: "चलते-फिरते, खाते समय भी ध्यान किया जा सकता है। बस पूरी तरह उपस्थित रहें।",
+    takeaway: "हर काम में ध्यान संभव है।",
+  },
+  {
+    id: 17,
+    title: "अपेक्षा छोड़ें",
+    body: "ध्यान से तुरंत परिणाम की उम्मीद न करें। धीरे-धीरे बदलाव आएगा।",
+    takeaway: "अपेक्षा छोड़ें, अभ्यास करें।",
+  },
+  {
+    id: 18,
+    title: "स्थान बनाएं",
+    body: "ध्यान के लिए एक शांत जगह चुनें, जहां ध्यान लगाना आसान हो।",
+    takeaway: "एक निश्चित स्थान मदद करता है।",
+  },
+  {
+    id: 19,
+    title: "लंबे समय के लाभ",
+    body: "नियमित ध्यान से ध्यान क्षमता, शांति और संतुलन बढ़ता है।",
+    takeaway: "ध्यान मन को मजबूत बनाता है।",
+  },
+  {
+    id: 20,
+    title: "अंदर की यात्रा",
+    body: "ध्यान खुद को समझने की यात्रा है। यह आपको आपके अंदर से जोड़ता है।",
+    takeaway: "ध्यान आत्म-समझ की यात्रा है।",
+  },
+];
+
+const meditationBasicsEnglish: BookSection[] = [
+  {
+    id: 1,
+    title: "What Is Meditation?",
+    body: "Meditation is not about emptying your mind completely. It is about learning to observe your thoughts without getting lost in them. Just like watching clouds pass in the sky, you let thoughts come and go. With practice, this awareness creates space between you and your reactions, helping you stay calm in stressful situations.",
+    takeaway: "Meditation helps you observe thoughts instead of being controlled by them.",
+  },
+  {
+    id: 2,
+    title: "Why Meditation Matters",
+    body: "In today’s world, your mind is constantly overloaded with information — messages, videos, and stress. Meditation acts like a reset button. It allows your brain to slow down and recover. Over time, it improves focus, emotional control, and clarity in decision-making, making daily life smoother.",
+    takeaway: "Meditation gives your mind the rest it rarely gets.",
+  },
+  {
+    id: 3,
+    title: "Starting Small",
+    body: "Many people think meditation requires long hours, but even five minutes a day is enough to begin. Sit quietly, close your eyes, and focus on your breath. The goal is not perfection, but consistency. Starting small makes it easier to build a lasting habit.",
+    takeaway: "Start small — consistency matters more than duration.",
+  },
+  {
+    id: 4,
+    title: "Focus on Breath",
+    body: "Your breath is the simplest anchor for meditation. By paying attention to each inhale and exhale, your mind gradually settles. Whenever your thoughts wander, gently bring your focus back to breathing. This repeated return builds mental discipline.",
+    takeaway: "Your breath is your anchor to the present moment.",
+  },
+  {
+    id: 5,
+    title: "Dealing with Distractions",
+    body: "Distractions are not failures; they are part of the process. Your mind will wander — that is its nature. The real practice is noticing when it drifts and calmly bringing it back. Each return strengthens your focus, just like a muscle.",
+    takeaway: "Every time you refocus, your mind becomes stronger.",
+  },
+  {
+    id: 6,
+    title: "Posture Matters",
+    body: "You don’t need complicated positions to meditate. Simply sit comfortably with your back straight. A stable posture helps you stay alert without tension. Whether on a chair or floor, the key is to be relaxed yet attentive.",
+    takeaway: "Comfortable posture keeps your mind alert and steady.",
+  },
+  {
+    id: 7,
+    title: "Consistency Over Perfection",
+    body: "Many people quit meditation because they feel they are ‘not doing it right.’ But meditation is not about perfection. Showing up daily, even for a few minutes, matters more than having a perfect session.",
+    takeaway: "Regular practice is more important than perfect practice.",
+  },
+  {
+    id: 8,
+    title: "Morning vs Night",
+    body: "Meditating in the morning helps set a calm tone for the day, while evening meditation helps release stress. Choose a time that fits your routine. What matters most is making it a consistent part of your day.",
+    takeaway: "Pick a time you can stick to every day.",
+  },
+  {
+    id: 9,
+    title: "Handling Restlessness",
+    body: "Feeling restless during meditation is normal, especially in the beginning. Instead of fighting it, observe it. Notice how it feels in your body and mind. Over time, this awareness reduces its intensity.",
+    takeaway: "Observe restlessness instead of resisting it.",
+  },
+  {
+    id: 10,
+    title: "The Power of Silence",
+    body: "Silence can feel uncomfortable at first because we are used to constant noise. But within silence lies clarity. Meditation trains you to become comfortable with stillness, where deeper understanding emerges.",
+    takeaway: "Silence is where clarity begins.",
+  },
+  {
+    id: 11,
+    title: "Emotional Awareness",
+    body: "Meditation helps you notice emotions as they arise. Instead of reacting instantly, you learn to pause. This small gap allows you to respond thoughtfully rather than impulsively.",
+    takeaway: "Awareness creates space between emotion and reaction.",
+  },
+  {
+    id: 12,
+    title: "Letting Go of Control",
+    body: "Trying to control every thought during meditation leads to frustration. Instead, allow thoughts to flow naturally. The goal is not to stop thinking, but to stop being disturbed by thoughts.",
+    takeaway: "Let thoughts pass without trying to control them.",
+  },
+  {
+    id: 13,
+    title: "Using Guided Meditation",
+    body: "For beginners, guided meditation can be helpful. Listening to a calm voice can make it easier to stay focused. Over time, you can move to silent meditation.",
+    takeaway: "Guidance can make starting meditation easier.",
+  },
+  {
+    id: 14,
+    title: "Building Patience",
+    body: "Meditation is a slow process. You may not notice changes immediately, but over weeks, your reactions become calmer and your focus improves. Trust the process.",
+    takeaway: "Real change comes with patience and time.",
+  },
+  {
+    id: 15,
+    title: "Meditation and Stress",
+    body: "When stress builds up, your mind becomes scattered. Meditation helps bring it back to the present. Even a few minutes can reduce anxiety and bring clarity.",
+    takeaway: "Meditation is a simple tool to manage stress.",
+  },
+  {
+    id: 16,
+    title: "Awareness in Daily Life",
+    body: "Meditation is not limited to sitting quietly. You can practice it while walking, eating, or even talking. Being fully present in any activity is also meditation.",
+    takeaway: "Meditation is awareness in every moment.",
+  },
+  {
+    id: 17,
+    title: "Avoiding Expectations",
+    body: "Expecting instant results can lead to disappointment. Meditation works gradually. Let go of expectations and focus on the process.",
+    takeaway: "Focus on practice, not results.",
+  },
+  {
+    id: 18,
+    title: "Creating a Space",
+    body: "Having a fixed place for meditation helps build consistency. A quiet corner with minimal distractions can make it easier to focus.",
+    takeaway: "A dedicated space supports your habit.",
+  },
+  {
+    id: 19,
+    title: "Long-Term Benefits",
+    body: "With regular practice, meditation improves focus, emotional balance, and overall well-being. It helps you handle challenges with a clearer mind.",
+    takeaway: "Meditation strengthens your mind over time.",
+  },
+  {
+    id: 20,
+    title: "The Journey Within",
+    body: "Meditation is not about achieving something outside; it is about understanding yourself. The more you practice, the more you connect with your inner self.",
+    takeaway: "Meditation is a journey toward self-understanding.",
+  },
+];
+
 export const books: Book[] = [
   {
     id: "gita-simplified",
@@ -776,8 +1022,8 @@ export const books: Book[] = [
     price: 99,
     cover: "from-violet-200 via-purple-200 to-indigo-200",
     category: "spiritual-guides",
-    hindiSections: [],
-    englishSections: [],
+    hindiSections: [meditationBasicsHindi],
+    englishSections: [meditationBasicsEnglish],
   },
   {
     id: "students-focus",
