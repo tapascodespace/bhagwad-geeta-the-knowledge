@@ -61,6 +61,18 @@ const Library = () => {
   const navigate = useNavigate();
   const { isUnlocked } = useUnlockedBooks();
   const { t, language } = useLanguage();
+  const [progressMap, setProgressMap] = useState<Record<string, number>>(() => readProgressMap());
+
+  useEffect(() => {
+    setProgressMap(readProgressMap());
+    const onStorage = () => setProgressMap(readProgressMap());
+    window.addEventListener("storage", onStorage);
+    window.addEventListener("focus", onStorage);
+    return () => {
+      window.removeEventListener("storage", onStorage);
+      window.removeEventListener("focus", onStorage);
+    };
+  }, []);
 
   const rows = CATEGORIES.map((c) => ({
     ...c,
@@ -92,6 +104,7 @@ const Library = () => {
                   book={book}
                   lang={language}
                   unlocked={isUnlocked(book.id)}
+                  progress={progressMap[book.id] ?? 1}
                   onClick={() => navigate(`/library/${book.id}`)}
                 />
               ))}
