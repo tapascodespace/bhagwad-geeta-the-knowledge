@@ -632,7 +632,7 @@ const krishnaLeelasEnglish: BookSection[] = [
   {
     id: 13,
     title: "Eating Mud",
-    body: "Krishna showed the universe in his mouth.",
+    body: "Yashoda, Krisna's Mother suspected he had been eating dirt while playing in the fields of Braj. When Yashoda confronted the young Krishna (Bal Gopal) about the mud, he denied eating it and offered to let her check for herself. Upon opening his mouth, Yashoda did not find dirt; instead, she saw the Entire Cosmos: All the stars, planets, sun, moon, and the vastness of space. She even saw past, present, and future, all material elements, and even a vision of herself standing in the courtyard.",
     takeaway: "Great truths can hide in small moments.",
   },
   {
