@@ -626,7 +626,7 @@ const krishnaLeelasEnglish: BookSection[] = [
   {
     id: 12,
     title: "Mother Yashoda",
-    body: "Yashoda loved Krishna as her child, not as God.",
+    body: "Yashoda’s love is unique because it is completely free from awe or reverence. While others saw Krishna as a powerful god, she saw him simply as her mischievous child who needed protection and care. Her Unique Form of Love was called Vatsalya Bhava ",
     takeaway: "A mother’s love is pure.",
   },
   {
