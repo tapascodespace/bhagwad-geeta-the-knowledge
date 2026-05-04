@@ -1,8 +1,10 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BookOpen, Lock } from "lucide-react";
-import { books, CATEGORIES, getBookMeta, type Book, type BookCategory } from "@/data/books";
-import { useUnlockedBooks } from "@/hooks/useLibrary";
+import { books, CATEGORIES, getBookMeta, getBookSections, type Book, type BookCategory } from "@/data/books";
+import { readProgressMap, useUnlockedBooks } from "@/hooks/useLibrary";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Progress } from "@/components/ui/progress";
 
 const CATEGORY_LABEL_KEYS: Record<BookCategory, "catBhagavadGita" | "catStoriesEpics" | "catSpiritualGuides" | "catForStudents" | "catShortReads"> = {
   "bhagavad-gita": "catBhagavadGita",
@@ -12,8 +14,10 @@ const CATEGORY_LABEL_KEYS: Record<BookCategory, "catBhagavadGita" | "catStoriesE
   "short-reads": "catShortReads",
 };
 
-const BookCard = ({ book, onClick, unlocked, lang }: { book: Book; onClick: () => void; unlocked: boolean; lang: string }) => {
+const BookCard = ({ book, onClick, unlocked, lang, progress }: { book: Book; onClick: () => void; unlocked: boolean; lang: string; progress: number }) => {
   const meta = getBookMeta(book, lang);
+  const total = getBookSections(book, lang === "en" ? "en" : "hi").length;
+  const pct = unlocked && total > 0 ? Math.min(100, Math.round((progress / total) * 100)) : 0;
   return (
     <button
       onClick={onClick}
@@ -43,6 +47,12 @@ const BookCard = ({ book, onClick, unlocked, lang }: { book: Book; onClick: () =
       <p className="mt-2 text-xs font-medium text-foreground line-clamp-2 leading-snug">
         {meta.title}
       </p>
+      {unlocked && total > 0 && (
+        <div className="mt-1.5">
+          <Progress value={pct} className="h-1" />
+          <p className="text-[10px] text-muted-foreground mt-0.5">{pct}%</p>
+        </div>
+      )}
     </button>
   );
 };
@@ -51,6 +61,18 @@ const Library = () => {
   const navigate = useNavigate();
   const { isUnlocked } = useUnlockedBooks();
   const { t, language } = useLanguage();
+  const [progressMap, setProgressMap] = useState<Record<string, number>>(() => readProgressMap());
+
+  useEffect(() => {
+    setProgressMap(readProgressMap());
+    const onStorage = () => setProgressMap(readProgressMap());
+    window.addEventListener("storage", onStorage);
+    window.addEventListener("focus", onStorage);
+    return () => {
+      window.removeEventListener("storage", onStorage);
+      window.removeEventListener("focus", onStorage);
+    };
+  }, []);
 
   const rows = CATEGORIES.map((c) => ({
     ...c,
@@ -82,6 +104,7 @@ const Library = () => {
                   book={book}
                   lang={language}
                   unlocked={isUnlocked(book.id)}
+                  progress={progressMap[book.id] ?? 1}
                   onClick={() => navigate(`/library/${book.id}`)}
                 />
               ))}

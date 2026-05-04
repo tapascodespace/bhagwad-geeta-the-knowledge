@@ -1,10 +1,11 @@
 import { useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ChevronLeft, Lock, BookOpen, Clock, Sparkles, Check, ArrowRight } from "lucide-react";
-import { getBook, getBookMeta, hasContent } from "@/data/books";
-import { useUnlockedBooks } from "@/hooks/useLibrary";
+import { getBook, getBookMeta, getBookSections, hasContent } from "@/data/books";
+import { useReadingProgress, useUnlockedBooks } from "@/hooks/useLibrary";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
 import { toast } from "sonner";
 
 const STRINGS = {
@@ -65,6 +66,7 @@ const BookDetail = () => {
   const { isUnlocked, unlock } = useUnlockedBooks();
   const { language } = useLanguage();
   const s = STRINGS[language] ?? STRINGS.hi;
+  const { section } = useReadingProgress(bookId);
 
   if (!book) {
     return (
@@ -156,9 +158,24 @@ const BookDetail = () => {
         </ul>
 
         {unlocked ? (
-          <Button className="w-full mt-5" size="lg" onClick={handleRead}>
-            {s.startReading} <ArrowRight className="w-4 h-4" />
-          </Button>
+          <>
+            {(() => {
+              const totalSec = getBookSections(book, language === "en" ? "en" : "hi").length;
+              const pct = totalSec > 0 ? Math.min(100, Math.round((section / totalSec) * 100)) : 0;
+              return (
+                <div className="mt-4">
+                  <div className="flex items-center justify-between text-xs text-muted-foreground mb-1">
+                    <span>{s.chapters(totalSec)}</span>
+                    <span>{pct}%</span>
+                  </div>
+                  <Progress value={pct} className="h-1.5" />
+                </div>
+              );
+            })()}
+            <Button className="w-full mt-5" size="lg" onClick={handleRead}>
+              {s.startReading} <ArrowRight className="w-4 h-4" />
+            </Button>
+          </>
         ) : (
           <>
             <Button className="w-full mt-5" size="lg" onClick={handleUnlock}>

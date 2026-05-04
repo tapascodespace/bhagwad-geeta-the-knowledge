@@ -183,6 +183,23 @@ export const t: Record<string, Dict> = {
     hi: "लघु पठन",
     en: "Short Reads",
   },
+  tabSlokas: { bn: "শ্লোক", hi: "श्लोक", en: "Slokas" },
+  tabBookmarks: { bn: "বুকমার্ক", hi: "बुकमार्क", en: "Bookmarks" },
+  noBookBookmarks: {
+    bn: "এখনও কোনো অধ্যায় সংরক্ষিত হয়নি।",
+    hi: "अभी तक कोई अध्याय सहेजा नहीं गया।",
+    en: "You haven't saved any sections yet.",
+  },
+  noBookBookmarksHint: {
+    bn: "পড়ার সময় বুকমার্ক আইকনে চাপ দিন।",
+    hi: "पढ़ते समय बुकमार्क आइकन दबाएँ।",
+    en: "Tap the bookmark icon while reading.",
+  },
+  section: { bn: "অধ্যায়", hi: "अध्याय", en: "Section" },
+  progress: { bn: "অগ্রগতি", hi: "प्रगति", en: "Progress" },
+  continueReading: { bn: "পড়া চালিয়ে যান", hi: "पढ़ना जारी रखें", en: "Continue reading" },
+  bookmarkAdded: { bn: "বুকমার্ক করা হয়েছে", hi: "बुकमार्क जोड़ा गया", en: "Bookmark added" },
+  bookmarkRemoved: { bn: "বুকমার্ক সরানো হয়েছে", hi: "बुकमार्क हटाया गया", en: "Bookmark removed" },
 };
 
 // Chapter names per language
