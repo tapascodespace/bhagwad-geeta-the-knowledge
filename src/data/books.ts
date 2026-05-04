@@ -573,7 +573,7 @@ const krishnaLeelasEnglish: BookSection[] = [
     id: 3,
     title: "The Butter Thief",
     body: "Krishna became famous as ‘Makhan Chor’ in Vrindavan. Even though he had plenty at home, he would sneak into the houses of Gopis to steal freshly churned butter. With his friends, he created clever ways to reach pots hung high from ceilings. This playful act was not theft, but a way to spread joy, bonding, and laughter.",
-    takeaway: "Joy, creativity, and connection matter more than seriousness.",
+    takeaway: "Krisna's innocence and joy ultimately melted everyone’s anger and replaced it with a smile.",
   },
   {
     id: 4,
