@@ -720,8 +720,8 @@ export const books: Book[] = [
     price: 99,
     cover: "from-sky-200 via-indigo-200 to-violet-200",
     category: "stories-epics",
-    hindiSections: [],
-    englishSections: [],
+    hindiSections: krishnaLeelasHindi,
+    englishSections: krishnaLeelasEnglish,
   },
   {
     id: "ramayana-tales",
