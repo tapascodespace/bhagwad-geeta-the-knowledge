@@ -433,6 +433,252 @@ const gitaEssenceEnglish: BookSection[] = [
   },
 ];
 
+const krishnaLeelasHindi: BookSection[] = [
+  {
+    id: 1,
+    title: "कृष्ण का जन्म",
+    body: "कृष्ण का जन्म अंधकार और अन्याय के समय हुआ। कंस के अत्याचार से पूरी मथुरा डरी हुई थी। फिर भी, उसी अंधेरे में आशा का जन्म हुआ। यह सिखाता है कि सबसे कठिन समय में भी बदलाव की शुरुआत हो सकती है।",
+    takeaway: "अंधेरे समय में भी उम्मीद हमेशा जन्म लेती है।",
+  },
+  {
+    id: 2,
+    title: "गोकुल आगमन",
+    body: "कृष्ण को वसुदेव ने यमुना पार कर गोकुल पहुंचाया। यह यात्रा खतरे से भरी थी, लेकिन विश्वास और साहस ने रास्ता बना दिया। जीवन में भी जब हम सही काम करते हैं, तो रास्ते अपने आप बनते हैं।",
+    takeaway: "सही इरादे के साथ चलो, रास्ता खुद बनता है।",
+  },
+  {
+    id: 3,
+    title: "माखन चोर",
+    body: "कृष्ण का माखन चुराना सिर्फ शरारत नहीं था। वह लोगों के दिलों को जीतने का तरीका था। यह हमें सिखाता है कि जीवन में आनंद और मासूमियत भी जरूरी है।",
+    takeaway: "खुशी और सरलता जीवन को सुंदर बनाती है।",
+  },
+  {
+    id: 4,
+    title: "पूतना वध",
+    body: "पूतना ने ज़हर देकर कृष्ण को मारने की कोशिश की, लेकिन कृष्ण ने उसे मुक्त कर दिया। यह दिखाता है कि बुराई भी अच्छाई के सामने हार जाती है।",
+    takeaway: "सत्य और अच्छाई हमेशा जीतते हैं।",
+  },
+  {
+    id: 5,
+    title: "कालिया नाग",
+    body: "कृष्ण ने कालिया नाग को हराकर यमुना को शुद्ध किया। यह केवल शक्ति नहीं, बल्कि संतुलन का प्रतीक था।",
+    takeaway: "डर का सामना करो, तभी वह खत्म होगा।",
+  },
+  {
+    id: 6,
+    title: "गोवर्धन पर्वत",
+    body: "कृष्ण ने इंद्र के अहंकार को तोड़ने के लिए गोवर्धन पर्वत उठाया। यह हमें सिखाता है कि अहंकार का अंत निश्चित है।",
+    takeaway: "अहंकार हमेशा गिरता है, विनम्रता टिकती है।",
+  },
+  {
+    id: 7,
+    title: "गोपियों का प्रेम",
+    body: "गोपियों का प्रेम निःस्वार्थ और शुद्ध था। उन्होंने कभी कुछ पाने के लिए प्रेम नहीं किया।",
+    takeaway: "सच्चा प्रेम बिना शर्त होता है।",
+  },
+  {
+    id: 8,
+    title: "माखन बाँटना",
+    body: "कृष्ण माखन सिर्फ खाते नहीं थे, बाँटते भी थे। यह सिखाता है कि खुशी बाँटने से बढ़ती है।",
+    takeaway: "जो आपके पास है, उसे बाँटो।",
+  },
+  {
+    id: 9,
+    title: "बाल मित्रता",
+    body: "कृष्ण अपने दोस्तों के साथ खेलते और हँसते थे। उनकी मित्रता सच्ची और सरल थी।",
+    takeaway: "सच्चे दोस्त जीवन को आसान बनाते हैं।",
+  },
+  {
+    id: 10,
+    title: "रास लीला",
+    body: "रास लीला केवल नृत्य नहीं था, यह आत्मा और परमात्मा का मिलन था।",
+    takeaway: "आत्मिक जुड़ाव सबसे गहरा होता है।",
+  },
+  {
+    id: 11,
+    title: "कंस वध",
+    body: "कृष्ण ने कंस का अंत किया और अन्याय को समाप्त किया।",
+    takeaway: "अन्याय के खिलाफ खड़े होना जरूरी है।",
+  },
+  {
+    id: 12,
+    title: "माता यशोदा का प्रेम",
+    body: "यशोदा का प्रेम बिना शर्त था। उन्होंने कृष्ण को भगवान नहीं, अपने बेटे के रूप में देखा।",
+    takeaway: "माँ का प्रेम सबसे शुद्ध होता है।",
+  },
+  {
+    id: 13,
+    title: "मिट्टी खाना",
+    body: "जब कृष्ण ने मिट्टी खाई, यशोदा ने उनके मुख में ब्रह्मांड देखा।",
+    takeaway: "हर छोटी चीज में भी बड़ा सत्य छिपा हो सकता है।",
+  },
+  {
+    id: 14,
+    title: "उखल बंधन",
+    body: "कृष्ण को यशोदा ने उखल से बांधा, लेकिन वह बंधन भी उन्हें रोक नहीं पाया।",
+    takeaway: "सच्ची शक्ति को कोई बांध नहीं सकता।",
+  },
+  {
+    id: 15,
+    title: "सुदामा मित्रता",
+    body: "कृष्ण ने सुदामा का स्वागत प्रेम से किया, बिना उसके हालात देखे।",
+    takeaway: "सच्ची दोस्ती कभी नहीं बदलती।",
+  },
+  {
+    id: 16,
+    title: "द्रौपदी की रक्षा",
+    body: "कृष्ण ने द्रौपदी की लाज बचाई जब वह संकट में थी।",
+    takeaway: "सच्ची श्रद्धा कभी अकेली नहीं होती।",
+  },
+  {
+    id: 17,
+    title: "गीता का उपदेश",
+    body: "कृष्ण ने अर्जुन को जीवन का सबसे बड़ा ज्ञान दिया।",
+    takeaway: "सही मार्गदर्शन जीवन बदल सकता है।",
+  },
+  {
+    id: 18,
+    title: "रणनीति और बुद्धि",
+    body: "कृष्ण केवल शक्तिशाली नहीं, बुद्धिमान भी थे।",
+    takeaway: "सिर्फ ताकत नहीं, बुद्धि भी जरूरी है।",
+  },
+  {
+    id: 19,
+    title: "विनम्रता",
+    body: "भगवान होते हुए भी कृष्ण हमेशा सरल और विनम्र रहे।",
+    takeaway: "विनम्रता ही असली महानता है।",
+  },
+  {
+    id: 20,
+    title: "जीवन का संतुलन",
+    body: "कृष्ण ने जीवन के हर रूप को जिया — बालपन, मित्रता, युद्ध, ज्ञान।",
+    takeaway: "जीवन में संतुलन ही सच्ची सफलता है।",
+  },
+];
+
+const krishnaLeelasEnglish: BookSection[] = [
+  {
+    id: 1,
+    title: "Birth of Krishna",
+    body: "Krishna was born during a time of darkness and injustice under King Kansa. Even in such fear, hope took birth. His arrival shows that change begins in the hardest times. No matter how bad things seem, something good can always emerge.",
+    takeaway: "Even in darkness, hope is always born.",
+  },
+  {
+    id: 2,
+    title: "Journey to Gokul",
+    body: "Vasudeva carried Krishna across the Yamuna in heavy rain to protect him. It was dangerous, yet faith guided him. When we take the right path, even difficult journeys become possible.",
+    takeaway: "Right intentions create a way forward.",
+  },
+  {
+    id: 3,
+    title: "Butter Thief",
+    body: "Krishna stealing butter was playful, not wrong. It spread joy and love among people. Life is not just about seriousness — joy and innocence matter too.",
+    takeaway: "Joy and simplicity make life beautiful.",
+  },
+  {
+    id: 4,
+    title: "Putana’s End",
+    body: "Putana tried to poison Krishna, but he freed her instead. This shows that goodness transforms even evil.",
+    takeaway: "Goodness always overcomes evil.",
+  },
+  {
+    id: 5,
+    title: "Kaliya Serpent",
+    body: "Krishna defeated the serpent Kaliya and purified the river. It was a lesson in courage and balance.",
+    takeaway: "Face your fears to overcome them.",
+  },
+  {
+    id: 6,
+    title: "Govardhan Hill",
+    body: "Krishna lifted Govardhan Hill to protect villagers and break Indra’s pride.",
+    takeaway: "Ego always falls, humility stays.",
+  },
+  {
+    id: 7,
+    title: "Love of Gopis",
+    body: "The Gopis loved Krishna without expecting anything. Their love was pure.",
+    takeaway: "True love is unconditional.",
+  },
+  {
+    id: 8,
+    title: "Sharing Butter",
+    body: "Krishna shared butter with others, not just enjoyed it himself.",
+    takeaway: "Sharing increases happiness.",
+  },
+  {
+    id: 9,
+    title: "Childhood Friendship",
+    body: "Krishna’s friendships were full of fun and trust.",
+    takeaway: "True friends make life easier.",
+  },
+  {
+    id: 10,
+    title: "Raas Leela",
+    body: "Raas Leela symbolized the connection between soul and divine.",
+    takeaway: "Spiritual connection is the deepest bond.",
+  },
+  {
+    id: 11,
+    title: "Defeating Kansa",
+    body: "Krishna ended Kansa’s rule and restored justice.",
+    takeaway: "Stand against injustice.",
+  },
+  {
+    id: 12,
+    title: "Mother Yashoda",
+    body: "Yashoda loved Krishna as her child, not as God.",
+    takeaway: "A mother’s love is pure.",
+  },
+  {
+    id: 13,
+    title: "Eating Mud",
+    body: "Krishna showed the universe in his mouth.",
+    takeaway: "Great truths can hide in small moments.",
+  },
+  {
+    id: 14,
+    title: "Tied to Mortar",
+    body: "Krishna was tied, yet his power remained limitless.",
+    takeaway: "True strength cannot be bound.",
+  },
+  {
+    id: 15,
+    title: "Sudama Friendship",
+    body: "Krishna welcomed Sudama with love despite his poverty.",
+    takeaway: "True friendship never changes.",
+  },
+  {
+    id: 16,
+    title: "Saving Draupadi",
+    body: "Krishna protected Draupadi in her darkest moment.",
+    takeaway: "Faith is never alone.",
+  },
+  {
+    id: 17,
+    title: "Teaching the Gita",
+    body: "Krishna guided Arjuna with wisdom.",
+    takeaway: "Right guidance changes life.",
+  },
+  {
+    id: 18,
+    title: "Wisdom and Strategy",
+    body: "Krishna used intelligence along with strength.",
+    takeaway: "Wisdom is as important as power.",
+  },
+  {
+    id: 19,
+    title: "Humility",
+    body: "Despite being divine, Krishna stayed humble.",
+    takeaway: "Humility is true greatness.",
+  },
+  {
+    id: 20,
+    title: "Balanced Life",
+    body: "Krishna lived every role fully — child, friend, guide, warrior.",
+    takeaway: "Balance is the key to life.",
+  },
+];
+
 export const books: Book[] = [
   {
     id: "gita-simplified",
