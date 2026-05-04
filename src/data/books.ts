@@ -1022,8 +1022,8 @@ export const books: Book[] = [
     price: 99,
     cover: "from-violet-200 via-purple-200 to-indigo-200",
     category: "spiritual-guides",
-    hindiSections: [meditationBasicsHindi],
-    englishSections: [meditationBasicsEnglish],
+    hindiSections: meditationBasicsHindi,
+    englishSections: meditationBasicsEnglish,
   },
   {
     id: "students-focus",
