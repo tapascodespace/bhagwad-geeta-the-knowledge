@@ -1013,7 +1013,7 @@ export const books: Book[] = [
   },
   {
     id: "meditation-basics",
-    title: "ध्यान का अभ्यास",
+    title: "ध्यान(मेडिटेशन) का अभ्यास",
     author: "शुरुआती गाइड",
     description: "रोज़ाना ध्यान शुरू करने की सरल विधियाँ।",
     titleEn: "Meditation Basics",
