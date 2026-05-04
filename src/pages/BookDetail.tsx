@@ -1,46 +1,101 @@
 import { useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ChevronLeft, Lock, BookOpen, Clock, Sparkles, Check, ArrowRight } from "lucide-react";
-import { getBook, hasContent } from "@/data/books";
+import { getBook, getBookMeta, hasContent } from "@/data/books";
 import { useUnlockedBooks } from "@/hooks/useLibrary";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+
+const STRINGS = {
+  bn: {
+    notFound: "বই পাওয়া যায়নি",
+    backToLibrary: "পুস্তকালয়ে ফিরে যান",
+    library: "পুস্তকালয়",
+    comingSoon: "এই বইটি শীঘ্রই উপলব্ধ হবে",
+    unlocked: "বইটি আনলক হয়েছে!",
+    isUnlocked: "বইটি আনলক করা আছে",
+    locked: "এই বইটি লক করা আছে",
+    oneTime: "এককালীন প্রদান",
+    chapters: (n: number) => `${n} সরল অধ্যায়`,
+    designed: "মোবাইলে পড়ার জন্য ডিজাইন করা",
+    themeFont: "লাইট / ডার্ক মোড ও ফন্ট নিয়ন্ত্রণ",
+    startReading: "পড়া শুরু করুন",
+    buyNow: (p: number) => `এখনই কিনুন — ₹${p}`,
+    demoNote: "ডেমো: এই বোতামটি অর্থ প্রদান ছাড়াই বইটি আনলক করে।",
+  },
+  hi: {
+    notFound: "पुस्तक नहीं मिली",
+    backToLibrary: "पुस्तकालय पर वापस जाएँ",
+    library: "पुस्तकालय",
+    comingSoon: "यह पुस्तक जल्द ही उपलब्ध होगी",
+    unlocked: "पुस्तक अनलॉक हो गई!",
+    isUnlocked: "पुस्तक अनलॉक है",
+    locked: "यह पुस्तक लॉक है",
+    oneTime: "एक बार का भुगतान",
+    chapters: (n: number) => `${n} सरल अध्याय`,
+    designed: "मोबाइल पर पढ़ने के लिए डिज़ाइन किया गया",
+    themeFont: "लाइट / डार्क मोड और फ़ॉन्ट कंट्रोल",
+    startReading: "पढ़ना शुरू करें",
+    buyNow: (p: number) => `अभी ख़रीदें — ₹${p}`,
+    demoNote: "डेमो: यह बटन भुगतान के बिना पुस्तक अनलॉक कर देता है।",
+  },
+  en: {
+    notFound: "Book not found",
+    backToLibrary: "Back to library",
+    library: "Library",
+    comingSoon: "This book will be available soon",
+    unlocked: "Book unlocked!",
+    isUnlocked: "Book is unlocked",
+    locked: "This book is locked",
+    oneTime: "One-time payment",
+    chapters: (n: number) => `${n} simple chapters`,
+    designed: "Designed for reading on mobile",
+    themeFont: "Light / Dark mode and font controls",
+    startReading: "Start reading",
+    buyNow: (p: number) => `Buy now — ₹${p}`,
+    demoNote: "Demo: this button unlocks the book without payment.",
+  },
+} as const;
 
 const BookDetail = () => {
   const { bookId = "" } = useParams();
   const navigate = useNavigate();
   const book = useMemo(() => getBook(bookId), [bookId]);
   const { isUnlocked, unlock } = useUnlockedBooks();
+  const { language } = useLanguage();
+  const s = STRINGS[language] ?? STRINGS.hi;
 
   if (!book) {
     return (
       <main className="min-h-screen flex items-center justify-center px-6">
         <div className="text-center">
-          <p className="text-muted-foreground">पुस्तक नहीं मिली</p>
+          <p className="text-muted-foreground">{s.notFound}</p>
           <Button onClick={() => navigate("/library")} variant="outline" className="mt-4">
-            पुस्तकालय पर वापस जाएँ
+            {s.backToLibrary}
           </Button>
         </div>
       </main>
     );
   }
 
+  const meta = getBookMeta(book, language);
   const unlocked = isUnlocked(book.id);
   const total = Math.max(book.hindiSections.length, book.englishSections.length);
   const available = hasContent(book);
 
   const handleUnlock = () => {
     if (!available) {
-      toast.info("यह पुस्तक जल्द ही उपलब्ध होगी");
+      toast.info(s.comingSoon);
       return;
     }
     unlock(book.id);
-    toast.success("पुस्तक अनलॉक हो गई!");
+    toast.success(s.unlocked);
   };
 
   const handleRead = () => {
     if (!available) {
-      toast.info("यह पुस्तक जल्द ही उपलब्ध होगी");
+      toast.info(s.comingSoon);
       return;
     }
     navigate(`/library/${book.id}/read`);
