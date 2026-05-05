@@ -1273,9 +1273,10 @@ export const books: Book[] = [
   },
   {
     id: "beating-procrastination",
-    title: "टालमटोल पर विजया",
+    title: "टालमटोल पर विजय",
     author: "विद्यार्थी मार्गदर्शिका",
-    description: "टालमटोल की आदत को समझकर उसे हराने के आसान और प्रभावी तरीके — पढ़ाई और रोज़मर्रा के कामों में तुरंत लागू करें।"",
+    description:
+      "टालमटोल की आदत को समझकर उसे हराने के आसान और प्रभावी तरीके — पढ़ाई और रोज़मर्रा के कामों में तुरंत लागू करें।",
     titleEn: "Beating Procrastination",
     authorEn: "Student Success Guide",
     descriptionEn: "Simple and practical ways to overcome procrastination and take action in studies and daily life.",
