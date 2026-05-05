@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BookOpen, Lock } from "lucide-react";
-import { books, CATEGORIES, getBookMeta, getBookSections, type Book, type BookCategory } from "@/data/books";
+import { toast } from "sonner";
+import { books, CATEGORIES, getBookMeta, getBookSections, hasContent, type Book, type BookCategory } from "@/data/books";
 import { readProgressMap, useUnlockedBooks } from "@/hooks/useLibrary";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Progress } from "@/components/ui/progress";
