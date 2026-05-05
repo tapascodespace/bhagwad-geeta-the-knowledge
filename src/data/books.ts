@@ -1599,8 +1599,8 @@ export const books: Book[] = [
     price: 99,
     cover: "from-red-200 via-orange-200 to-yellow-200",
     category: "short-reads",
-    hindiSections: failuresLessonsHindi,
-    englishSections: failuresLessonsEnglish,
+    hindiSections: [],
+    englishSections: [],
   },
 ];
 
