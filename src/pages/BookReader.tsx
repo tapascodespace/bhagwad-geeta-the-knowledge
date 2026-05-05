@@ -111,7 +111,7 @@ const BookReader = () => {
   const goPrev = () => !isPreview && section > 1 && setSection(section - 1);
   const goNext = () => {
     if (isPreview) {
-      toast.info(t("previewLockedMsg"));
+      toast.info(bookLang === "en" ? "Unlock the book to read more chapters." : "अधिक अध्याय पढ़ने के लिए पुस्तक अनलॉक करें।");
       return;
     }
     if (section < total) setSection(section + 1);
