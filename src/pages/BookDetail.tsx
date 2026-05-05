@@ -184,6 +184,20 @@ const BookDetail = () => {
             <Button className="w-full mt-5" size="lg" onClick={handleUnlock}>
               {s.buyNow(book.price)}
             </Button>
+            <Button
+              variant="outline"
+              className="w-full mt-2"
+              size="lg"
+              onClick={() => {
+                if (!available) {
+                  toast.info(s.comingSoon);
+                  return;
+                }
+                navigate(`/library/${book.id}/read?preview=1`);
+              }}
+            >
+              {s.preview}
+            </Button>
             <p className="text-[11px] text-muted-foreground text-center mt-3">
               {s.demoNote}
             </p>
