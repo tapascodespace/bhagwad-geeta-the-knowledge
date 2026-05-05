@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { ChevronLeft, Lock, BookOpen, Clock, Sparkles, Check, ArrowRight } from "lucide-react";
 import { getBook, getBookMeta, getBookSections, hasContent } from "@/data/books";
 import { useReadingProgress, useUnlockedBooks } from "@/hooks/useLibrary";
