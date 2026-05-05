@@ -200,6 +200,12 @@ export const t: Record<string, Dict> = {
   continueReading: { bn: "পড়া চালিয়ে যান", hi: "पढ़ना जारी रखें", en: "Continue reading" },
   bookmarkAdded: { bn: "বুকমার্ক করা হয়েছে", hi: "बुकमार्क जोड़ा गया", en: "Bookmark added" },
   bookmarkRemoved: { bn: "বুকমার্ক সরানো হয়েছে", hi: "बुकमार्क हटाया गया", en: "Bookmark removed" },
+  comingSoon: { bn: "শীঘ্রই আসছে", hi: "जल्द आ रहा है", en: "Coming Soon" },
+  bookUnavailable: {
+    bn: "এই বইটি এখনও উপলব্ধ নয়। সাথে থাকুন!",
+    hi: "यह पुस्तक अभी उपलब्ध नहीं है। बने रहिए!",
+    en: "This book is not available yet. Stay tuned!",
+  },
 };
 
 // Chapter names per language
