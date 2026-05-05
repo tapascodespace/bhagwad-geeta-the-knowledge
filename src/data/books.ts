@@ -1048,6 +1048,252 @@ const beatingProcrastinationHindi: BookSection[] = [
   },
 ];
 
+const scienceDecisionHindi: BookSection[] = [
+  {
+    id: 1,
+    title: "अंदर का निरीक्षक",
+    body: "निर्णय लेने से पहले एक पल रुकें और स्थिति को बाहर से देखने की कोशिश करें, जैसे आप किसी और को सलाह दे रहे हों। इससे भावनाएं शांत होती हैं और सोच स्पष्ट होती है।",
+    takeaway: "निर्णय से पहले रुककर सोचें।",
+  },
+  {
+    id: 2,
+    title: "भावना बनाम तर्क",
+    body: "हर निर्णय में भावना और तर्क दोनों का असर होता है। भावना तेज होती है, लेकिन तर्क सही दिशा देता है। दोनों का संतुलन जरूरी है।",
+    takeaway: "भावना को समझें, तर्क से निर्णय लें।",
+  },
+  {
+    id: 3,
+    title: "10 मिनट का नियम",
+    body: "जल्दी निर्णय लेने से पहले कम से कम 10 मिनट का समय लें। इससे आप जल्दबाजी से बचते हैं।",
+    takeaway: "रुककर सोचें, बेहतर निर्णय लें।",
+  },
+  {
+    id: 4,
+    title: "स्पष्ट लक्ष्य",
+    body: "जब लक्ष्य साफ होता है, तो निर्णय आसान हो जाते हैं। बिना लक्ष्य के हर विकल्प कठिन लगता है।",
+    takeaway: "स्पष्ट लक्ष्य, आसान निर्णय।",
+  },
+  {
+    id: 5,
+    title: "दबाव से बचना",
+    body: "दूसरों के दबाव में लिए गए निर्णय अक्सर गलत होते हैं। खुद से पूछें — क्या मैं अकेला होता तो यही करता?",
+    takeaway: "खुद के लिए सोचें।",
+  },
+  {
+    id: 6,
+    title: "छोटे निर्णय",
+    body: "रोज़ के छोटे फैसले ही भविष्य बनाते हैं। छोटी आदतें ही बड़े परिणाम देती हैं।",
+    takeaway: "छोटे फैसले, बड़े बदलाव।",
+  },
+  {
+    id: 7,
+    title: "डर का असर",
+    body: "डर हमें रोकता है। यह समझना जरूरी है कि डर असली है या केवल मन का भ्रम।",
+    takeaway: "डर को पहचानें।",
+  },
+  {
+    id: 8,
+    title: "ज्यादा सोच",
+    body: "बहुत ज्यादा सोचने से भ्रम पैदा होता है। सोचने की सीमा तय करें और फिर निर्णय लें।",
+    takeaway: "ज्यादा मत सोचो, निर्णय लो।",
+  },
+  {
+    id: 9,
+    title: "गलतियों से सीख",
+    body: "हर निर्णय सही नहीं होगा। गलतियां सीखने का हिस्सा हैं।",
+    takeaway: "गलती से सीखें।",
+  },
+  {
+    id: 10,
+    title: "ऊर्जा का महत्व",
+    body: "थके हुए दिमाग से लिए गए निर्णय गलत हो सकते हैं। शांत मन से निर्णय लें।",
+    takeaway: "साफ दिमाग से सोचें।",
+  },
+  {
+    id: 11,
+    title: "विकल्प कम करें",
+    body: "बहुत सारे विकल्प दिमाग को उलझा देते हैं। विकल्प कम करें।",
+    takeaway: "कम विकल्प, बेहतर निर्णय।",
+  },
+  {
+    id: 12,
+    title: "भविष्य की सोच",
+    body: "निर्णय लेते समय उसके भविष्य के प्रभाव को जरूर सोचें।",
+    takeaway: "आगे सोचें।",
+  },
+  {
+    id: 13,
+    title: "आदतें बनाएं",
+    body: "अच्छी आदतें निर्णय लेना आसान बना देती हैं।",
+    takeaway: "अच्छी आदतें बनाएं।",
+  },
+  {
+    id: 14,
+    title: "आत्मविश्वास",
+    body: "परफेक्ट निर्णय का इंतजार करने से अच्छा है सही समय पर अच्छा निर्णय लेना।",
+    takeaway: "आत्मविश्वास से निर्णय लें।",
+  },
+  {
+    id: 15,
+    title: "जानकारी सीमित रखें",
+    body: "बहुत ज्यादा जानकारी भी भ्रम पैदा करती है। जरूरी चीज़ों पर ध्यान दें।",
+    takeaway: "सही जानकारी चुनें।",
+  },
+  {
+    id: 16,
+    title: "इंट्यूशन",
+    body: "कभी-कभी पहली सोच सही होती है। इसे पहचानना सीखें और तर्क के साथ संतुलन रखें।",
+    takeaway: "अनुभव और तर्क का संतुलन रखें।",
+  },
+  {
+    id: 17,
+    title: "निर्णय थकान",
+    body: "बहुत ज्यादा फैसले लेने से दिमाग थक जाता है। छोटे फैसलों को कम करें।",
+    takeaway: "ऊर्जा बचाएं।",
+  },
+  {
+    id: 18,
+    title: "जिम्मेदारी",
+    body: "अपने फैसलों की जिम्मेदारी लेना जरूरी है। यही परिपक्वता लाता है।",
+    takeaway: "अपने निर्णय स्वीकार करें।",
+  },
+  {
+    id: 19,
+    title: "गति और सटीकता",
+    body: "कुछ फैसले जल्दी लेने चाहिए, कुछ सोच-समझकर। स्थिति के अनुसार निर्णय लें।",
+    takeaway: "स्थिति के अनुसार निर्णय लें।",
+  },
+  {
+    id: 20,
+    title: "अंतिम जांच",
+    body: "खुद से पूछें — क्या मुझे बाद में पछतावा होगा? इससे सही निर्णय लेने में मदद मिलती है।",
+    takeaway: "भविष्य सोचकर निर्णय लें।",
+  },
+];
+
+const scienceDecisionEnglish: BookSection[] = [
+  {
+    id: 1,
+    title: "The Inner Observer",
+    body: "Before making a decision, pause for a moment and step back mentally. Try to observe the situation as if you were advising a friend instead of being inside the problem. This creates clarity and reduces emotional pressure, especially in stressful situations like exams or peer pressure.",
+    takeaway: "Pause and observe before you decide.",
+  },
+  {
+    id: 2,
+    title: "Emotion vs Logic",
+    body: "Every decision is influenced by both emotion and logic. Emotions are fast and powerful, while logic is slower but more accurate. The goal is to balance both instead of letting emotions take full control.",
+    takeaway: "Feel your emotions, but let logic lead.",
+  },
+  {
+    id: 3,
+    title: "The 10-Minute Rule",
+    body: "When faced with an urgent decision, give yourself at least 10 minutes before acting. This delay helps your brain shift from impulsive reactions to thoughtful reasoning.",
+    takeaway: "Delay decisions to improve them.",
+  },
+  {
+    id: 4,
+    title: "Clarity of Goal",
+    body: "Confusion often comes from unclear goals. When you know exactly what you want, decisions become easier and faster because your direction is already set.",
+    takeaway: "Clear goals make decisions simple.",
+  },
+  {
+    id: 5,
+    title: "Avoiding Peer Pressure",
+    body: "Many wrong decisions happen because of trying to fit in. Ask yourself honestly: 'Would I still choose this if no one was watching?' This separates your real choice from pressure.",
+    takeaway: "Think for yourself, not for approval.",
+  },
+  {
+    id: 6,
+    title: "Small Decisions Matter",
+    body: "Big results are built from small daily choices. Even simple decisions like studying for 20 minutes or wasting time repeatedly shape your future over time.",
+    takeaway: "Small choices create big results.",
+  },
+  {
+    id: 7,
+    title: "Fear-Based Decisions",
+    body: "Fear can stop you from taking necessary risks. Instead of avoiding decisions, ask whether the fear is real or just imagined in your mind.",
+    takeaway: "Don’t let fear control your future.",
+  },
+  {
+    id: 8,
+    title: "Overthinking Trap",
+    body: "Thinking deeply is helpful, but overthinking leads to confusion. Set a limit on how long you think, then take action instead of staying stuck.",
+    takeaway: "Think, but don’t overthink.",
+  },
+  {
+    id: 9,
+    title: "Learning from Mistakes",
+    body: "No decision is perfect. Mistakes are part of growth. Instead of fearing them, focus on what you learn and improve next time.",
+    takeaway: "Every mistake improves future decisions.",
+  },
+  {
+    id: 10,
+    title: "Energy-Based Decisions",
+    body: "Your mental state affects your decisions. When tired or stressed, you are more likely to choose easy options instead of correct ones.",
+    takeaway: "Decide when your mind is clear.",
+  },
+  {
+    id: 11,
+    title: "Simplify Your Options",
+    body: "Too many choices create confusion. Reduce your options to two or three main ones to make decision-making easier.",
+    takeaway: "Simplify choices to decide faster.",
+  },
+  {
+    id: 12,
+    title: "Long-Term Thinking",
+    body: "A good decision considers the future, not just the present. Think about how your choice will affect you in the coming days or years.",
+    takeaway: "Think beyond the present moment.",
+  },
+  {
+    id: 13,
+    title: "Habit Decisions",
+    body: "Many daily decisions become automatic habits. Building good habits reduces the need to think repeatedly and saves energy.",
+    takeaway: "Build habits to reduce decisions.",
+  },
+  {
+    id: 14,
+    title: "Confidence Over Perfection",
+    body: "Waiting for the perfect decision often leads to delay. A good decision taken at the right time is better than a perfect one taken too late.",
+    takeaway: "Act with confidence, not perfection.",
+  },
+  {
+    id: 15,
+    title: "Information Overload",
+    body: "Too much information can make decisions harder. Focus only on what is relevant instead of trying to know everything.",
+    takeaway: "Filter information wisely.",
+  },
+  {
+    id: 16,
+    title: "Trusting Intuition",
+    body: "Your intuition is based on past experiences. Sometimes your first instinct is right, but it should still be balanced with logic.",
+    takeaway: "Balance intuition with logic.",
+  },
+  {
+    id: 17,
+    title: "Decision Fatigue",
+    body: "Making too many decisions drains your brain. Reduce small unnecessary choices so you can focus on important ones.",
+    takeaway: "Save energy for important decisions.",
+  },
+  {
+    id: 18,
+    title: "Responsibility of Choice",
+    body: "Every decision has consequences. Taking responsibility for your choices builds maturity and confidence over time.",
+    takeaway: "Own your decisions.",
+  },
+  {
+    id: 19,
+    title: "Speed vs Accuracy",
+    body: "Some decisions need to be quick, while others need deep thinking. Understanding the situation helps you decide correctly.",
+    takeaway: "Choose speed or accuracy wisely.",
+  },
+  {
+    id: 20,
+    title: "The Final Check",
+    body: "Before making a decision, ask yourself one simple question: 'Will I regret this later?' This helps filter poor choices.",
+    takeaway: "Think ahead before choosing.",
+  },
+];
+
 const beatingProcrastinationEnglish: BookSection[] = [
   {
     id: 1,
@@ -1286,6 +1532,20 @@ export const books: Book[] = [
     hindiSections: beatingProcrastinationHindi,
     englishSections: beatingProcrastinationEnglish,
   },
+  {
+  id: "science-of-decision-making",
+  title: "निर्णय लेने का विज्ञान",
+  author: "छात्रों के लिए गाइड",
+  description: "बेहतर फैसले लेने की कला — सोच, भावनाओं और आदतों को समझकर।",
+  titleEn: "The Science of Decision-Making",
+  authorEn: "Student Guide",
+  descriptionEn: "Learn how to make better decisions by understanding thinking, emotions, and habits.",
+  price: 99,
+  cover: "from-indigo-200 via-purple-200 to-pink-200",
+  category: "for-students",
+  hindiSections: scienceDecisionHindi,
+  englishSections: scienceDecisionEnglish,
+}
   {
     id: "students-discipline",
     title: "अनुशासन और सफलता",
