@@ -200,7 +200,7 @@ const gitaSimplifiedEnglish: BookSection[] = [
   {
     id: 5,
     title: "Know Your Own Dharma",
-    body: "Dharma does not just mean rituals. Dharma means your duty, your role, your nature. A student's dharma is to study; a parent's dharma is to care for their children; a doctor's dharma is to heal. Krishna says it is better to follow your own dharma imperfectly than to copy someone else's. Understanding who you are matters more than imitating others. When you do the work that fits your nature and situation, life flows easily. First know yourself; then the path will reveal itself.",
+    body: "Dharma does not just mean rituals. Dharma means your duty, your role, your nature. A student's dharma is to study; a parent's dharma is to care for their children; a doctor's dharma is to heal. Krishna says it is better to follow your own dharma imperfectly than to copy someone else's perfectly. Understanding who you are matters more than imitating others. When you do the work that fits your nature and situation, life flows easily. First know yourself; then the path will reveal itself.",
     takeaway: "Know your role — don't lose your real strength trying to be someone else.",
   },
   {
