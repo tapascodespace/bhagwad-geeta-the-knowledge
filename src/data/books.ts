@@ -1588,6 +1588,20 @@ export const books: Book[] = [
     hindiSections: [],
     englishSections: [],
   },
+  {
+    id: "failures-to-life-lessons",
+    title: "असफलता से सीख",
+    author: "विद्यार्थियों के लिए",
+    description: "असफलताओं को सीख में बदलने के सरल और व्यावहारिक तरीके।",
+    titleEn: "Turning Failures into Life Lessons",
+    authorEn: "Student Growth Guide",
+    descriptionEn: "Simple and practical ways to turn failures into powerful life lessons and personal growth.",
+    price: 99,
+    cover: "from-red-200 via-orange-200 to-yellow-200",
+    category: "short-reads",
+    hindiSections: failuresLessonsHindi,
+    englishSections: failuresLessonsEnglish,
+  },
 ];
 
 export const getBook = (id: string) => books.find((b) => b.id === id);
