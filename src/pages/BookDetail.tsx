@@ -24,6 +24,7 @@ const STRINGS = {
     startReading: "পড়া শুরু করুন",
     buyNow: (p: number) => `এখনই কিনুন — ₹${p}`,
     demoNote: "ডেমো: এই বোতামটি অর্থ প্রদান ছাড়াই বইটি আনলক করে।",
+    preview: "প্রিভিউ — প্রথম অধ্যায় পড়ুন",
   },
   hi: {
     notFound: "पुस्तक नहीं मिली",
@@ -40,6 +41,7 @@ const STRINGS = {
     startReading: "पढ़ना शुरू करें",
     buyNow: (p: number) => `अभी ख़रीदें — ₹${p}`,
     demoNote: "डेमो: यह बटन भुगतान के बिना पुस्तक अनलॉक कर देता है।",
+    preview: "प्रीव्यू — पहला अध्याय पढ़ें",
   },
   en: {
     notFound: "Book not found",
@@ -56,6 +58,7 @@ const STRINGS = {
     startReading: "Start reading",
     buyNow: (p: number) => `Buy now — ₹${p}`,
     demoNote: "Demo: this button unlocks the book without payment.",
+    preview: "Preview — read first chapter",
   },
 } as const;
 
@@ -180,6 +183,20 @@ const BookDetail = () => {
           <>
             <Button className="w-full mt-5" size="lg" onClick={handleUnlock}>
               {s.buyNow(book.price)}
+            </Button>
+            <Button
+              variant="outline"
+              className="w-full mt-2"
+              size="lg"
+              onClick={() => {
+                if (!available) {
+                  toast.info(s.comingSoon);
+                  return;
+                }
+                navigate(`/library/${book.id}/read?preview=1`);
+              }}
+            >
+              {s.preview}
             </Button>
             <p className="text-[11px] text-muted-foreground text-center mt-3">
               {s.demoNote}

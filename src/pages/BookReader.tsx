@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import {
   ArrowLeft,
   ArrowRight,
@@ -10,6 +10,7 @@ import {
   Moon,
   Bookmark,
   BookmarkCheck,
+  Lock,
 } from "lucide-react";
 import { getBook, getBookMeta, getBookSections, type BookLanguage } from "@/data/books";
 import { useBookBookmarks, useReaderPrefs, useReadingProgress, useUnlockedBooks } from "@/hooks/useLibrary";
@@ -28,6 +29,8 @@ const READER_LANG_KEY = "library:reader-lang";
 const BookReader = () => {
   const { bookId = "" } = useParams();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const isPreview = searchParams.get("preview") === "1";
   const book = useMemo(() => getBook(bookId), [bookId]);
   const { isUnlocked } = useUnlockedBooks();
   const { section, setSection } = useReadingProgress(bookId);
@@ -64,12 +67,12 @@ const BookReader = () => {
 
   const unlocked = book ? isUnlocked(book.id) : false;
 
-  // If not unlocked, redirect to the detail/paywall page.
+  // If not unlocked AND not in preview mode, redirect to the detail/paywall page.
   useEffect(() => {
-    if (book && !unlocked) {
+    if (book && !unlocked && !isPreview) {
       navigate(`/library/${book.id}`, { replace: true });
     }
-  }, [unlocked, book, navigate]);
+  }, [unlocked, book, navigate, isPreview]);
 
   if (!book) {
     return (
@@ -87,7 +90,7 @@ const BookReader = () => {
   const sections = getBookSections(book, bookLang);
   const total = sections.length;
 
-  if (!unlocked) return null;
+  if (!unlocked && !isPreview) return null;
 
   if (total === 0) {
     return (
@@ -102,10 +105,17 @@ const BookReader = () => {
     );
   }
 
-  const current = sections[Math.min(section, total) - 1];
+  const effectiveSection = isPreview ? 1 : section;
+  const current = sections[Math.min(effectiveSection, total) - 1];
   const isDark = prefs.theme === "dark";
-  const goPrev = () => section > 1 && setSection(section - 1);
-  const goNext = () => section < total && setSection(section + 1);
+  const goPrev = () => !isPreview && section > 1 && setSection(section - 1);
+  const goNext = () => {
+    if (isPreview) {
+      toast.info(bookLang === "en" ? "Unlock the book to read more chapters." : "अधिक अध्याय पढ़ने के लिए पुस्तक अनलॉक करें।");
+      return;
+    }
+    if (section < total) setSection(section + 1);
+  };
   const toggleReaderTheme = () => update({ theme: isDark ? "light" : "dark" });
   const meta = getBookMeta(book, bookLang);
   const bookmarked = isBookmarked(book.id, bookLang, current.id);
@@ -138,7 +148,7 @@ const BookReader = () => {
             </button>
             <div className="flex-1 min-w-0">
               <p className="text-xs opacity-70 truncate">{book.title}</p>
-              <p className="text-[11px] opacity-60">अध्याय {section} / {total}</p>
+              <p className="text-[11px] opacity-60">अध्याय {effectiveSection} / {total}</p>
             </div>
             <button
               onClick={() => update({ fontSize: Math.max(14, prefs.fontSize - 1) })}
@@ -197,8 +207,24 @@ const BookReader = () => {
             </div>
           </div>
           <div className="px-4 pb-3 max-w-lg mx-auto">
-            <Progress value={(section / total) * 100} className="h-1" />
+            <Progress value={(effectiveSection / total) * 100} className="h-1" />
           </div>
+          {isPreview && (
+            <div className="px-4 pb-2 max-w-lg mx-auto">
+              <div className="flex items-center justify-between gap-2 rounded-lg border border-gold/40 bg-gold/10 px-3 py-2 text-xs">
+                <span className="flex items-center gap-1.5 font-medium text-gold">
+                  <Lock className="w-3.5 h-3.5" />
+                  {bookLang === "en" ? "Preview — first chapter only" : "प्रीव्यू — केवल पहला अध्याय"}
+                </span>
+                <button
+                  onClick={() => navigate(`/library/${book.id}`)}
+                  className="font-semibold underline opacity-90 hover:opacity-100"
+                >
+                  {bookLang === "en" ? "Unlock" : "अनलॉक करें"}
+                </button>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Section content */}
@@ -208,7 +234,7 @@ const BookReader = () => {
         >
           <div className="text-center mb-6">
             <span className="inline-block text-[11px] uppercase tracking-widest opacity-60">
-              {bookLang === "en" ? `Chapter ${section} • ${readingTime(current.body)} min read` : `अध्याय ${section} • ${readingTime(current.body)} मिनट का पाठ`}
+              {bookLang === "en" ? `Chapter ${effectiveSection} • ${readingTime(current.body)} min read` : `अध्याय ${effectiveSection} • ${readingTime(current.body)} मिनट का पाठ`}
             </span>
             <h1 className="font-display text-3xl font-bold mt-2 leading-tight">
               {current.title}
@@ -242,22 +268,31 @@ const BookReader = () => {
             <div className="flex items-center gap-2 rounded-full p-1.5 shadow-elegant border border-border bg-card/90 backdrop-blur-md">
               <Button
                 onClick={goPrev}
-                disabled={section === 1}
+                disabled={isPreview || section === 1}
                 variant="ghost"
                 className="flex-1 rounded-full"
               >
                 <ArrowLeft className="w-4 h-4" /> {bookLang === "en" ? "Previous" : "पिछला"}
               </Button>
               <div className="text-xs opacity-70 px-2 whitespace-nowrap">
-                {section} / {total}
+                {effectiveSection} / {total}
               </div>
-              <Button
-                onClick={goNext}
-                disabled={section === total}
-                className="flex-1 rounded-full"
-              >
-                {bookLang === "en" ? "Next" : "अगला"} <ArrowRight className="w-4 h-4" />
-              </Button>
+              {isPreview ? (
+                <Button
+                  onClick={() => navigate(`/library/${book.id}`)}
+                  className="flex-1 rounded-full"
+                >
+                  <Lock className="w-4 h-4" /> {bookLang === "en" ? "Unlock" : "अनलॉक"}
+                </Button>
+              ) : (
+                <Button
+                  onClick={goNext}
+                  disabled={section === total}
+                  className="flex-1 rounded-full"
+                >
+                  {bookLang === "en" ? "Next" : "अगला"} <ArrowRight className="w-4 h-4" />
+                </Button>
+              )}
             </div>
           </div>
         </div>
