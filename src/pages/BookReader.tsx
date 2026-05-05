@@ -148,7 +148,7 @@ const BookReader = () => {
             </button>
             <div className="flex-1 min-w-0">
               <p className="text-xs opacity-70 truncate">{book.title}</p>
-              <p className="text-[11px] opacity-60">अध्याय {section} / {total}</p>
+              <p className="text-[11px] opacity-60">अध्याय {effectiveSection} / {total}</p>
             </div>
             <button
               onClick={() => update({ fontSize: Math.max(14, prefs.fontSize - 1) })}
@@ -207,8 +207,24 @@ const BookReader = () => {
             </div>
           </div>
           <div className="px-4 pb-3 max-w-lg mx-auto">
-            <Progress value={(section / total) * 100} className="h-1" />
+            <Progress value={(effectiveSection / total) * 100} className="h-1" />
           </div>
+          {isPreview && (
+            <div className="px-4 pb-2 max-w-lg mx-auto">
+              <div className="flex items-center justify-between gap-2 rounded-lg border border-gold/40 bg-gold/10 px-3 py-2 text-xs">
+                <span className="flex items-center gap-1.5 font-medium text-gold">
+                  <Lock className="w-3.5 h-3.5" />
+                  {bookLang === "en" ? "Preview — first chapter only" : "प्रीव्यू — केवल पहला अध्याय"}
+                </span>
+                <button
+                  onClick={() => navigate(`/library/${book.id}`)}
+                  className="font-semibold underline opacity-90 hover:opacity-100"
+                >
+                  {bookLang === "en" ? "Unlock" : "अनलॉक करें"}
+                </button>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Section content */}
@@ -218,7 +234,7 @@ const BookReader = () => {
         >
           <div className="text-center mb-6">
             <span className="inline-block text-[11px] uppercase tracking-widest opacity-60">
-              {bookLang === "en" ? `Chapter ${section} • ${readingTime(current.body)} min read` : `अध्याय ${section} • ${readingTime(current.body)} मिनट का पाठ`}
+              {bookLang === "en" ? `Chapter ${effectiveSection} • ${readingTime(current.body)} min read` : `अध्याय ${effectiveSection} • ${readingTime(current.body)} मिनट का पाठ`}
             </span>
             <h1 className="font-display text-3xl font-bold mt-2 leading-tight">
               {current.title}
@@ -252,22 +268,31 @@ const BookReader = () => {
             <div className="flex items-center gap-2 rounded-full p-1.5 shadow-elegant border border-border bg-card/90 backdrop-blur-md">
               <Button
                 onClick={goPrev}
-                disabled={section === 1}
+                disabled={isPreview || section === 1}
                 variant="ghost"
                 className="flex-1 rounded-full"
               >
                 <ArrowLeft className="w-4 h-4" /> {bookLang === "en" ? "Previous" : "पिछला"}
               </Button>
               <div className="text-xs opacity-70 px-2 whitespace-nowrap">
-                {section} / {total}
+                {effectiveSection} / {total}
               </div>
-              <Button
-                onClick={goNext}
-                disabled={section === total}
-                className="flex-1 rounded-full"
-              >
-                {bookLang === "en" ? "Next" : "अगला"} <ArrowRight className="w-4 h-4" />
-              </Button>
+              {isPreview ? (
+                <Button
+                  onClick={() => navigate(`/library/${book.id}`)}
+                  className="flex-1 rounded-full"
+                >
+                  <Lock className="w-4 h-4" /> {bookLang === "en" ? "Unlock" : "अनलॉक"}
+                </Button>
+              ) : (
+                <Button
+                  onClick={goNext}
+                  disabled={section === total}
+                  className="flex-1 rounded-full"
+                >
+                  {bookLang === "en" ? "Next" : "अगला"} <ArrowRight className="w-4 h-4" />
+                </Button>
+              )}
             </div>
           </div>
         </div>
