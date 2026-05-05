@@ -90,7 +90,7 @@ const BookReader = () => {
   const sections = getBookSections(book, bookLang);
   const total = sections.length;
 
-  if (!unlocked) return null;
+  if (!unlocked && !isPreview) return null;
 
   if (total === 0) {
     return (
@@ -105,10 +105,17 @@ const BookReader = () => {
     );
   }
 
-  const current = sections[Math.min(section, total) - 1];
+  const effectiveSection = isPreview ? 1 : section;
+  const current = sections[Math.min(effectiveSection, total) - 1];
   const isDark = prefs.theme === "dark";
-  const goPrev = () => section > 1 && setSection(section - 1);
-  const goNext = () => section < total && setSection(section + 1);
+  const goPrev = () => !isPreview && section > 1 && setSection(section - 1);
+  const goNext = () => {
+    if (isPreview) {
+      toast.info(t("previewLockedMsg"));
+      return;
+    }
+    if (section < total) setSection(section + 1);
+  };
   const toggleReaderTheme = () => update({ theme: isDark ? "light" : "dark" });
   const meta = getBookMeta(book, bookLang);
   const bookmarked = isBookmarked(book.id, bookLang, current.id);
