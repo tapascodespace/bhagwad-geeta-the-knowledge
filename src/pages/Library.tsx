@@ -114,16 +114,27 @@ const Library = () => {
               className="flex gap-3 overflow-x-auto px-5 pb-2 snap-x snap-mandatory scrollbar-none"
               style={{ scrollbarWidth: "none" }}
             >
-              {row.items.map((book) => (
-                <BookCard
-                  key={book.id}
-                  book={book}
-                  lang={language}
-                  unlocked={isUnlocked(book.id)}
-                  progress={progressMap[book.id] ?? 1}
-                  onClick={() => navigate(`/library/${book.id}`)}
-                />
-              ))}
+              {row.items.map((book) => {
+                const comingSoon = !hasContent(book);
+                return (
+                  <BookCard
+                    key={book.id}
+                    book={book}
+                    lang={language}
+                    unlocked={isUnlocked(book.id)}
+                    progress={progressMap[book.id] ?? 1}
+                    comingSoon={comingSoon}
+                    comingSoonLabel={t("comingSoon")}
+                    onClick={() => {
+                      if (comingSoon) {
+                        toast(t("comingSoon"), { description: t("bookUnavailable") });
+                        return;
+                      }
+                      navigate(`/library/${book.id}`);
+                    }}
+                  />
+                );
+              })}
             </div>
           </section>
         ))}
