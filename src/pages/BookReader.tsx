@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import {
   ArrowLeft,
   ArrowRight,
@@ -10,6 +10,7 @@ import {
   Moon,
   Bookmark,
   BookmarkCheck,
+  Lock,
 } from "lucide-react";
 import { getBook, getBookMeta, getBookSections, type BookLanguage } from "@/data/books";
 import { useBookBookmarks, useReaderPrefs, useReadingProgress, useUnlockedBooks } from "@/hooks/useLibrary";
@@ -28,6 +29,8 @@ const READER_LANG_KEY = "library:reader-lang";
 const BookReader = () => {
   const { bookId = "" } = useParams();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const isPreview = searchParams.get("preview") === "1";
   const book = useMemo(() => getBook(bookId), [bookId]);
   const { isUnlocked } = useUnlockedBooks();
   const { section, setSection } = useReadingProgress(bookId);
@@ -64,12 +67,12 @@ const BookReader = () => {
 
   const unlocked = book ? isUnlocked(book.id) : false;
 
-  // If not unlocked, redirect to the detail/paywall page.
+  // If not unlocked AND not in preview mode, redirect to the detail/paywall page.
   useEffect(() => {
-    if (book && !unlocked) {
+    if (book && !unlocked && !isPreview) {
       navigate(`/library/${book.id}`, { replace: true });
     }
-  }, [unlocked, book, navigate]);
+  }, [unlocked, book, navigate, isPreview]);
 
   if (!book) {
     return (
