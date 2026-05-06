@@ -1639,6 +1639,204 @@ const yogaLifeEnglish: BookSection[] = [
   },
 ];
 
+const ganeshaBirthHindi: BookSection[] = [
+  {
+    id: 1,
+    title: "देवी पार्वती का संकल्प",
+    body: "एक दिन देवी पार्वती स्नान करने जा रही थीं और उन्होंने सोचा कि उन्हें एक ऐसा रक्षक चाहिए जो पूरी तरह उनका अपना हो। उन्होंने अपने शरीर के उबटन (चंदन और हल्दी के लेप) से एक बालक का निर्माण किया। उस बालक में उन्होंने प्राण फूंके और उसे अपना पुत्र बना लिया। यह केवल सृजन नहीं था, बल्कि शक्ति और मातृत्व का प्रतीक था — एक ऐसा बालक जो उनकी आज्ञा का पालन करे और उनकी रक्षा करे।",
+    takeaway: "सच्चा सृजन प्रेम और संकल्प से होता है।",
+  },
+  {
+    id: 2,
+    title: "पहली आज्ञा",
+    body: "पार्वती ने उस बालक से कहा कि वह द्वार पर पहरा दे और किसी को भी अंदर न आने दे। बालक ने बिना किसी सवाल के यह जिम्मेदारी स्वीकार कर ली। उसके लिए उसकी माँ की आज्ञा ही सर्वोपरि थी। यह उसके जीवन का पहला कर्तव्य था, जिसे उसने पूरी निष्ठा से निभाने का संकल्प लिया।",
+    takeaway: "कर्तव्य की शुरुआत आज्ञा पालन से होती है।",
+  },
+  {
+    id: 3,
+    title: "शिव का आगमन",
+    body: "इसी बीच भगवान शिव वहां पहुंचे और अपने ही घर में प्रवेश करना चाहा। लेकिन द्वार पर खड़े उस बालक ने उन्हें रोक दिया। बालक ने कहा कि जब तक माता पार्वती की अनुमति नहीं मिलती, वह किसी को अंदर नहीं जाने देगा। शिव ने उसे समझाने की कोशिश की, लेकिन बालक अपने कर्तव्य पर अडिग रहा।",
+    takeaway: "सही काम के लिए दृढ़ रहना आवश्यक है।",
+  },
+  {
+    id: 4,
+    title: "संघर्ष की शुरुआत",
+    body: "शिव के गणों ने बालक को हटाने की कोशिश की, लेकिन वह अकेला होते हुए भी सबका सामना करता रहा। उसने हर प्रयास को विफल कर दिया। यह केवल शक्ति का नहीं, बल्कि निष्ठा और साहस का प्रदर्शन था।",
+    takeaway: "साहस संख्या से नहीं, संकल्प से आता है।",
+  },
+  {
+    id: 5,
+    title: "शिव का क्रोध",
+    body: "जब कोई भी उस बालक को हटा नहीं पाया, तो अंततः भगवान शिव स्वयं क्रोधित हो उठे। उन्होंने अपने त्रिशूल से उस बालक का सिर अलग कर दिया। यह घटना अत्यंत दुखद थी और एक बड़े परिवर्तन का कारण बनी।",
+    takeaway: "क्रोध में लिया गया निर्णय परिणाम बदल सकता है।",
+  },
+  {
+    id: 6,
+    title: "पार्वती का शोक",
+    body: "जब पार्वती ने यह देखा, तो वह अत्यंत दुखी और क्रोधित हो गईं। उन्होंने अपने पुत्र के वियोग में पूरी सृष्टि को नष्ट करने का संकल्प कर लिया। उनकी शक्ति इतनी प्रबल थी कि सभी देवता भयभीत हो गए।",
+    takeaway: "भावनाओं की शक्ति को समझना जरूरी है।",
+  },
+  {
+    id: 7,
+    title: "समाधान की खोज",
+    body: "देवताओं ने शिव से विनती की कि वे इस स्थिति को ठीक करें। तब शिव ने कहा कि वे बालक को पुनर्जीवित करेंगे, लेकिन इसके लिए किसी अन्य जीव का सिर लाना होगा।",
+    takeaway: "समस्या का समाधान हमेशा संभव होता है।",
+  },
+  {
+    id: 8,
+    title: "हाथी का सिर",
+    body: "शिव के गणों ने उत्तर दिशा में पहला जीव खोजा — वह एक हाथी था। उसका सिर लाकर बालक के शरीर से जोड़ा गया। इस प्रकार एक नई पहचान का जन्म हुआ।",
+    takeaway: "परिवर्तन एक नई पहचान बना सकता है।",
+  },
+  {
+    id: 9,
+    title: "गणेश का पुनर्जन्म",
+    body: "शिव ने बालक को पुनर्जीवित किया और उसे 'गणेश' नाम दिया — गणों का ईश्वर। पार्वती का दुःख समाप्त हुआ और बालक को नई पहचान मिली।",
+    takeaway: "हर अंत एक नई शुरुआत हो सकता है।",
+  },
+  {
+    id: 10,
+    title: "प्रथम पूज्य का वरदान",
+    body: "शिव ने घोषणा की कि गणेश को हर पूजा में सबसे पहले पूजा जाएगा। इससे उन्हें 'प्रथम पूज्य' का स्थान मिला।",
+    takeaway: "सच्चे गुणों को हमेशा सम्मान मिलता है।",
+  },
+  {
+    id: 11,
+    title: "विघ्नहर्ता का अर्थ",
+    body: "गणेश को विघ्नहर्ता कहा गया — जो बाधाओं को दूर करते हैं। यह केवल धार्मिक नहीं, बल्कि जीवन का संदेश है कि हर समस्या का समाधान होता है।",
+    takeaway: "हर बाधा का समाधान संभव है।",
+  },
+  {
+    id: 12,
+    title: "ज्ञान का प्रतीक",
+    body: "गणेश का बड़ा सिर ज्ञान का प्रतीक है। यह हमें सिखाता है कि हमें सोच-समझकर निर्णय लेना चाहिए।",
+    takeaway: "बड़ा सोचो, समझदारी से निर्णय लो।",
+  },
+  {
+    id: 13,
+    title: "बड़े कान का संदेश",
+    body: "गणेश के बड़े कान हमें सिखाते हैं कि हमें अधिक सुनना चाहिए और कम बोलना चाहिए।",
+    takeaway: "सुनना समझ की शुरुआत है।",
+  },
+  {
+    id: 14,
+    title: "छोटा मुख",
+    body: "उनका छोटा मुख यह दर्शाता है कि हमें कम बोलना चाहिए और सोचकर बोलना चाहिए।",
+    takeaway: "कम बोलो, सही बोलो।",
+  },
+  {
+    id: 15,
+    title: "मोटा पेट",
+    body: "गणेश का बड़ा पेट सहनशीलता का प्रतीक है — हर परिस्थिति को स्वीकार करना।",
+    takeaway: "जीवन को स्वीकार करना सीखो।",
+  },
+  {
+    id: 16,
+    title: "गणेश का संदेश",
+    body: "गणेश की पूरी कथा हमें सिखाती है कि कर्तव्य, धैर्य, और समझ जीवन को बदल सकते हैं। यह केवल एक कहानी नहीं, बल्कि जीवन जीने की दिशा है।",
+    takeaway: "धैर्य और कर्तव्य से जीवन सफल होता है।",
+  },
+];
+
+const ganeshaBirthEnglish: BookSection[] = [
+  {
+    id: 1,
+    title: "Parvati’s Creation",
+    body: "One day, Goddess Parvati decided she needed a guardian who belonged only to her. Using sandalwood paste from her body, she created a young boy and gave him life. This was not just creation — it was an act of love, independence, and divine power. The boy became her son, born purely from her will and energy.",
+    takeaway: "True creation comes from intention and love.",
+  },
+  {
+    id: 2,
+    title: "The First Duty",
+    body: "Parvati instructed the boy to guard the entrance while she bathed, allowing no one inside. The boy accepted this responsibility without question. For him, his mother’s command was absolute.",
+    takeaway: "Responsibility begins with trust and obedience.",
+  },
+  {
+    id: 3,
+    title: "Shiva Arrives",
+    body: "Lord Shiva returned home and tried to enter, but the boy stopped him. Unaware of Shiva’s identity, the boy remained firm in his duty. Even when questioned, he did not step aside.",
+    takeaway: "Stand firm when you know your duty.",
+  },
+  {
+    id: 4,
+    title: "The Conflict Begins",
+    body: "Shiva’s attendants tried to remove the boy, but he resisted bravely. Despite being alone, he stood his ground against all of them.",
+    takeaway: "Courage is about standing alone when needed.",
+  },
+  {
+    id: 5,
+    title: "Shiva’s Anger",
+    body: "Frustrated, Shiva became angry and struck the boy, severing his head. This moment changed everything and led to deep consequences.",
+    takeaway: "Anger can lead to irreversible actions.",
+  },
+  {
+    id: 6,
+    title: "Parvati’s Grief",
+    body: "When Parvati saw what had happened, she was filled with grief and rage. Her sorrow shook the entire universe, and even the gods feared her reaction.",
+    takeaway: "Emotions, when intense, can impact everything around us.",
+  },
+  {
+    id: 7,
+    title: "A Solution is Sought",
+    body: "To calm Parvati, Shiva promised to bring the boy back to life. He instructed his followers to find a suitable head.",
+    takeaway: "Every problem has a solution if we seek it.",
+  },
+  {
+    id: 8,
+    title: "The Elephant Head",
+    body: "The first living being found facing north was an elephant. Its head was brought and placed on the boy’s body.",
+    takeaway: "Change can create a new identity.",
+  },
+  {
+    id: 9,
+    title: "The Birth of Ganesha",
+    body: "With the elephant head, the boy was revived and named Ganesha. He was accepted as the son of Shiva and Parvati.",
+    takeaway: "Every ending can lead to a new beginning.",
+  },
+  {
+    id: 10,
+    title: "First Among All",
+    body: "Shiva declared that Ganesha would be worshipped before all other gods. This made him the remover of obstacles and the first to be honored.",
+    takeaway: "True value earns recognition.",
+  },
+  {
+    id: 11,
+    title: "Remover of Obstacles",
+    body: "Ganesha became known as the remover of obstacles. This reflects a deeper truth — challenges can be overcome with wisdom and calmness.",
+    takeaway: "Every obstacle can be overcome.",
+  },
+  {
+    id: 12,
+    title: "Symbol of Wisdom",
+    body: "Ganesha’s large head represents knowledge and thinking deeply before acting.",
+    takeaway: "Think big and act wisely.",
+  },
+  {
+    id: 13,
+    title: "The Meaning of Big Ears",
+    body: "His large ears symbolize listening more and speaking less.",
+    takeaway: "Listening builds understanding.",
+  },
+  {
+    id: 14,
+    title: "Small Mouth",
+    body: "His small mouth reminds us to speak carefully and thoughtfully.",
+    takeaway: "Speak less, speak wisely.",
+  },
+  {
+    id: 15,
+    title: "Large Stomach",
+    body: "His large stomach symbolizes the ability to accept all experiences in life.",
+    takeaway: "Accept life as it comes.",
+  },
+  {
+    id: 16,
+    title: "The Message of Ganesha",
+    body: "Ganesha’s story is more than mythology. It teaches duty, patience, intelligence, and balance — lessons that apply to everyday life.",
+    takeaway: "Wisdom and patience lead to success.",
+  },
+];
+
 export const books: Book[] = [
   {
     id: "gita-simplified",
@@ -1710,6 +1908,20 @@ export const books: Book[] = [
     category: "stories-epics",
     hindiSections: [],
     englishSections: [],
+  },
+  {
+    id: "ganesha-birth",
+    title: "गणेश जन्म की कथा",
+    author: "पौराणिक कथा",
+    description: "भगवान गणेश के जन्म और उनके दिव्य अर्थ की विस्तृत कहानी।",
+    titleEn: "The Birth of Ganesha",
+    authorEn: "Mythological Story",
+    descriptionEn: "The detailed story of Lord Ganesha’s birth and its deeper meaning.",
+    price: 99,
+    cover: "from-orange-200 via-amber-200 to-yellow-200",
+    category: "stories-epics",
+    hindiSections: ganeshaBirthHindi,
+    englishSections: ganeshaBirthEnglish,
   },
   {
     id: "meditation-basics",
