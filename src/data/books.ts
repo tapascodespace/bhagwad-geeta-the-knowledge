@@ -2036,6 +2036,20 @@ export const books: Book[] = [
     hindiSections: [],
     englishSections: [],
   },
+  {
+    id: "manage-your-life",
+    title: "अपना जीवन कैसे संभालें",
+    author: "व्यावहारिक मार्गदर्शिका",
+    description: "समय, आदतें, निर्णय और संतुलन के माध्यम से जीवन को व्यवस्थित करने की सरल और प्रभावी तकनीकें।",
+    titleEn: "How to Manage Your Life",
+    authorEn: "Practical Guide",
+    descriptionEn: "Simple and effective strategies to manage time, habits, decisions, and balance in daily life.",
+    price: 99,
+    cover: "from-green-200 via-emerald-200 to-teal-200",
+    category: "for-students",
+    hindiSections: [],
+    englishSections: [],
+  },
 ];
 
 export const getBook = (id: string) => books.find((b) => b.id === id);
