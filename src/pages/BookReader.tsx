@@ -65,6 +65,22 @@ const BookReader = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [section, bookLang]);
 
+  // Override the global theme while the reader is mounted so the reader's
+  // independent light/dark toggle works regardless of the app theme.
+  // We snapshot the original `dark` class state and restore it on unmount.
+  useEffect(() => {
+    const root = document.documentElement;
+    const hadDark = root.classList.contains("dark");
+    const readerDark = prefs.theme === "dark";
+    root.classList.toggle("dark", readerDark);
+    const prevColorScheme = root.style.colorScheme;
+    root.style.colorScheme = readerDark ? "dark" : "light";
+    return () => {
+      root.classList.toggle("dark", hadDark);
+      root.style.colorScheme = prevColorScheme;
+    };
+  }, [prefs.theme]);
+
   const unlocked = book ? isUnlocked(book.id) : false;
 
   // If not unlocked AND not in preview mode, redirect to the detail/paywall page.
