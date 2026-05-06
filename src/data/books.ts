@@ -1837,6 +1837,228 @@ const ganeshaBirthEnglish: BookSection[] = [
   },
 ];
 
+const karmaPowerHindi: BookSection[] = [
+  {
+    id: 1,
+    title: "कर्म क्या है?",
+    body: "कर्म का अर्थ केवल बड़े काम नहीं होता, बल्कि हर छोटा निर्णय, हर शब्द और हर विचार भी कर्म ही है। हम जो सोचते हैं, बोलते हैं और करते हैं — सब मिलकर हमारा कर्म बनाते हैं। यही कर्म हमारे जीवन की दिशा तय करते हैं। इसलिए कर्म को समझना, जीवन को समझने जैसा है।",
+    takeaway: "हर छोटा काम भी कर्म है — इसे हल्के में मत लो।",
+  },
+  {
+    id: 2,
+    title: "कर्म और परिणाम",
+    body: "हर कर्म का परिणाम होता है, चाहे वह तुरंत दिखे या बाद में। कई बार हम सोचते हैं कि हमारे काम का असर नहीं हुआ, लेकिन हर क्रिया का एक प्रभाव होता है। यह समझ हमें जिम्मेदार बनाती है।",
+    takeaway: "हर कर्म का परिणाम तय है — देर हो सकती है, लेकिन असर जरूर होता है।",
+  },
+  {
+    id: 3,
+    title: "इरादा क्यों जरूरी है?",
+    body: "किसी भी कर्म का असली मूल्य उसके पीछे के इरादे से तय होता है। वही काम अगर स्वार्थ से किया जाए तो अलग परिणाम देता है, और अगर निःस्वार्थ भाव से किया जाए तो अलग।",
+    takeaway: "कर्म से ज्यादा उसका इरादा मायने रखता है।",
+  },
+  {
+    id: 4,
+    title: "आज का कर्म, कल का जीवन",
+    body: "आज हम जो करते हैं, वही कल हमारी स्थिति बनाता है। आदतें धीरे-धीरे बनती हैं और वही भविष्य तय करती हैं। इसलिए हर दिन का छोटा प्रयास महत्वपूर्ण है।",
+    takeaway: "आज का छोटा कदम ही भविष्य का बड़ा परिणाम बनता है।",
+  },
+  {
+    id: 5,
+    title: "टालमटोल भी कर्म है",
+    body: "कुछ न करना भी एक कर्म है। जब हम काम को टालते हैं, तब हम एक निर्णय ले रहे होते हैं — और उसका भी परिणाम होता है।",
+    takeaway: "काम टालना भी एक कर्म है — और उसका भी परिणाम होगा।",
+  },
+  {
+    id: 6,
+    title: "ध्यान और कर्म",
+    body: "जब हम पूरी एकाग्रता से काम करते हैं, तो कर्म की गुणवत्ता बढ़ जाती है। आधे मन से किया गया काम कभी पूरा संतोष नहीं देता।",
+    takeaway: "पूरे ध्यान से किया गया काम ही सच्चा कर्म है।",
+  },
+  {
+    id: 7,
+    title: "कर्म और आदतें",
+    body: "हमारे रोज़ के छोटे-छोटे कर्म मिलकर हमारी आदतें बनाते हैं। और यही आदतें हमारे जीवन का स्वरूप तय करती हैं।",
+    takeaway: "छोटी आदतें ही बड़े जीवन का निर्माण करती हैं।",
+  },
+  {
+    id: 8,
+    title: "अच्छे कर्म की पहचान",
+    body: "अच्छा कर्म वह है जो न केवल हमें, बल्कि दूसरों को भी लाभ पहुंचाए। ऐसा कर्म जो किसी को नुकसान न दे, वही सच्चा कर्म है।",
+    takeaway: "ऐसा कर्म करो जिससे सबका भला हो।",
+  },
+  {
+    id: 9,
+    title: "कर्म और सोच",
+    body: "हमारी सोच ही हमारे कर्म को जन्म देती है। सकारात्मक सोच से सकारात्मक कर्म निकलते हैं, और नकारात्मक सोच से उल्टा।",
+    takeaway: "जैसी सोच, वैसा कर्म।",
+  },
+  {
+    id: 10,
+    title: "गलत कर्म से सीख",
+    body: "गलतियां भी जरूरी हैं, क्योंकि उनसे सीख मिलती है। अगर हम अपने कर्म को समझें, तो हर गलती एक शिक्षक बन सकती है।",
+    takeaway: "गलती से भागो मत — उससे सीखो।",
+  },
+  {
+    id: 11,
+    title: "कर्म और धैर्य",
+    body: "कई बार अच्छे कर्म का परिणाम देर से मिलता है। ऐसे समय में धैर्य रखना जरूरी है।",
+    takeaway: "अच्छे कर्म का फल देर से सही, लेकिन मिलता जरूर है।",
+  },
+  {
+    id: 12,
+    title: "दूसरों की मदद",
+    body: "किसी की मदद करना सबसे शक्तिशाली कर्मों में से एक है। यह न केवल सामने वाले को, बल्कि हमें भी मजबूत बनाता है।",
+    takeaway: "मदद करना सबसे बड़ा कर्म है।",
+  },
+  {
+    id: 13,
+    title: "कर्म और आत्मविश्वास",
+    body: "जब हम लगातार सही कर्म करते हैं, तो आत्मविश्वास अपने आप बढ़ता है।",
+    takeaway: "सही कर्म आत्मविश्वास बनाता है।",
+  },
+  {
+    id: 14,
+    title: "कर्म का नियंत्रण",
+    body: "हम अपने कर्म को नियंत्रित कर सकते हैं, लेकिन परिणाम को नहीं। इसलिए ध्यान कर्म पर होना चाहिए।",
+    takeaway: "कर्म पर नियंत्रण है, परिणाम पर नहीं।",
+  },
+  {
+    id: 15,
+    title: "कर्म और अनुशासन",
+    body: "अनुशासन के बिना सही कर्म संभव नहीं। रोज़ थोड़ा-थोड़ा सही करना ही अनुशासन है।",
+    takeaway: "अनुशासन ही कर्म को मजबूत बनाता है।",
+  },
+  {
+    id: 16,
+    title: "छोटे कर्म, बड़ा असर",
+    body: "एक छोटी आदत, एक छोटा निर्णय — समय के साथ बड़ा असर डालते हैं।",
+    takeaway: "छोटे कर्मों को हल्के में मत लो।",
+  },
+  {
+    id: 17,
+    title: "जीवन एक परिणाम है",
+    body: "आज का जीवन हमारे पिछले कर्मों का परिणाम है। और आज के कर्म भविष्य बनाएंगे।",
+    takeaway: "आपका जीवन आपके कर्मों का परिणाम है।",
+  },
+  {
+    id: 18,
+    title: "कर्म का असली अर्थ",
+    body: "कर्म केवल काम करना नहीं, बल्कि जागरूक होकर सही काम करना है। यही जीवन को बदलता है।",
+    takeaway: "सही समझ के साथ किया गया कर्म ही असली शक्ति है।",
+  },
+];
+
+const karmaPowerEnglish: BookSection[] = [
+  {
+    id: 1,
+    title: "What Is Karma?",
+    body: "Karma is not just about big actions. Every thought, word, and small decision you make is also karma. Your daily choices shape your life over time. Understanding karma means understanding how your life is built.",
+    takeaway: "Every small action counts — nothing is insignificant.",
+  },
+  {
+    id: 2,
+    title: "Action and Consequence",
+    body: "Every action has a consequence. Sometimes it shows immediately, sometimes later. But nothing goes unnoticed.",
+    takeaway: "Every action creates an effect — always.",
+  },
+  {
+    id: 3,
+    title: "The Power of Intention",
+    body: "The intention behind an action defines its impact. The same act can have different outcomes depending on the mindset behind it.",
+    takeaway: "Your intention matters more than the action itself.",
+  },
+  {
+    id: 4,
+    title: "Today Builds Tomorrow",
+    body: "What you do today shapes your future. Small consistent actions create long-term results.",
+    takeaway: "Your future is built by your daily actions.",
+  },
+  {
+    id: 5,
+    title: "Procrastination Is Also Karma",
+    body: "Doing nothing is also a decision. Avoiding action creates consequences just like taking action does.",
+    takeaway: "Not acting is also a form of action.",
+  },
+  {
+    id: 6,
+    title: "Focus in Action",
+    body: "When you act with full attention, the quality of your work improves. Half-hearted effort leads to weak results.",
+    takeaway: "Focused action creates better outcomes.",
+  },
+  {
+    id: 7,
+    title: "Habits and Karma",
+    body: "Your repeated actions become habits, and your habits define your life.",
+    takeaway: "Your habits are your long-term karma.",
+  },
+  {
+    id: 8,
+    title: "Good Actions",
+    body: "A good action benefits not just you, but others as well. It creates positive impact without harm.",
+    takeaway: "Choose actions that uplift, not harm.",
+  },
+  {
+    id: 9,
+    title: "Thoughts Become Actions",
+    body: "Every action begins with a thought. Positive thinking leads to constructive action.",
+    takeaway: "Control your thoughts to control your actions.",
+  },
+  {
+    id: 10,
+    title: "Learning from Mistakes",
+    body: "Mistakes are part of growth. When you reflect on them, they become lessons.",
+    takeaway: "Every mistake is a chance to improve.",
+  },
+  {
+    id: 11,
+    title: "Patience and Karma",
+    body: "Good actions don’t always show results immediately. Patience is necessary.",
+    takeaway: "Trust the process — results take time.",
+  },
+  {
+    id: 12,
+    title: "Helping Others",
+    body: "Helping others is one of the most powerful forms of action. It creates positive impact on both sides.",
+    takeaway: "Helping others strengthens you.",
+  },
+  {
+    id: 13,
+    title: "Confidence Through Action",
+    body: "Taking consistent action builds confidence over time.",
+    takeaway: "Confidence comes from doing, not thinking.",
+  },
+  {
+    id: 14,
+    title: "Control Your Actions",
+    body: "You can control your actions, but not always the outcome.",
+    takeaway: "Focus on effort, not results.",
+  },
+  {
+    id: 15,
+    title: "Discipline and Action",
+    body: "Discipline helps you take the right actions consistently.",
+    takeaway: "Discipline turns actions into results.",
+  },
+  {
+    id: 16,
+    title: "Small Actions Matter",
+    body: "Even small decisions create big long-term effects.",
+    takeaway: "Never ignore small actions.",
+  },
+  {
+    id: 17,
+    title: "Life Is a Result",
+    body: "Your current life is a result of past actions, and your future depends on what you do now.",
+    takeaway: "Your life reflects your actions.",
+  },
+  {
+    id: 18,
+    title: "The True Meaning of Karma",
+    body: "Karma is not just action — it is conscious, aware action. That is what creates real change.",
+    takeaway: "Awareness turns action into power.",
+  },
+];
+
 export const books: Book[] = [
   {
     id: "gita-simplified",
@@ -1950,6 +2172,20 @@ export const books: Book[] = [
     category: "spiritual-guides",
     hindiSections: yogaLifeHindi,
     englishSections: yogaLifeEnglish,
+  },
+  {
+    id: "power-of-karma",
+    title: "कर्म की शक्ति",
+    author: "जीवन मार्गदर्शिका",
+    description: "कर्म, उसके परिणाम और जीवन में उसके गहरे प्रभाव को समझाने वाली व्यावहारिक पुस्तक।",
+    titleEn: "The Power of Karma (Action)",
+    authorEn: "Life Guide",
+    descriptionEn: "A practical guide to understanding action, consequences, and how karma shapes your life.",
+    price: 149,
+    cover: "from-yellow-200 via-amber-200 to-orange-200",
+    category: "spiritual-guides",
+    hindiSections: karmaPowerHindi,
+    englishSections: karmaPowerEnglish,
   },
   {
     id: "beating-procrastination",
