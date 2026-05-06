@@ -2351,7 +2351,7 @@ export const books: Book[] = [
   },
   {
     id: "power-of-karma",
-    title: "कर्म की शक्ति (Action)",
+    title: "कर्म की शक्ति",
     author: "जीवन मार्गदर्शिका",
     description: "कर्म के सिद्धांत को समझकर जीवन को सही दिशा देने की व्यावहारिक गाइड।",
     titleEn: "The Power of Karma (Action)",
