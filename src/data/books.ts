@@ -2059,6 +2059,192 @@ const karmaPowerEnglish: BookSection[] = [
   },
 ];
 
+const krishnaRelationshipsHindi: BookSection[] = [
+  {
+    id: 1,
+    title: "संबंधों की असली समझ",
+    body: "कृष्ण के अनुसार, हर संबंध अपेक्षाओं पर नहीं, बल्कि समझ और स्वीकृति पर आधारित होना चाहिए। जब हम किसी से बहुत ज़्यादा उम्मीदें रखते हैं, तो निराशा होना तय है। लेकिन जब हम सामने वाले को जैसा है वैसे स्वीकार करते हैं, तब संबंध हल्के और सहज बनते हैं। रिश्ते कोई लेन-देन नहीं, बल्कि अनुभव और विकास का माध्यम हैं।",
+    takeaway: "अपेक्षाएँ कम करो, समझ बढ़ाओ — संबंध अपने आप सुधरेंगे।",
+  },
+  {
+    id: 2,
+    title: "निःस्वार्थ प्रेम",
+    body: "कृष्ण का प्रेम हमेशा निःस्वार्थ था। उन्होंने कभी बदले में कुछ नहीं माँगा। आज के समय में ज़्यादातर रिश्ते ‘अगर-तब’ पर आधारित होते हैं — अगर तुम ऐसा करोगे, तो मैं भी करूँगा। लेकिन सच्चा प्रेम बिना शर्त होता है। जब हम बिना अपेक्षा के देते हैं, तभी संबंध गहरे बनते हैं।",
+    takeaway: "सच्चा प्रेम शर्तों पर नहीं चलता।",
+  },
+  {
+    id: 3,
+    title: "सही दूरी बनाए रखना",
+    body: "कृष्ण हर किसी के करीब थे, लेकिन किसी पर निर्भर नहीं थे। यह सिखाता है कि रिश्तों में संतुलन ज़रूरी है। बहुत ज़्यादा चिपकना या पूरी तरह दूर हो जाना — दोनों ही नुकसानदायक हैं। अपनी स्वतंत्रता बनाए रखते हुए जुड़ाव रखना ही स्वस्थ संबंध है।",
+    takeaway: "रिश्तों में जुड़ाव रखें, पर अपनी पहचान न खोएँ।",
+  },
+  {
+    id: 4,
+    title: "क्रोध को संभालना",
+    body: "जब संबंधों में मतभेद आते हैं, तो सबसे बड़ी समस्या क्रोध बन जाता है। कृष्ण सिखाते हैं कि प्रतिक्रिया देने से पहले रुकना चाहिए। एक क्षण का धैर्य कई रिश्तों को टूटने से बचा सकता है। जब हम शांत होकर बात करते हैं, तो समाधान निकलता है, टकराव नहीं।",
+    takeaway: "गुस्से में नहीं, समझदारी में प्रतिक्रिया दो।",
+  },
+  {
+    id: 5,
+    title: "सुनने की कला",
+    body: "अक्सर हम जवाब देने के लिए सुनते हैं, समझने के लिए नहीं। कृष्ण एक आदर्श श्रोता थे। उन्होंने अर्जुन की हर बात ध्यान से सुनी, तभी वे सही मार्गदर्शन दे पाए। रिश्तों में सुनना बोलने से ज़्यादा ज़रूरी है।",
+    takeaway: "सुनना सीखो — यही मजबूत रिश्तों की नींव है।",
+  },
+  {
+    id: 6,
+    title: "मित्रता का महत्व",
+    body: "कृष्ण और सुदामा की मित्रता सच्चे संबंध का उदाहरण है। स्थिति बदल सकती है — कोई अमीर, कोई गरीब हो सकता है — लेकिन सच्चा संबंध वही रहता है। यह हमें सिखाता है कि रिश्ते स्थिति से नहीं, भाव से बनते हैं।",
+    takeaway: "सच्चे रिश्ते परिस्थिति से नहीं बदलते।",
+  },
+  {
+    id: 7,
+    title: "क्षमा करना सीखो",
+    body: "रिश्तों में गलतियाँ होना स्वाभाविक है। अगर हर गलती को पकड़कर रखें, तो कोई संबंध नहीं टिक सकता। कृष्ण सिखाते हैं कि क्षमा करना कमजोरी नहीं, बल्कि आंतरिक शक्ति है।",
+    takeaway: "माफ करना सीखो — यही संबंधों को टिकाता है।",
+  },
+  {
+    id: 8,
+    title: "ईमानदारी और सच्चाई",
+    body: "कृष्ण ने हमेशा सच्चाई का साथ दिया, भले ही स्थिति कठिन हो। रिश्तों में झूठ थोड़े समय के लिए चीज़ें आसान बना सकता है, लेकिन लंबे समय में विश्वास तोड़ देता है।",
+    takeaway: "विश्वास सच्चाई से बनता है, झूठ से नहीं।",
+  },
+  {
+    id: 9,
+    title: "भावनाओं का संतुलन",
+    body: "बहुत ज़्यादा भावुक होना या बिल्कुल ठंडा रहना — दोनों ही समस्याएँ हैं। कृष्ण ने हर स्थिति में संतुलन बनाए रखा। यही संतुलन रिश्तों को स्थिर रखता है।",
+    takeaway: "भावनाओं को समझो, उनमें बहो मत।",
+  },
+  {
+    id: 10,
+    title: "स्वाभिमान बनाए रखना",
+    body: "रिश्तों में खुद को खो देना सही नहीं है। कृष्ण ने हर संबंध में अपना स्वाभिमान बनाए रखा। जब आप खुद का सम्मान करते हैं, तभी दूसरे भी आपका सम्मान करते हैं।",
+    takeaway: "खुद का सम्मान करो — तभी संबंध स्वस्थ रहेंगे।",
+  },
+  {
+    id: 11,
+    title: "समय देना",
+    body: "रिश्ते समय माँगते हैं। केवल शब्द नहीं, उपस्थिति भी ज़रूरी है। कृष्ण हर व्यक्ति के साथ समय बिताते थे, जिससे हर कोई खास महसूस करता था।",
+    takeaway: "समय देना ही सच्चा प्रेम दिखाता है।",
+  },
+  {
+    id: 12,
+    title: "सही मार्गदर्शन देना",
+    body: "अच्छा संबंध वही है जहाँ आप सामने वाले को सही दिशा दिखा सकें। कृष्ण ने अर्जुन को केवल सांत्वना नहीं दी, बल्कि उसे सच्चाई का सामना करने के लिए तैयार किया।",
+    takeaway: "सच्चा संबंध मार्गदर्शन देता है, सिर्फ़ दिलासा नहीं।",
+  },
+  {
+    id: 13,
+    title: "ईर्ष्या से बचना",
+    body: "ईर्ष्या धीरे-धीरे संबंधों को कमजोर कर देती है। कृष्ण सिखाते हैं कि तुलना छोड़कर अपने जीवन पर ध्यान देना चाहिए।",
+    takeaway: "तुलना छोड़ो, अपने रास्ते पर ध्यान दो।",
+  },
+  {
+    id: 14,
+    title: "विश्वास बनाना",
+    body: "हर मजबूत संबंध की नींव विश्वास है। यह एक दिन में नहीं बनता — समय और निरंतरता से बनता है। कृष्ण पर सभी को विश्वास था क्योंकि उनके कर्म साफ थे।",
+    takeaway: "विश्वास धीरे-धीरे बनता है, जल्दी टूटता है।",
+  },
+  {
+    id: 15,
+    title: "रिश्तों का संतुलन",
+    body: "जीवन में कई प्रकार के संबंध होते हैं — परिवार, मित्र, कार्य। हर एक को सही समय और ऊर्जा देना जरूरी है। कृष्ण ने हर भूमिका को संतुलित किया।",
+    takeaway: "हर रिश्ते को उसका सही स्थान दो।",
+  },
+];
+
+const krishnaRelationshipsEnglish: BookSection[] = [
+  {
+    id: 1,
+    title: "Understanding Relationships",
+    body: "According to Krishna, relationships should be based on understanding and acceptance, not expectations. When we expect too much from others, disappointment becomes inevitable. But when we accept people as they are, relationships become lighter and more peaceful. Relationships are not transactions; they are spaces for growth and experience.",
+    takeaway: "Reduce expectations, increase understanding.",
+  },
+  {
+    id: 2,
+    title: "Selfless Love",
+    body: "Krishna’s love was always selfless. He never demanded anything in return. Modern relationships often operate on conditions — 'if you do this, I will do that.' True love, however, is unconditional. Giving without expecting builds deeper bonds.",
+    takeaway: "True love is unconditional.",
+  },
+  {
+    id: 3,
+    title: "Healthy Distance",
+    body: "Krishna was close to everyone, yet never dependent. This teaches balance. Being too attached or too distant both harm relationships. Staying connected while maintaining independence is the key.",
+    takeaway: "Stay connected, but don’t lose yourself.",
+  },
+  {
+    id: 4,
+    title: "Handling Anger",
+    body: "Conflicts are natural, but anger destroys relationships quickly. Krishna teaches us to pause before reacting. A moment of patience can save a lifelong bond.",
+    takeaway: "Respond with calmness, not anger.",
+  },
+  {
+    id: 5,
+    title: "The Art of Listening",
+    body: "Most people listen to reply, not to understand. Krishna listened deeply to Arjuna, which is why he could guide him properly. Listening is more powerful than speaking in relationships.",
+    takeaway: "Listen to understand, not just to respond.",
+  },
+  {
+    id: 6,
+    title: "True Friendship",
+    body: "Krishna and Sudama’s friendship shows that real relationships go beyond wealth and status. Situations may change, but true bonds remain.",
+    takeaway: "True relationships don’t change with circumstances.",
+  },
+  {
+    id: 7,
+    title: "Learning to Forgive",
+    body: "Mistakes are natural in relationships. Holding onto them destroys bonds. Krishna teaches that forgiveness is strength, not weakness.",
+    takeaway: "Forgiveness keeps relationships alive.",
+  },
+  {
+    id: 8,
+    title: "Honesty and Truth",
+    body: "Krishna always stood for truth. Lies may make things easier temporarily, but they break trust in the long run.",
+    takeaway: "Trust is built on truth.",
+  },
+  {
+    id: 9,
+    title: "Emotional Balance",
+    body: "Being too emotional or too cold both create problems. Krishna maintained balance in every situation. That balance keeps relationships stable.",
+    takeaway: "Feel emotions, but don’t lose control.",
+  },
+  {
+    id: 10,
+    title: "Self-Respect",
+    body: "Losing yourself in a relationship is unhealthy. Krishna always maintained self-respect. When you respect yourself, others will too.",
+    takeaway: "Respect yourself to maintain healthy relationships.",
+  },
+  {
+    id: 11,
+    title: "Giving Time",
+    body: "Relationships need time and presence. Krishna made everyone feel valued by being present.",
+    takeaway: "Time is the true expression of care.",
+  },
+  {
+    id: 12,
+    title: "Guidance in Relationships",
+    body: "A true relationship helps you grow. Krishna didn’t just comfort Arjuna — he guided him toward truth.",
+    takeaway: "True bonds guide, not just comfort.",
+  },
+  {
+    id: 13,
+    title: "Avoiding Jealousy",
+    body: "Jealousy slowly destroys relationships. Krishna teaches focusing on your own path instead of comparing.",
+    takeaway: "Focus on your journey, not others.",
+  },
+  {
+    id: 14,
+    title: "Building Trust",
+    body: "Strong relationships are built on trust, which takes time and consistency. Krishna earned trust through his actions.",
+    takeaway: "Trust is built slowly, broken quickly.",
+  },
+  {
+    id: 15,
+    title: "Balancing Relationships",
+    body: "Life includes many relationships — family, friends, work. Krishna balanced all roles wisely, giving each the right attention.",
+    takeaway: "Give each relationship its proper place.",
+  },
+];
+
 export const books: Book[] = [
   {
     id: "gita-simplified",
@@ -2088,6 +2274,20 @@ export const books: Book[] = [
     category: "bhagavad-gita",
     hindiSections: gitaEssenceHindi,
     englishSections: gitaEssenceEnglish,
+  },
+  {
+    id: "krishna-relationships",
+    title: "कृष्ण के अनुसार रिश्तों को संभालना",
+    author: "जीवन मार्गदर्शिका",
+    description: "भगवान कृष्ण के जीवन से रिश्तों को समझने और बेहतर बनाने की व्यावहारिक सीख।",
+    titleEn: "Managing Relationships According to Krishna",
+    authorEn: "Life Guide",
+    descriptionEn: "Practical lessons from Krishna’s life on how to understand and manage relationships.",
+    price: 149,
+    cover: "from-pink-200 via-rose-200 to-orange-200",
+    category: "bhagavad-gita",
+    hindiSections: krishnaRelationshipsHindi,
+    englishSections: krishnaRelationshipsEnglish,
   },
   {
     id: "krishna-leelas",
