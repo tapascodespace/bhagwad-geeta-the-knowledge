@@ -2653,6 +2653,132 @@ const ganeshaMahabharataEnglish: BookSection[] = [
   },
 ];
 
+const hanumanForgotPowersHindi: BookSection[] = [
+  {
+    id: 1,
+    title: "बाल हनुमान की शक्ति",
+    body: "हनुमान जी बचपन से ही असाधारण शक्तियों वाले थे। वे अत्यंत तेज, साहसी और चंचल थे। एक दिन उन्होंने उगते हुए सूर्य को लाल फल समझ लिया और उसे खाने के लिए आकाश में उड़ गए। देवताओं ने उनकी शक्ति देखकर आश्चर्य किया। इंद्र ने अपने वज्र से उन पर प्रहार किया, जिससे हनुमान जी घायल हो गए। बाद में देवताओं ने उन्हें अनेक वरदान दिए।",
+    takeaway: "महान शक्ति बचपन से ही पहचानी जा सकती है।",
+  },
+  {
+    id: 2,
+    title: "ऋषियों का श्राप",
+    body: "हनुमान जी अपनी शक्तियों के कारण बहुत शरारतें करते थे। वे कभी ऋषियों के आश्रम में उथल-पुथल मचा देते, तो कभी ध्यान में बैठे साधुओं को परेशान कर देते। अंत में कुछ ऋषियों ने उन्हें श्राप दिया कि वे अपनी शक्तियों को भूल जाएंगे, जब तक कोई उन्हें याद न दिलाए। यह श्राप दंड नहीं, बल्कि उनकी शक्ति को सही समय तक नियंत्रित रखने का उपाय था।",
+    takeaway: "शक्ति के साथ संयम भी आवश्यक है।",
+  },
+  {
+    id: 3,
+    title: "राम से पहली मुलाकात",
+    body: "समय बीतने के बाद हनुमान जी की मुलाकात भगवान राम और लक्ष्मण से हुई। उस समय वे सुग्रीव के दूत के रूप में कार्य कर रहे थे। हनुमान जी ने पहली ही मुलाकात में राम के प्रति गहरी भक्ति महसूस की। राम ने भी उनकी बुद्धि, विनम्रता और सेवा भाव को पहचाना। यही मुलाकात उनके जीवन का सबसे महत्वपूर्ण मोड़ बनी।",
+    takeaway: "सही मार्गदर्शक जीवन की दिशा बदल सकता है।",
+  },
+  {
+    id: 4,
+    title: "सीता की खोज",
+    body: "जब माता सीता का रावण द्वारा हरण हुआ, तब उनकी खोज के लिए वानर सेना भेजी गई। हनुमान जी भी उस दल में थे। खोज करते-करते वे समुद्र के किनारे पहुँचे, जहाँ सभी चिंतित हो गए क्योंकि सामने विशाल समुद्र था। किसी को समझ नहीं आ रहा था कि लंका तक कौन जा सकता है।",
+    takeaway: "कभी-कभी सबसे बड़ी चुनौती हमारे सामने अचानक खड़ी हो जाती है।",
+  },
+  {
+    id: 5,
+    title: "जामवंत की याद दिलाना",
+    body: "वानरों में सबसे बुद्धिमान जामवंत जी ने हनुमान को देखा और समझ गए कि वे अपनी शक्ति भूल चुके हैं। उन्होंने हनुमान जी को उनके बचपन की घटनाएँ और वरदान याद दिलाए। जैसे-जैसे जामवंत बोलते गए, हनुमान जी का आत्मविश्वास लौटता गया। अचानक उन्हें अपनी असली शक्ति का एहसास हुआ।",
+    takeaway: "कभी-कभी हमें अपनी क्षमता याद दिलाने के लिए किसी की जरूरत होती है।",
+  },
+  {
+    id: 6,
+    title: "समुद्र पार की छलांग",
+    body: "अपनी शक्तियाँ याद आते ही हनुमान जी विशाल रूप धारण कर आकाश में उछले। उन्होंने एक ही छलांग में विशाल समुद्र पार करने का निश्चय किया। रास्ते में अनेक बाधाएँ आईं, लेकिन उन्होंने बुद्धि और साहस से हर कठिनाई को पार किया। यह यात्रा केवल शारीरिक नहीं, बल्कि आत्मविश्वास की यात्रा भी थी।",
+    takeaway: "आत्मविश्वास जाग जाए तो असंभव भी संभव लगता है।",
+  },
+  {
+    id: 7,
+    title: "लंका में प्रवेश",
+    body: "हनुमान जी लंका पहुँचे और गुप्त रूप से माता सीता की खोज शुरू की। उन्होंने रावण की सोने की नगरी देखी, लेकिन उनका ध्यान केवल अपने लक्ष्य पर था। अंततः उन्होंने अशोक वाटिका में माता सीता को खोज लिया और भगवान राम की अंगूठी देकर उन्हें विश्वास दिलाया कि सहायता आने वाली है।",
+    takeaway: "सच्चा ध्यान लक्ष्य पर रहता है, आकर्षणों पर नहीं।",
+  },
+  {
+    id: 8,
+    title: "लंका दहन",
+    body: "रावण के सैनिकों ने हनुमान जी को पकड़ लिया और उनकी पूँछ में आग लगा दी। लेकिन हनuman जी ने उसी आग का उपयोग करके पूरी लंका को जला दिया। यह केवल शक्ति का प्रदर्शन नहीं था, बल्कि अधर्म के खिलाफ चेतावनी थी।",
+    takeaway: "बुद्धिमानी से कठिन परिस्थिति को अवसर बनाया जा सकता है।",
+  },
+  {
+    id: 9,
+    title: "रामभक्ति का आदर्श",
+    body: "हनुमान जी ने कभी अपनी शक्ति पर घमंड नहीं किया। वे हमेशा खुद को भगवान राम का सेवक मानते रहे। उनकी सबसे बड़ी ताकत उनकी भक्ति, विनम्रता और निस्वार्थ सेवा थी। इसी कारण वे आज भी सबसे प्रिय भक्तों में गिने जाते हैं।",
+    takeaway: "विनम्रता शक्ति को और महान बनाती है।",
+  },
+  {
+    id: 10,
+    title: "कथा की सीख",
+    body: "हनुमान जी की यह कथा हमें सिखाती है कि कई बार हम अपनी ही क्षमता भूल जाते हैं। डर, असफलता या आत्मविश्वास की कमी हमें कमजोर महसूस कराती है। लेकिन सही मार्गदर्शन, विश्वास और प्रयास हमें हमारी असली शक्ति याद दिला सकते हैं।",
+    takeaway: "आपके भीतर भी वह शक्ति है, जिसे केवल जगाने की जरूरत है।",
+  },
+];
+
+const hanumanForgotPowersEnglish: BookSection[] = [
+  {
+    id: 1,
+    title: "The Power of Young Hanuman",
+    body: "From childhood, Hanuman possessed extraordinary strength, courage, and energy. One morning, he saw the rising sun and mistook it for a glowing fruit. Excited, he leaped into the sky to catch it. The gods were astonished by his immense power. Lord Indra struck him with his thunderbolt, injuring him. Later, the gods blessed Hanuman with many divine powers and protections.",
+    takeaway: "Great strength can appear even in childhood.",
+  },
+  {
+    id: 2,
+    title: "The Curse of the Sages",
+    body: "Because of his immense powers, young Hanuman often played mischievous pranks on sages and saints. He would disturb their meditation and create chaos without understanding the consequences. Finally, some sages placed a curse on him — he would forget his powers until someone reminded him of them. The curse was not meant as punishment, but as protection until the right time arrived.",
+    takeaway: "Power must always be balanced with discipline.",
+  },
+  {
+    id: 3,
+    title: "Meeting Lord Rama",
+    body: "Years later, Hanuman met Lord Rama and Lakshmana while serving Sugriva. The moment he met Rama, Hanuman felt deep devotion toward him. Rama immediately recognized Hanuman’s wisdom, humility, and loyalty. This meeting became the turning point of Hanuman’s life and gave his existence a greater purpose.",
+    takeaway: "The right guide can completely transform your life.",
+  },
+  {
+    id: 4,
+    title: "The Search for Sita",
+    body: "After Ravana kidnapped Sita, the Vanara army was sent to search for her. Hanuman joined the mission. Eventually, the search party reached the edge of a vast ocean. Across the sea stood Lanka, but nobody knew how they could cross such a huge distance.",
+    takeaway: "Sometimes life suddenly places impossible challenges before us.",
+  },
+  {
+    id: 5,
+    title: "Jambavan Reminds Hanuman",
+    body: "Jambavan, the wisest among the Vanaras, realized that Hanuman had forgotten his true strength. He reminded Hanuman about his childhood powers, the blessings of the gods, and the greatness hidden within him. As Jambavan spoke, Hanuman’s confidence slowly returned. For the first time in years, he remembered who he truly was.",
+    takeaway: "Sometimes we need others to remind us of our own potential.",
+  },
+  {
+    id: 6,
+    title: "The Great Leap Across the Ocean",
+    body: "As his confidence awakened, Hanuman grew into a gigantic form and prepared to leap across the ocean. With one mighty jump, he soared through the sky toward Lanka. Along the journey he faced many obstacles, but he overcame each one with courage, intelligence, and calmness.",
+    takeaway: "When confidence awakens, even the impossible feels achievable.",
+  },
+  {
+    id: 7,
+    title: "Entering Lanka",
+    body: "Hanuman secretly entered Lanka and began searching for Sita. He saw Ravana’s magnificent golden kingdom, but he never lost focus on his mission. Finally, he found Sita in Ashoka Vatika and gave her Rama’s ring as proof that help was coming soon.",
+    takeaway: "True focus stays fixed on the goal, not distractions.",
+  },
+  {
+    id: 8,
+    title: "Burning Lanka",
+    body: "Ravana’s soldiers captured Hanuman and set his tail on fire. But Hanuman turned this punishment into an advantage. Using the flames, he burned large parts of Lanka and warned Ravana about the consequences of adharma. His actions showed both courage and intelligence.",
+    takeaway: "Wisdom can transform difficulty into strength.",
+  },
+  {
+    id: 9,
+    title: "The Ideal Devotee",
+    body: "Despite his immense powers, Hanuman never became arrogant. He always considered himself a humble servant of Lord Rama. His greatest strength was not physical power, but devotion, loyalty, and selfless service. That is why Hanuman remains one of the most beloved figures in Hindu tradition.",
+    takeaway: "Humility makes strength even greater.",
+  },
+  {
+    id: 10,
+    title: "The Lesson of the Story",
+    body: "Hanuman’s story teaches us that many people forget their own abilities because of fear, failure, or self-doubt. But with the right encouragement, guidance, and belief, hidden strength can awaken again. Just like Hanuman, every person carries immense potential within themselves.",
+    takeaway: "The strength you seek already exists within you.",
+  },
+];
+
 export const books: Book[] = [
   {
     id: "gita-simplified",
