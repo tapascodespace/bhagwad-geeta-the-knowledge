@@ -2587,6 +2587,72 @@ const kuberaGoldEnglish: BookSection[] = [
   },
 ];
 
+const ganeshaMahabharataHindi: BookSection[] = [
+  {
+    id: 1,
+    title: "महाभारत लिखने की शुरुआत",
+    body: "महर्षि वेदव्यास ने महाभारत की रचना की, लेकिन उन्हें ऐसा लेखक चाहिए था जो बिना रुके पूरे ग्रंथ को लिख सके। उन्होंने भगवान गणेश से सहायता मांगी। गणेश जी ने शर्त रखी कि वेदव्यास बिना रुके श्लोक बोलेंगे। वेदव्यास ने भी कहा कि गणेश जी हर श्लोक को समझकर ही लिखेंगे। इस प्रकार महाभारत लिखने का महान कार्य शुरू हुआ।",
+    takeaway: "महान कार्यों के लिए धैर्य, बुद्धि और अनुशासन आवश्यक हैं।",
+  },
+  {
+    id: 2,
+    title: "सिंधुरासुर की योजना",
+    body: "एक दानव जिसका नाम सिंधुरासुर था, नहीं चाहता था कि महाभारत जैसा दिव्य ग्रंथ पूरा हो। उसे डर था कि यह ज्ञान संसार को धर्म और सत्य का मार्ग दिखाएगा। उसने चुपके से गणेश जी की मजबूत लेखनी को कमजोर पंख से बदल दिया। शुरुआत में लेखनी चलती रही, लेकिन लगातार लिखने के कारण वह अचानक टूट गई।",
+    takeaway: "अच्छे और महान कार्यों में बाधाएँ अवश्य आती हैं।",
+  },
+  {
+    id: 3,
+    title: "आधा दांत तोड़ने का निर्णय",
+    body: "लेखनी टूटने के बाद भी गणेश जी रुके नहीं। उन्हें पता था कि यदि वे रुक गए, तो महाभारत की रचना अधूरी रह सकती है। तुरंत उन्होंने अपने एक दांत का आधा भाग तोड़ लिया और उसे लेखनी बनाकर लिखना जारी रखा। इसी कारण उन्हें 'एकदंत' कहा जाता है। उनका यह त्याग ज्ञान और कर्तव्य के प्रति पूर्ण समर्पण का प्रतीक बन गया।",
+    takeaway: "सच्चा समर्पण कठिन समय में भी समाधान खोज लेता है।",
+  },
+  {
+    id: 4,
+    title: "दूसरा आधा दांत",
+    body: "कथा के अनुसार, गणेश जी का बाकी आधा दांत बाद में भगवान परशुराम के साथ हुए युद्ध में टूटा। जब परशुराम भगवान शिव से मिलने कैलाश पहुँचे, तब गणेश जी ने उन्हें रोक दिया क्योंकि शिवजी विश्राम कर रहे थे। क्रोधित होकर परशुराम ने अपना फरसा फेंका। गणेश जी ने पिता शिव के सम्मान में उस वार को स्वीकार किया और उनका दूसरा आधा दांत भी टूट गया।",
+    takeaway: "सम्मान और कर्तव्य के लिए त्याग करना महानता की निशानी है।",
+  },
+  {
+    id: 5,
+    title: "महाभारत की पूर्णता",
+    body: "गणेश जी ने अपने टूटे हुए दांत से पूरा महाभारत लिखा। यह केवल एक महाकाव्य नहीं, बल्कि धर्म, नीति, युद्ध, जीवन और मानव स्वभाव का विशाल ज्ञानकोष बन गया। गणेश जी के त्याग और वेदव्यास की बुद्धि ने मिलकर दुनिया को एक अमर ग्रंथ दिया।",
+    takeaway: "त्याग और ज्ञान मिलकर अमर विरासत बनाते हैं।",
+  },
+];
+
+const ganeshaMahabharataEnglish: BookSection[] = [
+  {
+    id: 1,
+    title: "The Beginning of the Mahabharata",
+    body: "Sage Ved Vyasa composed the Mahabharata, but he needed someone capable of writing the entire epic without stopping. He requested Lord Ganesha to become the writer. Ganesha agreed on one condition — Vyasa must recite continuously without pause. Vyasa added his own condition that Ganesha must fully understand every verse before writing it. Thus began the creation of one of the greatest epics in history.",
+    takeaway: "Great achievements require discipline, intelligence, and patience.",
+  },
+  {
+    id: 2,
+    title: "Sindhurasura’s Plan",
+    body: "A demon named Sindhurasura did not want the Mahabharata to be completed because he feared its wisdom would guide humanity toward truth and dharma. Secretly, he replaced Ganesha’s strong writing feather with a weak one. At first it worked normally, but after continuous writing, the feather suddenly broke.",
+    takeaway: "Important work often attracts obstacles and negativity.",
+  },
+  {
+    id: 3,
+    title: "Breaking Half the Tusk",
+    body: "Even after the writing tool broke, Ganesha refused to stop. He knew that interrupting the writing could disturb the creation of the sacred epic. Without hesitation, he broke off half of one of his tusks and used it as a pen to continue writing. Because of this, Ganesha became known as 'Ekadanta' — the one with a single tusk. His sacrifice became a symbol of dedication toward knowledge and duty.",
+    takeaway: "True dedication always finds a way forward.",
+  },
+  {
+    id: 4,
+    title: "The Other Half of the Tusk",
+    body: "According to another famous story, the remaining half of Ganesha’s tusk later broke during a confrontation with Lord Parashurama. When Parashurama arrived at Mount Kailash to meet Lord Shiva, Ganesha stopped him because Shiva was resting. In anger, Parashurama threw his axe. Out of respect for his father Shiva, Ganesha accepted the strike instead of blocking it, and the remaining part of his tusk broke.",
+    takeaway: "Sacrifice for respect and duty reflects true greatness.",
+  },
+  {
+    id: 5,
+    title: "Completing the Great Epic",
+    body: "Using his broken tusk, Ganesha completed the Mahabharata. The epic became an eternal collection of wisdom about duty, morality, war, relationships, and human nature. Through Vyasa’s knowledge and Ganesha’s sacrifice, the world received one of its greatest spiritual treasures.",
+    takeaway: "Knowledge and sacrifice together create an eternal legacy.",
+  },
+];
+
 export const books: Book[] = [
   {
     id: "gita-simplified",
@@ -2836,11 +2902,25 @@ export const books: Book[] = [
     titleEn: "Ganesha and Kubera’s Gold",
     authorEn: "Short Mythological Story",
     descriptionEn: "The famous story where Ganesha taught Kubera the true meaning of humility and wealth.",
-    price: 49,
+    price: 29,
     cover: "from-yellow-200 via-amber-200 to-orange-300",
     category: "short-reads",
     hindiSections: kuberaGoldHindi,
     englishSections: kuberaGoldEnglish,
+  },
+  {
+    id: "ganesha-writes-mahabharata",
+    title: "गणेश जी और महाभारत की लेखनी",
+    author: "पौराणिक कथा संग्रह",
+    description: "वह प्रसिद्ध कथा जिसमें गणेश जी ने अपना दांत तोड़कर महाभारत लिखी।",
+    titleEn: "Ganesha Writing the Mahabharata",
+    authorEn: "Mythological Stories Collection",
+    descriptionEn: "The famous story where Ganesha broke his tusk to continue writing the Mahabharata.",
+    price: 29,
+    cover: "from-orange-200 via-amber-200 to-yellow-300",
+    category: "short-reads",
+    hindiSections: ganeshaMahabharataHindi,
+    englishSections: ganeshaMahabharataEnglish,
   },
   {
     id: "short-wisdom",
