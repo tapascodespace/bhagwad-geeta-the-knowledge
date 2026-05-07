@@ -2702,8 +2702,8 @@ export const books: Book[] = [
     price: 149,
     cover: "from-amber-200 via-orange-200 to-yellow-300",
     category: "spiritual-guides",
-    hindiSections: wayOfDharmaHindi,
-    englishSections: wayOfDharmaEnglish,
+    hindiSections: [],
+    englishSections: [],
   },
   {
     id: "beating-procrastination",
