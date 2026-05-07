@@ -2395,6 +2395,132 @@ const failureLessonsEnglish: BookSection[] = [
   },
 ];
 
+const ganeshaKartikeyaHindi: BookSection[] = [
+  {
+    id: 1,
+    title: "विवाह की शर्त",
+    body: "एक दिन भगवान शिव और माता पार्वती ने अपने दोनों पुत्रों — श्रीगणेश और कार्तिकेय — से कहा कि अब उनके विवाह का समय आ गया है। दोनों ही पहले विवाह करना चाहते थे। तब शिव और पार्वती ने एक प्रतियोगिता रखी। उन्होंने कहा कि जो पहले पूरे ब्रह्मांड का चक्कर लगाकर वापस आएगा, उसी का विवाह पहले किया जाएगा। यह सुनते ही कार्तिकेय अपने तेज़ मोर पर बैठकर तुरंत निकल पड़े। सभी को लगा कि वे आसानी से जीत जाएंगे।",
+    takeaway: "जीवन में हर प्रतियोगिता केवल शक्ति और गति से नहीं जीती जाती।",
+  },
+  {
+    id: 2,
+    title: "कार्तिकेय की ब्रह्मांड यात्रा",
+    body: "कार्तिकेय पूरी शक्ति और उत्साह के साथ ब्रह्मांड की यात्रा पर निकल पड़े। उन्होंने पर्वतों, नदियों, जंगलों और अनेक लोकों का भ्रमण किया। वे अत्यंत तेज़ और वीर थे। उनकी यात्रा कठिन थी, लेकिन वे लगातार आगे बढ़ते रहे। यह दर्शाता है कि मेहनत, अनुशासन और आत्मविश्वास सफलता के लिए आवश्यक हैं।",
+    takeaway: "मेहनत और साहस हमेशा सम्मान के योग्य होते हैं।",
+  },
+  {
+    id: 3,
+    title: "गणेश जी का गहरा विचार",
+    body: "जहाँ कार्तिकेय पूरी सृष्टि में यात्रा कर रहे थे, वहीं गणेश जी शांत बैठकर सोच रहे थे। उन्होंने समझा कि माता-पिता ही पूरे संसार का आधार हैं। उनके लिए शिव और पार्वती ही संपूर्ण ब्रह्मांड थे। गणेश जी ने महसूस किया कि इस प्रतियोगिता का असली अर्थ केवल तेज़ दौड़ना नहीं, बल्कि सच्चे ज्ञान को समझना है।",
+    takeaway: "सही समझ कई बार तेज़ गति से भी अधिक शक्तिशाली होती है।",
+  },
+  {
+    id: 4,
+    title: "माता-पिता की परिक्रमा",
+    body: "गणेश जी ने श्रद्धा और प्रेम से भगवान शिव और माता पार्वती की सात बार परिक्रमा की। फिर उन्होंने हाथ जोड़कर कहा, “मेरे लिए आप दोनों ही पूरा ब्रह्मांड हैं। आपकी परिक्रमा करना ही पूरे संसार की परिक्रमा करने के समान है।” यह सुनकर सभी देवता आश्चर्यचकित रह गए।",
+    takeaway: "माता-पिता का सम्मान सबसे बड़ा धर्म माना गया है।",
+  },
+  {
+    id: 5,
+    title: "ज्ञान की विजय",
+    body: "भगवान शिव और माता पार्वती गणेश जी की बुद्धि और भक्ति से अत्यंत प्रसन्न हुए। उन्होंने गणेश जी को प्रतियोगिता का विजेता घोषित कर दिया। बाद में उनका विवाह रिद्धि और सिद्धि से कराया गया। यह दर्शाता है कि बुद्धि और सही दृष्टिकोण कई बार केवल शक्ति और गति से अधिक महत्वपूर्ण होते हैं।",
+    takeaway: "बुद्धि और विवेक जीवन की सबसे बड़ी शक्तियाँ हैं।",
+  },
+  {
+    id: 6,
+    title: "कार्तिकेय की वापसी",
+    body: "जब कार्तिकेय अपनी लंबी यात्रा पूरी करके लौटे, तब उन्होंने देखा कि गणेश जी पहले ही विजेता बन चुके हैं और उनका विवाह भी हो चुका है। यह देखकर उन्हें दुख और क्रोध हुआ। उन्हें लगा कि उनके साथ अन्याय हुआ है, क्योंकि उन्होंने पूरी ईमानदारी से कठिन यात्रा पूरी की थी।",
+    takeaway: "कभी-कभी मेहनत के बाद भी परिणाम हमारी उम्मीदों जैसे नहीं होते।",
+  },
+  {
+    id: 7,
+    title: "कार्तिकेय का प्रस्थान",
+    body: "दुखी होकर कार्तिकेय कैलाश छोड़कर दक्षिण दिशा की ओर चले गए। वे क्रौंच पर्वत (Mount Krauncha) पर जाकर रहने लगे। उन्होंने संसार से दूरी बना ली और तपस्या में लीन हो गए। यह घटना दर्शाती है कि महान और शक्तिशाली लोग भी भावनात्मक पीड़ा महसूस करते हैं।",
+    takeaway: "हर व्यक्ति को कभी न कभी भावनात्मक संघर्षों से गुजरना पड़ता है।",
+  },
+  {
+    id: 8,
+    title: "शिव और पार्वती का प्रेम",
+    body: "जब शिव और पार्वती को पता चला कि कार्तिकेय दुखी होकर क्रौंच पर्वत चले गए हैं, तो वे भी वहाँ पहुँचे। वे अपने पुत्र को अकेला नहीं छोड़ना चाहते थे। माता-पिता का यह प्रेम दर्शाता है कि सच्चा स्नेह हमेशा साथ निभाता है, चाहे परिस्थितियाँ कैसी भी हों।",
+    takeaway: "सच्चा प्रेम कठिन समय में भी साथ नहीं छोड़ता।",
+  },
+  {
+    id: 9,
+    title: "मल्लिकार्जुन ज्योतिर्लिंग",
+    body: "मान्यता है कि क्रौंच पर्वत पर ही भगवान शिव और माता पार्वती ने अपने पुत्र के पास निवास किया। वहीं भगवान शिव मल्लिकार्जुन ज्योतिर्लिंग के रूप में प्रकट हुए। यह स्थान विशेष माना जाता है क्योंकि यहाँ शिवलिंग और मल्लिकार्जुन ज्योतिर्लिंग का दिव्य महत्व एक साथ जुड़ा हुआ है। आज भी लाखों भक्त इस पवित्र स्थान के दर्शन करने जाते हैं।",
+    takeaway: "पवित्र स्थान केवल मंदिर नहीं, भावनाओं और कथाओं से भी जुड़े होते हैं।",
+  },
+  {
+    id: 10,
+    title: "कहानी का गहरा संदेश",
+    body: "यह कथा केवल दो भाइयों की प्रतियोगिता नहीं, बल्कि जीवन की गहरी शिक्षा है। गणेश जी ने सिखाया कि ज्ञान और भक्ति सबसे बड़ी शक्तियाँ हैं। कार्तिकेय ने सिखाया कि मेहनत और साहस भी उतने ही महत्वपूर्ण हैं। शिव और पार्वती ने दिखाया कि परिवार का प्रेम हमेशा सबसे ऊपर होता है।",
+    takeaway: "ज्ञान, मेहनत और परिवार — यही जीवन की असली ताकत हैं।",
+  },
+];
+
+const ganeshaKartikeyaEnglish: BookSection[] = [
+  {
+    id: 1,
+    title: "The Challenge for Marriage",
+    body: "One day, Lord Shiva and Goddess Parvati decided that it was time for their sons, Ganesha and Kartikeya, to get married. Since both wished to marry first, Shiva and Parvati announced a challenge. Whoever travelled around the entire universe and returned first would be married before the other. Hearing this, Kartikeya immediately mounted his fast peacock and flew away with confidence. Everyone believed he would surely win because of his speed and strength.",
+    takeaway: "Not every competition is won through speed and power alone.",
+  },
+  {
+    id: 2,
+    title: "Kartikeya’s Journey Across the Universe",
+    body: "Kartikeya travelled through mountains, forests, rivers, heavenly worlds, and distant realms. He faced every challenge with determination and courage. His journey represented discipline, effort, and persistence. He believed that success comes through hard work and action, so he gave everything to complete the race first.",
+    takeaway: "Hard work and determination are always worthy of respect.",
+  },
+  {
+    id: 3,
+    title: "Ganesha’s Deep Understanding",
+    body: "While Kartikeya travelled across the universe, Ganesha remained calm and thoughtful. He reflected on the true meaning of the challenge. To him, his parents represented the entire universe because all creation begins from them. He understood that wisdom is not only about movement, but also about understanding truth deeply.",
+    takeaway: "True intelligence often comes from understanding, not rushing.",
+  },
+  {
+    id: 4,
+    title: "Circumambulating His Parents",
+    body: "Ganesha respectfully walked around Lord Shiva and Goddess Parvati seven times. After completing the circles, he folded his hands and said, “For me, my parents are the entire universe. By circling them, I have circled all creation.” The gods were amazed by his wisdom and devotion.",
+    takeaway: "Respect for parents is considered one of life’s highest virtues.",
+  },
+  {
+    id: 5,
+    title: "The Victory of Wisdom",
+    body: "Lord Shiva and Goddess Parvati were deeply pleased by Ganesha’s understanding. They declared him the winner of the challenge. Soon after, Ganesha was married to Riddhi and Siddhi. This event showed that wisdom and insight can sometimes achieve more than speed and physical effort.",
+    takeaway: "Wisdom and understanding are greater than mere speed.",
+  },
+  {
+    id: 6,
+    title: "Kartikeya’s Return",
+    body: "When Kartikeya finally returned after completing his difficult journey, he saw that Ganesha had already been declared victorious and married. He felt disappointed and hurt because he had sincerely worked hard to complete the challenge. To him, the result felt unfair.",
+    takeaway: "Sometimes life’s results do not match our expectations despite great effort.",
+  },
+  {
+    id: 7,
+    title: "Kartikeya Leaves Kailash",
+    body: "Feeling deeply saddened, Kartikeya left Mount Kailash and travelled south. He settled on Mount Krauncha, choosing a life of solitude and meditation. This part of the story reminds us that even strong and powerful individuals experience emotional pain and disappointment.",
+    takeaway: "Even the strongest people face emotional struggles.",
+  },
+  {
+    id: 8,
+    title: "The Love of Shiva and Parvati",
+    body: "When Shiva and Parvati learned that Kartikeya had left in sorrow, they followed him to Mount Krauncha. They did not want their son to remain alone in sadness. Their journey reflects the unconditional love of parents, who continue to care for their children regardless of circumstances.",
+    takeaway: "True love never abandons someone during difficult times.",
+  },
+  {
+    id: 9,
+    title: "The Mallikarjuna Jyotirlinga",
+    body: "According to tradition, Lord Shiva and Goddess Parvati stayed near Kartikeya at Mount Krauncha. There, Lord Shiva manifested as the sacred Mallikarjuna Jyotirlinga. This place became one of the holiest pilgrimage sites because of its deep connection to both the divine family and the Jyotirlinga itself. Even today, millions of devotees visit this sacred location.",
+    takeaway: "Sacred places carry stories, emotions, and spiritual meaning.",
+  },
+  {
+    id: 10,
+    title: "The Eternal Lesson",
+    body: "This story is far more than a competition between two brothers. Ganesha teaches the power of wisdom and devotion. Kartikeya represents courage, effort, and discipline. Shiva and Parvati demonstrate the strength of family love and compassion. Together, the story reminds us that true success in life requires intelligence, effort, humility, and strong relationships.",
+    takeaway: "Wisdom, effort, and family are among life’s greatest strengths.",
+  },
+];
+
 export const books: Book[] = [
   {
     id: "gita-simplified",
