@@ -2965,6 +2965,96 @@ const fearlessLivingEnglish: BookSection[] = [
   },
 ];
 
+const eatSunHindi: BookSection[] = [
+  {
+    id: 1,
+    title: "अद्भुत बालक का जन्म",
+    body: "माता अंजना और वानरराज केसरी के घर एक दिव्य बालक का जन्म हुआ — हनुमान। जन्म से ही उनमें असाधारण ऊर्जा, साहस और शक्ति थी। देवताओं को पता था कि यह बालक भविष्य में धर्म की रक्षा के लिए महान कार्य करेगा। बचपन में हनुमान अत्यंत चंचल और निडर थे। उन्हें किसी भी चीज़ से डर नहीं लगता था।",
+    takeaway: "महान शक्ति अक्सर बचपन से ही दिखाई देने लगती है।",
+  },
+  {
+    id: 2,
+    title: "आकाश में चमकता फल",
+    body: "एक सुबह हनुमान जी बहुत भूखे थे। तभी उन्होंने आकाश में चमकते हुए लाल सूर्य को देखा। उन्हें लगा कि वह कोई विशाल मीठा फल है। बिना कुछ सोचे वे उसे खाने के लिए आकाश में उड़ पड़े। उनकी गति इतनी तेज थी कि देवता भी आश्चर्यचकित हो गए।",
+    takeaway: "मासूमियत कभी-कभी असंभव लगने वाले काम करवा देती है।",
+  },
+  {
+    id: 3,
+    title: "देवताओं की चिंता",
+    body: "जब हनुमान सूर्य की ओर बढ़ने लगे, तब देवताओं में चिंता फैल गई। यदि सूर्य गायब हो जाता, तो पूरी सृष्टि अंधकार में डूब जाती। उसी समय राहु सूर्य ग्रहण के लिए आया, लेकिन हनुमान को देखकर डर गया। वह तुरंत इंद्र के पास शिकायत लेकर पहुँचा।",
+    takeaway: "छोटे कार्य भी कभी-कभी बड़े प्रभाव डाल सकते हैं।",
+  },
+  {
+    id: 4,
+    title: "इंद्र का वज्र",
+    body: "देवराज इंद्र ने स्थिति को रोकने के लिए अपने वज्र से हनुमान पर प्रहार किया। वज्र उनके जबड़े पर लगा और वे नीचे गिर पड़े। उनके घायल होने से वायु देव अत्यंत क्रोधित हो गए। उन्होंने पूरी दुनिया से वायु रोक दी, जिससे सभी प्राणी परेशान हो गए।",
+    takeaway: "शक्ति के साथ जिम्मेदारी भी जरूरी होती है।",
+  },
+  {
+    id: 5,
+    title: "देवताओं के वरदान",
+    body: "जब देवताओं ने देखा कि संसार संकट में पड़ गया है, तब वे वायु देव को शांत करने पहुँचे। सभी देवताओं ने मिलकर हनुमान जी को अनेक दिव्य वरदान दिए। उन्हें अग्नि से सुरक्षा, असाधारण बल, बुद्धि और अमर साहस प्राप्त हुआ। ब्रह्मा, इंद्र और सूर्यदेव ने भी उन्हें विशेष आशीर्वाद दिए।",
+    takeaway: "कठिन परिस्थितियाँ भी नई शक्तियों का कारण बन सकती हैं।",
+  },
+  {
+    id: 6,
+    title: "सूर्य बने गुरु",
+    body: "बाद में सूर्यदेव स्वयं हनुमान जी के गुरु बने। हनुमान प्रतिदिन सूर्य के साथ चलते हुए शिक्षा प्राप्त करते थे। उन्होंने वेद, शास्त्र, युद्धकला और ज्ञान सीखा। उनकी बुद्धि उतनी ही महान बन गई जितनी उनकी शक्ति।",
+    takeaway: "सच्ची महानता शक्ति और ज्ञान दोनों से बनती है।",
+  },
+  {
+    id: 7,
+    title: "कथा की सीख",
+    body: "यह कथा केवल एक बालक द्वारा सूर्य खाने की कोशिश की कहानी नहीं है। यह साहस, जिज्ञासा और छिपी हुई क्षमता की कहानी है। हनुमान जी दिखाते हैं कि निडरता महान है, लेकिन उसे सही दिशा और ज्ञान की भी आवश्यकता होती है।",
+    takeaway: "साहस तब सबसे शक्तिशाली बनता है जब उसके साथ बुद्धि हो।",
+  },
+];
+
+const eatSunEnglish: BookSection[] = [
+  {
+    id: 1,
+    title: "The Birth of an Extraordinary Child",
+    body: "Hanuman was born to Mother Anjana and the Vanara king Kesari. From the very beginning, he possessed extraordinary strength, energy, and fearlessness. The gods knew that this child would one day play an important role in protecting dharma. As a young boy, Hanuman was playful, curious, and completely fearless.",
+    takeaway: "Great potential often appears early in life.",
+  },
+  {
+    id: 2,
+    title: "The Glowing Fruit in the Sky",
+    body: "One morning, young Hanuman felt extremely hungry. As he looked into the sky, he saw the bright red rising sun glowing beautifully. Innocently, he mistook it for a giant fruit. Without hesitation, he leaped into the sky to grab and eat it. His speed and confidence shocked the gods themselves.",
+    takeaway: "Innocence can create unbelievable courage.",
+  },
+  {
+    id: 3,
+    title: "The Gods Become Worried",
+    body: "As Hanuman flew closer to the sun, the gods became deeply worried. If the sun disappeared, the entire universe would fall into darkness and chaos. At the same time, Rahu was approaching the sun for an eclipse, but after seeing Hanuman racing toward it, he became terrified and rushed to complain to Indra.",
+    takeaway: "Even small actions can create huge consequences.",
+  },
+  {
+    id: 4,
+    title: "Indra’s Thunderbolt",
+    body: "To stop the situation from becoming dangerous, Lord Indra used his thunderbolt weapon against Hanuman. The strike hit Hanuman’s jaw and caused him to fall back to Earth. Seeing his son injured, Vayu Dev became furious and stopped the flow of air across the world. Soon, all living beings began suffering without air.",
+    takeaway: "Power must always be balanced with responsibility.",
+  },
+  {
+    id: 5,
+    title: "Blessings from the Gods",
+    body: "Realizing the danger they had created, the gods came together to calm Vayu Dev. To heal and protect Hanuman, they granted him many divine blessings. He received protection from fire, immense physical strength, wisdom, speed, and courage. Brahma, Indra, Surya, and many other gods personally blessed him.",
+    takeaway: "Difficult moments can become the beginning of great strength.",
+  },
+  {
+    id: 6,
+    title: "The Sun Becomes His Teacher",
+    body: "Later in life, Surya Dev himself became Hanuman’s guru. Hanuman learned while moving alongside the sun across the sky each day. He mastered scriptures, warfare, wisdom, discipline, and spiritual knowledge. His intelligence became just as remarkable as his physical strength.",
+    takeaway: "True greatness comes from both strength and wisdom.",
+  },
+  {
+    id: 7,
+    title: "The Lesson of the Story",
+    body: "This story is not only about a boy trying to eat the sun. It is a story about courage, innocence, curiosity, and hidden potential. Hanuman teaches that fearlessness is powerful, but it becomes truly meaningful only when guided by wisdom and purpose.",
+    takeaway: "Courage becomes greatest when guided by wisdom.",
+  },
+];
+
 export const books: Book[] = [
   {
     id: "gita-simplified",
@@ -3024,6 +3114,20 @@ export const books: Book[] = [
     category: "bhagavad-gita",
     hindiSections: fearlessLivingHindi,
     englishSections: fearlessLivingEnglish,
+  },
+  {
+    id: "the-boy-who-tried-to-eat-the-sun",
+    title: "वह बालक जिसने सूर्य को खाने की कोशिश की",
+    author: "पौराणिक कथा संग्रह",
+    description: "बाल हनुमान की प्रसिद्ध कथा जिसमें उन्होंने सूर्य को फल समझकर खाने की कोशिश की।",
+    titleEn: "The Boy Who Tried to Eat the Sun",
+    authorEn: "Mythological Stories Collection",
+    descriptionEn: "The famous childhood story of Hanuman trying to eat the sun after mistaking it for a fruit.",
+    price: 29,
+    cover: "from-orange-200 via-yellow-200 to-red-200",
+    category: "short-reads",
+    hindiSections: eatSunHindi,
+    englishSections: eatSunEnglish,
   },
   {
     id: "importance-of-patience",
