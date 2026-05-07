@@ -2923,6 +2923,22 @@ export const books: Book[] = [
     englishSections: ganeshaMahabharataEnglish,
   },
   {
+    id: "hanuman-forgets-his-powers",
+    title: "हनुमान अपनी शक्तियाँ भूल गए",
+    author: "पौराणिक कथा संग्रह",
+    description:
+      "वह प्रेरणादायक कथा जिसमें हनुमान जी अपनी शक्तियाँ भूल जाते हैं और जामवंत उन्हें उनकी असली क्षमता याद दिलाते हैं।",
+    titleEn: "Hanuman Forgets His Powers",
+    authorEn: "Mythological Stories Collection",
+    descriptionEn:
+      "The inspiring story where Hanuman forgets his powers until Jambavan reminds him of his true strength.",
+    price: 29,
+    cover: "from-orange-200 via-red-200 to-amber-300",
+    category: "short-reads",
+    hindiSections: hanumanForgotPowersHindi,
+    englishSections: hanumanForgotPowersEnglish,
+  },
+  {
     id: "short-wisdom",
     title: "10 मिनट का ज्ञान",
     author: "लघु पाठ",
