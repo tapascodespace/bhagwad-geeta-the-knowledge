@@ -2779,6 +2779,192 @@ const hanumanForgotPowersEnglish: BookSection[] = [
   },
 ];
 
+const fearlessLivingHindi: BookSection[] = [
+  {
+    id: 1,
+    title: "भय क्यों पैदा होता है",
+    body: "भय केवल बाहरी परिस्थितियों से नहीं आता, बल्कि हमारे मन की कल्पनाओं से पैदा होता है। जब व्यक्ति भविष्य को लेकर असुरक्षित महसूस करता है, तब डर बढ़ने लगता है। भगवान कृष्ण ने अर्जुन को समझाया कि डर अक्सर उस चीज़ से होता है जो अभी हुई ही नहीं। मन बार-बार असफलता, अपमान या नुकसान की कल्पना करता है। इसलिए भय को हराने का पहला कदम है — अपने विचारों को समझना।",
+    takeaway: "डर अक्सर वास्तविकता से नहीं, कल्पनाओं से पैदा होता है।",
+  },
+  {
+    id: 2,
+    title: "अर्जुन की उलझन",
+    body: "महाभारत के युद्ध से पहले अर्जुन भय और भ्रम से भर गए थे। उनके हाथ काँप रहे थे और वे युद्ध छोड़ना चाहते थे। उन्हें अपने ही परिवार के खिलाफ खड़े होने का डर था। यह दिखाता है कि सबसे शक्तिशाली व्यक्ति भी मानसिक संघर्ष से गुजर सकता है। कृष्ण ने अर्जुन को सिखाया कि डर से भागना समाधान नहीं है।",
+    takeaway: "सबसे बहादुर लोग भी कभी-कभी डरते हैं।",
+  },
+  {
+    id: 3,
+    title: "कर्तव्य पर ध्यान",
+    body: "कृष्ण ने अर्जुन को परिणाम की चिंता छोड़कर अपने कर्तव्य पर ध्यान देने को कहा। जब व्यक्ति केवल परिणाम के बारे में सोचता है, तब डर बढ़ता है। लेकिन जब ध्यान सही कर्म पर होता है, तब मन स्थिर रहता है। जीवन में साहस का अर्थ है सही काम करना, चाहे परिणाम अनिश्चित ही क्यों न हों।",
+    takeaway: "साहस का अर्थ है सही कर्म करना।",
+  },
+  {
+    id: 4,
+    title: "असफलता का डर",
+    body: "बहुत लोग इसलिए प्रयास नहीं करते क्योंकि उन्हें असफल होने का डर होता है। कृष्ण सिखाते हैं कि असफलता अंत नहीं, बल्कि सीखने का हिस्सा है। यदि व्यक्ति केवल हार से बचने के लिए जीता है, तो वह कभी अपनी पूरी क्षमता तक नहीं पहुँच सकता।",
+    takeaway: "असफलता विकास का हिस्सा है, अंत नहीं।",
+  },
+  {
+    id: 5,
+    title: "दूसरों की राय का भय",
+    body: "कई बार लोग इसलिए अपने सपने छोड़ देते हैं क्योंकि उन्हें समाज के निर्णय का डर होता है। कृष्ण बताते हैं कि जो व्यक्ति हर समय दूसरों को खुश करने की कोशिश करता है, वह कभी भीतर से शांत नहीं रह सकता। सही जीवन वह है जो सत्य और धर्म के अनुसार जिया जाए।",
+    takeaway: "हर किसी को खुश करना संभव नहीं है।",
+  },
+  {
+    id: 6,
+    title: "मन को नियंत्रित करना",
+    body: "कृष्ण ने मन को हवा की तरह चंचल बताया। यदि मन नियंत्रित न हो, तो डर और चिंता बढ़ते जाते हैं। ध्यान, अनुशासन और सही सोच से मन को स्थिर बनाया जा सकता है। जब मन शांत होता है, तब निर्णय भी स्पष्ट होते हैं।",
+    takeaway: "शांत मन ही सबसे बड़ी शक्ति है।",
+  },
+  {
+    id: 7,
+    title: "वर्तमान में जीना",
+    body: "भय का बड़ा कारण भविष्य की चिंता है। कृष्ण सिखाते हैं कि व्यक्ति को वर्तमान क्षण पर ध्यान देना चाहिए। जब हम वर्तमान में पूरी जागरूकता के साथ जीते हैं, तब अनावश्यक डर कम होने लगता है।",
+    takeaway: "वर्तमान में जीना डर को कम करता है।",
+  },
+  {
+    id: 8,
+    title: "आत्मा का ज्ञान",
+    body: "भगवान कृष्ण ने अर्जुन को आत्मा के बारे में समझाया कि आत्मा न जन्म लेती है और न मरती है। शरीर बदलता है, लेकिन आत्मा शाश्वत है। यह समझ व्यक्ति के भीतर गहरा साहस पैदा करती है क्योंकि वह जीवन को केवल शरीर तक सीमित नहीं देखता।",
+    takeaway: "आत्मा का ज्ञान भय को कम करता है।",
+  },
+  {
+    id: 9,
+    title: "कठिन निर्णय लेना",
+    body: "सही निर्णय हमेशा आसान नहीं होते। कई बार व्यक्ति को सत्य के लिए कठिन रास्ता चुनना पड़ता है। कृष्ण ने अर्जुन को सिखाया कि कठिन निर्णय से भागना कमजोरी है। साहस का अर्थ है सही रास्ता चुनना, चाहे वह कठिन ही क्यों न हो।",
+    takeaway: "सही रास्ता हमेशा आसान नहीं होता।",
+  },
+  {
+    id: 10,
+    title: "तुलना का जाल",
+    body: "दूसरों से तुलना करने से डर और असुरक्षा बढ़ती है। कृष्ण बताते हैं कि हर व्यक्ति का अपना मार्ग और उद्देश्य होता है। जब व्यक्ति अपनी यात्रा पर ध्यान देता है, तब उसका आत्मविश्वास बढ़ता है।",
+    takeaway: "अपनी यात्रा पर ध्यान दो, तुलना पर नहीं।",
+  },
+  {
+    id: 11,
+    title: "आत्मविश्वास और विश्वास",
+    body: "कृष्ण ने अर्जुन को खुद पर और ईश्वर पर विश्वास रखना सिखाया। जब व्यक्ति भीतर से विश्वास से भरा होता है, तब डर कमजोर पड़ने लगता है। आत्मविश्वास केवल सफलता से नहीं, बल्कि लगातार प्रयास से बनता है।",
+    takeaway: "विश्वास डर को कमजोर कर देता है।",
+  },
+  {
+    id: 12,
+    title: "संघर्ष से भागना नहीं",
+    body: "जीवन में संघर्ष से बचना संभव नहीं है। कृष्ण ने सिखाया कि चुनौतियाँ व्यक्ति को मजबूत बनाती हैं। यदि हर कठिनाई से भागा जाए, तो विकास रुक जाता है।",
+    takeaway: "संघर्ष ही व्यक्ति को मजबूत बनाते हैं।",
+  },
+  {
+    id: 13,
+    title: "भावनाओं का संतुलन",
+    body: "भय, क्रोध और चिंता जैसी भावनाएँ स्वाभाविक हैं। लेकिन यदि वे व्यक्ति को नियंत्रित करने लगें, तो निर्णय कमजोर हो जाते हैं। कृष्ण सिखाते हैं कि भावनाओं को दबाना नहीं, बल्कि समझना और संतुलित करना जरूरी है।",
+    takeaway: "भावनाओं का संतुलन आंतरिक शक्ति देता है।",
+  },
+  {
+    id: 14,
+    title: "धर्म के लिए खड़े होना",
+    body: "कृष्ण ने अर्जुन को केवल युद्ध के लिए नहीं, बल्कि धर्म की रक्षा के लिए प्रेरित किया। कई बार सही चीज़ के लिए खड़ा होना कठिन होता है, लेकिन वही सच्चा साहस है।",
+    takeaway: "सच्चा साहस धर्म के साथ खड़े होने में है।",
+  },
+  {
+    id: 15,
+    title: "निर्भय जीवन का रहस्य",
+    body: "निर्भय जीवन का अर्थ यह नहीं कि व्यक्ति कभी नहीं डरता। इसका अर्थ है कि डर के बावजूद सही दिशा में आगे बढ़ना। कृष्ण का संदेश है कि विश्वास, अनुशासन, आत्मज्ञान और सही कर्म व्यक्ति को भीतर से मजबूत बनाते हैं।",
+    takeaway: "निर्भयता डर का अभाव नहीं, बल्कि उस पर विजय है।",
+  },
+];
+
+const fearlessLivingEnglish: BookSection[] = [
+  {
+    id: 1,
+    title: "Why Fear Exists",
+    body: "Fear does not only come from external situations — it often comes from the imagination of the mind. People become afraid when they constantly think about failure, rejection, loss, or uncertainty. Krishna teaches that most fears are based on events that have not even happened yet. The mind creates stories and worst-case scenarios, making the future seem dangerous. The first step toward fearlessness is learning to observe and control your thoughts instead of becoming controlled by them.",
+    takeaway: "Most fear is created by imagination, not reality.",
+  },
+  {
+    id: 2,
+    title: "Arjuna’s Breakdown",
+    body: "Before the Kurukshetra war began, Arjuna was filled with fear, confusion, and emotional pain. His hands trembled, his mind became restless, and he wanted to walk away from the battlefield. He feared fighting against his own family and teachers. Krishna’s response showed that even the strongest people experience fear and emotional struggle. Courage does not mean never feeling fear — it means learning how to move forward despite it.",
+    takeaway: "Even the strongest people experience fear sometimes.",
+  },
+  {
+    id: 3,
+    title: "Focus on Duty",
+    body: "Krishna advised Arjuna to focus on his duty rather than worrying about results. Fear grows when people become obsessed with outcomes they cannot fully control. But when attention shifts toward doing the right action with sincerity, the mind becomes calmer and stronger. Krishna teaches that courage comes from commitment to action, not attachment to success.",
+    takeaway: "True courage comes from doing the right thing.",
+  },
+  {
+    id: 4,
+    title: "The Fear of Failure",
+    body: "Many people avoid opportunities because they fear failure or embarrassment. Krishna explains that failure is not the opposite of success — it is part of growth. Every challenge teaches something valuable. A person who avoids all risks may feel safe temporarily, but they also limit their own potential and experience.",
+    takeaway: "Failure is part of growth, not the end of the journey.",
+  },
+  {
+    id: 5,
+    title: "Fear of Judgment",
+    body: "One of the biggest fears people face is the fear of what others think. Krishna teaches that constantly seeking approval from society creates inner weakness. People lose themselves when they live only to satisfy others. A fearless life requires staying connected to truth and values instead of public opinion.",
+    takeaway: "You cannot build peace by trying to please everyone.",
+  },
+  {
+    id: 6,
+    title: "Mastering the Mind",
+    body: "Krishna compared the mind to the wind — restless, fast, and difficult to control. Without discipline, the mind becomes a source of anxiety, fear, and overthinking. Through meditation, awareness, and self-control, the mind can slowly become stable. A calm mind creates clear decisions and emotional strength.",
+    takeaway: "A calm mind is one of life’s greatest powers.",
+  },
+  {
+    id: 7,
+    title: "Living in the Present",
+    body: "Fear often comes from excessive worry about the future. Krishna teaches that peace exists only in the present moment. When people constantly replay the past or imagine future disasters, they disconnect from reality. Living fully in the present reduces unnecessary mental suffering.",
+    takeaway: "Presence weakens fear and strengthens clarity.",
+  },
+  {
+    id: 8,
+    title: "Understanding the Soul",
+    body: "Krishna explained that the soul is eternal — it is never born and never dies. The body changes, but the soul continues beyond physical life. This understanding gives deep courage because it shifts a person’s identity beyond temporary fears and limitations.",
+    takeaway: "Spiritual understanding reduces fear deeply.",
+  },
+  {
+    id: 9,
+    title: "Making Difficult Decisions",
+    body: "The right decisions are not always comfortable. Sometimes truth requires sacrifice, honesty, or painful choices. Krishna teaches that avoiding difficult decisions only creates more suffering later. Real courage means choosing what is right even when it feels uncomfortable.",
+    takeaway: "The right path is not always the easiest path.",
+  },
+  {
+    id: 10,
+    title: "The Trap of Comparison",
+    body: "Comparison creates insecurity and self-doubt. Krishna teaches that every person has a unique role and purpose in life. When people constantly compare themselves to others, they lose focus on their own growth. Fearlessness grows when a person accepts their own journey fully.",
+    takeaway: "Focus on your own journey, not comparisons.",
+  },
+  {
+    id: 11,
+    title: "Faith and Confidence",
+    body: "Krishna encouraged Arjuna to develop faith — both in himself and in the divine. Confidence does not come from never failing; it comes from continuing despite uncertainty. Faith gives strength during moments when logic alone feels insufficient.",
+    takeaway: "Faith weakens fear and strengthens action.",
+  },
+  {
+    id: 12,
+    title: "Do Not Escape Struggles",
+    body: "Krishna never told Arjuna to escape life’s struggles. Instead, he taught that challenges are necessary for growth and transformation. Avoiding every difficult situation may feel easier temporarily, but it weakens character over time.",
+    takeaway: "Challenges are necessary for growth.",
+  },
+  {
+    id: 13,
+    title: "Balancing Emotions",
+    body: "Fear, anger, sadness, and anxiety are natural human emotions. Krishna teaches that emotions should not be suppressed blindly, but understood wisely. Emotional balance creates inner stability and helps people respond thoughtfully instead of reacting impulsively.",
+    takeaway: "Emotional balance creates inner strength.",
+  },
+  {
+    id: 14,
+    title: "Standing for Dharma",
+    body: "Krishna inspired Arjuna not merely to fight, but to stand for dharma — truth, justice, and righteousness. Fearless living is not only about personal success. It is also about having the courage to protect what is right even when it is difficult.",
+    takeaway: "True courage stands with truth and justice.",
+  },
+  {
+    id: 15,
+    title: "The Secret of Fearless Living",
+    body: "Fearlessness does not mean never feeling afraid. It means refusing to let fear control your choices and actions. Krishna’s teachings show that discipline, self-awareness, faith, wisdom, and right action create true inner strength. A fearless life begins when a person stops running away from themselves.",
+    takeaway: "Fearlessness is not the absence of fear — it is mastery over it.",
+  },
+];
+
 export const books: Book[] = [
   {
     id: "gita-simplified",
@@ -2822,6 +3008,22 @@ export const books: Book[] = [
     category: "bhagavad-gita",
     hindiSections: krishnaRelationshipsHindi,
     englishSections: krishnaRelationshipsEnglish,
+  },
+  {
+    id: "krishnas-guide-to-fearless-living",
+    title: "निर्भय जीवन के लिए कृष्ण का मार्गदर्शन",
+    author: "आध्यात्मिक ज्ञान श्रृंखला",
+    description:
+      "भगवान कृष्ण की शिक्षाओं के माध्यम से भय, असुरक्षा और मानसिक संघर्ष को समझने और उनसे ऊपर उठने की गहरी सीख।",
+    titleEn: "Krishna’s Guide to Fearless Living",
+    authorEn: "Spiritual Wisdom Series",
+    descriptionEn:
+      "A deep guide inspired by Krishna’s teachings on overcoming fear, anxiety, self-doubt, and inner conflict.",
+    price: 149,
+    cover: "from-indigo-200 via-blue-200 to-purple-200",
+    category: "bhagavad-gita",
+    hindiSections: fearlessLivingHindi,
+    englishSections: fearlessLivingEnglish,
   },
   {
     id: "importance-of-patience",
