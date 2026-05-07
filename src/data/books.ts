@@ -3019,7 +3019,7 @@ export const books: Book[] = [
     authorEn: "Spiritual Wisdom Series",
     descriptionEn:
       "A deep guide inspired by Krishna’s teachings on overcoming fear, anxiety, self-doubt, and inner conflict.",
-    price: 149,
+    price: 99,
     cover: "from-indigo-200 via-blue-200 to-purple-200",
     category: "bhagavad-gita",
     hindiSections: fearlessLivingHindi,
