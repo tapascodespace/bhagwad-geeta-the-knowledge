@@ -2561,7 +2561,7 @@ export const books: Book[] = [
     descriptionEn: "How patience helps build better decisions, stronger relationships, and a calmer life.",
     price: 99,
     cover: "from-emerald-200 via-teal-200 to-cyan-200",
-    category: "spiritual-guides",
+    category: "bhagavad-gita",
     hindiSections: [],
     englishSections: [],
   },
