@@ -2209,6 +2209,192 @@ const krishnaRelationshipsEnglish: BookSection[] = [
   },
 ];
 
+const failureLessonsHindi: BookSection[] = [
+  {
+    id: 1,
+    title: "असफलता क्या है?",
+    body: "असफलता का मतलब अंत नहीं होता। यह केवल एक परिणाम है जो बताता है कि कौन-सी चीज़ काम नहीं कर रही। हर सफल व्यक्ति ने कई बार असफलता देखी होती है। फर्क सिर्फ इतना होता है कि वे रुकते नहीं।",
+    takeaway: "असफलता अंत नहीं, सीख की शुरुआत है।",
+  },
+  {
+    id: 2,
+    title: "गलतियों से सीखना",
+    body: "गलतियाँ हमें हमारी कमजोरियों के बारे में बताती हैं। अगर हम हर गलती के बाद खुद से पूछें कि क्या बेहतर किया जा सकता था, तो वही गलती हमारी ताकत बन जाती है।",
+    takeaway: "हर गलती में सुधार का अवसर छिपा होता है।",
+  },
+  {
+    id: 3,
+    title: "डर को समझना",
+    body: "अक्सर असफलता का सबसे बड़ा कारण डर होता है। लोग कोशिश करने से पहले ही हार मान लेते हैं। लेकिन डर को हराने का एक ही तरीका है — कार्रवाई करना।",
+    takeaway: "डर कम नहीं होगा, लेकिन साहस बढ़ सकता है।",
+  },
+  {
+    id: 4,
+    title: "तुलना करना बंद करो",
+    body: "दूसरों की सफलता देखकर खुद को असफल समझना गलत है। हर व्यक्ति की यात्रा अलग होती है। तुलना आत्मविश्वास को कमजोर करती है और ध्यान भटका देती है।",
+    takeaway: "अपनी यात्रा पर ध्यान दो, दूसरों की नहीं।",
+  },
+  {
+    id: 5,
+    title: "धीरे-धीरे आगे बढ़ना",
+    body: "हर बड़ी सफलता छोटे कदमों से बनती है। असफलता के बाद दोबारा शुरुआत करना कठिन लगता है, लेकिन छोटे कदम आत्मविश्वास वापस लाते हैं।",
+    takeaway: "छोटे कदम भी प्रगति होते हैं।",
+  },
+  {
+    id: 6,
+    title: "आलोचना से सीखो",
+    body: "हर आलोचना गलत नहीं होती। कई बार दूसरों की बातें हमें हमारी कमियों को समझने में मदद करती हैं। समझदारी यह है कि सही आलोचना को स्वीकार किया जाए।",
+    takeaway: "सही आलोचना विकास का साधन बन सकती है।",
+  },
+  {
+    id: 7,
+    title: "धैर्य रखना",
+    body: "असफलता के बाद तुरंत परिणाम की उम्मीद करना गलत है। सुधार और सफलता समय लेते हैं। धैर्य रखने वाले लोग ही अंत में मजबूत बनते हैं।",
+    takeaway: "धैर्य कठिन समय को आसान बनाता है।",
+  },
+  {
+    id: 8,
+    title: "खुद को दोष मत दो",
+    body: "कई लोग असफलता के बाद खुद को बेकार समझने लगते हैं। लेकिन एक असफलता आपकी पहचान तय नहीं करती। आपका प्रयास ज्यादा महत्वपूर्ण है।",
+    takeaway: "आपकी असफलता आपकी पहचान नहीं है।",
+  },
+  {
+    id: 9,
+    title: "अनुभव की ताकत",
+    body: "हर असफलता अनुभव देती है। वही अनुभव आगे सही निर्णय लेने में मदद करता है। अनुभव किताबों से नहीं, जीवन से आता है।",
+    takeaway: "अनुभव सबसे बड़ा शिक्षक है।",
+  },
+  {
+    id: 10,
+    title: "फिर से शुरुआत करना",
+    body: "दोबारा शुरुआत करना कमजोरी नहीं, साहस है। जो व्यक्ति गिरने के बाद फिर उठता है, वही वास्तव में मजबूत बनता है।",
+    takeaway: "दोबारा शुरुआत करना ही असली ताकत है।",
+  },
+  {
+    id: 11,
+    title: "नकारात्मक सोच से बचो",
+    body: "लगातार नकारात्मक सोच आत्मविश्वास को खत्म कर देती है। असफलता के बाद भी सकारात्मक दृष्टिकोण बनाए रखना जरूरी है।",
+    takeaway: "सोच बदलो, दिशा बदल जाएगी।",
+  },
+  {
+    id: 12,
+    title: "अनुशासन की भूमिका",
+    body: "केवल प्रेरणा काफी नहीं होती। रोज़ का अनुशासन ही लंबे समय में सफलता दिलाता है। छोटे-छोटे लगातार प्रयास बड़े परिणाम बनाते हैं।",
+    takeaway: "अनुशासन प्रेरणा से ज्यादा शक्तिशाली है।",
+  },
+  {
+    id: 13,
+    title: "सही लोगों के साथ रहना",
+    body: "अच्छे लोग कठिन समय में हिम्मत देते हैं। नकारात्मक लोगों के बीच रहना आत्मविश्वास कम कर सकता है।",
+    takeaway: "संगति आपके सोचने का तरीका बदल देती है।",
+  },
+  {
+    id: 14,
+    title: "सफल लोगों की कहानी",
+    body: "दुनिया के कई सफल लोग पहले असफल हुए थे। वैज्ञानिक, खिलाड़ी, व्यवसायी — सभी ने संघर्ष देखा। लेकिन उन्होंने हार नहीं मानी।",
+    takeaway: "हर सफलता के पीछे संघर्ष छिपा होता है।",
+  },
+  {
+    id: 15,
+    title: "असफलता को स्वीकार करना",
+    body: "जब हम असफलता को स्वीकार करते हैं, तभी सुधार शुरू होता है। सच्चाई से भागना केवल समस्या को लंबा करता है।",
+    takeaway: "स्वीकार करना ही बदलाव का पहला कदम है।",
+  },
+];
+
+const failureLessonsEnglish: BookSection[] = [
+  {
+    id: 1,
+    title: "What Failure Really Means",
+    body: "Failure does not mean your journey is over. It simply means a certain method or decision did not work. Many successful people failed multiple times before reaching their goals. The difference is that they treated failure as feedback instead of defeat.",
+    takeaway: "Failure is not the end — it is information for growth.",
+  },
+  {
+    id: 2,
+    title: "Learning from Mistakes",
+    body: "Mistakes reveal weaknesses that would otherwise remain hidden. Instead of feeling ashamed, analyzing mistakes calmly helps improve future decisions. Every mistake contains a lesson if you are willing to look for it.",
+    takeaway: "Every mistake carries a lesson inside it.",
+  },
+  {
+    id: 3,
+    title: "Understanding Fear",
+    body: "Fear of failure often stops people before they even begin. Many dreams remain incomplete not because people lack talent, but because they are afraid of trying. Courage grows only through action.",
+    takeaway: "Action weakens fear more than thinking ever will.",
+  },
+  {
+    id: 4,
+    title: "Stop Comparing Yourself",
+    body: "Comparing your failures to someone else’s success creates unnecessary pressure. Everyone moves at a different speed in life. Focusing on your own growth is healthier and more productive.",
+    takeaway: "Focus on progress, not comparison.",
+  },
+  {
+    id: 5,
+    title: "The Power of Small Steps",
+    body: "After failure, starting again can feel overwhelming. Small actions rebuild confidence and momentum slowly. Consistent small improvements eventually create major change.",
+    takeaway: "Small steps create long-term progress.",
+  },
+  {
+    id: 6,
+    title: "Using Criticism Wisely",
+    body: "Not all criticism is harmful. Sometimes honest feedback reveals blind spots we fail to notice ourselves. Learning to separate useful criticism from negativity is an important life skill.",
+    takeaway: "Wise people learn even from criticism.",
+  },
+  {
+    id: 7,
+    title: "Patience During Difficult Times",
+    body: "Growth after failure takes time. People often expect immediate success after one improvement, but real change happens gradually. Patience prevents frustration and keeps you moving forward.",
+    takeaway: "Patience turns struggle into strength.",
+  },
+  {
+    id: 8,
+    title: "Do Not Define Yourself by Failure",
+    body: "One failed exam, business, or decision does not define your value as a person. Separating your identity from temporary failure protects confidence and mental health.",
+    takeaway: "Your failure is not your identity.",
+  },
+  {
+    id: 9,
+    title: "The Value of Experience",
+    body: "Experience often comes through setbacks. Difficult situations teach lessons that success sometimes cannot. Those lessons later become wisdom and better judgment.",
+    takeaway: "Experience is built through challenges.",
+  },
+  {
+    id: 10,
+    title: "Starting Again",
+    body: "Beginning again after failure requires courage. Many people quit permanently after one setback, but those who rise again become mentally stronger and more resilient.",
+    takeaway: "Restarting is a sign of strength, not weakness.",
+  },
+  {
+    id: 11,
+    title: "Avoiding Negative Thinking",
+    body: "Constant negative thoughts reduce confidence and motivation. Learning to control your inner dialogue after failure is essential for recovery and improvement.",
+    takeaway: "Your thoughts influence your recovery.",
+  },
+  {
+    id: 12,
+    title: "The Role of Discipline",
+    body: "Motivation comes and goes, but discipline keeps you moving even during difficult days. Consistent habits create progress long after emotions fade.",
+    takeaway: "Discipline creates lasting success.",
+  },
+  {
+    id: 13,
+    title: "Choosing the Right Environment",
+    body: "Supportive people help you recover from setbacks faster. Negative environments increase self-doubt and fear. Your surroundings strongly influence your mindset.",
+    takeaway: "Your environment shapes your thinking.",
+  },
+  {
+    id: 14,
+    title: "Stories of Successful People",
+    body: "Scientists, athletes, entrepreneurs, and leaders all faced rejection and failure before succeeding. Their stories prove that setbacks are part of almost every successful journey.",
+    takeaway: "Behind every success story is struggle.",
+  },
+  {
+    id: 15,
+    title: "Accepting Reality",
+    body: "Growth begins when you honestly accept what went wrong instead of avoiding it. Acceptance allows clear thinking and better decisions moving forward.",
+    takeaway: "Acceptance is the first step toward change.",
+  },
+];
+
 export const books: Book[] = [
   {
     id: "gita-simplified",
@@ -2379,6 +2565,20 @@ export const books: Book[] = [
     category: "for-students",
     hindiSections: scienceDecisionHindi,
     englishSections: scienceDecisionEnglish,
+  },
+  {
+    id: "turning-failures-into-lessons",
+    title: "असफलताओं को सीख में बदलना",
+    author: "जीवन विकास गाइड",
+    description: "असफलताओं को समझकर उन्हें आत्मविश्वास, अनुभव और सफलता में बदलने की व्यावहारिक पुस्तक।",
+    titleEn: "Turning Failures into Lessons",
+    authorEn: "Personal Growth Guide",
+    descriptionEn: "A practical guide to understanding failure and turning it into growth, confidence, and success.",
+    price: 99,
+    cover: "from-rose-200 via-orange-200 to-amber-200",
+    category: "for-students",
+    hindiSections: failureLessonsHindi,
+    englishSections: failureLessonsEnglish,
   },
   {
     id: "students-discipline",
