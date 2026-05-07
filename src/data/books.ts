@@ -2521,6 +2521,72 @@ const ganeshaKartikeyaEnglish: BookSection[] = [
   },
 ];
 
+const kuberaGoldHindi: BookSection[] = [
+  {
+    id: 1,
+    title: "धन के देवता कुबेर",
+    body: "कुबेर देवताओं के खजांची माने जाते थे। उनके पास अपार सोना, हीरे-जवाहरात और भव्य महल थे। धीरे-धीरे उन्हें अपने धन पर बहुत घमंड होने लगा। वे चाहते थे कि पूरी दुनिया उनकी संपत्ति और वैभव की प्रशंसा करे।",
+    takeaway: "अत्यधिक घमंड इंसान को वास्तविकता से दूर कर देता है।",
+  },
+  {
+    id: 2,
+    title: "भव्य भोज का निमंत्रण",
+    body: "अपने वैभव को दिखाने के लिए कुबेर ने भगवान शिव और माता पार्वती को एक विशाल भोज के लिए आमंत्रित किया। उनका उद्देश्य भक्ति नहीं, बल्कि अपने धन का प्रदर्शन करना था। भगवान शिव ने कुबेर का अहंकार समझ लिया और स्वयं जाने के बजाय गणेश जी को भेज दिया।",
+    takeaway: "जब अच्छे काम के पीछे दिखावा हो, तो उसका अर्थ बदल जाता है।",
+  },
+  {
+    id: 3,
+    title: "गणेश जी की अद्भुत भूख",
+    body: "गणेश जी भोज में पहुँचे और भोजन करना शुरू किया। उन्होंने पलभर में सारा भोजन समाप्त कर दिया। लेकिन उनकी भूख फिर भी शांत नहीं हुई। वे रसोई का हर भोजन खाने लगे। जब सब खत्म हो गया, तो उन्होंने महल की सोने-चाँदी की वस्तुएँ तक खाना शुरू कर दिया।",
+    takeaway: "केवल धन और वैभव से किसी को संतुष्ट नहीं किया जा सकता।",
+  },
+  {
+    id: 4,
+    title: "कुबेर का डर",
+    body: "कुबेर भयभीत हो गए। उन्हें समझ नहीं आ रहा था कि क्या करें। वे तुरंत कैलाश पर्वत पहुँचे और भगवान शिव से सहायता माँगी। शिवजी मुस्कुराए और बोले कि गणेश जी की भूख भोजन से नहीं, बल्कि विनम्रता और प्रेम से शांत होगी। तब कुबेर को अपनी गलती का एहसास होने लगा।",
+    takeaway: "समस्या का समाधान अक्सर विनम्रता में छिपा होता है।",
+  },
+  {
+    id: 5,
+    title: "विनम्रता की सच्ची शक्ति",
+    body: "कुबेर वापस लौटे और इस बार उन्होंने बिना घमंड के, प्रेम और सम्मान से गणेश जी को साधारण भोजन परोसा। गणेश जी तुरंत संतुष्ट हो गए। कुबेर समझ गए कि सच्ची महानता धन में नहीं, बल्कि विनम्रता और भक्ति में होती है।",
+    takeaway: "प्रेम और विनम्रता सबसे बड़ा धन हैं।",
+  },
+];
+
+const kuberaGoldEnglish: BookSection[] = [
+  {
+    id: 1,
+    title: "Kubera, the God of Wealth",
+    body: "Kubera was known as the treasurer of the gods. He possessed enormous amounts of gold, jewels, and luxurious palaces. Over time, he became very proud of his wealth and wanted everyone to admire his greatness and riches.",
+    takeaway: "Too much pride distances people from reality.",
+  },
+  {
+    id: 2,
+    title: "The Grand Feast",
+    body: "To display his riches, Kubera invited Lord Shiva and Goddess Parvati to a magnificent feast. His intention was not devotion, but showing off his wealth. Lord Shiva understood Kubera’s pride and decided to send Ganesha instead of going himself.",
+    takeaway: "When good actions are driven by ego, their meaning changes.",
+  },
+  {
+    id: 3,
+    title: "Ganesha’s Endless Hunger",
+    body: "Ganesha arrived at the feast and began eating. Within moments, all the prepared food was gone. Yet his hunger remained. He continued eating everything in the kitchen. When no food was left, he even started consuming the gold and silver decorations of Kubera’s palace.",
+    takeaway: "Luxury and wealth alone cannot truly satisfy anyone.",
+  },
+  {
+    id: 4,
+    title: "Kubera’s Fear",
+    body: "Kubera became terrified and rushed to Mount Kailash to seek Lord Shiva’s help. Shiva calmly explained that Ganesha’s hunger could not be satisfied through wealth, but only through humility and sincerity. Kubera slowly realized the mistake of his arrogance.",
+    takeaway: "Humility often holds the answer to difficult problems.",
+  },
+  {
+    id: 5,
+    title: "The Real Wealth",
+    body: "Kubera returned and this time served Ganesha a simple meal with genuine respect and humility. Immediately, Ganesha’s hunger disappeared. Kubera finally understood that true greatness does not come from riches, but from love, devotion, and humility.",
+    takeaway: "Love and humility are the greatest forms of wealth.",
+  },
+];
+
 export const books: Book[] = [
   {
     id: "gita-simplified",
@@ -2761,6 +2827,20 @@ export const books: Book[] = [
     category: "for-students",
     hindiSections: [],
     englishSections: [],
+  },
+  {
+    id: "ganesha-and-kuberas-gold",
+    title: "गणेश और कुबेर का घमंड",
+    author: "लघु पौराणिक कथा",
+    description: "वह प्रसिद्ध कथा जिसमें गणेश जी ने कुबेर को विनम्रता और सच्चे धन का महत्व सिखाया।",
+    titleEn: "Ganesha and Kubera’s Gold",
+    authorEn: "Short Mythological Story",
+    descriptionEn: "The famous story where Ganesha taught Kubera the true meaning of humility and wealth.",
+    price: 49,
+    cover: "from-yellow-200 via-amber-200 to-orange-300",
+    category: "short-reads",
+    hindiSections: kuberaGoldHindi,
+    englishSections: kuberaGoldEnglish,
   },
   {
     id: "short-wisdom",
