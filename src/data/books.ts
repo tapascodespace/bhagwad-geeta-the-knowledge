@@ -2567,11 +2567,11 @@ export const books: Book[] = [
     englishSections: scienceDecisionEnglish,
   },
   {
-    id: "turning-failures-into-lessons",
+    id: "turning-failures-into-life-lessons",
     title: "असफलताओं को सीख में बदलना",
     author: "जीवन विकास गाइड",
     description: "असफलताओं को समझकर उन्हें आत्मविश्वास, अनुभव और सफलता में बदलने की व्यावहारिक पुस्तक।",
-    titleEn: "Turning Failures into Lessons",
+    titleEn: "Turning Failures into Life Lessons",
     authorEn: "Personal Growth Guide",
     descriptionEn: "A practical guide to understanding failure and turning it into growth, confidence, and success.",
     price: 99,
