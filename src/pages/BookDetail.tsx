@@ -207,8 +207,12 @@ const BookDetail = () => {
           </>
         ) : (
           <>
-            <Button className="w-full mt-5" size="lg" onClick={handleUnlock}>
-              {s.buyNow(book.price)}
+            <Button className="w-full mt-5" size="lg" onClick={handleBuy} disabled={checkoutLoading}>
+              {checkoutLoading ? (
+                <><Loader2 className="w-4 h-4 animate-spin" /> {s.processing}</>
+              ) : (
+                s.buyNow(book.price)
+              )}
             </Button>
             <Button
               variant="outline"
