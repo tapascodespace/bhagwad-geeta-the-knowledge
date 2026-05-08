@@ -3301,6 +3301,228 @@ const wayOfDharmaEnglish: BookSection[] = [
   },
 ];
 
+const innerPeaceHindi: BookSection[] = [
+  {
+    id: 1,
+    title: "आधुनिक जीवन की भागदौड़",
+    body: "आज का जीवन पहले से कहीं अधिक तेज़ हो गया है। लोग लगातार काम, पढ़ाई, सोशल मीडिया, भविष्य और तुलना के दबाव में जी रहे हैं। मन को आराम देने का समय कम होता जा रहा है। बाहर से जीवन सामान्य दिख सकता है, लेकिन भीतर बेचैनी बढ़ती रहती है। आंतरिक शांति का अर्थ है इस भागदौड़ के बीच भी मन को स्थिर रखना सीखना।",
+    takeaway: "शांति बाहर नहीं, भीतर से शुरू होती है।",
+  },
+  {
+    id: 2,
+    title: "मन हमेशा व्यस्त क्यों रहता है",
+    body: "मन लगातार सोचता रहता है — भविष्य, गलतियाँ, डर, तुलना और इच्छाओं के बारे में। आधुनिक जीवन में यह और बढ़ गया है क्योंकि हर समय नई जानकारी और ध्यान भटकाने वाली चीज़ें सामने आती रहती हैं। यदि मन को दिशा न दी जाए, तो वह थकान और चिंता पैदा करने लगता है।",
+    takeaway: "अनियंत्रित मन शांति को कमजोर कर देता है।",
+  },
+  {
+    id: 3,
+    title: "सोशल मीडिया और तुलना",
+    body: "सोशल मीडिया लोगों को दूसरों की सफलता, सुंदरता और जीवन के केवल अच्छे हिस्से दिखाता है। इससे व्यक्ति अपने जीवन को कम समझने लगता है। लगातार तुलना आत्मविश्वास और शांति दोनों को कम करती है। हर व्यक्ति की यात्रा अलग होती है, इसलिए तुलना करना मन को अस्थिर बनाता है।",
+    takeaway: "तुलना शांति की सबसे बड़ी दुश्मनों में से एक है।",
+  },
+  {
+    id: 4,
+    title: "वर्तमान में जीना",
+    body: "अधिकांश चिंता या तो अतीत की गलतियों से आती है या भविष्य की कल्पनाओं से। लेकिन जीवन केवल वर्तमान क्षण में होता है। जब व्यक्ति वर्तमान में पूरी जागरूकता से जीना सीखता है, तब मन धीरे-धीरे शांत होने लगता है।",
+    takeaway: "वर्तमान क्षण में ही वास्तविक शांति मिलती है।",
+  },
+  {
+    id: 5,
+    title: "अकेले रहने की कला",
+    body: "आज कई लोग अकेले रहने से डरते हैं। इसलिए वे हमेशा मोबाइल, मनोरंजन या लोगों के बीच खुद को व्यस्त रखते हैं। लेकिन आंतरिक शांति तब बढ़ती है जब व्यक्ति कुछ समय खुद के साथ बिताना सीखता है। अकेलापन और एकांत अलग चीज़ें हैं।",
+    takeaway: "खुद के साथ सहज होना शांति की शुरुआत है।",
+  },
+  {
+    id: 6,
+    title: "मन को शांत करने की आदतें",
+    body: "शांति अचानक नहीं आती, बल्कि रोज़ की छोटी आदतों से बनती है। ध्यान, गहरी साँसें, सही नींद, प्रकृति में समय बिताना और स्क्रीन टाइम कम करना मन को शांत बनाते हैं। शरीर और मन एक-दूसरे से जुड़े होते हैं।",
+    takeaway: "छोटी आदतें धीरे-धीरे बड़ा बदलाव लाती हैं।",
+  },
+  {
+    id: 7,
+    title: "हर चीज़ को नियंत्रित करने की कोशिश",
+    body: "लोग अक्सर हर परिस्थिति, व्यक्ति और परिणाम को नियंत्रित करना चाहते हैं। जब चीज़ें योजना के अनुसार नहीं होतीं, तब तनाव बढ़ जाता है। आंतरिक शांति का एक बड़ा हिस्सा यह समझना है कि हर चीज़ हमारे नियंत्रण में नहीं होती।",
+    takeaway: "हर चीज़ को नियंत्रित करना संभव नहीं है।",
+  },
+  {
+    id: 8,
+    title: "डिजिटल थकान",
+    body: "लगातार स्क्रीन देखने से मन को आराम नहीं मिल पाता। मोबाइल, नोटिफिकेशन और तेज़ जानकारी की आदत दिमाग को हमेशा सक्रिय रखती है। धीरे-धीरे यह मानसिक थकान और बेचैनी का कारण बनती है।",
+    takeaway: "मन को भी आराम और शांत समय चाहिए।",
+  },
+  {
+    id: 9,
+    title: "धीरे चलने की शक्ति",
+    body: "आधुनिक दुनिया हमेशा जल्दी में रहती है। लेकिन हर समय जल्दी करना मन को थका देता है। कभी-कभी धीरे चलना, गहराई से सोचना और शांत तरीके से काम करना अधिक संतुलन देता है।",
+    takeaway: "धीरे चलना कमजोरी नहीं, जागरूकता है।",
+  },
+  {
+    id: 10,
+    title: "भावनाओं को समझना",
+    body: "लोग अक्सर अपनी भावनाओं से भागते हैं। दुख, डर या गुस्से को दबाने से वे खत्म नहीं होते। आंतरिक शांति तब आती है जब व्यक्ति अपनी भावनाओं को समझना और स्वीकार करना सीखता है।",
+    takeaway: "भावनाओं को समझना उन्हें नियंत्रित करने की शुरुआत है।",
+  },
+  {
+    id: 11,
+    title: "सरल जीवन की शक्ति",
+    body: "अत्यधिक चीज़ें, अत्यधिक इच्छाएँ और अत्यधिक व्यस्तता मन को भारी बना देती हैं। सरल जीवन का अर्थ सब कुछ छोड़ना नहीं, बल्कि अनावश्यक चीज़ों को कम करना है। सरलता मन को हल्का बनाती है।",
+    takeaway: "सरलता शांति को बढ़ाती है।",
+  },
+  {
+    id: 12,
+    title: "रिश्ते और मानसिक शांति",
+    body: "विषाक्त रिश्ते मन की शांति को धीरे-धीरे खत्म कर देते हैं। सम्मान, ईमानदारी और समझ पर बने रिश्ते मानसिक स्थिरता देते हैं। हर संबंध को बनाए रखना जरूरी नहीं होता।",
+    takeaway: "स्वस्थ रिश्ते आंतरिक शांति को मजबूत करते हैं।",
+  },
+  {
+    id: 13,
+    title: "ध्यान और जागरूकता",
+    body: "ध्यान केवल आध्यात्मिक अभ्यास नहीं, बल्कि मन को देखने की कला है। जब व्यक्ति अपने विचारों और प्रतिक्रियाओं को समझने लगता है, तब वह धीरे-धीरे अधिक शांत और संतुलित हो जाता है।",
+    takeaway: "जागरूकता मन को शांत बनाती है।",
+  },
+  {
+    id: 14,
+    title: "सफलता और शांति",
+    body: "कई लोग सोचते हैं कि सफलता मिलने के बाद शांति मिलेगी। लेकिन यदि मन भीतर से अशांत हो, तो बाहरी उपलब्धियाँ भी स्थायी संतोष नहीं देतीं। शांति और सफलता साथ चल सकती हैं, यदि संतुलन हो।",
+    takeaway: "सफलता बिना शांति के अधूरी है।",
+  },
+  {
+    id: 15,
+    title: "स्वीकार करने की शक्ति",
+    body: "जीवन में कुछ चीज़ें बदल सकती हैं और कुछ नहीं। जो व्यक्ति हर स्थिति से लड़ता रहता है, उसका मन थक जाता है। स्वीकार करना हार मानना नहीं, बल्कि वास्तविकता को समझना है।",
+    takeaway: "स्वीकार करना मानसिक शक्ति का संकेत है।",
+  },
+  {
+    id: 16,
+    title: "आत्मचिंतन",
+    body: "शांति पाने के लिए व्यक्ति को समय-समय पर खुद को समझना जरूरी है। क्या चीज़ वास्तव में खुशी देती है? क्या केवल दिखावे के लिए किया जा रहा है? आत्मचिंतन व्यक्ति को स्पष्टता देता है।",
+    takeaway: "खुद को समझना शांति की दिशा में बड़ा कदम है।",
+  },
+  {
+    id: 17,
+    title: "प्रकृति से जुड़ना",
+    body: "प्रकृति मन को स्वाभाविक रूप से शांत करती है। पेड़, हवा, बारिश और खुला आकाश व्यक्ति को धीमा और स्थिर महसूस कराते हैं। आधुनिक जीवन में प्रकृति से दूरी मानसिक थकान बढ़ा देती है।",
+    takeaway: "प्रकृति मन को संतुलित करती है।",
+  },
+  {
+    id: 18,
+    title: "आंतरिक शांति का अर्थ",
+    body: "आंतरिक शांति का अर्थ समस्याओं का पूरी तरह खत्म हो जाना नहीं है। इसका अर्थ है — कठिन परिस्थितियों में भी भीतर से स्थिर बने रहना। शांत व्यक्ति समस्याओं से भागता नहीं, बल्कि उन्हें संतुलन से संभालता है।",
+    takeaway: "शांति समस्याओं की अनुपस्थिति नहीं, स्थिरता की उपस्थिति है।",
+  },
+];
+
+const innerPeaceEnglish: BookSection[] = [
+  {
+    id: 1,
+    title: "The Rush of Modern Life",
+    body: "Modern life moves faster than ever before. People constantly live under pressure from work, studies, social media, expectations, and endless distractions. Even when life looks normal from the outside, many people feel restless internally. Inner peace means learning how to remain mentally stable even in the middle of this fast-moving world.",
+    takeaway: "Peace begins within, not outside.",
+  },
+  {
+    id: 2,
+    title: "Why the Mind Never Stops",
+    body: "The human mind constantly jumps between fears, memories, worries, desires, and comparisons. Modern technology has made this even stronger because people are surrounded by nonstop information and stimulation. Without awareness and discipline, the mind slowly becomes exhausted and anxious.",
+    takeaway: "An uncontrolled mind weakens inner peace.",
+  },
+  {
+    id: 3,
+    title: "Social Media and Comparison",
+    body: "Social media often shows only the best moments of other people’s lives. Constant exposure to success, beauty, luxury, and achievements creates unnecessary comparison. Over time, comparison damages confidence and mental stability. Every person’s journey is different, and comparing lives creates endless dissatisfaction.",
+    takeaway: "Comparison is one of the greatest enemies of peace.",
+  },
+  {
+    id: 4,
+    title: "Living in the Present",
+    body: "Most anxiety comes from either regret about the past or fear of the future. But life only exists in the present moment. When people learn to focus completely on what is happening now, the mind slowly becomes calmer and clearer.",
+    takeaway: "True peace exists in the present moment.",
+  },
+  {
+    id: 5,
+    title: "Learning to Be Alone",
+    body: "Many people fear being alone, so they constantly seek distractions through phones, entertainment, or social activity. But inner peace grows when a person becomes comfortable spending time with themselves. Solitude can become a source of clarity rather than loneliness.",
+    takeaway: "Being comfortable with yourself creates peace.",
+  },
+  {
+    id: 6,
+    title: "Habits That Calm the Mind",
+    body: "Peace is not created overnight. It develops through daily habits such as meditation, deep breathing, healthy sleep, reduced screen time, and spending time in nature. The body and mind deeply influence each other.",
+    takeaway: "Small habits slowly create major change.",
+  },
+  {
+    id: 7,
+    title: "Trying to Control Everything",
+    body: "People often try to control every outcome, person, and situation around them. When reality does not match expectations, stress grows quickly. One of the most important parts of inner peace is understanding that not everything can be controlled.",
+    takeaway: "Not everything in life can be controlled.",
+  },
+  {
+    id: 8,
+    title: "Digital Exhaustion",
+    body: "Constant screen exposure keeps the brain overstimulated. Notifications, scrolling, and endless information prevent the mind from truly resting. Over time, this creates mental fatigue, anxiety, and emotional restlessness.",
+    takeaway: "The mind also needs silence and rest.",
+  },
+  {
+    id: 9,
+    title: "The Power of Slowing Down",
+    body: "Modern society constantly pushes people to move faster. But rushing through everything creates exhaustion. Sometimes slowing down, thinking deeply, and acting with awareness creates far more balance and peace.",
+    takeaway: "Slowing down is awareness, not weakness.",
+  },
+  {
+    id: 10,
+    title: "Understanding Emotions",
+    body: "People often avoid uncomfortable emotions such as sadness, anger, or fear. But suppressing emotions does not remove them. Inner peace develops when people learn to observe, understand, and process their emotions in healthy ways.",
+    takeaway: "Understanding emotions is the beginning of mastering them.",
+  },
+  {
+    id: 11,
+    title: "The Strength of Simplicity",
+    body: "Too many possessions, distractions, and desires make the mind heavy. Simplicity does not mean rejecting life — it means removing what is unnecessary. A simpler life often creates more mental space and calmness.",
+    takeaway: "Simplicity strengthens peace.",
+  },
+  {
+    id: 12,
+    title: "Relationships and Mental Peace",
+    body: "Toxic relationships slowly drain emotional energy and disturb inner stability. Relationships built on trust, honesty, understanding, and respect create emotional safety and peace. Not every relationship needs to be maintained at any cost.",
+    takeaway: "Healthy relationships support inner peace.",
+  },
+  {
+    id: 13,
+    title: "Meditation and Awareness",
+    body: "Meditation is not only a spiritual practice — it is the ability to observe the mind clearly. Through awareness, people begin understanding their thoughts, reactions, and patterns more deeply. This gradually creates emotional balance and calmness.",
+    takeaway: "Awareness calms the mind deeply.",
+  },
+  {
+    id: 14,
+    title: "Success and Peace",
+    body: "Many people believe peace will come only after achieving success. But external achievements alone cannot create lasting satisfaction if the mind remains restless inside. Success and peace can exist together only when balance exists.",
+    takeaway: "Success without peace feels incomplete.",
+  },
+  {
+    id: 15,
+    title: "The Power of Acceptance",
+    body: "Some things in life can be changed, while others cannot. Constantly fighting reality creates exhaustion. Acceptance does not mean weakness or surrender — it means understanding life clearly instead of resisting everything emotionally.",
+    takeaway: "Acceptance is a sign of mental strength.",
+  },
+  {
+    id: 16,
+    title: "Self-Reflection",
+    body: "Inner peace requires regular self-reflection. People must occasionally ask themselves important questions: What truly matters? What creates real happiness? What am I chasing only for appearance or validation? Reflection creates clarity and direction.",
+    takeaway: "Understanding yourself creates deeper peace.",
+  },
+  {
+    id: 17,
+    title: "Connecting With Nature",
+    body: "Nature naturally calms the human mind. Trees, rain, wind, sunlight, and open spaces slow mental noise and create emotional balance. Modern life often disconnects people from nature, increasing stress and mental fatigue.",
+    takeaway: "Nature restores balance to the mind.",
+  },
+  {
+    id: 18,
+    title: "The Meaning of Inner Peace",
+    body: "Inner peace does not mean living without problems or challenges. It means remaining emotionally stable even during difficult moments. Peaceful people do not escape life — they face it with calmness, awareness, and balance.",
+    takeaway: "Peace is not the absence of problems, but the presence of stability.",
+  },
+];
+
 export const books: Book[] = [
   {
     id: "gita-simplified",
@@ -3510,11 +3732,26 @@ export const books: Book[] = [
     authorEn: "Spiritual Living Series",
     descriptionEn:
       "A deep spiritual guide about dharma, truth, balance, responsibility, and living life in the right way.",
-    price: 149,
+    price: 99,
     cover: "from-yellow-200 via-orange-200 to-amber-300",
     category: "spiritual-guides",
     hindiSections: wayOfDharmaHindi,
     englishSections: wayOfDharmaEnglish,
+  },
+  {
+    id: "inner-peace-in-modern-life",
+    title: "आधुनिक जीवन में आंतरिक शांति",
+    author: "आध्यात्मिक जीवन श्रृंखला",
+    description: "तेज़ और तनावपूर्ण आधुनिक जीवन में मानसिक शांति, संतुलन और जागरूकता बनाए रखने की गहरी मार्गदर्शिका।",
+    titleEn: "Inner Peace in Modern Life",
+    authorEn: "Spiritual Living Series",
+    descriptionEn:
+      "A deep guide to finding calmness, balance, and emotional stability in today’s fast and stressful modern world.",
+    price: 99,
+    cover: "from-sky-200 via-cyan-200 to-blue-300",
+    category: "spiritual-guides",
+    hindiSections: innerPeaceHindi,
+    englishSections: innerPeaceEnglish,
   },
   {
     id: "beating-procrastination",
