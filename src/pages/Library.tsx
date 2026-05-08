@@ -52,12 +52,15 @@ const BookCard = ({ book, onClick, unlocked, lang, progress, comingSoon, comingS
               </span>
             </div>
           </>
+        ) : unlocked ? (
+          <span className="absolute top-2 right-2 inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-900 bg-emerald-100/95 backdrop-blur px-1.5 py-0.5 rounded-full shadow-soft">
+            <Check className="w-2.5 h-2.5" />
+            {lang === "hi" ? "खरीदा गया" : lang === "bn" ? "কেনা হয়েছে" : "Purchased"}
+          </span>
         ) : (
-          !unlocked && (
-            <span className="absolute top-2 right-2 inline-flex items-center gap-1 text-[10px] font-semibold text-amber-900 bg-white/90 backdrop-blur px-1.5 py-0.5 rounded-full shadow-soft">
-              <Lock className="w-2.5 h-2.5" />₹{book.price}
-            </span>
-          )
+          <span className="absolute top-2 right-2 inline-flex items-center gap-1 text-[10px] font-semibold text-amber-900 bg-white/90 backdrop-blur px-1.5 py-0.5 rounded-full shadow-soft">
+            <Lock className="w-2.5 h-2.5" />₹{book.price}
+          </span>
         )}
       </div>
       <p className={`mt-2 text-xs font-medium line-clamp-2 leading-snug ${comingSoon ? "text-muted-foreground" : "text-foreground"}`}>
