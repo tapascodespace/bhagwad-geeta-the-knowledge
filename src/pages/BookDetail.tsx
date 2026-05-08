@@ -1,11 +1,12 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ChevronLeft, Lock, BookOpen, Clock, Sparkles, Check, ArrowRight } from "lucide-react";
+import { ChevronLeft, Lock, BookOpen, Clock, Sparkles, Check, ArrowRight, Loader2 } from "lucide-react";
 import { getBook, getBookMeta, getBookSections, hasContent } from "@/data/books";
 import { useReadingProgress, useUnlockedBooks } from "@/hooks/useLibrary";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
 const STRINGS = {
