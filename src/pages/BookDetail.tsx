@@ -1,11 +1,12 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ChevronLeft, Lock, BookOpen, Clock, Sparkles, Check, ArrowRight } from "lucide-react";
+import { ChevronLeft, Lock, BookOpen, Clock, Sparkles, Check, ArrowRight, Loader2 } from "lucide-react";
 import { getBook, getBookMeta, getBookSections, hasContent } from "@/data/books";
 import { useReadingProgress, useUnlockedBooks } from "@/hooks/useLibrary";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
 const STRINGS = {
@@ -23,8 +24,10 @@ const STRINGS = {
     themeFont: "লাইট / ডার্ক মোড ও ফন্ট নিয়ন্ত্রণ",
     startReading: "পড়া শুরু করুন",
     buyNow: (p: number) => `এখনই কিনুন — ₹${p}`,
-    demoNote: "ডেমো: এই বোতামটি অর্থ প্রদান ছাড়াই বইটি আনলক করে।",
+    demoNote: "নিরাপদ পেমেন্ট Stripe দ্বারা পরিচালিত।",
     preview: "প্রিভিউ — প্রথম অধ্যায় পড়ুন",
+    processing: "চেকআউট প্রস্তুত হচ্ছে…",
+    paymentError: "পেমেন্ট শুরু করা যায়নি। আবার চেষ্টা করুন।",
   },
   hi: {
     notFound: "पुस्तक नहीं मिली",
@@ -40,8 +43,10 @@ const STRINGS = {
     themeFont: "लाइट / डार्क मोड और फ़ॉन्ट कंट्रोल",
     startReading: "पढ़ना शुरू करें",
     buyNow: (p: number) => `अभी ख़रीदें — ₹${p}`,
-    demoNote: "डेमो: यह बटन भुगतान के बिना पुस्तक अनलॉक कर देता है।",
+    demoNote: "सुरक्षित भुगतान Stripe द्वारा संचालित।",
     preview: "प्रीव्यू — पहला अध्याय पढ़ें",
+    processing: "चेकआउट तैयार हो रहा है…",
+    paymentError: "भुगतान शुरू नहीं हो सका। कृपया पुनः प्रयास करें।",
   },
   en: {
     notFound: "Book not found",
@@ -57,8 +62,10 @@ const STRINGS = {
     themeFont: "Light / Dark mode and font controls",
     startReading: "Start reading",
     buyNow: (p: number) => `Buy now — ₹${p}`,
-    demoNote: "Demo: this button unlocks the book without payment.",
+    demoNote: "Secure payment powered by Stripe.",
     preview: "Preview — read first chapter",
+    processing: "Preparing checkout…",
+    paymentError: "Could not start payment. Please try again.",
   },
 } as const;
 
@@ -66,10 +73,11 @@ const BookDetail = () => {
   const { bookId = "" } = useParams();
   const navigate = useNavigate();
   const book = useMemo(() => getBook(bookId), [bookId]);
-  const { isUnlocked, unlock } = useUnlockedBooks();
+  const { isUnlocked } = useUnlockedBooks();
   const { language } = useLanguage();
   const s = STRINGS[language] ?? STRINGS.hi;
   const { section } = useReadingProgress(bookId);
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
 
   if (!book) {
     return (
@@ -89,13 +97,31 @@ const BookDetail = () => {
   const total = Math.max(book.hindiSections.length, book.englishSections.length);
   const available = hasContent(book);
 
-  const handleUnlock = () => {
+  const handleBuy = async () => {
     if (!available) {
       toast.info(s.comingSoon);
       return;
     }
-    unlock(book.id);
-    toast.success(s.unlocked);
+    setCheckoutLoading(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("create-checkout", {
+        body: {
+          bookId: book.id,
+          title: meta.title,
+          price: book.price,
+          currency: "inr",
+          origin: window.location.origin,
+        },
+      });
+      if (error) throw error;
+      const url = (data as { url?: string } | null)?.url;
+      if (!url) throw new Error("No checkout URL returned");
+      window.location.href = url;
+    } catch (err) {
+      console.error("Stripe checkout error", err);
+      toast.error(s.paymentError);
+      setCheckoutLoading(false);
+    }
   };
 
   const handleRead = () => {
@@ -181,8 +207,12 @@ const BookDetail = () => {
           </>
         ) : (
           <>
-            <Button className="w-full mt-5" size="lg" onClick={handleUnlock}>
-              {s.buyNow(book.price)}
+            <Button className="w-full mt-5" size="lg" onClick={handleBuy} disabled={checkoutLoading}>
+              {checkoutLoading ? (
+                <><Loader2 className="w-4 h-4 animate-spin" /> {s.processing}</>
+              ) : (
+                s.buyNow(book.price)
+              )}
             </Button>
             <Button
               variant="outline"
