@@ -3745,6 +3745,132 @@ const stopOverthinkingEnglish: BookSection[] = [
   },
 ];
 
+const shivaPoisonHindi: BookSection[] = [
+  {
+    id: 1,
+    title: "समुद्र मंथन की शुरुआत",
+    body: "एक समय देवता और असुर दोनों अपनी शक्तियाँ खोने लगे थे। अमरता प्राप्त करने और दिव्य अमृत पाने के लिए उन्होंने क्षीर सागर का मंथन करने का निर्णय लिया। भगवान विष्णु की सलाह पर दोनों पक्षों ने मिलकर समुद्र मंथन शुरू किया। मंदराचल पर्वत को मथनी और वासुकी नाग को रस्सी बनाया गया।",
+    takeaway: "महान लक्ष्य के लिए कभी-कभी विरोधी भी साथ आते हैं।",
+  },
+  {
+    id: 2,
+    title: "मंथन से निकली दिव्य वस्तुएँ",
+    body: "समुद्र मंथन के दौरान अनेक दिव्य रत्न और शक्तियाँ बाहर आने लगीं। कामधेनु, ऐरावत, लक्ष्मी देवी और कई अद्भुत वस्तुएँ प्रकट हुईं। सभी अमृत की प्रतीक्षा कर रहे थे, लेकिन किसी को नहीं पता था कि सबसे पहले एक भयंकर संकट आने वाला है।",
+    takeaway: "हर बड़े अवसर के साथ चुनौतियाँ भी आती हैं।",
+  },
+  {
+    id: 3,
+    title: "हलाहल विष का प्रकट होना",
+    body: "अचानक समुद्र से एक अत्यंत घातक विष निकला जिसे ‘हलाहल’ कहा गया। उसका प्रभाव इतना भयंकर था कि उसकी गर्मी और धुआँ पूरे ब्रह्मांड को नष्ट करने लगे। देवता, असुर, ऋषि और सभी जीव भयभीत हो गए। कोई भी उस विष को रोकने में सक्षम नहीं था।",
+    takeaway: "कुछ संकट इतने बड़े होते हैं कि वे सबको प्रभावित करते हैं।",
+  },
+  {
+    id: 4,
+    title: "सभी देवताओं का भय",
+    body: "हलाहल विष तेजी से फैलने लगा। नदियाँ, आकाश और पृथ्वी प्रभावित होने लगे। सभी देवता भगवान ब्रह्मा और विष्णु के पास पहुँचे, लेकिन यह स्पष्ट था कि इस संकट को केवल एक ही शक्ति संभाल सकती है — भगवान शिव।",
+    takeaway: "सच्चे नेता संकट के समय सामने आते हैं।",
+  },
+  {
+    id: 5,
+    title: "भगवान शिव का निर्णय",
+    body: "जब सभी कैलाश पहुँचे, तब उन्होंने भगवान शिव से सहायता माँगी। शिव ने देखा कि यदि विष को नहीं रोका गया, तो पूरा संसार नष्ट हो जाएगा। उन्होंने बिना अपने बारे में सोचे विष पीने का निर्णय लिया। यह केवल शक्ति नहीं, बल्कि त्याग और करुणा का सबसे बड़ा उदाहरण था।",
+    takeaway: "सच्ची महानता दूसरों की रक्षा में दिखाई देती है।",
+  },
+  {
+    id: 6,
+    title: "पार्वती जी का हस्तक्षेप",
+    body: "जब शिव विष पीने लगे, तब माता पार्वती चिंतित हो गईं। उन्होंने तुरंत शिव के गले को पकड़ लिया ताकि विष उनके शरीर में नीचे न जा सके। विष शिव के कंठ में ही रुक गया और उनका गला नीला हो गया। तभी से भगवान शिव को ‘नीलकंठ’ कहा जाने लगा।",
+    takeaway: "शक्ति और प्रेम साथ मिलकर संतुलन बनाते हैं।",
+  },
+  {
+    id: 7,
+    title: "नीलकंठ का अर्थ",
+    body: "भगवान शिव का नीला कंठ केवल एक घटना नहीं, बल्कि गहरा प्रतीक है। इसका अर्थ है कि महान व्यक्ति संसार की नकारात्मकता को अपने भीतर रोक लेते हैं, लेकिन उसे दूसरों तक फैलने नहीं देते। शिव ने विष को नष्ट नहीं किया, बल्कि उसे नियंत्रित किया।",
+    takeaway: "सच्ची शक्ति नकारात्मकता को नियंत्रित करने में है।",
+  },
+  {
+    id: 8,
+    title: "देवताओं की राहत",
+    body: "जब विष का प्रभाव रुक गया, तब पूरे ब्रह्मांड ने राहत की साँस ली। देवताओं ने शिव की स्तुति की और समझा कि उनका त्याग ही संसार की रक्षा का कारण बना। समुद्र मंथन आगे जारी रहा और अंत में अमृत भी प्रकट हुआ।",
+    takeaway: "त्याग अक्सर दूसरों के जीवन में शांति लाता है।",
+  },
+  {
+    id: 9,
+    title: "शिव का स्वभाव",
+    body: "भगवान शिव हमेशा उन शक्तियों का प्रतिनिधित्व करते हैं जो संतुलन बनाए रखती हैं। वे विनाशक भी हैं और रक्षक भी। इस कथा में उन्होंने दिखाया कि सच्ची शक्ति केवल युद्ध में नहीं, बल्कि करुणा और त्याग में भी होती है।",
+    takeaway: "महान शक्ति हमेशा जिम्मेदारी के साथ आती है।",
+  },
+  {
+    id: 10,
+    title: "कथा की गहरी सीख",
+    body: "यह कथा केवल पौराणिक घटना नहीं, बल्कि जीवन की गहरी सीख है। हर व्यक्ति अपने जीवन में नकारात्मकता, तनाव और कठिनाइयों का सामना करता है। भगवान शिव सिखाते हैं कि बुद्धि, धैर्य और संतुलन से विष जैसे संकटों को भी संभाला जा सकता है।",
+    takeaway: "धैर्य और संतुलन सबसे बड़े संकटों को भी शांत कर सकते हैं।",
+  },
+];
+
+const shivaPoisonEnglish: BookSection[] = [
+  {
+    id: 1,
+    title: "The Beginning of Samudra Manthan",
+    body: "There was a time when both the Devas and Asuras began losing their strength and power. In order to obtain immortality and divine nectar, they decided to churn the cosmic ocean known as the Kshira Sagara. Following Lord Vishnu’s guidance, both sides worked together. Mount Mandara became the churning rod, while the serpent Vasuki served as the rope.",
+    takeaway: "Even rivals sometimes unite for a greater purpose.",
+  },
+  {
+    id: 2,
+    title: "Treasures Emerging From the Ocean",
+    body: "As the ocean was churned, many divine treasures and beings emerged. Kamadhenu, Airavata, Goddess Lakshmi, and several celestial objects appeared one after another. Everyone eagerly waited for the nectar of immortality, unaware that a terrible danger would appear first.",
+    takeaway: "Great opportunities are often followed by challenges.",
+  },
+  {
+    id: 3,
+    title: "The Appearance of Halahala Poison",
+    body: "Suddenly, a deadly poison known as Halahala emerged from the ocean. Its power was so destructive that its heat and fumes began spreading across the universe. The skies, rivers, earth, and all living beings were threatened. Fear spread among gods, sages, and demons alike.",
+    takeaway: "Some dangers become too large for anyone to ignore.",
+  },
+  {
+    id: 4,
+    title: "Fear Among the Gods",
+    body: "The poison spread rapidly and no one knew how to stop it. The Devas approached Lord Brahma and Lord Vishnu for help, but it became clear that only one being possessed the power and courage to handle such destruction — Lord Shiva.",
+    takeaway: "True leaders rise during moments of crisis.",
+  },
+  {
+    id: 5,
+    title: "Shiva’s Decision",
+    body: "The gods traveled to Mount Kailash and requested Shiva’s help. Shiva understood that if the poison continued spreading, the universe itself could be destroyed. Without thinking about his own safety, he chose to drink the poison himself. This act became one of the greatest examples of sacrifice and compassion.",
+    takeaway: "True greatness is shown through selfless protection of others.",
+  },
+  {
+    id: 6,
+    title: "Parvati’s Intervention",
+    body: "As Shiva drank the poison, Goddess Parvati became worried about its effects. To protect him, she held his throat tightly so the poison would not spread through his body. The poison remained trapped in his throat, turning it blue. From that moment, Shiva became known as Neelkanth — the Blue-Throated One.",
+    takeaway: "Strength and love together create balance.",
+  },
+  {
+    id: 7,
+    title: "The Meaning of Neelkanth",
+    body: "Shiva’s blue throat symbolizes something far deeper than a mythological event. It represents the ability to contain negativity without spreading it further into the world. Shiva did not destroy the poison — he controlled it within himself for the protection of all beings.",
+    takeaway: "Real strength lies in controlling negativity wisely.",
+  },
+  {
+    id: 8,
+    title: "Relief Across the Universe",
+    body: "Once the poison was contained, the universe slowly returned to peace. The gods praised Shiva and realized that his sacrifice had saved creation itself. After the danger passed, the churning continued and eventually the divine nectar emerged.",
+    takeaway: "Sacrifice often brings peace to others.",
+  },
+  {
+    id: 9,
+    title: "The Nature of Shiva",
+    body: "Lord Shiva represents both destruction and protection. He destroys ignorance, ego, and imbalance while protecting truth and cosmic harmony. This story shows that true power is not only found in battle, but also in compassion, courage, and responsibility.",
+    takeaway: "Great power always carries great responsibility.",
+  },
+  {
+    id: 10,
+    title: "The Deeper Lesson",
+    body: "This story is more than mythology — it reflects human life itself. Every person faces negativity, stress, pain, and emotional poison in different forms. Shiva teaches that with patience, awareness, and balance, even the most dangerous situations can be handled wisely.",
+    takeaway: "Patience and balance can calm even the greatest crises.",
+  },
+];
+
 export const books: Book[] = [
   {
     id: "gita-simplified",
@@ -3874,6 +4000,20 @@ export const books: Book[] = [
     category: "stories-epics",
     hindiSections: ganeshaKartikeyaHindi,
     englishSections: ganeshaKartikeyaEnglish,
+  },
+  {
+    id: "why-shiva-drank-poison",
+    title: "शिव ने विष क्यों पिया",
+    author: "पौराणिक कथा संग्रह",
+    description: "समुद्र मंथन, हलाहल विष और भगवान शिव के नीलकंठ बनने की प्रसिद्ध कथा।",
+    titleEn: "Why Shiva Drank Poison",
+    authorEn: "Mythological Stories Collection",
+    descriptionEn: "The famous story of Samudra Manthan, the deadly Halahala poison, and how Shiva became Neelkanth.",
+    price: 99,
+    cover: "from-blue-300 via-indigo-300 to-purple-400",
+    category: "mythological-stories",
+    hindiSections: shivaPoisonHindi,
+    englishSections: shivaPoisonEnglish,
   },
   {
     id: "ramayana-tales",
