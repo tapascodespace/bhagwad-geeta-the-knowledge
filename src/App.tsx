@@ -13,6 +13,8 @@ import Library from "@/pages/Library";
 import BookReader from "@/pages/BookReader";
 import BookDetail from "@/pages/BookDetail";
 import LanguageSelect from "@/pages/LanguageSelect";
+import PaymentSuccess from "@/pages/PaymentSuccess";
+import PaymentCancelled from "@/pages/PaymentCancelled";
 import NotFound from "@/pages/NotFound";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { backgroundMusic } from "@/lib/background-music";
