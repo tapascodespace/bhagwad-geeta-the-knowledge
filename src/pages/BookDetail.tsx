@@ -97,13 +97,31 @@ const BookDetail = () => {
   const total = Math.max(book.hindiSections.length, book.englishSections.length);
   const available = hasContent(book);
 
-  const handleUnlock = () => {
+  const handleBuy = async () => {
     if (!available) {
       toast.info(s.comingSoon);
       return;
     }
-    unlock(book.id);
-    toast.success(s.unlocked);
+    setCheckoutLoading(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("create-checkout", {
+        body: {
+          bookId: book.id,
+          title: meta.title,
+          price: book.price,
+          currency: "inr",
+          origin: window.location.origin,
+        },
+      });
+      if (error) throw error;
+      const url = (data as { url?: string } | null)?.url;
+      if (!url) throw new Error("No checkout URL returned");
+      window.location.href = url;
+    } catch (err) {
+      console.error("Stripe checkout error", err);
+      toast.error(s.paymentError);
+      setCheckoutLoading(false);
+    }
   };
 
   const handleRead = () => {
