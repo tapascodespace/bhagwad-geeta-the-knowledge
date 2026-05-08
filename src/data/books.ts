@@ -4011,7 +4011,7 @@ export const books: Book[] = [
     descriptionEn: "The famous story of Samudra Manthan, the deadly Halahala poison, and how Shiva became Neelkanth.",
     price: 99,
     cover: "from-blue-300 via-indigo-300 to-purple-400",
-    category: "mythological-stories",
+    category: "stories-epics",
     hindiSections: shivaPoisonHindi,
     englishSections: shivaPoisonEnglish,
   },
