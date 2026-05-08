@@ -73,10 +73,11 @@ const BookDetail = () => {
   const { bookId = "" } = useParams();
   const navigate = useNavigate();
   const book = useMemo(() => getBook(bookId), [bookId]);
-  const { isUnlocked, unlock } = useUnlockedBooks();
+  const { isUnlocked } = useUnlockedBooks();
   const { language } = useLanguage();
   const s = STRINGS[language] ?? STRINGS.hi;
   const { section } = useReadingProgress(bookId);
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
 
   if (!book) {
     return (
