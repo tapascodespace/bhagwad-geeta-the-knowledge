@@ -62,8 +62,10 @@ const STRINGS = {
     themeFont: "Light / Dark mode and font controls",
     startReading: "Start reading",
     buyNow: (p: number) => `Buy now — ₹${p}`,
-    demoNote: "Demo: this button unlocks the book without payment.",
+    demoNote: "Secure payment powered by Stripe.",
     preview: "Preview — read first chapter",
+    processing: "Preparing checkout…",
+    paymentError: "Could not start payment. Please try again.",
   },
 } as const;
 
