@@ -43,8 +43,10 @@ const STRINGS = {
     themeFont: "लाइट / डार्क मोड और फ़ॉन्ट कंट्रोल",
     startReading: "पढ़ना शुरू करें",
     buyNow: (p: number) => `अभी ख़रीदें — ₹${p}`,
-    demoNote: "डेमो: यह बटन भुगतान के बिना पुस्तक अनलॉक कर देता है।",
+    demoNote: "सुरक्षित भुगतान Stripe द्वारा संचालित।",
     preview: "प्रीव्यू — पहला अध्याय पढ़ें",
+    processing: "चेकआउट तैयार हो रहा है…",
+    paymentError: "भुगतान शुरू नहीं हो सका। कृपया पुनः प्रयास करें।",
   },
   en: {
     notFound: "Book not found",
