@@ -3523,6 +3523,228 @@ const innerPeaceEnglish: BookSection[] = [
   },
 ];
 
+const stopOverthinkingHindi: BookSection[] = [
+  {
+    id: 1,
+    title: "ओवरथिंकिंग क्या है",
+    body: "ओवरथिंकिंग का अर्थ है किसी बात के बारे में जरूरत से ज़्यादा सोचना। व्यक्ति एक ही परिस्थिति, गलती, डर या भविष्य की संभावना को बार-बार अपने मन में दोहराता रहता है। धीरे-धीरे यह आदत मानसिक थकान, चिंता और आत्मविश्वास की कमी पैदा करती है। सोचने और ओवरथिंकिंग में अंतर होता है — सही सोच समाधान ढूँढती है, जबकि ओवरथिंकिंग व्यक्ति को उसी जगह फँसाए रखती है।",
+    takeaway: "हर गहरी सोच उपयोगी नहीं होती।",
+  },
+  {
+    id: 2,
+    title: "मन भविष्य में क्यों भागता है",
+    body: "मानव मन स्वाभाविक रूप से भविष्य को नियंत्रित करना चाहता है। इसलिए वह हर संभावित समस्या, गलती और परिणाम के बारे में सोचता रहता है। लेकिन भविष्य को पूरी तरह नियंत्रित नहीं किया जा सकता। लगातार भविष्य की चिंता व्यक्ति को वर्तमान से दूर कर देती है।",
+    takeaway: "भविष्य की चिंता वर्तमान की शांति छीन लेती है।",
+  },
+  {
+    id: 3,
+    title: "बार-बार पुरानी बातें सोचना",
+    body: "कई लोग पुरानी गलतियों, शर्मिंदगी या दुखद घटनाओं को बार-बार याद करते रहते हैं। उनका मन सोचता है कि ‘काश मैंने ऐसा किया होता।’ लेकिन अतीत को बदलना संभव नहीं है। उससे सीखना जरूरी है, उसमें फँसना नहीं।",
+    takeaway: "अतीत से सीखो, उसमें मत जीओ।",
+  },
+  {
+    id: 4,
+    title: "हर चीज़ को परफेक्ट बनाने की कोशिश",
+    body: "परफेक्शन की आदत ओवरथिंकिंग को बढ़ाती है। व्यक्ति हर छोटे निर्णय को भी बहुत बड़ा बना देता है। उसे डर रहता है कि कहीं गलती न हो जाए। लेकिन पूर्णता असंभव है। प्रगति, पूर्णता से अधिक महत्वपूर्ण होती है।",
+    takeaway: "पूर्णता नहीं, प्रगति ज़रूरी है।",
+  },
+  {
+    id: 5,
+    title: "निर्णय लेने का डर",
+    body: "ओवरथिंकिंग अक्सर निर्णय लेने में देरी कर देती है। व्यक्ति हर विकल्प के बारे में इतना सोचता है कि वह कोई कदम ही नहीं उठा पाता। गलत निर्णय का डर उसे स्थिर बना देता है। लेकिन जीवन में स्पष्टता अक्सर कदम उठाने के बाद आती है।",
+    takeaway: "हर निर्णय में पूर्ण निश्चितता संभव नहीं होती।",
+  },
+  {
+    id: 6,
+    title: "मन को शांत करने की कला",
+    body: "मन को जबरदस्ती रोकना संभव नहीं है। लेकिन उसे दिशा देना संभव है। ध्यान, गहरी साँसें, लिखना और शांत वातावरण मन को धीमा करने में मदद करते हैं। जब व्यक्ति अपने विचारों को देखना सीखता है, तब वे उस पर कम नियंत्रण रखते हैं।",
+    takeaway: "शांत मन स्पष्ट सोचता है।",
+  },
+  {
+    id: 7,
+    title: "वर्तमान में लौटना",
+    body: "ओवरथिंकिंग व्यक्ति को या तो अतीत में ले जाती है या भविष्य में। इसलिए वर्तमान पर ध्यान देना आवश्यक है। अपने आसपास की चीज़ों, साँसों और वर्तमान कार्य पर ध्यान केंद्रित करने से मन धीरे-धीरे स्थिर होने लगता है।",
+    takeaway: "वर्तमान क्षण मन को स्थिर करता है।",
+  },
+  {
+    id: 8,
+    title: "दूसरों की राय का डर",
+    body: "कई लोग लगातार इस बारे में सोचते रहते हैं कि दूसरे उनके बारे में क्या सोचेंगे। यह डर उन्हें स्वतंत्र रूप से जीने से रोकता है। सच्चाई यह है कि अधिकतर लोग अपने ही जीवन में व्यस्त होते हैं।",
+    takeaway: "हर किसी को खुश करना संभव नहीं है।",
+  },
+  {
+    id: 9,
+    title: "शरीर और मन का संबंध",
+    body: "कम नींद, लगातार स्क्रीन टाइम और थका हुआ शरीर भी ओवरथिंकिंग बढ़ा सकते हैं। जब शरीर थका होता है, तब मन अधिक नकारात्मक और अस्थिर हो जाता है। सही नींद और स्वास्थ्य मानसिक शांति के लिए जरूरी हैं।",
+    takeaway: "स्वस्थ शरीर शांत मन को समर्थन देता है।",
+  },
+  {
+    id: 10,
+    title: "हर विचार सच नहीं होता",
+    body: "मन में आने वाला हर विचार वास्तविकता नहीं होता। कई बार डर, चिंता और असुरक्षा मन में ऐसी कहानियाँ बना देते हैं जो सच नहीं होतीं। जागरूक व्यक्ति अपने विचारों को तुरंत सच नहीं मानता।",
+    takeaway: "विचार हमेशा वास्तविकता नहीं होते।",
+  },
+  {
+    id: 11,
+    title: "छोटे कदम उठाना",
+    body: "ओवरथिंकिंग अक्सर व्यक्ति को शुरू करने से रोकती है। वह तब तक सोचता रहता है जब तक ऊर्जा खत्म नहीं हो जाती। लेकिन छोटे कदम उठाने से स्पष्टता बढ़ती है। कार्रवाई चिंता को कम करती है।",
+    takeaway: "कदम उठाना सोचने से अधिक शक्तिशाली होता है।",
+  },
+  {
+    id: 12,
+    title: "अपने मन को देखना",
+    body: "ध्यान और आत्म-जागरूकता व्यक्ति को अपने विचारों को देखने की क्षमता देते हैं। जब व्यक्ति समझता है कि वह अपने विचार नहीं है, तब ओवरथिंकिंग की पकड़ कमजोर होने लगती है।",
+    takeaway: "जागरूकता विचारों की शक्ति कम करती है।",
+  },
+  {
+    id: 13,
+    title: "तुलना छोड़ना",
+    body: "दूसरों से तुलना करना ओवरथिंकिंग का बड़ा कारण है। लोग दूसरों की सफलता देखकर खुद को कम समझने लगते हैं। लेकिन हर व्यक्ति की यात्रा अलग होती है। तुलना शांति छीन लेती है।",
+    takeaway: "तुलना आत्मविश्वास को कमजोर करती है।",
+  },
+  {
+    id: 14,
+    title: "डर का सामना करना",
+    body: "ओवरथिंकिंग अक्सर डर से जुड़ी होती है। व्यक्ति उन चीज़ों के बारे में सोचता रहता है जिनसे वह डरता है। लेकिन डर का समाधान उससे भागना नहीं, बल्कि धीरे-धीरे उसका सामना करना है।",
+    takeaway: "डर का सामना करने से उसका प्रभाव कम होता है।",
+  },
+  {
+    id: 15,
+    title: "पूर्ण नियंत्रण की चाह",
+    body: "लोग हर परिस्थिति को नियंत्रित करना चाहते हैं। लेकिन जीवन हमेशा अनिश्चित रहेगा। जब व्यक्ति यह स्वीकार करता है कि कुछ चीज़ें उसके नियंत्रण से बाहर हैं, तब मन हल्का होने लगता है।",
+    takeaway: "हर चीज़ को नियंत्रित करना संभव नहीं है।",
+  },
+  {
+    id: 16,
+    title: "आत्मविश्वास और कार्रवाई",
+    body: "आत्मविश्वास सोचते रहने से नहीं, बल्कि अनुभव और कार्रवाई से बनता है। जितना अधिक व्यक्ति जीवन का सामना करता है, उतना ही मन मजबूत होता जाता है।",
+    takeaway: "आत्मविश्वास कार्रवाई से बनता है।",
+  },
+  {
+    id: 17,
+    title: "मन को आराम देना",
+    body: "लगातार जानकारी और मनोरंजन मन को थका देते हैं। कभी-कभी चुप्पी, प्रकृति और शांत समय की आवश्यकता होती है। मन को भी आराम चाहिए होता है।",
+    takeaway: "शांति के लिए मानसिक आराम जरूरी है।",
+  },
+  {
+    id: 18,
+    title: "ओवरथिंकिंग से मुक्त जीवन",
+    body: "ओवरथिंकिंग पूरी तरह खत्म नहीं होती, लेकिन व्यक्ति उसे नियंत्रित करना सीख सकता है। जागरूकता, संतुलन और कार्रवाई के साथ मन धीरे-धीरे शांत होने लगता है। जीवन तब हल्का और अधिक स्पष्ट महसूस होता है।",
+    takeaway: "शांत जीवन जागरूक सोच से बनता है।",
+  },
+];
+
+const stopOverthinkingEnglish: BookSection[] = [
+  {
+    id: 1,
+    title: "What Is Overthinking",
+    body: "Overthinking happens when a person repeatedly analyzes the same fears, mistakes, possibilities, or situations without reaching clarity. Instead of solving problems, the mind becomes trapped in endless mental loops. Healthy thinking helps people make decisions, while overthinking creates confusion, stress, and emotional exhaustion.",
+    takeaway: "Not every deep thought is helpful.",
+  },
+  {
+    id: 2,
+    title: "Why the Mind Runs Into the Future",
+    body: "The human mind naturally wants certainty and control. Because of this, people constantly imagine future problems, failures, and worst-case scenarios. But the future can never be fully controlled. Excessive worry about tomorrow slowly steals peace from today.",
+    takeaway: "Fear of the future weakens present peace.",
+  },
+  {
+    id: 3,
+    title: "Repeating the Past",
+    body: "Many people replay embarrassing moments, mistakes, and regrets again and again. The mind keeps saying, 'I should have done something differently.' But no amount of thinking can change the past. Reflection is useful, but getting trapped in regret creates suffering.",
+    takeaway: "Learn from the past without living inside it.",
+  },
+  {
+    id: 4,
+    title: "The Need for Perfection",
+    body: "Perfectionism is one of the biggest causes of overthinking. People become afraid of making mistakes, so even small decisions start feeling dangerous. But perfection does not exist. Growth and progress matter far more than flawless results.",
+    takeaway: "Progress matters more than perfection.",
+  },
+  {
+    id: 5,
+    title: "Fear of Decisions",
+    body: "Overthinkers often delay decisions because they want complete certainty before acting. They analyze every possibility until they become mentally exhausted. But clarity usually comes through action, not endless thinking.",
+    takeaway: "Complete certainty is rarely possible in life.",
+  },
+  {
+    id: 6,
+    title: "Learning to Calm the Mind",
+    body: "The mind cannot simply be forced to stop thinking. But it can be guided and trained. Meditation, deep breathing, journaling, silence, and reflection help slow mental noise. Awareness creates space between a person and their thoughts.",
+    takeaway: "A calm mind thinks more clearly.",
+  },
+  {
+    id: 7,
+    title: "Returning to the Present",
+    body: "Overthinking pulls people away from the present moment. The mind either revisits the past or fears the future. Focusing on breathing, surroundings, and the current task slowly brings stability back to the mind.",
+    takeaway: "The present moment creates mental stability.",
+  },
+  {
+    id: 8,
+    title: "Fear of Other People’s Opinions",
+    body: "Many people constantly worry about how others see them. This fear creates self-consciousness and anxiety. In reality, most people are too focused on their own lives to judge constantly.",
+    takeaway: "You cannot control everyone’s opinion.",
+  },
+  {
+    id: 9,
+    title: "The Connection Between Body and Mind",
+    body: "Lack of sleep, constant screen exposure, unhealthy habits, and exhaustion can increase overthinking significantly. A tired body often creates a restless and negative mind. Physical health strongly affects emotional stability.",
+    takeaway: "A healthy body supports a peaceful mind.",
+  },
+  {
+    id: 10,
+    title: "Not Every Thought Is True",
+    body: "The mind creates stories based on fear, insecurity, and imagination. Many thoughts are exaggerated or unrealistic. Wise people learn to observe thoughts without immediately believing every single one.",
+    takeaway: "Thoughts are not always reality.",
+  },
+  {
+    id: 11,
+    title: "Taking Small Actions",
+    body: "Overthinking often stops people from starting anything meaningful. They think so much that they lose energy to act. Small actions break mental paralysis and slowly build confidence and clarity.",
+    takeaway: "Action is more powerful than endless thinking.",
+  },
+  {
+    id: 12,
+    title: "Observing the Mind",
+    body: "Meditation and self-awareness teach people how to observe thoughts without becoming trapped inside them. Once a person realizes they are not their thoughts, overthinking loses much of its control.",
+    takeaway: "Awareness weakens the power of overthinking.",
+  },
+  {
+    id: 13,
+    title: "Letting Go of Comparison",
+    body: "Comparison is a major source of mental stress. Constantly comparing success, appearance, or progress with others creates insecurity and dissatisfaction. Every person moves through life differently.",
+    takeaway: "Comparison weakens confidence and peace.",
+  },
+  {
+    id: 14,
+    title: "Facing Fear Directly",
+    body: "Overthinking often grows from avoided fears. People mentally replay situations because they fear failure, rejection, or embarrassment. But fear becomes weaker when faced gradually and honestly.",
+    takeaway: "Facing fear reduces its control over the mind.",
+  },
+  {
+    id: 15,
+    title: "The Desire to Control Everything",
+    body: "People suffer when they try to control every outcome in life. Reality will always contain uncertainty. Accepting uncertainty creates emotional freedom and reduces mental pressure.",
+    takeaway: "Not everything in life can be controlled.",
+  },
+  {
+    id: 16,
+    title: "Confidence Through Action",
+    body: "Confidence is not built by thinking endlessly. It grows through experience, mistakes, learning, and action. The more a person faces life directly, the stronger the mind becomes.",
+    takeaway: "Confidence grows through action.",
+  },
+  {
+    id: 17,
+    title: "Giving the Mind Rest",
+    body: "Modern life overstimulates the brain constantly through screens, entertainment, and information. Silence, nature, and moments of stillness allow the mind to recover and reset emotionally.",
+    takeaway: "The mind needs rest just like the body.",
+  },
+  {
+    id: 18,
+    title: "Freedom From Overthinking",
+    body: "Overthinking may never disappear completely, but it can be managed wisely. Through awareness, balance, healthy habits, and action, the mind slowly becomes calmer and clearer. Life begins feeling lighter and more peaceful.",
+    takeaway: "A peaceful life begins with balanced thinking.",
+  },
+];
+
 export const books: Book[] = [
   {
     id: "gita-simplified",
@@ -3795,6 +4017,21 @@ export const books: Book[] = [
     category: "for-students",
     hindiSections: failureLessonsHindi,
     englishSections: failureLessonsEnglish,
+  },
+  {
+    id: "how-to-stop-overthinking",
+    title: "ओवरथिंकिंग को कैसे रोकें",
+    author: "मानसिक स्पष्टता श्रृंखला",
+    description: "चिंता, डर और लगातार सोचने की आदत से बाहर निकलकर शांत और स्पष्ट मन बनाने की गहरी मार्गदर्शिका।",
+    titleEn: "How to Stop Overthinking",
+    authorEn: "Mental Clarity Series",
+    descriptionEn:
+      "A deep guide to overcoming anxiety, mental loops, and excessive thinking to build a calmer and clearer mind.",
+    price: 149,
+    cover: "from-purple-200 via-indigo-200 to-blue-300",
+    category: "self-growth",
+    hindiSections: stopOverthinkingHindi,
+    englishSections: stopOverthinkingEnglish,
   },
   {
     id: "students-discipline",
