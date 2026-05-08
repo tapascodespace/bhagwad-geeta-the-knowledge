@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { BookOpen, Lock } from "lucide-react";
+import { BookOpen, Lock, Check } from "lucide-react";
 import { toast } from "sonner";
 import { books, CATEGORIES, getBookMeta, getBookSections, hasContent, type Book, type BookCategory } from "@/data/books";
 import { readProgressMap, useUnlockedBooks } from "@/hooks/useLibrary";
