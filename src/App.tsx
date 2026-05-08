@@ -51,6 +51,8 @@ const App = () => (
             <Route path="/library" element={<RequireLanguage><Library /></RequireLanguage>} />
             <Route path="/library/:bookId" element={<RequireLanguage><BookDetail /></RequireLanguage>} />
             <Route path="/library/:bookId/read" element={<RequireLanguage><BookReader /></RequireLanguage>} />
+            <Route path="/payment-success" element={<PaymentSuccess />} />
+            <Route path="/payment-cancelled" element={<PaymentCancelled />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <BottomNav />
