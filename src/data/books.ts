@@ -4027,9 +4027,9 @@ export const books: Book[] = [
     authorEn: "Mental Clarity Series",
     descriptionEn:
       "A deep guide to overcoming anxiety, mental loops, and excessive thinking to build a calmer and clearer mind.",
-    price: 149,
+    price: 99,
     cover: "from-purple-200 via-indigo-200 to-blue-300",
-    category: "self-growth",
+    category: "for-students",
     hindiSections: stopOverthinkingHindi,
     englishSections: stopOverthinkingEnglish,
   },
