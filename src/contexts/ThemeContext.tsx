@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, ReactNode, useCallback } from "react";
 
-export type Theme = "light" | "dark";
+export type Theme = "light" | "dark" | "amoled";
 
 interface ThemeContextValue {
   theme: Theme;
@@ -13,26 +13,25 @@ const STORAGE_KEY = "gita.theme";
 
 const applyTheme = (theme: Theme) => {
   const root = document.documentElement;
+  root.classList.remove("dark", "amoled");
   if (theme === "dark") root.classList.add("dark");
-  else root.classList.remove("dark");
-  root.style.colorScheme = theme;
+  else if (theme === "amoled") root.classList.add("dark", "amoled");
+  root.style.colorScheme = theme === "light" ? "light" : "dark";
 };
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setThemeState] = useState<Theme>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved === "dark" || saved === "light") return saved;
+      if (saved === "dark" || saved === "light" || saved === "amoled") return saved;
     } catch { /* ignore */ }
     return "light";
   });
 
-  // Apply immediately on mount and on change
   useEffect(() => {
     applyTheme(theme);
   }, [theme]);
 
-  // Enable transition class after first paint to avoid initial flicker
   useEffect(() => {
     const id = window.requestAnimationFrame(() => {
       document.documentElement.classList.add("theme-ready");
@@ -47,7 +46,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
 
   const toggleTheme = useCallback(() => {
     setThemeState((prev) => {
-      const next: Theme = prev === "dark" ? "light" : "dark";
+      const next: Theme = prev === "light" ? "dark" : "light";
       try { localStorage.setItem(STORAGE_KEY, next); } catch { /* ignore */ }
       return next;
     });

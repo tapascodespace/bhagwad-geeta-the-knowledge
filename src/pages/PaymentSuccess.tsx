@@ -4,6 +4,7 @@ import { CheckCircle2, Loader2, XCircle, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useUnlockedBooks } from "@/hooks/useLibrary";
+import { recordPurchase } from "@/hooks/usePurchases";
 import { getBook, getBookMeta } from "@/data/books";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -64,6 +65,15 @@ const PaymentSuccess = () => {
           return;
         }
         unlock(data.bookId as string);
+        const purchasedBook = getBook(data.bookId as string);
+        if (purchasedBook) {
+          recordPurchase({
+            bookId: purchasedBook.id,
+            price: typeof data.amount === "number" ? data.amount : purchasedBook.price,
+            currency: typeof data.currency === "string" ? data.currency : "INR",
+            purchasedAt: Date.now(),
+          });
+        }
         setBookId(data.bookId as string);
         setState("ok");
       } catch {

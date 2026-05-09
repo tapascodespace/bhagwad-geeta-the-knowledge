@@ -13,6 +13,7 @@ import Library from "@/pages/Library";
 import BookReader from "@/pages/BookReader";
 import BookDetail from "@/pages/BookDetail";
 import LanguageSelect from "@/pages/LanguageSelect";
+import Settings from "@/pages/Settings";
 import PaymentSuccess from "@/pages/PaymentSuccess";
 import PaymentCancelled from "@/pages/PaymentCancelled";
 import NotFound from "@/pages/NotFound";
@@ -51,6 +52,7 @@ const App = () => (
             <Route path="/library" element={<RequireLanguage><Library /></RequireLanguage>} />
             <Route path="/library/:bookId" element={<RequireLanguage><BookDetail /></RequireLanguage>} />
             <Route path="/library/:bookId/read" element={<RequireLanguage><BookReader /></RequireLanguage>} />
+            <Route path="/settings" element={<RequireLanguage><Settings /></RequireLanguage>} />
             <Route path="/payment-success" element={<PaymentSuccess />} />
             <Route path="/payment-cancelled" element={<PaymentCancelled />} />
             <Route path="*" element={<NotFound />} />

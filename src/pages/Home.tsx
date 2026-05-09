@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { BookOpen, Languages, Sparkles } from "lucide-react";
+import { BookOpen, Languages, Sparkles, Settings as SettingsIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LANGUAGES } from "@/i18n/translations";
@@ -23,6 +23,13 @@ const Home = () => {
         >
           <Languages className="w-5 h-5 text-primary" />
           <span className="text-base font-medium">{currentLang?.native}</span>
+        </button>
+        <button
+          onClick={() => navigate("/settings")}
+          className="flex items-center justify-center w-10 h-10 rounded-full bg-secondary/80 backdrop-blur text-secondary-foreground border border-border/50 hover:bg-secondary active:scale-95 transition-all"
+          aria-label={t("settings")}
+        >
+          <SettingsIcon className="w-5 h-5 text-primary" />
         </button>
       </div>
 
