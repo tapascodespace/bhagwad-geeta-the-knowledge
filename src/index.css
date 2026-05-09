@@ -113,13 +113,30 @@
     @apply border-border;
   }
 
+  :root {
+    --app-font-scale: 1;
+    --app-line-spacing: 1.65;
+  }
+
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Inter', 'Noto Sans Bengali', 'Noto Sans Devanagari', sans-serif;
-    font-size: 17px;
-    line-height: 1.65;
+    font-size: calc(17px * var(--app-font-scale));
+    line-height: var(--app-line-spacing);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* AMOLED theme — pure black background for OLED screens */
+  .dark.amoled {
+    --background: 0 0% 0%;
+    --card: 0 0% 4%;
+    --popover: 0 0% 4%;
+    --secondary: 0 0% 8%;
+    --muted: 0 0% 7%;
+    --border: 0 0% 14%;
+    --input: 0 0% 14%;
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 5%), hsl(0 0% 2%));
   }
 
   /* Smooth theme transition across the whole app (skip transforms/opacity to avoid jank) */
