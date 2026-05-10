@@ -37,7 +37,6 @@ import { useAppearance } from "@/hooks/useAppearance";
 import { usePurchases } from "@/hooks/usePurchases";
 import {
   readProgressMap,
-  useUnlockedBooks,
   useBookBookmarks,
 } from "@/hooks/useLibrary";
 import { useBookmarks } from "@/hooks/useBookmarks";
