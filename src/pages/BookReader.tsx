@@ -84,13 +84,20 @@ const BookReader = () => {
   }, [prefs.theme]);
 
   const unlocked = book ? isUnlocked(book.id) : false;
+  const gatingReady = !authLoading && !purchasesLoading;
 
-  // If not unlocked AND not in preview mode, redirect to the detail/paywall page.
+  // If not previewing: require auth, then verify purchase. Otherwise redirect.
   useEffect(() => {
-    if (book && !unlocked && !isPreview) {
+    if (!book || isPreview) return;
+    if (!gatingReady) return;
+    if (!user) {
+      navigate(`/auth?redirect=${encodeURIComponent(`/library/${book.id}`)}`, { replace: true });
+      return;
+    }
+    if (!unlocked) {
       navigate(`/library/${book.id}`, { replace: true });
     }
-  }, [unlocked, book, navigate, isPreview]);
+  }, [user, unlocked, book, navigate, isPreview, gatingReady]);
 
   if (!book) {
     return (
