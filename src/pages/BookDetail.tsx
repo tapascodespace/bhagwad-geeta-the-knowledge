@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ChevronLeft, Lock, BookOpen, Clock, Sparkles, Check, ArrowRight, Loader2 } from "lucide-react";
 import { getBook, getBookMeta, getBookSections, hasContent } from "@/data/books";
 import { useReadingProgress, useUnlockedBooks } from "@/hooks/useLibrary";
+import { useAuth } from "@/hooks/useAuth";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
