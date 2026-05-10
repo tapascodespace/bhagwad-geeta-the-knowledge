@@ -321,22 +321,17 @@ const Settings = () => {
   );
   const lastRead = sortedProgress[0];
 
-  const handleRestore = () => {
-    // No auth yet — best-effort: re-unlock anything stored in purchases history
-    purchases.forEach((p) => unlock(p.bookId));
-    if (purchases.length > 0) {
-      toast.success(s.restore, { description: `${purchases.length} book(s) restored` });
-    } else {
-      toast(s.restore, { description: s.restoreNote });
-    }
+  const handleRestore = async () => {
+    // Purchases are stored server-side; just refetch.
+    toast(s.restore, { description: s.restoreNote });
   };
 
-  const handleSignOut = () => {
+  const handleSignOut = async () => {
     if (!window.confirm(s.signOutConfirm)) return;
     try {
+      await supabase.auth.signOut();
+      // Clear local-only reading prefs/progress on this device.
       [
-        "library:unlocked",
-        "library:purchases",
         "library:progress",
         "library:book-bookmarks",
         "library:reader-prefs",
