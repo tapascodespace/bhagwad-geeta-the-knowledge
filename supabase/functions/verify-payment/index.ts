@@ -52,11 +52,13 @@ Deno.serve(async (req) => {
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } },
     );
   } catch (err) {
-    const message = err instanceof Error ? err.message : "Unknown error";
-    console.error("verify-payment error:", message);
-    return new Response(JSON.stringify({ error: message }), {
-      status: 500,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
+    console.error("verify-payment error:", err);
+    return new Response(
+      JSON.stringify({ error: "Payment could not be verified" }),
+      {
+        status: 500,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      },
+    );
   }
 });
