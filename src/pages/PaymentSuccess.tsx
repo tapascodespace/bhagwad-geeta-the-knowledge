@@ -40,10 +40,10 @@ const STRINGS = {
 const PaymentSuccess = () => {
   const [params] = useSearchParams();
   const navigate = useNavigate();
-  const { unlock } = useUnlockedBooks();
+  const { refresh } = usePurchases();
   const { language } = useLanguage();
   const s = STRINGS[language] ?? STRINGS.hi;
-  const [state, setState] = useState<"loading" | "ok" | "fail">("loading");
+  const [state, setState] = useState<"loading" | "ok" | "fail" | "auth">("loading");
   const [bookId, setBookId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -55,6 +55,13 @@ const PaymentSuccess = () => {
     let cancelled = false;
     (async () => {
       try {
+        // Ensure user is signed in (verify-payment requires JWT)
+        const { data: sess } = await supabase.auth.getSession();
+        if (!sess.session) {
+          if (!cancelled) setState("auth");
+          return;
+        }
+
         const { data, error } = await supabase.functions.invoke("verify-payment", {
           body: { sessionId },
         });
@@ -63,16 +70,7 @@ const PaymentSuccess = () => {
           setState("fail");
           return;
         }
-        unlock(data.bookId as string);
-        const purchasedBook = getBook(data.bookId as string);
-        if (purchasedBook) {
-          recordPurchase({
-            bookId: purchasedBook.id,
-            price: typeof data.amount === "number" ? data.amount : purchasedBook.price,
-            currency: typeof data.currency === "string" ? data.currency : "INR",
-            purchasedAt: Date.now(),
-          });
-        }
+        await refresh();
         setBookId(data.bookId as string);
         setState("ok");
       } catch {
