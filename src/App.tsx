@@ -15,6 +15,7 @@ import BookDetail from "@/pages/BookDetail";
 import LanguageSelect from "@/pages/LanguageSelect";
 import Settings from "@/pages/Settings";
 import PaymentSuccess from "@/pages/PaymentSuccess";
+import Auth from "@/pages/Auth";
 import PaymentCancelled from "@/pages/PaymentCancelled";
 import NotFound from "@/pages/NotFound";
 import { useLanguage } from "@/contexts/LanguageContext";
