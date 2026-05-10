@@ -33,7 +33,8 @@ const BookReader = () => {
   const [searchParams] = useSearchParams();
   const isPreview = searchParams.get("preview") === "1";
   const book = useMemo(() => getBook(bookId), [bookId]);
-  const { isUnlocked } = useUnlockedBooks();
+  const { isUnlocked, loading: purchasesLoading } = useUnlockedBooks();
+  const { user, loading: authLoading } = useAuth();
   const { section, setSection } = useReadingProgress(bookId);
   const { prefs, update } = useReaderPrefs();
   const { language: appLang, t } = useLanguage();
