@@ -104,6 +104,10 @@ const BookDetail = () => {
       toast.info(s.comingSoon);
       return;
     }
+    if (!user) {
+      navigate(`/auth?redirect=${encodeURIComponent(`/library/${book.id}`)}`);
+      return;
+    }
     setCheckoutLoading(true);
     try {
       const { data, error } = await supabase.functions.invoke("create-checkout", {
