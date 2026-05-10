@@ -1,46 +1,56 @@
-## Goal
+# Server-Side Paywall Authorization
 
-Use your new ElevenLabs API key (with the 200k credits) to batch-generate the missing verse MP3s and upload them to the `verse-audio` storage bucket so the app plays them instantly with no runtime credit cost.
+This is a critical security fix. Today the app has no user authentication and "unlocked books" live entirely in `localStorage`, so anyone can grant themselves free access via DevTools. Stripe Checkout works, but nothing the client claims is verified server-side at read time. The fix below introduces real authentication, persists purchases in the database, and serves paid book content through an authenticated edge function so client tampering cannot bypass it.
 
-## Current state
+## What you'll see as a user
 
-- Frontend reads pre-generated MP3s from the public `verse-audio` bucket.
-- Two existing TTS proxy functions:
-  - `tts-default` → uses `ELEVENLABS_API_KEY`
-  - `tts-account1` → uses `ELEVENLABS_API_KEY_ACCOUNT1`
-- Both keys are already configured, but you say the new key has the credits.
+- A new **Sign in / Sign up** screen (email + password, plus Google).
+- You must be signed in to buy a book or open a paid book.
+- After a successful Stripe payment, the purchase is recorded against your account on the server, not in your browser. Clearing storage or switching devices keeps your library.
+- A "Restore purchases" option re-syncs from the server.
+- Free content (Bhagavad Gita verses, free verse audio CDN) stays open to everyone, no login required.
 
-## Plan
+## Database changes
 
-### 1. Add the new key as a secret
-Prompt you to save the new key as `ELEVENLABS_API_KEY_ACCOUNT2` (keeps existing keys intact so we can fall back).
+Add two tables (with RLS) and one helper:
 
-### 2. Create a new edge function `tts-account2`
-Same shape as `tts-account1`, but reads `ELEVENLABS_API_KEY_ACCOUNT2`. Acts as the TTS proxy for the generation script.
+- `profiles` — one row per auth user (`user_id`, `display_name`). Auto-created on signup via trigger. Used so the rest of the app can read user metadata without hitting `auth.users`.
+- `purchases` — `user_id`, `book_id`, `stripe_session_id` (unique), `amount`, `currency`, `created_at`. RLS: a user can only `SELECT` their own rows. No client `INSERT` / `UPDATE` / `DELETE` policies — only edge functions using the service role can write.
+- `has_purchased(_user_id uuid, _book_id text)` — `SECURITY DEFINER` SQL function that returns `true` iff a row exists in `purchases`. Used by the content edge function and (optionally) by future RLS policies.
 
-### 3. Generation script (sandbox, one-off)
-Run a Node script in `/tmp` that:
-- Iterates all chapters/verses in `src/data/gita.ts`.
-- For each verse + part (`shloka`, `hi-translation`, `hi-explanation`, and optionally `en-*`/`bn-*` if you want), checks `verse-audio` bucket via HEAD for the expected filename.
-- If missing, calls `tts-account2` with the right text, voice, and `language_code`.
-- Uploads the returned MP3 to `verse-audio` using the service role key with the exact naming convention:
-  - `ch{c}-v{v}-shloka.mp3`
-  - `ch{c}-v{v}-{lang}-{part}.mp3`
-- Logs progress + remaining-credits estimate, retries on 429, skips on 4xx.
+## Edge function changes
 
-### 4. Confirm before bulk run
-Before generating thousands of files, ask which scope to generate:
-- Only Hindi (translation + explanation) — smallest, matches the Library/Hindi-only direction.
-- Hindi + Sanskrit shlokas.
-- All three languages (en/hi/bn) for every verse.
+- `create-checkout` — now requires a valid JWT. Reads `user_id` from `getClaims()`, keeps the server-side `BOOK_CATALOG` price, and stores `user_id` + `bookId` in the Stripe session `metadata`. Rejects unauthenticated requests.
+- `verify-payment` — requires a valid JWT. Retrieves the Stripe session, confirms `payment_status === "paid"` and that `metadata.user_id` matches the caller, then `INSERT`s into `purchases` (idempotent on `stripe_session_id`) using the service-role client. Returns `{ paid, bookId }`.
+- `get-book-content` (new) — requires a valid JWT. Takes `{ bookId }`, calls `has_purchased(user_id, bookId)`, and only then returns the book sections JSON. For free books it returns content directly. This is the choke point that makes localStorage tampering useless: the content itself never leaves the server unless the DB confirms purchase.
 
-### 5. Verify
-After generation, spot-check a few verses in the app (e.g. Chapter 2, Verse 47) to confirm they play without the "Audio not available yet" toast.
+All three keep generic error messages and log details server-side.
 
-## Questions for you before I start
+## Frontend changes
 
-1. What name should the new key be saved as? (Default: `ELEVENLABS_API_KEY_ACCOUNT2`.)
-2. Which scope should I generate? (Hindi only / Hindi + Sanskrit / all languages.)
-3. Same voice as before (`JBFqnCBsd6RMkjVDRZzb` — George) or a different one?
+- New `/auth` page with sign-in / sign-up tabs (email+password and Google). Uses `supabase.auth.onAuthStateChange` set up before `getSession()`.
+- New `usePurchases` hook backed by a Supabase query against `purchases` (not localStorage). Exposes `isUnlocked(bookId)` and `refetch()`.
+- `BookReader` no longer reads `library:unlocked`. It calls the `get-book-content` edge function; if the function returns 403, it redirects to the paywall / sign-in.
+- `BookDetail` "Buy" button requires sign-in; if signed out, redirects to `/auth?next=...`.
+- `PaymentSuccess` calls `verify-payment` with the user's JWT, then refetches `purchases`. No more `localStorage.setItem("library:unlocked", ...)`.
+- `Settings` "Purchase History" reads from the `purchases` table. Old `library:purchases` localStorage code is removed.
+- All `useUnlockedBooks`, `library:unlocked` writes, and any query-param unlock paths are deleted.
 
-Once you approve, I'll: add the secret request, create `tts-account2`, then run the generator.
+Reading progress, bookmarks, and reader prefs stay in `localStorage` — they are not security-sensitive.
+
+## Verification (after build)
+
+- Signed-out: hitting `/read/<paid-book>` redirects to `/auth`. Calling `get-book-content` directly returns 401.
+- Signed-in but no purchase: `get-book-content` returns 403; UI shows paywall.
+- Manually setting `localStorage['library:unlocked']` to any value has no effect — content still gated by the edge function.
+- After a real Stripe test payment, `purchases` row appears, `verify-payment` returns `paid: true`, content loads, and clearing localStorage does not lose access.
+- Trying to call `verify-payment` with another user's `session_id` is rejected (metadata mismatch).
+
+## Open question before I start
+
+One decision affects scope. Please pick:
+
+1. **Migrate existing localStorage "purchases" to the database on first login** — friendlier for current testers, but technically grants paid access based on untrusted client data the first time. Recommended only if no real money has been taken yet.
+2. **Do not migrate** — every existing "unlocked" book must be paid for again. Strictly correct, slightly worse UX for testers.
+
+Reply "1" or "2" (or "go" for option 2, the safer default) and I'll implement.
