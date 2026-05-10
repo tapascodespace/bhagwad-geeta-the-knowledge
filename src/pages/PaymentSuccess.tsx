@@ -115,7 +115,20 @@ const PaymentSuccess = () => {
             </div>
           </>
         )}
-        {state === "fail" && (
+        {state === "auth" && (
+          <>
+            <XCircle className="w-12 h-12 mx-auto text-amber-600" />
+            <h1 className="font-display text-xl font-bold mt-3">Sign in required</h1>
+            <p className="text-sm text-muted-foreground mt-1">
+              Please sign in with the same account you used at checkout to unlock your book.
+            </p>
+            <Button className="w-full mt-6" asChild>
+              <Link to={`/auth?redirect=/payment-success?session_id=${encodeURIComponent(params.get("session_id") ?? "")}`}>
+                Sign in
+              </Link>
+            </Button>
+          </>
+        )}
           <>
             <XCircle className="w-12 h-12 mx-auto text-destructive" />
             <h1 className="font-display text-xl font-bold mt-3">{s.failed}</h1>
