@@ -1,6 +1,6 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
+import { usePurchases } from "@/hooks/usePurchases";
 
-const UNLOCKED_KEY = "library:unlocked";
 const PROGRESS_KEY = "library:progress";
 const READER_PREFS_KEY = "library:reader-prefs";
 const BOOK_BOOKMARKS_KEY = "library:book-bookmarks";
