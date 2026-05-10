@@ -3,8 +3,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { CheckCircle2, Loader2, XCircle, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
-import { useUnlockedBooks } from "@/hooks/useLibrary";
-import { recordPurchase } from "@/hooks/usePurchases";
+import { usePurchases } from "@/hooks/usePurchases";
 import { getBook, getBookMeta } from "@/data/books";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -41,10 +40,10 @@ const STRINGS = {
 const PaymentSuccess = () => {
   const [params] = useSearchParams();
   const navigate = useNavigate();
-  const { unlock } = useUnlockedBooks();
+  const { refresh } = usePurchases();
   const { language } = useLanguage();
   const s = STRINGS[language] ?? STRINGS.hi;
-  const [state, setState] = useState<"loading" | "ok" | "fail">("loading");
+  const [state, setState] = useState<"loading" | "ok" | "fail" | "auth">("loading");
   const [bookId, setBookId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -56,6 +55,13 @@ const PaymentSuccess = () => {
     let cancelled = false;
     (async () => {
       try {
+        // Ensure user is signed in (verify-payment requires JWT)
+        const { data: sess } = await supabase.auth.getSession();
+        if (!sess.session) {
+          if (!cancelled) setState("auth");
+          return;
+        }
+
         const { data, error } = await supabase.functions.invoke("verify-payment", {
           body: { sessionId },
         });
@@ -64,16 +70,7 @@ const PaymentSuccess = () => {
           setState("fail");
           return;
         }
-        unlock(data.bookId as string);
-        const purchasedBook = getBook(data.bookId as string);
-        if (purchasedBook) {
-          recordPurchase({
-            bookId: purchasedBook.id,
-            price: typeof data.amount === "number" ? data.amount : purchasedBook.price,
-            currency: typeof data.currency === "string" ? data.currency : "INR",
-            purchasedAt: Date.now(),
-          });
-        }
+        await refresh();
         setBookId(data.bookId as string);
         setState("ok");
       } catch {
@@ -116,6 +113,20 @@ const PaymentSuccess = () => {
                 <Link to="/library">{s.library}</Link>
               </Button>
             </div>
+          </>
+        )}
+        {state === "auth" && (
+          <>
+            <XCircle className="w-12 h-12 mx-auto text-amber-600" />
+            <h1 className="font-display text-xl font-bold mt-3">Sign in required</h1>
+            <p className="text-sm text-muted-foreground mt-1">
+              Please sign in with the same account you used at checkout to unlock your book.
+            </p>
+            <Button className="w-full mt-6" asChild>
+              <Link to={`/auth?redirect=/payment-success?session_id=${encodeURIComponent(params.get("session_id") ?? "")}`}>
+                Sign in
+              </Link>
+            </Button>
           </>
         )}
         {state === "fail" && (

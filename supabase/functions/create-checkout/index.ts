@@ -1,8 +1,8 @@
 // Create a Stripe Checkout session for a book purchase.
-// Public endpoint (no auth required). Price and title are taken from a
-// server-side catalog — the client-supplied price is ignored to prevent
-// price tampering.
+// Requires an authenticated Supabase user. Price/title come from a server-side
+// catalog; client-supplied price is ignored to prevent tampering.
 import Stripe from "https://esm.sh/stripe@17.7.0?target=deno";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -11,7 +11,6 @@ const corsHeaders = {
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
-// Authoritative price catalog (INR rupees). Keep in sync with src/data/books.ts.
 const BOOK_CATALOG: Record<string, { title: string; price: number }> = {
   "bhagavad-gita": { title: "Bhagavad Gita", price: 99 },
   "gita-essence": { title: "Gita Essence", price: 99 },
@@ -43,7 +42,6 @@ const BOOK_CATALOG: Record<string, { title: string; price: number }> = {
   "manage-your-life": { title: "Manage Your Life", price: 99 },
 };
 
-// Allowed origins for success/cancel URLs to prevent open-redirect abuse.
 const ALLOWED_ORIGIN_HOSTS = [
   "bhagwad-geeta-the-knowledge.lovable.app",
   "id-preview--51f564b6-e7cd-45d8-a13c-995607cd78c9.lovable.app",
@@ -75,6 +73,22 @@ Deno.serve(async (req) => {
   }
 
   try {
+    // Require authenticated user
+    const authHeader = req.headers.get("Authorization") ?? "";
+    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+    const anonKey = Deno.env.get("SUPABASE_ANON_KEY")!;
+    const userClient = createClient(supabaseUrl, anonKey, {
+      global: { headers: { Authorization: authHeader } },
+    });
+    const { data: userData, error: userError } = await userClient.auth.getUser();
+    const user = userData?.user;
+    if (userError || !user) {
+      return new Response(
+        JSON.stringify({ error: "Authentication required" }),
+        { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+      );
+    }
+
     const key = Deno.env.get("STRIPE_SECRET_KEY");
     if (!key) {
       console.error("create-checkout: STRIPE_SECRET_KEY not configured");
@@ -102,18 +116,18 @@ Deno.serve(async (req) => {
 
     const stripe = new Stripe(key, { apiVersion: "2024-11-20.acacia" });
 
-    const requestedOrigin =
-      body.origin || req.headers.get("origin") || "";
+    const requestedOrigin = body.origin || req.headers.get("origin") || "";
     const origin =
       requestedOrigin && isAllowedOrigin(requestedOrigin)
         ? requestedOrigin.replace(/\/$/, "")
         : "https://bhagwad-geeta-the-knowledge.lovable.app";
 
-    const currency = (body.currency === "usd" ? "usd" : "inr");
+    const currency = body.currency === "usd" ? "usd" : "inr";
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       payment_method_types: ["card"],
+      customer_email: user.email ?? undefined,
       line_items: [
         {
           quantity: 1,
@@ -127,7 +141,7 @@ Deno.serve(async (req) => {
           },
         },
       ],
-      metadata: { bookId: body.bookId },
+      metadata: { bookId: body.bookId, userId: user.id },
       success_url: `${origin}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/payment-cancelled?book_id=${encodeURIComponent(body.bookId)}`,
     });

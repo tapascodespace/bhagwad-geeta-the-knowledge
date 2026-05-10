@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { getBook, getBookMeta, getBookSections, type BookLanguage } from "@/data/books";
 import { useBookBookmarks, useReaderPrefs, useReadingProgress, useUnlockedBooks } from "@/hooks/useLibrary";
+import { useAuth } from "@/hooks/useAuth";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -32,7 +33,8 @@ const BookReader = () => {
   const [searchParams] = useSearchParams();
   const isPreview = searchParams.get("preview") === "1";
   const book = useMemo(() => getBook(bookId), [bookId]);
-  const { isUnlocked } = useUnlockedBooks();
+  const { isUnlocked, loading: purchasesLoading } = useUnlockedBooks();
+  const { user, loading: authLoading } = useAuth();
   const { section, setSection } = useReadingProgress(bookId);
   const { prefs, update } = useReaderPrefs();
   const { language: appLang, t } = useLanguage();
@@ -82,13 +84,20 @@ const BookReader = () => {
   }, [prefs.theme]);
 
   const unlocked = book ? isUnlocked(book.id) : false;
+  const gatingReady = !authLoading && !purchasesLoading;
 
-  // If not unlocked AND not in preview mode, redirect to the detail/paywall page.
+  // If not previewing: require auth, then verify purchase. Otherwise redirect.
   useEffect(() => {
-    if (book && !unlocked && !isPreview) {
+    if (!book || isPreview) return;
+    if (!gatingReady) return;
+    if (!user) {
+      navigate(`/auth?redirect=${encodeURIComponent(`/library/${book.id}`)}`, { replace: true });
+      return;
+    }
+    if (!unlocked) {
       navigate(`/library/${book.id}`, { replace: true });
     }
-  }, [unlocked, book, navigate, isPreview]);
+  }, [user, unlocked, book, navigate, isPreview, gatingReady]);
 
   if (!book) {
     return (
@@ -106,7 +115,7 @@ const BookReader = () => {
   const sections = getBookSections(book, bookLang);
   const total = sections.length;
 
-  if (!unlocked && !isPreview) return null;
+  if (!isPreview && (!gatingReady || !unlocked)) return null;
 
   if (total === 0) {
     return (

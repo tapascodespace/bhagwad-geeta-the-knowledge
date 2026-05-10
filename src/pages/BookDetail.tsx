@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ChevronLeft, Lock, BookOpen, Clock, Sparkles, Check, ArrowRight, Loader2 } from "lucide-react";
 import { getBook, getBookMeta, getBookSections, hasContent } from "@/data/books";
 import { useReadingProgress, useUnlockedBooks } from "@/hooks/useLibrary";
+import { useAuth } from "@/hooks/useAuth";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -74,6 +75,7 @@ const BookDetail = () => {
   const navigate = useNavigate();
   const book = useMemo(() => getBook(bookId), [bookId]);
   const { isUnlocked } = useUnlockedBooks();
+  const { user } = useAuth();
   const { language } = useLanguage();
   const s = STRINGS[language] ?? STRINGS.hi;
   const { section } = useReadingProgress(bookId);
@@ -100,6 +102,10 @@ const BookDetail = () => {
   const handleBuy = async () => {
     if (!available) {
       toast.info(s.comingSoon);
+      return;
+    }
+    if (!user) {
+      navigate(`/auth?redirect=${encodeURIComponent(`/library/${book.id}`)}`);
       return;
     }
     setCheckoutLoading(true);
