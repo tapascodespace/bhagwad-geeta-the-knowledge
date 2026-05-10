@@ -1,6 +1,6 @@
-import { useEffect, useState, useCallback, useMemo } from "react";
-import { usePurchases } from "@/hooks/usePurchases";
+import { useEffect, useState, useCallback } from "react";
 
+const UNLOCKED_KEY = "library:unlocked";
 const PROGRESS_KEY = "library:progress";
 const READER_PREFS_KEY = "library:reader-prefs";
 const BOOK_BOOKMARKS_KEY = "library:book-bookmarks";
@@ -72,19 +72,34 @@ export const useBookBookmarks = () => {
   return { items, isBookmarked, toggle, remove };
 };
 
-// Unlock state is now derived from server-verified purchases.
-// localStorage `library:unlocked` is no longer trusted or written.
+const readSet = (): Set<string> => {
+  try {
+    const raw = localStorage.getItem(UNLOCKED_KEY);
+    return new Set(raw ? (JSON.parse(raw) as string[]) : []);
+  } catch {
+    return new Set();
+  }
+};
+
 export const useUnlockedBooks = () => {
-  const { purchases, loading } = usePurchases();
-  const unlockedSet = useMemo(
-    () => new Set(purchases.map((p) => p.bookId)),
-    [purchases],
-  );
-  const isUnlocked = useCallback(
-    (bookId: string) => unlockedSet.has(bookId),
-    [unlockedSet],
-  );
-  return { isUnlocked, loading };
+  const [unlocked, setUnlocked] = useState<Set<string>>(() => readSet());
+
+  useEffect(() => {
+    const onStorage = () => setUnlocked(readSet());
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, []);
+
+  const unlock = useCallback((bookId: string) => {
+    const next = readSet();
+    next.add(bookId);
+    localStorage.setItem(UNLOCKED_KEY, JSON.stringify([...next]));
+    setUnlocked(new Set(next));
+  }, []);
+
+  const isUnlocked = useCallback((bookId: string) => unlocked.has(bookId), [unlocked]);
+
+  return { isUnlocked, unlock };
 };
 
 export const useReadingProgress = (bookId: string) => {

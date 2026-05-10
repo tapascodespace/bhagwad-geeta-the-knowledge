@@ -14,69 +14,13 @@ export type Database = {
   }
   public: {
     Tables: {
-      profiles: {
-        Row: {
-          created_at: string
-          display_name: string | null
-          id: string
-          updated_at: string
-          user_id: string
-        }
-        Insert: {
-          created_at?: string
-          display_name?: string | null
-          id?: string
-          updated_at?: string
-          user_id: string
-        }
-        Update: {
-          created_at?: string
-          display_name?: string | null
-          id?: string
-          updated_at?: string
-          user_id?: string
-        }
-        Relationships: []
-      }
-      purchases: {
-        Row: {
-          amount: number
-          book_id: string
-          created_at: string
-          currency: string
-          id: string
-          stripe_session_id: string
-          user_id: string
-        }
-        Insert: {
-          amount: number
-          book_id: string
-          created_at?: string
-          currency: string
-          id?: string
-          stripe_session_id: string
-          user_id: string
-        }
-        Update: {
-          amount?: number
-          book_id?: string
-          created_at?: string
-          currency?: string
-          id?: string
-          stripe_session_id?: string
-          user_id?: string
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      has_purchased: {
-        Args: { _book_id: string; _user_id: string }
-        Returns: boolean
-      }
+      [_ in never]: never
     }
     Enums: {
       [_ in never]: never

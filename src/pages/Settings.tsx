@@ -27,7 +27,6 @@ import {
   PlayCircle,
 } from "lucide-react";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Progress } from "@/components/ui/progress";
@@ -37,6 +36,7 @@ import { useAppearance } from "@/hooks/useAppearance";
 import { usePurchases } from "@/hooks/usePurchases";
 import {
   readProgressMap,
+  useUnlockedBooks,
   useBookBookmarks,
 } from "@/hooks/useLibrary";
 import { useBookmarks } from "@/hooks/useBookmarks";
@@ -282,7 +282,7 @@ const Settings = () => {
   const { theme, setTheme } = useTheme();
   const { appearance, update, reset } = useAppearance();
   const { purchases } = usePurchases();
-  // Server-verified purchases — no client-side unlock state.
+  const { unlock } = useUnlockedBooks();
   const { items: bookBookmarks } = useBookBookmarks();
   const { bookmarks: verseBookmarks } = useBookmarks();
   const s = STR[language] ?? STR.en;
@@ -321,17 +321,22 @@ const Settings = () => {
   );
   const lastRead = sortedProgress[0];
 
-  const handleRestore = async () => {
-    // Purchases are stored server-side; just refetch.
-    toast(s.restore, { description: s.restoreNote });
+  const handleRestore = () => {
+    // No auth yet — best-effort: re-unlock anything stored in purchases history
+    purchases.forEach((p) => unlock(p.bookId));
+    if (purchases.length > 0) {
+      toast.success(s.restore, { description: `${purchases.length} book(s) restored` });
+    } else {
+      toast(s.restore, { description: s.restoreNote });
+    }
   };
 
-  const handleSignOut = async () => {
+  const handleSignOut = () => {
     if (!window.confirm(s.signOutConfirm)) return;
     try {
-      await supabase.auth.signOut();
-      // Clear local-only reading prefs/progress on this device.
       [
+        "library:unlocked",
+        "library:purchases",
         "library:progress",
         "library:book-bookmarks",
         "library:reader-prefs",

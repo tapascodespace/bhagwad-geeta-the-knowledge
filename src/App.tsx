@@ -15,7 +15,6 @@ import BookDetail from "@/pages/BookDetail";
 import LanguageSelect from "@/pages/LanguageSelect";
 import Settings from "@/pages/Settings";
 import PaymentSuccess from "@/pages/PaymentSuccess";
-import Auth from "@/pages/Auth";
 import PaymentCancelled from "@/pages/PaymentCancelled";
 import NotFound from "@/pages/NotFound";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -55,7 +54,6 @@ const App = () => (
             <Route path="/library/:bookId/read" element={<RequireLanguage><BookReader /></RequireLanguage>} />
             <Route path="/settings" element={<RequireLanguage><Settings /></RequireLanguage>} />
             <Route path="/payment-success" element={<PaymentSuccess />} />
-            <Route path="/auth" element={<Auth />} />
             <Route path="/payment-cancelled" element={<PaymentCancelled />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
