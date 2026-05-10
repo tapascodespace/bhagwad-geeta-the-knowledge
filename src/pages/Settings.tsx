@@ -282,7 +282,7 @@ const Settings = () => {
   const { theme, setTheme } = useTheme();
   const { appearance, update, reset } = useAppearance();
   const { purchases } = usePurchases();
-  const { unlock } = useUnlockedBooks();
+  // Server-verified purchases — no client-side unlock state.
   const { items: bookBookmarks } = useBookBookmarks();
   const { bookmarks: verseBookmarks } = useBookmarks();
   const s = STR[language] ?? STR.en;
