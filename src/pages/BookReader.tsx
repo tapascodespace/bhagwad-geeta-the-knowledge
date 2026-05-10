@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { getBook, getBookMeta, getBookSections, type BookLanguage } from "@/data/books";
 import { useBookBookmarks, useReaderPrefs, useReadingProgress, useUnlockedBooks } from "@/hooks/useLibrary";
+import { useAuth } from "@/hooks/useAuth";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
