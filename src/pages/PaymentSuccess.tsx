@@ -3,8 +3,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { CheckCircle2, Loader2, XCircle, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
-import { useUnlockedBooks } from "@/hooks/useLibrary";
-import { recordPurchase } from "@/hooks/usePurchases";
+import { usePurchases } from "@/hooks/usePurchases";
 import { getBook, getBookMeta } from "@/data/books";
 import { useLanguage } from "@/contexts/LanguageContext";
 
