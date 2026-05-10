@@ -55,6 +55,7 @@ const App = () => (
             <Route path="/library/:bookId/read" element={<RequireLanguage><BookReader /></RequireLanguage>} />
             <Route path="/settings" element={<RequireLanguage><Settings /></RequireLanguage>} />
             <Route path="/payment-success" element={<PaymentSuccess />} />
+            <Route path="/auth" element={<Auth />} />
             <Route path="/payment-cancelled" element={<PaymentCancelled />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
