@@ -16,8 +16,9 @@ Deno.serve(async (req) => {
   try {
     const key = Deno.env.get("STRIPE_SECRET_KEY");
     if (!key) {
+      console.error("verify-payment: STRIPE_SECRET_KEY not configured");
       return new Response(
-        JSON.stringify({ error: "STRIPE_SECRET_KEY is not configured" }),
+        JSON.stringify({ error: "Service temporarily unavailable" }),
         { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } },
       );
     }
