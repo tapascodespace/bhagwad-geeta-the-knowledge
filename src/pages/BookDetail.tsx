@@ -75,6 +75,7 @@ const BookDetail = () => {
   const navigate = useNavigate();
   const book = useMemo(() => getBook(bookId), [bookId]);
   const { isUnlocked } = useUnlockedBooks();
+  const { user } = useAuth();
   const { language } = useLanguage();
   const s = STRINGS[language] ?? STRINGS.hi;
   const { section } = useReadingProgress(bookId);
