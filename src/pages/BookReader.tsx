@@ -115,7 +115,7 @@ const BookReader = () => {
   const sections = getBookSections(book, bookLang);
   const total = sections.length;
 
-  if (!unlocked && !isPreview) return null;
+  if (!isPreview && (!gatingReady || !unlocked)) return null;
 
   if (total === 0) {
     return (
