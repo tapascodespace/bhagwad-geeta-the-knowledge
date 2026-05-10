@@ -128,6 +128,7 @@ const PaymentSuccess = () => {
               </Link>
             </Button>
           </>
+        )}
         {state === "fail" && (
           <>
             <XCircle className="w-12 h-12 mx-auto text-destructive" />
