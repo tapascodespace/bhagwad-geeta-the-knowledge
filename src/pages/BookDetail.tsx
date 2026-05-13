@@ -93,7 +93,7 @@ const BookDetail = () => {
   }
 
   const meta = getBookMeta(book, language);
-  const unlocked = isUnlocked(book.id);
+  const unlocked = isUnlocked(book.id) || book.price === 0;
   const total = Math.max(book.hindiSections.length, book.englishSections.length);
   const available = hasContent(book);
 
