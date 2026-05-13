@@ -81,7 +81,7 @@ const BookReader = () => {
     };
   }, [prefs.theme]);
 
-  const unlocked = book ? isUnlocked(book.id) : false;
+  const unlocked = book ? (isUnlocked(book.id) || book.price === 0) : false;
 
   // If not unlocked AND not in preview mode, redirect to the detail/paywall page.
   useEffect(() => {
