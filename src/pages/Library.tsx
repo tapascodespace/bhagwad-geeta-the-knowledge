@@ -124,7 +124,7 @@ const Library = () => {
                     key={book.id}
                     book={book}
                     lang={language}
-                    unlocked={isUnlocked(book.id)}
+                    unlocked={isUnlocked(book.id) || book.price === 0}
                     progress={progressMap[book.id] ?? 1}
                     comingSoon={comingSoon}
                     comingSoonLabel={t("comingSoon")}
