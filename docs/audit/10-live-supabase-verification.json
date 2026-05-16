@@ -1,0 +1,347 @@
+{
+  "project_url": "https://iiddeudiakdfmpqoynks.supabase.co",
+  "rest_schema": {
+    "openapi_status": 401,
+    "openapi_error": "{\"message\":\"Invalid API key\",\"hint\":\"Only the `service_role` API key can be used for this endpoint.\"}",
+    "known_table_probes": {
+      "profiles": {
+        "status": 200,
+        "ok": true,
+        "body_excerpt": "[]"
+      },
+      "purchases": {
+        "status": 200,
+        "ok": true,
+        "body_excerpt": "[]"
+      }
+    },
+    "content_candidate_probes": {
+      "verses": {
+        "status": 404,
+        "ok": false,
+        "body_excerpt": "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table 'public.purchases'\",\"message\":\"Could not find the table 'public.verses' in the schema cache\"}"
+      },
+      "chapters": {
+        "status": 404,
+        "ok": false,
+        "body_excerpt": "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table 'public.purchases'\",\"message\":\"Could not find the table 'public.chapters' in the schema cache\"}"
+      },
+      "gita": {
+        "status": 404,
+        "ok": false,
+        "body_excerpt": "{\"code\":\"PGRST205\",\"details\":null,\"hint\":null,\"message\":\"Could not find the table 'public.gita' in the schema cache\"}"
+      },
+      "gita_verses": {
+        "status": 404,
+        "ok": false,
+        "body_excerpt": "{\"code\":\"PGRST205\",\"details\":null,\"hint\":null,\"message\":\"Could not find the table 'public.gita_verses' in the schema cache\"}"
+      },
+      "bhagavad_gita": {
+        "status": 404,
+        "ok": false,
+        "body_excerpt": "{\"code\":\"PGRST205\",\"details\":null,\"hint\":null,\"message\":\"Could not find the table 'public.bhagavad_gita' in the schema cache\"}"
+      },
+      "shlokas": {
+        "status": 404,
+        "ok": false,
+        "body_excerpt": "{\"code\":\"PGRST205\",\"details\":null,\"hint\":null,\"message\":\"Could not find the table 'public.shlokas' in the schema cache\"}"
+      },
+      "slokas": {
+        "status": 404,
+        "ok": false,
+        "body_excerpt": "{\"code\":\"PGRST205\",\"details\":null,\"hint\":null,\"message\":\"Could not find the table 'public.slokas' in the schema cache\"}"
+      },
+      "translations": {
+        "status": 404,
+        "ok": false,
+        "body_excerpt": "{\"code\":\"PGRST205\",\"details\":null,\"hint\":null,\"message\":\"Could not find the table 'public.translations' in the schema cache\"}"
+      },
+      "verse_translations": {
+        "status": 404,
+        "ok": false,
+        "body_excerpt": "{\"code\":\"PGRST205\",\"details\":null,\"hint\":null,\"message\":\"Could not find the table 'public.verse_translations' in the schema cache\"}"
+      },
+      "content": {
+        "status": 404,
+        "ok": false,
+        "body_excerpt": "{\"code\":\"PGRST205\",\"details\":null,\"hint\":null,\"message\":\"Could not find the table 'public.content' in the schema cache\"}"
+      },
+      "gita_data": {
+        "status": 404,
+        "ok": false,
+        "body_excerpt": "{\"code\":\"PGRST205\",\"details\":null,\"hint\":null,\"message\":\"Could not find the table 'public.gita_data' in the schema cache\"}"
+      }
+    },
+    "content_table_candidates_found": []
+  },
+  "storage": {
+    "bucket": "verse-audio",
+    "list_status": "ok_http_200",
+    "object_count_listed": 975,
+    "sample_listed_names": [
+      "ch1-v1-hi-explanation-clean.mp3",
+      "ch1-v1-hi-explanation.mp3",
+      "ch1-v1-hi-translation-clean.mp3",
+      "ch1-v1-hi-translation.mp3",
+      "ch1-v1-shloka.mp3",
+      "ch1-v10-hi-explanation-clean.mp3",
+      "ch1-v10-hi-explanation.mp3",
+      "ch1-v10-hi-translation-clean.mp3",
+      "ch1-v10-hi-translation.mp3",
+      "ch1-v10-shloka.mp3",
+      "ch1-v11-hi-explanation-clean.mp3",
+      "ch1-v11-hi-explanation.mp3",
+      "ch1-v11-hi-translation-clean.mp3",
+      "ch1-v11-hi-translation.mp3",
+      "ch1-v11-shloka.mp3",
+      "ch1-v12-hi-explanation-clean.mp3",
+      "ch1-v12-hi-explanation.mp3",
+      "ch1-v12-hi-translation-clean.mp3",
+      "ch1-v12-hi-translation.mp3",
+      "ch1-v12-shloka.mp3"
+    ],
+    "listed_name_counts": {
+      "shloka": 267,
+      "en_translation": 20,
+      "hi_translation": 267,
+      "bn_translation": 20,
+      "en_explanation": 20,
+      "hi_explanation": 267,
+      "bn_explanation": 20,
+      "other": 94
+    },
+    "sample_head_checks": [
+      {
+        "ref": "1.1",
+        "object": "ch1-v1-shloka.mp3",
+        "exists_by_head": true,
+        "http_status": 200,
+        "content_length": "160958",
+        "error": null
+      },
+      {
+        "ref": "1.1",
+        "object": "ch1-v1-en-translation.mp3",
+        "exists_by_head": false,
+        "http_status": 400,
+        "content_length": null,
+        "error": "Bad Request"
+      },
+      {
+        "ref": "1.1",
+        "object": "ch1-v1-en-explanation.mp3",
+        "exists_by_head": false,
+        "http_status": 400,
+        "content_length": null,
+        "error": "Bad Request"
+      },
+      {
+        "ref": "1.1",
+        "object": "ch1-v1-hi-translation.mp3",
+        "exists_by_head": true,
+        "http_status": 200,
+        "content_length": "194813",
+        "error": null
+      },
+      {
+        "ref": "1.1",
+        "object": "ch1-v1-hi-explanation.mp3",
+        "exists_by_head": true,
+        "http_status": 200,
+        "content_length": "1014013",
+        "error": null
+      },
+      {
+        "ref": "1.1",
+        "object": "ch1-v1-bn-translation.mp3",
+        "exists_by_head": false,
+        "http_status": 400,
+        "content_length": null,
+        "error": "Bad Request"
+      },
+      {
+        "ref": "1.1",
+        "object": "ch1-v1-bn-explanation.mp3",
+        "exists_by_head": false,
+        "http_status": 400,
+        "content_length": null,
+        "error": "Bad Request"
+      },
+      {
+        "ref": "1.5",
+        "object": "ch1-v5-shloka.mp3",
+        "exists_by_head": true,
+        "http_status": 200,
+        "content_length": "183946",
+        "error": null
+      },
+      {
+        "ref": "1.5",
+        "object": "ch1-v5-en-translation.mp3",
+        "exists_by_head": false,
+        "http_status": 400,
+        "content_length": null,
+        "error": "Bad Request"
+      },
+      {
+        "ref": "1.5",
+        "object": "ch1-v5-en-explanation.mp3",
+        "exists_by_head": false,
+        "http_status": 400,
+        "content_length": null,
+        "error": "Bad Request"
+      },
+      {
+        "ref": "1.5",
+        "object": "ch1-v5-hi-translation.mp3",
+        "exists_by_head": true,
+        "http_status": 200,
+        "content_length": "166809",
+        "error": null
+      },
+      {
+        "ref": "1.5",
+        "object": "ch1-v5-hi-explanation.mp3",
+        "exists_by_head": true,
+        "http_status": 200,
+        "content_length": "276733",
+        "error": null
+      },
+      {
+        "ref": "1.5",
+        "object": "ch1-v5-bn-translation.mp3",
+        "exists_by_head": false,
+        "http_status": 400,
+        "content_length": null,
+        "error": "Bad Request"
+      },
+      {
+        "ref": "1.5",
+        "object": "ch1-v5-bn-explanation.mp3",
+        "exists_by_head": false,
+        "http_status": 400,
+        "content_length": null,
+        "error": "Bad Request"
+      },
+      {
+        "ref": "10.10",
+        "object": "ch10-v10-shloka.mp3",
+        "exists_by_head": false,
+        "http_status": 400,
+        "content_length": null,
+        "error": "Bad Request"
+      },
+      {
+        "ref": "10.10",
+        "object": "ch10-v10-en-translation.mp3",
+        "exists_by_head": false,
+        "http_status": 400,
+        "content_length": null,
+        "error": "Bad Request"
+      },
+      {
+        "ref": "10.10",
+        "object": "ch10-v10-en-explanation.mp3",
+        "exists_by_head": false,
+        "http_status": 400,
+        "content_length": null,
+        "error": "Bad Request"
+      },
+      {
+        "ref": "10.10",
+        "object": "ch10-v10-hi-translation.mp3",
+        "exists_by_head": false,
+        "http_status": 400,
+        "content_length": null,
+        "error": "Bad Request"
+      },
+      {
+        "ref": "10.10",
+        "object": "ch10-v10-hi-explanation.mp3",
+        "exists_by_head": false,
+        "http_status": 400,
+        "content_length": null,
+        "error": "Bad Request"
+      },
+      {
+        "ref": "10.10",
+        "object": "ch10-v10-bn-translation.mp3",
+        "exists_by_head": false,
+        "http_status": 400,
+        "content_length": null,
+        "error": "Bad Request"
+      },
+      {
+        "ref": "10.10",
+        "object": "ch10-v10-bn-explanation.mp3",
+        "exists_by_head": false,
+        "http_status": 400,
+        "content_length": null,
+        "error": "Bad Request"
+      },
+      {
+        "ref": "18.78",
+        "object": "ch18-v78-shloka.mp3",
+        "exists_by_head": false,
+        "http_status": 400,
+        "content_length": null,
+        "error": "Bad Request"
+      },
+      {
+        "ref": "18.78",
+        "object": "ch18-v78-en-translation.mp3",
+        "exists_by_head": false,
+        "http_status": 400,
+        "content_length": null,
+        "error": "Bad Request"
+      },
+      {
+        "ref": "18.78",
+        "object": "ch18-v78-en-explanation.mp3",
+        "exists_by_head": false,
+        "http_status": 400,
+        "content_length": null,
+        "error": "Bad Request"
+      },
+      {
+        "ref": "18.78",
+        "object": "ch18-v78-hi-translation.mp3",
+        "exists_by_head": false,
+        "http_status": 400,
+        "content_length": null,
+        "error": "Bad Request"
+      },
+      {
+        "ref": "18.78",
+        "object": "ch18-v78-hi-explanation.mp3",
+        "exists_by_head": false,
+        "http_status": 400,
+        "content_length": null,
+        "error": "Bad Request"
+      },
+      {
+        "ref": "18.78",
+        "object": "ch18-v78-bn-translation.mp3",
+        "exists_by_head": false,
+        "http_status": 400,
+        "content_length": null,
+        "error": "Bad Request"
+      },
+      {
+        "ref": "18.78",
+        "object": "ch18-v78-bn-explanation.mp3",
+        "exists_by_head": false,
+        "http_status": 400,
+        "content_length": null,
+        "error": "Bad Request"
+      }
+    ],
+    "sample_exists": 6,
+    "sample_total": 28
+  },
+  "conclusion": [
+    "Live REST probes found profiles/purchases but no common verse/chapter/content table names accessible to anon.",
+    "Live storage bucket verse-audio is listable; 975 objects were returned.",
+    "Public HEAD sample found 6/28 expected audio objects."
+  ]
+}
