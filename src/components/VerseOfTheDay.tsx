@@ -41,7 +41,7 @@ const VerseOfTheDay = () => {
   return (
     <button
       onClick={handleOpen}
-      className="w-full text-left rounded-2xl bg-gradient-card border border-border/60 shadow-elegant p-5 active:scale-[0.99] transition-all hover:border-primary/40 group"
+      className="w-full text-left rounded-[20px] bg-card shadow-product-card border border-primary/15 p-5 active:scale-[0.99] transition-all hover:border-primary/35 group"
       aria-label={t("verseOfTheDay")}
     >
       <div className="flex items-center justify-between mb-3">

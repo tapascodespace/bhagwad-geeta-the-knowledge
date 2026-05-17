@@ -9,6 +9,11 @@ export const LANGUAGES: { code: Language; label: string; native: string }[] = [
 type Dict = Record<Language, string>;
 
 export const t: Record<string, Dict> = {
+  LANGUAGES: {
+    bn: "ভাষাসমূহ",
+    hi: "भाषाएँ",
+    en: "Languages",
+  },
   appTitle: {
     bn: "শ্রীমদ্ভগবদ্গীতা",
     hi: "श्रीमद्भगवद्गीता",
@@ -51,6 +56,32 @@ export const t: Record<string, Dict> = {
     en: "Change Language",
   },
   allChapters: { bn: "সমস্ত অধ্যায়", hi: "सभी अध्याय", en: "All Chapters" },
+  homeTagline: {
+    bn: "অধ্যায়ভিত্তিক পড়ুন ও শুনুন!",
+    hi: "अध्यायवार पढ़ें और सुनें!",
+    en: "Read and listen chapter-wise!",
+  },
+  search: { bn: "খুঁজুন", hi: "खोजें", en: "Search" },
+  searchChapters: {
+    bn: "অধ্যায় খুঁজুন…",
+    hi: "अध्याय खोजें…",
+    en: "Search chapters…",
+  },
+  filter: { bn: "ফিল্টার", hi: "फ़िल्टर", en: "Filter" },
+  filterAll: { bn: "সব", hi: "सभी", en: "All" },
+  chaptersRange1: { bn: "১–৬", hi: "१–६", en: "1–6" },
+  chaptersRange2: { bn: "৭–১২", hi: "७–१२", en: "7–12" },
+  chaptersRange3: { bn: "১৩–১৮", hi: "१३–१८", en: "13–18" },
+  noChaptersFound: {
+    bn: "কোনো অধ্যায় পাওয়া যায়নি",
+    hi: "कोई अध्याय नहीं मिला",
+    en: "No chapters found",
+  },
+  quickStart: {
+    bn: "দ্রুত শুরু",
+    hi: "त्वरित प्रारंभ",
+    en: "Quick start",
+  },
   verses: { bn: "শ্লোক", hi: "श्लोक", en: "verses" },
   verse: { bn: "শ্লোক", hi: "श्लोक", en: "Verse" },
   chapter: { bn: "অধ্যায়", hi: "अध्याय", en: "Chapter" },

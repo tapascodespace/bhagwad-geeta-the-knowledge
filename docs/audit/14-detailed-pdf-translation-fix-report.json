@@ -1,0 +1,28 @@
+{
+  "sourcePdf": "c:\\Users\\realt\\Downloads\\Detailed_Bhagavad_Gita_Translation_Issues_Report.pdf",
+  "pdfFindings": 55,
+  "pdfRefsChecked": 53,
+  "changed": [
+    {
+      "ref": "1.8",
+      "previous": "\"Thou thyself, Bhishma, Karna, Kripa, the victorious in war, Asvatthama, Vikarna, and Bhurisrava, the son of Somadatta—all these are ready for battle.\"",
+      "next": "You yourself, Bhishma, Karna, Kripa, the victorious in war, Asvatthama, Vikarna, and Bhurisrava, the son of Somadatta—all these are ready for battle."
+    },
+    {
+      "ref": "1.28",
+      "previous": "Arjuna said, \"O Krishna, seeing my kinsmen arrayed here, eager to fight,\"",
+      "next": "Arjuna said, \"O Krishna, I see my kinsmen arrayed here, eager to fight.\""
+    },
+    {
+      "ref": "1.38",
+      "previous": "Though they, with intelligence overpowered by greed, see no evil in the destruction of families and no sin in hostility to friends,",
+      "next": "They, with intelligence overpowered by greed, see no evil in the destruction of families and no sin in hostility to friends."
+    },
+    {
+      "ref": "5.8",
+      "previous": "I do nothing at all,\" thus would the harmonized knower of Truth think, seeing, hearing, touching, smelling, eating, going, sleeping, and breathing.\"",
+      "next": "\"I do nothing at all,\" thus would the harmonized knower of Truth think, seeing, hearing, touching, smelling, eating, going, sleeping, and breathing."
+    }
+  ],
+  "remainingDetectedFormattingIssues": []
+}

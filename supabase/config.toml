@@ -1,4 +1,4 @@
-project_id = "iiddeudiakdfmpqoynks"
+project_id = "oczkinultzflofespdog"
 
 [functions.tts-account1]
 verify_jwt = false
@@ -7,4 +7,10 @@ verify_jwt = false
 verify_jwt = false
 
 [functions.verify-payment]
+verify_jwt = false
+
+[functions.upload-verse-audio]
+verify_jwt = false
+
+[functions.tts-account2]
 verify_jwt = false

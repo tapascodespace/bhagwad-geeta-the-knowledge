@@ -6,6 +6,7 @@ import { books, CATEGORIES, getBookMeta, getBookSections, hasContent, type Book,
 import { readProgressMap, useUnlockedBooks } from "@/hooks/useLibrary";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Progress } from "@/components/ui/progress";
+import AppScreenHeader from "@/components/template/AppScreenHeader";
 
 const CATEGORY_LABEL_KEYS: Record<BookCategory, "catBhagavadGita" | "catStoriesEpics" | "catSpiritualGuides" | "catForStudents" | "catShortReads"> = {
   "bhagavad-gita": "catBhagavadGita",
@@ -99,13 +100,8 @@ const Library = () => {
   })).filter((r) => r.items.length > 0);
 
   return (
-    <main className="min-h-screen pb-28 pt-8 max-w-lg mx-auto">
-      <header className="mb-6 px-5">
-        <h1 className="font-display text-3xl font-bold text-foreground">{t("libraryTitle")}</h1>
-        <p className="text-sm text-muted-foreground mt-1">
-          {t("librarySubtitle")}
-        </p>
-      </header>
+    <main className="min-h-screen pb-32 pt-6 max-w-lg mx-auto bg-background px-5">
+      <AppScreenHeader title={t("libraryTitle")} subtitle={t("librarySubtitle")} showAvatar={false} />
 
       <div className="space-y-7">
         {rows.map((row) => (

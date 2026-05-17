@@ -4,6 +4,7 @@ import { toast } from "@/hooks/use-toast";
 import { audioController } from "@/lib/audio-controller";
 import {
   resolveVerseAudio,
+  isVerseAudioAvailable,
   AudioNotAvailableError,
   type AudioPart,
   type AudioLang,
@@ -40,6 +41,7 @@ const formatTime = (s: number) => {
 
 const VerseAudioPlayer = ({ chapter, verse, part, meta, language }: Props) => {
   const state = useAudioState();
+  const [available, setAvailable] = useState<boolean | null>(null);
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -47,6 +49,17 @@ const VerseAudioPlayer = ({ chapter, verse, part, meta, language }: Props) => {
   const isActive = state.activeId === id;
   const isPlaying = isActive && state.isPlaying;
   const rafRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    setAvailable(null);
+    void isVerseAudioAvailable(chapter, verse, part, language).then((ok) => {
+      if (!cancelled) setAvailable(ok);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [chapter, verse, part, language]);
 
   useEffect(() => {
     if (!isActive) {
@@ -109,6 +122,10 @@ const VerseAudioPlayer = ({ chapter, verse, part, meta, language }: Props) => {
 
   const Icon = meta.icon;
   const pct = duration > 0 ? Math.min(100, (progress / duration) * 100) : 0;
+
+  if (available === false) {
+    return null;
+  }
 
   return (
     <div

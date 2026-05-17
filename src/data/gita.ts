@@ -30,11 +30,8 @@ export interface Chapter {
 
 export const chapters: Chapter[] = rawData as Chapter[];
 
-// The English "explanation" field in the source dataset prepends a Sanskrit
-// word-by-word gloss (e.g. "धर्मक्षेत्रे on the holy plain? ...") before the
-// actual English commentary, separated by the literal word "Commentary".
-// Strip everything up to and including that marker so users only see prose
-// in their chosen language.
+// Keep this defensive cleanup for any legacy imported explanation that still
+// includes a Sanskrit word-by-word gloss before the English prose commentary.
 const cleanEnglishCommentary = (raw: string): string => {
   if (!raw) return "";
   const idx = raw.indexOf("Commentary");

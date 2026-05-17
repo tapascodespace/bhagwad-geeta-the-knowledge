@@ -213,4 +213,21 @@
   }
   .ornament-divider::before { left: 0; }
   .ornament-divider::after { right: 0; }
+
+  .shadow-search {
+    box-shadow: 0 4px 19px hsl(24 30% 14% / 0.12);
+  }
+  .shadow-product-card {
+    box-shadow: 0 6px 17px hsl(24 30% 14% / 0.1);
+  }
+  .shadow-chip-active {
+    box-shadow: 0 10px 18px -1px hsl(22 78% 48% / 0.35);
+  }
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
 }

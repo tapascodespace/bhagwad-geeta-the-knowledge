@@ -10,7 +10,9 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "audio:generate": "python scripts/generate_audio_free.py --only-missing --langs hi,en",
+    "audio:generate:dry": "python scripts/generate_audio_free.py --only-missing --langs hi,en --dry-run"
   },
   "dependencies": {
     "@capacitor/android": "^8.3.0",

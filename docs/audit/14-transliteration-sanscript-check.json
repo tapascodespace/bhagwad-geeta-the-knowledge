@@ -1,0 +1,36 @@
+{
+  "summary": {
+    "total_compared": 701,
+    "exact_matches": 0,
+    "loose_matches": 0,
+    "mismatches": 701,
+    "note": "Loose match ignores spacing/hyphens and normalizes śh→sh. Style differs from vedabase IAST."
+  },
+  "mismatch_samples": [
+    {
+      "ref": "BG 1.1",
+      "stored_preview": "dhṛitarāśhtra uvācha\ndharma-kṣhetre kuru-kṣhetre samavetā yuyutsavaḥ\nmāmakāḥ pāṇḍavāśhchaiva kimakurvata sañjaya",
+      "generated_preview": "dhṛtarāṣṭra uvāca\ndharmakṣetre kurukṣetre samavetā yuyutsavaḥ।\nmāmakāḥ pāṇḍavāścaiva kimakurvata sañjaya"
+    },
+    {
+      "ref": "BG 1.2",
+      "stored_preview": "sañjaya uvācha\ndṛiṣhṭvā tu pāṇḍavānīkaṁ vyūḍhaṁ duryodhanastadā\nāchāryamupasaṅgamya rājā vachanamabravīt",
+      "generated_preview": "sañjaya uvāca\ndṛṣṭvā tu pāṇḍavānīkaṃ vyūḍhaṃ duryodhanastadā।\nācāryamupasaṅgamya rājā vacanamabravīt"
+    },
+    {
+      "ref": "BG 1.3",
+      "stored_preview": "paśhyaitāṁ pāṇḍu-putrāṇām āchārya mahatīṁ chamūm\nvyūḍhāṁ drupada-putreṇa tava śhiṣhyeṇa dhīmatā",
+      "generated_preview": "paśyaitāṃ pāṇḍuputrāṇāmācārya mahatīṃ camūm।\nvyūḍhāṃ drupadaputreṇa tava śiṣyeṇa dhīmatā"
+    },
+    {
+      "ref": "BG 1.4",
+      "stored_preview": "atra śhūrā maheṣhvāsā bhīmārjuna-samā yudhi\nyuyudhāno virāṭaśhcha drupadaśhcha mahā-rathaḥ",
+      "generated_preview": "atra śūrā maheṣvāsā bhīmārjunasamā yudhi।\nyuyudhāno virāṭaśca drupadaśca mahārathaḥ"
+    },
+    {
+      "ref": "BG 1.5",
+      "stored_preview": "dhṛiṣhṭaketuśhchekitānaḥ kāśhirājaśhcha vīryavān\npurujit kuntibhojaśhcha śhaibyaśhcha nara-puṅgavaḥ",
+      "generated_preview": "dhṛṣṭaketuścekitānaḥ kāśirājaśca vīryavān।\npurujitkuntibhojaśca śaibyaśca narapuṅgavaḥ"
+    }
+  ]
+}

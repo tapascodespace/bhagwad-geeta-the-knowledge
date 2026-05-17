@@ -97,11 +97,11 @@ class PlayAllController {
         });
         if (this.cancelled) return false;
       } catch (e) {
-        this.stop();
         if (e instanceof AudioNotAvailableError) {
-          // Re-throw so caller can show a friendly message, but don't advance.
-          throw e;
+          // Skip segments without pre-generated audio; continue the chain.
+          continue;
         }
+        this.stop();
         throw e;
       }
     }

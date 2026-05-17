@@ -1,70 +1,47 @@
 import { useNavigate } from "react-router-dom";
-import { BookOpen, Languages, Sparkles, Settings as SettingsIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { BookOpen, Heart, Library as LibraryIcon, Sparkles } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { LANGUAGES } from "@/i18n/translations";
-import ThemeToggle from "@/components/ThemeToggle";
-
+import AppScreenHeader from "@/components/template/AppScreenHeader";
+import VerseOfTheDay from "@/components/VerseOfTheDay";
 
 const Home = () => {
   const navigate = useNavigate();
-  const { t, language } = useLanguage();
-  const currentLang = LANGUAGES.find((l) => l.code === language);
+  const { t } = useLanguage();
+
+  const quickLinks = [
+    { path: "/chapters", label: t("viewChapters"), icon: BookOpen, desc: t("allChapters") },
+    { path: "/library", label: t("library"), icon: LibraryIcon, desc: t("librarySubtitle") },
+    { path: "/bookmarks", label: t("bookmarks"), icon: Heart, desc: t("myBookmarks") },
+    { path: "/settings", label: t("settings"), icon: Sparkles, desc: t("intro") },
+  ];
 
   return (
-    <div className="min-h-[calc(100vh-5rem)] flex flex-col px-6 pt-6 pb-8 animate-fade-in-slow">
-      {/* Top bar */}
-      <div className="flex justify-end items-center gap-2 mb-2">
-        <ThemeToggle ariaLabel={t("changeLanguage")} />
-        <button
-          onClick={() => navigate("/settings/language")}
-          className="flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/80 backdrop-blur text-secondary-foreground active:scale-95 transition-all hover:bg-secondary border border-border/50"
-          aria-label={t("changeLanguage")}
-        >
-          <Languages className="w-5 h-5 text-primary" />
-          <span className="text-base font-medium">{currentLang?.native}</span>
-        </button>
-        <button
-          onClick={() => navigate("/settings")}
-          className="flex items-center justify-center w-10 h-10 rounded-full bg-secondary/80 backdrop-blur text-secondary-foreground border border-border/50 hover:bg-secondary active:scale-95 transition-all"
-          aria-label={t("settings")}
-        >
-          <SettingsIcon className="w-5 h-5 text-primary" />
-        </button>
+    <div className="pb-32 px-5 pt-6 animate-fade-in-slow min-h-screen bg-background">
+      <AppScreenHeader />
+
+      <div className="mb-6">
+        <VerseOfTheDay />
       </div>
 
-      <div className="flex-1 flex flex-col items-center justify-center text-center">
-        {/* Glowing emblem */}
-        <div className="relative mb-8 animate-scale-in">
-          <div className="absolute inset-0 rounded-full bg-gradient-primary blur-2xl opacity-40" />
-          <div className="relative w-32 h-32 rounded-full bg-gradient-header flex items-center justify-center shadow-elegant">
-            <BookOpen className="w-16 h-16 text-primary-foreground" strokeWidth={1.5} />
-          </div>
-          <Sparkles className="absolute -top-1 -right-1 w-6 h-6 text-gold animate-soft-pulse" />
-        </div>
+      <p className="text-sm font-semibold uppercase tracking-widest text-primary mb-3">
+        {t("quickStart")}
+      </p>
 
-        <h1 className="font-display text-5xl font-semibold text-foreground mb-3 leading-tight tracking-tight">
-          {t("appTitle")}
-        </h1>
-
-        <div className="ornament-divider w-48 mb-4">
-          <span className="px-3 text-gold text-sm">✦</span>
-        </div>
-
-        <p className="text-muted-foreground text-xl mb-6 italic">{t("appSubtitle")}</p>
-
-        <p className="text-foreground/80 text-lg max-w-sm mb-12 leading-relaxed">
-          {t("intro")}
-        </p>
-
-        <Button
-          size="lg"
-          className="text-lg px-10 py-7 rounded-full w-full max-w-xs bg-gradient-primary hover:opacity-95 shadow-elegant border-0 font-semibold tracking-wide"
-          onClick={() => navigate("/chapters")}
-        >
-          {t("viewChapters")}
-        </Button>
-
+      <div className="grid grid-cols-2 gap-4">
+        {quickLinks.map((item) => (
+          <button
+            key={item.path}
+            type="button"
+            onClick={() => navigate(item.path)}
+            className="text-left rounded-[20px] bg-card shadow-product-card p-5 active:scale-[0.98] hover:border-primary/20 border border-transparent transition-all min-h-[140px] flex flex-col"
+          >
+            <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-3">
+              <item.icon className="h-6 w-6 text-primary" strokeWidth={2} />
+            </div>
+            <p className="font-semibold text-foreground text-base leading-snug">{item.label}</p>
+            <p className="text-sm text-muted-foreground mt-1 line-clamp-2 leading-relaxed">{item.desc}</p>
+          </button>
+        ))}
       </div>
     </div>
   );

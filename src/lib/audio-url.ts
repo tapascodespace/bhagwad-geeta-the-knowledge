@@ -67,3 +67,14 @@ export const resolveVerseAudio = async (
   if (!ok) throw new AudioNotAvailableError();
   return url;
 };
+
+/** Check whether a verse audio file exists in Storage (uses HEAD cache). */
+export const isVerseAudioAvailable = async (
+  chapter: number,
+  verse: number,
+  part: AudioPart,
+  language: AudioLang
+): Promise<boolean> => {
+  const url = getVerseAudioUrl(chapter, verse, part, language);
+  return checkAudioAvailable(url);
+};
