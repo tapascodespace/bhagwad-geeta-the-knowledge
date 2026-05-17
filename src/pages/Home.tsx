@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { BookOpen, Heart, Library as LibraryIcon, Sparkles } from "lucide-react";
+import { BookOpen, Heart, ImageIcon, Library as LibraryIcon, Sparkles } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import AppScreenHeader from "@/components/template/AppScreenHeader";
 import VerseOfTheDay from "@/components/VerseOfTheDay";
@@ -9,6 +9,7 @@ const Home = () => {
   const { t } = useLanguage();
 
   const quickLinks = [
+    { path: "/verse-studio", label: t("verseStudio"), icon: ImageIcon, desc: t("verseStudioSubtitle") },
     { path: "/chapters", label: t("viewChapters"), icon: BookOpen, desc: t("allChapters") },
     { path: "/library", label: t("library"), icon: LibraryIcon, desc: t("librarySubtitle") },
     { path: "/bookmarks", label: t("bookmarks"), icon: Heart, desc: t("myBookmarks") },

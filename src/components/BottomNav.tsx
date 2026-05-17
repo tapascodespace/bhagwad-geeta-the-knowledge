@@ -48,7 +48,9 @@ const BottomNav = () => {
     return location.pathname.startsWith(path);
   };
 
-  const hideOnVerse = /^\/chapters\/\d+\/verses\/\d+$/.test(location.pathname);
+  const hideOnVerse =
+    /^\/chapters\/\d+\/verses\/\d+$/.test(location.pathname) ||
+    location.pathname === "/verse-studio";
 
   const TabButton = ({ path, label, icon: Icon }: { path: string; label: string; icon: typeof Home }) => {
     const active = isActive(path);
