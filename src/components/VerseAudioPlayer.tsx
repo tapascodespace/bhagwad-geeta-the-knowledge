@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
-import { Pause, Play, Loader2, AudioLines, BookOpen, Headphones, Lightbulb } from "lucide-react";
+import { Pause, Play, Loader2, AudioLines, BookOpen, Headphones, Lightbulb, Clock } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { audioController } from "@/lib/audio-controller";
 import {
@@ -9,6 +9,7 @@ import {
   type AudioPart,
   type AudioLang,
 } from "@/lib/audio-url";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface SectionMeta {
   key: AudioPart;
@@ -41,10 +42,12 @@ const formatTime = (s: number) => {
 
 const VerseAudioPlayer = ({ chapter, verse, part, meta, language }: Props) => {
   const state = useAudioState();
+  const { t } = useLanguage();
   const [available, setAvailable] = useState<boolean | null>(null);
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
+
   const id = `ch${chapter}-v${verse}-${part === "shloka" ? "shloka" : `${language}-${part}`}`;
   const isActive = state.activeId === id;
   const isPlaying = isActive && state.isPlaying;
@@ -123,8 +126,26 @@ const VerseAudioPlayer = ({ chapter, verse, part, meta, language }: Props) => {
   const Icon = meta.icon;
   const pct = duration > 0 ? Math.min(100, (progress / duration) * 100) : 0;
 
+  if (available === null) return null;
+
   if (available === false) {
-    return null;
+    return (
+      <div className="mt-4 rounded-2xl border border-border/30 p-4 bg-muted/20">
+        <div className="flex items-center gap-3">
+          <div className="shrink-0 w-14 h-14 rounded-full flex items-center justify-center border-2 border-border/30 bg-muted/30 text-muted-foreground">
+            <Clock className="w-5 h-5" strokeWidth={1.8} />
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="font-display font-semibold text-muted-foreground text-base leading-tight truncate">
+              {meta.title}
+            </p>
+            <p className="text-xs text-muted-foreground/70 mt-0.5 truncate">
+              {t("audioComingSoon") || "Audio coming soon"}
+            </p>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
