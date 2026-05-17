@@ -1,7 +1,7 @@
-import { useEffect, useSyncExternalStore } from "react";
+import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import { Loader2, Play, Square } from "lucide-react";
 import { playAllController, type PlayAllSegment } from "@/lib/play-all-controller";
-import { AudioNotAvailableError } from "@/lib/audio-url";
+import { AudioNotAvailableError, isVerseAudioAvailable } from "@/lib/audio-url";
 import { toast } from "@/hooks/use-toast";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -29,6 +29,23 @@ const PlayAllButton = ({
 }: Props) => {
   const state = useState_();
   const { t } = useLanguage();
+  const [hasAnyAudio, setHasAnyAudio] = useState<boolean | null>(null);
+  const segmentsKey = useMemo(
+    () => segments.map((s) => `${s.chapter}-${s.verse}-${s.part}-${s.language}`).join(),
+    [segments]
+  );
+
+  useEffect(() => {
+    let cancelled = false;
+    Promise.all(
+      segments.map((seg) =>
+        isVerseAudioAvailable(seg.chapter, seg.verse, seg.part, seg.language)
+      )
+    ).then((results) => {
+      if (!cancelled) setHasAnyAudio(results.some(Boolean));
+    });
+    return () => { cancelled = true; };
+  }, [segments, segmentsKey]);
   const isThisSession = state.sessionId === sessionId && state.isActive;
   const partLabel = (p?: string | null) =>
     p === "shloka" ? t("partShloka")
@@ -86,6 +103,8 @@ const PlayAllButton = ({
         ? `${t("playing")} ${partLabel(state.currentPart)}…`
         : `${t("playing")}…`
     : t("playAllHint");
+
+  if (hasAnyAudio === null || hasAnyAudio === false) return null;
 
   return (
     <button
