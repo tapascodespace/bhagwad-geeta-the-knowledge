@@ -1,0 +1,294 @@
+{
+  "backup": "docs\\audit\\15-gita-data-before-commentary-placeholder-fix-20260517T181656Z.json",
+  "changes": [
+    {
+      "ref": "4.16",
+      "lang": "en",
+      "status": "override"
+    },
+    {
+      "ref": "4.17",
+      "lang": "en",
+      "status": "override"
+    },
+    {
+      "ref": "5.8",
+      "lang": "hi",
+      "status": "copied",
+      "from": "5.9"
+    },
+    {
+      "ref": "5.8",
+      "lang": "en",
+      "status": "copied",
+      "from": "5.9"
+    },
+    {
+      "ref": "5.8",
+      "lang": "bn",
+      "status": "copied",
+      "from": "5.9"
+    },
+    {
+      "ref": "7.8",
+      "lang": "hi",
+      "status": "copied",
+      "from": "7.9"
+    },
+    {
+      "ref": "7.8",
+      "lang": "bn",
+      "status": "copied",
+      "from": "7.9"
+    },
+    {
+      "ref": "8.5",
+      "lang": "en",
+      "status": "override"
+    },
+    {
+      "ref": "8.12",
+      "lang": "hi",
+      "status": "copied",
+      "from": "8.13"
+    },
+    {
+      "ref": "8.12",
+      "lang": "bn",
+      "status": "copied",
+      "from": "8.13"
+    },
+    {
+      "ref": "8.18",
+      "lang": "hi",
+      "status": "copied",
+      "from": "8.19"
+    },
+    {
+      "ref": "8.18",
+      "lang": "bn",
+      "status": "copied",
+      "from": "8.19"
+    },
+    {
+      "ref": "9.7",
+      "lang": "hi",
+      "status": "copied",
+      "from": "9.8"
+    },
+    {
+      "ref": "9.7",
+      "lang": "bn",
+      "status": "copied",
+      "from": "9.8"
+    },
+    {
+      "ref": "9.12",
+      "lang": "hi",
+      "status": "copied",
+      "from": "9.13"
+    },
+    {
+      "ref": "9.12",
+      "lang": "bn",
+      "status": "copied",
+      "from": "9.13"
+    },
+    {
+      "ref": "10.4",
+      "lang": "hi",
+      "status": "copied",
+      "from": "10.5"
+    },
+    {
+      "ref": "10.4",
+      "lang": "bn",
+      "status": "copied",
+      "from": "10.5"
+    },
+    {
+      "ref": "10.12",
+      "lang": "hi",
+      "status": "copied",
+      "from": "10.13"
+    },
+    {
+      "ref": "10.12",
+      "lang": "bn",
+      "status": "copied",
+      "from": "10.13"
+    },
+    {
+      "ref": "10.16",
+      "lang": "en",
+      "status": "override"
+    },
+    {
+      "ref": "10.41",
+      "lang": "en",
+      "status": "override"
+    },
+    {
+      "ref": "11.10",
+      "lang": "hi",
+      "status": "copied",
+      "from": "11.11"
+    },
+    {
+      "ref": "11.10",
+      "lang": "bn",
+      "status": "copied",
+      "from": "11.11"
+    },
+    {
+      "ref": "11.23",
+      "lang": "hi",
+      "status": "copied",
+      "from": "11.24"
+    },
+    {
+      "ref": "11.23",
+      "lang": "bn",
+      "status": "copied",
+      "from": "11.24"
+    },
+    {
+      "ref": "11.29",
+      "lang": "en",
+      "status": "override"
+    },
+    {
+      "ref": "11.31",
+      "lang": "en",
+      "status": "override"
+    },
+    {
+      "ref": "11.33",
+      "lang": "hi",
+      "status": "copied",
+      "from": "11.34"
+    },
+    {
+      "ref": "11.33",
+      "lang": "bn",
+      "status": "copied",
+      "from": "11.34"
+    },
+    {
+      "ref": "11.41",
+      "lang": "hi",
+      "status": "copied",
+      "from": "11.42"
+    },
+    {
+      "ref": "11.41",
+      "lang": "en",
+      "status": "copied",
+      "from": "11.42"
+    },
+    {
+      "ref": "11.41",
+      "lang": "bn",
+      "status": "copied",
+      "from": "11.42"
+    },
+    {
+      "ref": "11.52",
+      "lang": "hi",
+      "status": "copied",
+      "from": "11.53"
+    },
+    {
+      "ref": "11.52",
+      "lang": "bn",
+      "status": "copied",
+      "from": "11.53"
+    },
+    {
+      "ref": "12.3",
+      "lang": "hi",
+      "status": "copied",
+      "from": "12.4"
+    },
+    {
+      "ref": "12.3",
+      "lang": "bn",
+      "status": "copied",
+      "from": "12.4"
+    },
+    {
+      "ref": "12.6",
+      "lang": "hi",
+      "status": "copied",
+      "from": "12.7"
+    },
+    {
+      "ref": "12.6",
+      "lang": "bn",
+      "status": "copied",
+      "from": "12.7"
+    },
+    {
+      "ref": "12.13",
+      "lang": "hi",
+      "status": "copied",
+      "from": "12.14"
+    },
+    {
+      "ref": "12.13",
+      "lang": "bn",
+      "status": "copied",
+      "from": "12.14"
+    },
+    {
+      "ref": "12.18",
+      "lang": "hi",
+      "status": "copied",
+      "from": "12.19"
+    },
+    {
+      "ref": "12.18",
+      "lang": "bn",
+      "status": "copied",
+      "from": "12.19"
+    },
+    {
+      "ref": "13.6",
+      "lang": "hi",
+      "status": "copied",
+      "from": "13.7"
+    },
+    {
+      "ref": "13.6",
+      "lang": "bn",
+      "status": "copied",
+      "from": "13.7"
+    },
+    {
+      "ref": "15.3",
+      "lang": "hi",
+      "status": "copied",
+      "from": "15.4"
+    },
+    {
+      "ref": "15.3",
+      "lang": "bn",
+      "status": "copied",
+      "from": "15.4"
+    },
+    {
+      "ref": "17.5",
+      "lang": "hi",
+      "status": "copied",
+      "from": "17.6"
+    },
+    {
+      "ref": "17.5",
+      "lang": "bn",
+      "status": "copied",
+      "from": "17.6"
+    }
+  ],
+  "change_count": 49,
+  "remaining_placeholders": []
+}
