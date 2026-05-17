@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
@@ -40,6 +40,7 @@ import {
   useBookBookmarks,
 } from "@/hooks/useLibrary";
 import { useBookmarks } from "@/hooks/useBookmarks";
+import { useAuthSession } from "@/hooks/useAuthSession";
 import { LANGUAGES, type Language } from "@/i18n/translations";
 import {
   books as ALL_BOOKS,
@@ -152,6 +153,14 @@ const STR = {
     accountSub: "आपकी प्रोफ़ाइल और खरीद",
     guest: "अतिथि उपयोगकर्ता",
     guestSub: "इस डिवाइस पर सहेजा गया",
+    signedInAs: "साइन इन किया गया",
+    signIn: "साइन इन करें",
+    signInWithGoogle: "Google से जारी रखें",
+    emailPlaceholder: "ईमेल पता",
+    emailLink: "ईमेल लिंक भेजें",
+    sending: "भेज रहे हैं...",
+    emailSent: "साइन-इन लिंक ईमेल कर दिया गया",
+    signInError: "साइन-इन विफल रहा",
     restore: "खरीद पुनर्स्थापित करें",
     signOut: "साइन आउट",
     signOutConfirm: "स्थानीय डेटा साफ़ करना चाहते हैं?",
@@ -205,6 +214,14 @@ const STR = {
     accountSub: "Your profile and purchases",
     guest: "Guest user",
     guestSub: "Saved on this device",
+    signedInAs: "Signed in as",
+    signIn: "Sign in",
+    signInWithGoogle: "Continue with Google",
+    emailPlaceholder: "Email address",
+    emailLink: "Send email link",
+    sending: "Sending...",
+    emailSent: "Sign-in link sent",
+    signInError: "Sign-in failed",
     restore: "Restore purchases",
     signOut: "Sign out",
     signOutConfirm: "Clear all local data on this device?",
@@ -258,6 +275,14 @@ const STR = {
     accountSub: "আপনার প্রোফাইল ও ক্রয়",
     guest: "অতিথি ব্যবহারকারী",
     guestSub: "এই ডিভাইসে সংরক্ষিত",
+    signedInAs: "সাইন ইন করা হয়েছে",
+    signIn: "সাইন ইন করুন",
+    signInWithGoogle: "Google দিয়ে চালিয়ে যান",
+    emailPlaceholder: "ইমেল ঠিকানা",
+    emailLink: "ইমেল লিংক পাঠান",
+    sending: "পাঠানো হচ্ছে...",
+    emailSent: "সাইন-ইন লিংক পাঠানো হয়েছে",
+    signInError: "সাইন-ইন ব্যর্থ হয়েছে",
     restore: "ক্রয় পুনরুদ্ধার করুন",
     signOut: "সাইন আউট",
     signOutConfirm: "এই ডিভাইস থেকে স্থানীয় ডেটা মুছবেন?",
@@ -285,6 +310,9 @@ const Settings = () => {
   const { unlock } = useUnlockedBooks();
   const { items: bookBookmarks } = useBookBookmarks();
   const { bookmarks: verseBookmarks } = useBookmarks();
+  const { user, loading: authLoading, signInWithGoogle, signInWithEmail, signOut } = useAuthSession();
+  const [email, setEmail] = useState("");
+  const [authBusy, setAuthBusy] = useState(false);
   const s = STR[language] ?? STR.en;
 
   const progressMap = useMemo(() => readProgressMap(), [purchases]);
@@ -331,7 +359,49 @@ const Settings = () => {
     }
   };
 
-  const handleSignOut = () => {
+  const handleEmailSignIn = async () => {
+    if (!email.trim()) return;
+    setAuthBusy(true);
+    try {
+      await signInWithEmail(email.trim());
+      toast.success(s.emailSent);
+    } catch (error) {
+      toast.error(s.signInError, {
+        description: error instanceof Error ? error.message : undefined,
+      });
+    } finally {
+      setAuthBusy(false);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    setAuthBusy(true);
+    try {
+      await signInWithGoogle();
+    } catch (error) {
+      toast.error(s.signInError, {
+        description: error instanceof Error ? error.message : undefined,
+      });
+      setAuthBusy(false);
+    }
+  };
+
+  const handleSignOut = async () => {
+    if (user) {
+      setAuthBusy(true);
+      try {
+        await signOut();
+        toast.success(s.signOut);
+      } catch (error) {
+        toast.error(s.signInError, {
+          description: error instanceof Error ? error.message : undefined,
+        });
+      } finally {
+        setAuthBusy(false);
+      }
+      return;
+    }
+
     if (!window.confirm(s.signOutConfirm)) return;
     try {
       [
@@ -665,10 +735,46 @@ const Settings = () => {
               <UserCircle2 className="w-7 h-7 text-primary-foreground" />
             </div>
             <div className="min-w-0">
-              <p className="font-semibold text-foreground">{s.guest}</p>
-              <p className="text-xs text-muted-foreground">{s.guestSub}</p>
+              <p className="font-semibold text-foreground">
+                {user ? s.signedInAs : s.guest}
+              </p>
+              <p className="text-xs text-muted-foreground truncate">
+                {authLoading ? s.sending : user?.email ?? s.guestSub}
+              </p>
             </div>
           </div>
+          {!user && (
+            <div className="space-y-2 mb-3">
+              <Button
+                type="button"
+                className="w-full rounded-2xl"
+                onClick={handleGoogleSignIn}
+                disabled={authBusy || authLoading}
+              >
+                {authBusy ? s.sending : s.signInWithGoogle}
+              </Button>
+              <div className="flex gap-2">
+                <input
+                  type="email"
+                  inputMode="email"
+                  autoComplete="email"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                  placeholder={s.emailPlaceholder}
+                  className="min-w-0 flex-1 rounded-2xl border border-border bg-background/70 px-3 py-2 text-sm text-foreground outline-none ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring"
+                />
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="rounded-2xl"
+                  onClick={handleEmailSignIn}
+                  disabled={authBusy || authLoading || !email.trim()}
+                >
+                  {s.emailLink}
+                </Button>
+              </div>
+            </div>
+          )}
           <div className="space-y-2">
             <Row onClick={handleRestore}>
               <span className="flex items-center gap-3">
@@ -680,7 +786,9 @@ const Settings = () => {
             <Row onClick={handleSignOut}>
               <span className="flex items-center gap-3">
                 <LogOut className="w-4 h-4 text-destructive" />
-                <span className="text-sm font-medium text-destructive">{s.signOut}</span>
+                <span className="text-sm font-medium text-destructive">
+                  {user ? s.signOut : s.signOutConfirm}
+                </span>
               </span>
               <ChevronRight className="w-4 h-4 text-muted-foreground" />
             </Row>

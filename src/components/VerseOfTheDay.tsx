@@ -4,9 +4,17 @@ import { Sparkles, ArrowRight } from "lucide-react";
 import { chapters, pickText, getChapterName } from "@/data/gita";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-// Deterministic verse-of-the-day: cycles through every verse in the Gita
-// based on day-of-year so users see something new each day, and the same
-// verse is shown to everyone on a given day.
+const hashString = (value: string) => {
+  let hash = 2166136261;
+  for (let i = 0; i < value.length; i += 1) {
+    hash ^= value.charCodeAt(i);
+    hash = Math.imul(hash, 16777619);
+  }
+  return hash >>> 0;
+};
+
+// Date-seeded verse-of-the-day: random-looking each day, stable for the full
+// local day, and shared by every user on that date.
 const getDailyVerse = () => {
   const all: { chapterId: number; verseIndex: number }[] = [];
   chapters.forEach((c) => {
@@ -14,28 +22,24 @@ const getDailyVerse = () => {
   });
 
   const now = new Date();
-  const start = new Date(now.getFullYear(), 0, 0);
-  const diff = now.getTime() - start.getTime();
-  const dayOfYear = Math.floor(diff / (1000 * 60 * 60 * 24));
-  // Mix in year so it doesn't repeat identically every year
-  const seed = dayOfYear + now.getFullYear() * 7;
-  const idx = seed % all.length;
+  const dateKey = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
+  const idx = hashString(`gita-verse-of-day:${dateKey}`) % all.length;
   const pick = all[idx];
   const chapter = chapters.find((c) => c.id === pick.chapterId)!;
   const verse = chapter.verses[pick.verseIndex];
-  return { chapter, verse, verseNumber: pick.verseIndex + 1 };
+  return { chapter, verse };
 };
 
 const VerseOfTheDay = () => {
   const navigate = useNavigate();
   const { t, language } = useLanguage();
-  const { chapter, verse, verseNumber } = useMemo(getDailyVerse, []);
+  const { chapter, verse } = useMemo(getDailyVerse, []);
 
   const translation = pickText(verse.translation, language);
   const chapterName = getChapterName(chapter, language);
 
   const handleOpen = () => {
-    navigate(`/chapters/${chapter.id}/verses/${verseNumber}`);
+    navigate(`/chapters/${chapter.id}/verses/${verse.id}`);
   };
 
   return (
@@ -52,7 +56,7 @@ const VerseOfTheDay = () => {
           </span>
         </div>
         <span className="text-xs text-muted-foreground font-medium">
-          {chapter.id}.{verseNumber}
+          {chapter.id}.{verse.id}
         </span>
       </div>
 

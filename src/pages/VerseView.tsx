@@ -78,10 +78,12 @@ const VerseView = () => {
   };
 
   const handleShare = async () => {
-    const text = `${chapterName} • ${t("verse")} ${verse.id}\n\n${verse.sanskrit}\n\n${translation}`;
+    const verseUrl = window.location.href;
+    const appUrl = window.location.origin;
+    const text = `${chapterName} • ${t("verse")} ${verse.id}\n\n${verse.sanskrit}\n\n${translation}\n\n${t("shareDownloadPrompt")} ${appUrl}`;
     try {
       if (navigator.share) {
-        await navigator.share({ title: `Bhagavad Gita ${chapter.id}.${verse.id}`, text });
+        await navigator.share({ title: `Bhagavad Gita ${chapter.id}.${verse.id}`, text, url: verseUrl });
       } else {
         await navigator.clipboard.writeText(text);
         toast({ title: t("copied") });

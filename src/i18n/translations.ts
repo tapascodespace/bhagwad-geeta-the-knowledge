@@ -119,6 +119,11 @@ export const t: Record<string, Dict> = {
   save: { bn: "সংরক্ষণ করুন", hi: "सहेजें", en: "Save" },
   bookmark: { bn: "পছন্দ", hi: "पसंद", en: "Bookmark" },
   share: { bn: "শেয়ার", hi: "साझा करें", en: "Share" },
+  shareDownloadPrompt: {
+    bn: "অ্যাপটি পান:",
+    hi: "ऐप डाउनलोड करें:",
+    en: "Get the app:",
+  },
   copy: { bn: "কপি", hi: "कॉपी", en: "Copy" },
   copied: { bn: "কপি হয়েছে", hi: "कॉपी हो गया", en: "Copied" },
   copiedDesc: {
@@ -178,6 +183,46 @@ export const t: Record<string, Dict> = {
     bn: "সম্পূর্ণ শ্লোক পড়ুন",
     hi: "पूरा श्लोक पढ़ें",
     en: "Read Full Verse",
+  },
+  verseStudio: {
+    bn: "শ্লোক কার্ড",
+    hi: "श्लोक कार्ड",
+    en: "Verse Cards",
+  },
+  verseStudioSubtitle: {
+    bn: "সুন্দর পটভূমিতে শ্লোক তৈরি ও শেয়ার করুন",
+    hi: "सुंदर पृष्ठभूमि पर श्लोक बनाएँ और साझा करें",
+    en: "Create and share verses on cinematic backgrounds",
+  },
+  shuffleVerse: {
+    bn: "নতুন শ্লোক",
+    hi: "नया श्लोक",
+    en: "New verse",
+  },
+  saveImage: {
+    bn: "ছবি সংরক্ষণ",
+    hi: "चित्र सहेजें",
+    en: "Save image",
+  },
+  shareImage: {
+    bn: "ছবি শেয়ার",
+    hi: "चित्र साझा करें",
+    en: "Share image",
+  },
+  imageSaved: {
+    bn: "ছবি ডাউনলোড হয়েছে",
+    hi: "चित्र डाउनलोड हो गया",
+    en: "Image downloaded",
+  },
+  generatingImage: {
+    bn: "ছবি তৈরি হচ্ছে…",
+    hi: "चित्र बन रहा है…",
+    en: "Creating image…",
+  },
+  openVerse: {
+    bn: "সম্পূর্ণ শ্লোক",
+    hi: "पूरा श्लोक खोलें",
+    en: "Open full verse",
   },
   libraryTitle: {
     bn: "পুস্তকালয়",
