@@ -8,6 +8,8 @@ import {
   type AudioPart,
   type AudioLang,
 } from "@/lib/audio-url";
+import { buildNowPlayingMeta } from "@/lib/now-playing-meta";
+import { chapters, getChapterName } from "@/data/gita";
 
 export interface PlayAllSegment {
   part: AudioPart;
@@ -90,9 +92,16 @@ class PlayAllController {
         if (this.cancelled) return false;
 
         this.update({ isLoading: false });
+        const ch = chapters.find((c) => c.id === seg.chapter);
+        const nowPlaying = buildNowPlayingMeta(
+          seg.chapter,
+          seg.verse,
+          seg.part,
+          ch ? getChapterName(ch, seg.language === "bn" ? "bn" : seg.language === "hi" ? "hi" : "en") : undefined,
+        );
         await new Promise<void>((resolve, reject) => {
           audioController
-            .play(id, url, () => resolve())
+            .play(id, url, { onEnded: () => resolve(), nowPlaying })
             .catch(reject);
         });
         if (this.cancelled) return false;

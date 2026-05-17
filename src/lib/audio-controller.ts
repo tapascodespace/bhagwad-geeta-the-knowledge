@@ -1,6 +1,13 @@
 // Global single-audio controller. Ensures only ONE audio plays at a time
 // across the app and switching verses/parts always stops previous playback.
 
+import {
+  bindMediaSessionHandlers,
+  clearMediaSession,
+  updateMediaSession,
+  type NowPlayingMeta,
+} from "@/lib/media-session";
+
 export interface AudioState {
   activeId: string | null;
   isPlaying: boolean;
@@ -12,11 +19,22 @@ class AudioController {
   private audio: HTMLAudioElement | null = null;
   private listeners = new Set<Listener>();
   private snapshot: AudioState = { activeId: null, isPlaying: false };
+  private sessionBound = false;
 
   private ensureAudio() {
     if (!this.audio) {
       this.audio = new Audio();
       this.audio.preload = "auto";
+    }
+    if (!this.sessionBound) {
+      this.sessionBound = true;
+      bindMediaSessionHandlers({
+        onPlay: () => {
+          const { activeId } = this.snapshot;
+          if (activeId) void this.resume(activeId);
+        },
+        onPause: () => this.pause(),
+      });
     }
     return this.audio;
   }
@@ -62,12 +80,16 @@ class AudioController {
       this.audio.load();
       this.audio.onended = null;
     }
+    clearMediaSession();
     this.update({ activeId: null, isPlaying: false });
   }
 
   pause() {
     if (this.audio && !this.audio.paused) {
       this.audio.pause();
+      if ("mediaSession" in navigator) {
+        navigator.mediaSession.playbackState = "paused";
+      }
       this.update({ isPlaying: false });
     }
   }
@@ -75,18 +97,29 @@ class AudioController {
   async resume(id: string) {
     if (this.snapshot.activeId === id && this.audio) {
       await this.audio.play();
+      if ("mediaSession" in navigator) {
+        navigator.mediaSession.playbackState = "playing";
+      }
       this.update({ isPlaying: true });
     }
   }
 
-  async play(id: string, url: string, onEnded?: () => void) {
+  async play(
+    id: string,
+    url: string,
+    options?: { onEnded?: () => void; nowPlaying?: NowPlayingMeta },
+  ) {
     const a = this.ensureAudio();
     a.pause();
     a.onended = null;
     a.src = url;
+    if (options?.nowPlaying) {
+      updateMediaSession(options.nowPlaying);
+    }
     a.onended = () => {
+      clearMediaSession();
       this.update({ isPlaying: false, activeId: null });
-      onEnded?.();
+      options?.onEnded?.();
     };
     // Workaround: MP3s without an accurate duration header (e.g. ElevenLabs
     // output) report Infinity/0 for `duration` until fully scanned. Seek to
@@ -98,6 +131,9 @@ class AudioController {
       /* ignore */
     }
     await a.play();
+    if ("mediaSession" in navigator) {
+      navigator.mediaSession.playbackState = "playing";
+    }
     this.update({ activeId: id, isPlaying: true });
   }
 

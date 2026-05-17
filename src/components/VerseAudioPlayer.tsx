@@ -9,6 +9,9 @@ import {
   type AudioPart,
   type AudioLang,
 } from "@/lib/audio-url";
+import { buildNowPlayingMeta } from "@/lib/now-playing-meta";
+import { chapters, getChapterName } from "@/data/gita";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface SectionMeta {
   key: AudioPart;
@@ -40,6 +43,7 @@ const formatTime = (s: number) => {
 };
 
 const VerseAudioPlayer = ({ chapter, verse, part, meta, language }: Props) => {
+  const { language: appLang } = useLanguage();
   const state = useAudioState();
   const [available, setAvailable] = useState<boolean | null>(null);
   const [loading, setLoading] = useState(false);
@@ -101,7 +105,14 @@ const VerseAudioPlayer = ({ chapter, verse, part, meta, language }: Props) => {
       setLoading(true);
       const url = await resolveVerseAudio(chapter, verse, part, language);
       setLoading(false);
-      await audioController.play(id, url);
+      const ch = chapters.find((c) => c.id === chapter);
+      const nowPlaying = buildNowPlayingMeta(
+        chapter,
+        verse,
+        part,
+        ch ? getChapterName(ch, appLang) : undefined,
+      );
+      await audioController.play(id, url, { nowPlaying });
     } catch (e: any) {
       setLoading(false);
       if (e instanceof AudioNotAvailableError) {
