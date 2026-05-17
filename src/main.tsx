@@ -4,6 +4,7 @@ import "./index.css";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { initAppearance } from "./hooks/useAppearance";
+import { initNativePlugins } from "./lib/native-init";
 
 // Apply persisted theme synchronously to avoid initial flicker
 try {
@@ -14,6 +15,7 @@ try {
 } catch { /* ignore */ }
 
 initAppearance();
+initNativePlugins();
 
 createRoot(document.getElementById("root")!).render(
   <ThemeProvider>

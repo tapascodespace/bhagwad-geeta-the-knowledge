@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ChevronLeft, Lock, BookOpen, Clock, Sparkles, Check, ArrowRight, Loader2 } from "lucide-react";
 import { getBook, getBookMeta, getBookSections, hasContent } from "@/data/books";
@@ -6,7 +6,7 @@ import { useReadingProgress, useUnlockedBooks } from "@/hooks/useLibrary";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { supabase } from "@/integrations/supabase/client";
+import { useNativePurchase } from "@/hooks/useNativePurchase";
 import { toast } from "sonner";
 
 const STRINGS = {
@@ -24,10 +24,11 @@ const STRINGS = {
     themeFont: "লাইট / ডার্ক মোড ও ফন্ট নিয়ন্ত্রণ",
     startReading: "পড়া শুরু করুন",
     buyNow: (p: number) => `এখনই কিনুন — ₹${p}`,
-    demoNote: "নিরাপদ পেমেন্ট Stripe দ্বারা পরিচালিত।",
+    demoNote: "Google Play দ্বারা নিরাপদ পেমেন্ট।",
     preview: "প্রিভিউ — প্রথম অধ্যায় পড়ুন",
-    processing: "চেকআউট প্রস্তুত হচ্ছে…",
+    processing: "পেমেন্ট প্রস্তুত হচ্ছে…",
     paymentError: "পেমেন্ট শুরু করা যায়নি। আবার চেষ্টা করুন।",
+    webOnly: "এই বইটি শুধুমাত্র অ্যাপে কেনা যাবে।",
   },
   hi: {
     notFound: "पुस्तक नहीं मिली",
@@ -43,10 +44,11 @@ const STRINGS = {
     themeFont: "लाइट / डार्क मोड और फ़ॉन्ट कंट्रोल",
     startReading: "पढ़ना शुरू करें",
     buyNow: (p: number) => `अभी ख़रीदें — ₹${p}`,
-    demoNote: "सुरक्षित भुगतान Stripe द्वारा संचालित।",
+    demoNote: "Google Play द्वारा सुरक्षित भुगतान।",
     preview: "प्रीव्यू — पहला अध्याय पढ़ें",
-    processing: "चेकआउट तैयार हो रहा है…",
+    processing: "भुगतान तैयार हो रहा है…",
     paymentError: "भुगतान शुरू नहीं हो सका। कृपया पुनः प्रयास करें।",
+    webOnly: "यह पुस्तक केवल ऐप में ख़रीदी जा सकती है।",
   },
   en: {
     notFound: "Book not found",
@@ -62,10 +64,11 @@ const STRINGS = {
     themeFont: "Light / Dark mode and font controls",
     startReading: "Start reading",
     buyNow: (p: number) => `Buy now — ₹${p}`,
-    demoNote: "Secure payment powered by Stripe.",
+    demoNote: "Secure payment via Google Play.",
     preview: "Preview — read first chapter",
-    processing: "Preparing checkout…",
+    processing: "Preparing purchase…",
     paymentError: "Could not start payment. Please try again.",
+    webOnly: "This book can only be purchased in the app.",
   },
 } as const;
 
@@ -77,7 +80,7 @@ const BookDetail = () => {
   const { language } = useLanguage();
   const s = STRINGS[language] ?? STRINGS.hi;
   const { section } = useReadingProgress(bookId);
-  const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const { buy, loading: checkoutLoading } = useNativePurchase();
 
   if (!book) {
     return (
@@ -102,25 +105,15 @@ const BookDetail = () => {
       toast.info(s.comingSoon);
       return;
     }
-    setCheckoutLoading(true);
-    try {
-      const { data, error } = await supabase.functions.invoke("create-checkout", {
-        body: {
-          bookId: book.id,
-          title: meta.title,
-          price: book.price,
-          currency: "inr",
-          origin: window.location.origin,
-        },
-      });
-      if (error) throw error;
-      const url = (data as { url?: string } | null)?.url;
-      if (!url) throw new Error("No checkout URL returned");
-      window.location.href = url;
-    } catch (err) {
-      console.error("Stripe checkout error", err);
+    const result = await buy(book.id);
+    if (result.webFallback) {
+      toast.info(s.webOnly);
+      return;
+    }
+    if (result.success) {
+      toast.success(s.unlocked);
+    } else {
       toast.error(s.paymentError);
-      setCheckoutLoading(false);
     }
   };
 

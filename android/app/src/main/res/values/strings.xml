@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Bhagwad Geeta The Knowledge</string>
+    <string name="title_activity_main">Bhagwad Geeta The Knowledge</string>
+    <string name="package_name">com.bhagwadgeeta.knowledge</string>
+    <string name="custom_url_scheme">com.bhagwadgeeta.knowledge</string>
+</resources>

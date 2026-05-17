@@ -820,23 +820,19 @@ const Settings = () => {
               </span>
               <ChevronRight className="w-4 h-4 text-muted-foreground" />
             </Row>
-            <Row onClick={() => toast(s.privacy, { description: s.soon })}>
+            <Row onClick={() => navigate("/privacy")}>
               <span className="flex items-center gap-3">
                 <ShieldCheck className="w-4 h-4 text-primary" />
                 <span className="text-sm font-medium text-foreground">{s.privacy}</span>
               </span>
-              <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                {s.soon}
-              </span>
+              <ChevronRight className="w-4 h-4 text-muted-foreground" />
             </Row>
-            <Row onClick={() => toast(s.terms, { description: s.soon })}>
+            <Row onClick={() => navigate("/terms")}>
               <span className="flex items-center gap-3">
                 <ScrollText className="w-4 h-4 text-primary" />
                 <span className="text-sm font-medium text-foreground">{s.terms}</span>
               </span>
-              <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                {s.soon}
-              </span>
+              <ChevronRight className="w-4 h-4 text-muted-foreground" />
             </Row>
           </div>
         </SectionCard>
