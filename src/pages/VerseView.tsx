@@ -114,7 +114,7 @@ const VerseView = () => {
   ];
 
   return (
-    <div key={`${chapter.id}-${verse.id}`} className="pb-28 animate-fade-in">
+    <div key={`${chapter.id}-${verse.id}`} className="pb-24 animate-fade-in">
       {/* Top bar */}
       <div className="flex items-center justify-between px-4 pt-4 pb-2">
         <button
@@ -275,20 +275,8 @@ const VerseView = () => {
           </>
         )}
 
-        {/* Action row */}
-        <div className="grid grid-cols-5 gap-2 pt-6 mt-6 border-t border-gold/20">
-          <button
-            onClick={goPrev}
-            disabled={!hasPrev}
-            className="flex flex-col items-center gap-1.5 py-2 active:scale-95 transition-all disabled:opacity-40"
-          >
-            <span className="w-11 h-11 rounded-full bg-gradient-primary text-primary-foreground flex items-center justify-center shadow-soft">
-              <ArrowLeft className="w-5 h-5" />
-            </span>
-            <span className="text-xs text-foreground/80 font-medium text-center leading-tight">
-              {t("previous")} {t("verse")}
-            </span>
-          </button>
+        {/* In-card action row (share / copy / bookmark) */}
+        <div className="grid grid-cols-3 gap-2 pt-6 mt-6 border-t border-gold/20">
           <button
             onClick={() => toggleBookmark(chapter.id, verse.id)}
             className="flex flex-col items-center gap-1.5 py-2 active:scale-95 transition-all"
@@ -311,24 +299,12 @@ const VerseView = () => {
           </button>
           <button
             onClick={handleCopy}
-            className="flex flex-col items-center gap-1.5 p-3 rounded-2xl bg-muted/40 hover:bg-muted/60 transition-colors active:scale-95"
-          >
-            <div className="w-10 h-10 rounded-full bg-background flex items-center justify-center shadow-sm">
-              <Copy className="w-5 h-5" />
-            </div>
-            <span className="text-xs text-foreground/80 font-medium text-center leading-tight">{t("copy")}</span>
-          </button>
-          <button
-            onClick={goNext}
-            disabled={!hasNext}
-            className="flex flex-col items-center gap-1.5 py-2 active:scale-95 transition-all disabled:opacity-40"
+            className="flex flex-col items-center gap-1.5 py-2 active:scale-95 transition-all"
           >
             <span className="w-11 h-11 rounded-full bg-gradient-primary text-primary-foreground flex items-center justify-center shadow-soft">
-              <ArrowRight className="w-5 h-5" />
+              <Copy className="w-5 h-5" />
             </span>
-            <span className="text-xs text-foreground/80 font-medium text-center leading-tight">
-              {t("next")} {t("verse")}
-            </span>
+            <span className="text-xs text-foreground/80 font-medium text-center leading-tight">{t("copy")}</span>
           </button>
         </div>
       </div>
@@ -342,6 +318,31 @@ const VerseView = () => {
           The wisdom is timeless. The journey is yours.
         </p>
         <div className="text-gold/60 text-xs mt-3">━━━ ✦ ━━━</div>
+      </div>
+
+      {/* Fixed prev / next bar — always visible at the bottom of the screen */}
+      <div className="fixed bottom-0 left-0 right-0 z-20 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+        <div className="max-w-lg mx-auto px-4">
+          <div className="flex items-center gap-2 rounded-full p-1.5 shadow-elegant border border-border bg-card/90 backdrop-blur-md">
+            <button
+              onClick={goPrev}
+              disabled={!hasPrev}
+              className="flex-1 flex items-center justify-center gap-1.5 rounded-full py-2.5 text-sm font-medium transition-all active:scale-95 disabled:opacity-40"
+            >
+              <ArrowLeft className="w-4 h-4" /> {t("previous")}
+            </button>
+            <div className="text-xs opacity-70 px-2 whitespace-nowrap">
+              {verse.id} / {chapter.verses.length}
+            </div>
+            <button
+              onClick={goNext}
+              disabled={!hasNext}
+              className="flex-1 flex items-center justify-center gap-1.5 rounded-full py-2.5 text-sm font-medium bg-gradient-primary text-primary-foreground shadow-soft transition-all active:scale-95 disabled:opacity-40"
+            >
+              {t("next")} <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
