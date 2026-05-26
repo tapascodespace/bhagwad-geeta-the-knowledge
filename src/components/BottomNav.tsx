@@ -39,7 +39,14 @@ const BottomNav = () => {
     { path: "/bookmarks", label: t("bookmarks"), icon: Heart },
   ];
 
-  if (location.pathname === "/welcome" || location.pathname === "/settings/language") {
+  const hideEntirely =
+    location.pathname === "/welcome" ||
+    location.pathname === "/settings/language" ||
+    /^\/chapters\/\d+\/verses\/\d+$/.test(location.pathname) ||
+    location.pathname === "/verse-studio" ||
+    /^\/library\/[^/]+\/read$/.test(location.pathname);
+
+  if (hideEntirely) {
     return null;
   }
 
@@ -47,11 +54,6 @@ const BottomNav = () => {
     if (path === "/") return location.pathname === "/";
     return location.pathname.startsWith(path);
   };
-
-  const hideOnImmersive =
-    /^\/chapters\/\d+\/verses\/\d+$/.test(location.pathname) ||
-    location.pathname === "/verse-studio" ||
-    /^\/library\/[^/]+\/read$/.test(location.pathname);
 
   const TabButton = ({ path, label, icon: Icon }: { path: string; label: string; icon: typeof Home }) => {
     const active = isActive(path);
@@ -74,10 +76,7 @@ const BottomNav = () => {
 
   return (
     <nav
-      className={`fixed bottom-0 left-0 right-0 z-50 max-w-lg mx-auto pointer-events-none ${
-        hideOnImmersive ? "invisible pointer-events-none" : ""
-      }`}
-      aria-hidden={hideOnImmersive}
+      className="fixed bottom-0 left-0 right-0 z-50 max-w-lg mx-auto pointer-events-none"
     >
       <div className="relative h-[88px] pointer-events-auto">
         <svg
