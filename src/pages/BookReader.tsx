@@ -62,7 +62,7 @@ const BookReader = () => {
 
   useEffect(() => {
     setAnimKey((k) => k + 1);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   }, [section, bookLang]);
 
   // Override the global theme while the reader is mounted so the reader's
@@ -151,7 +151,7 @@ const BookReader = () => {
     // Scope `dark` class to this subtree only so the reader theme stays
     // independent from the global app theme.
     <div className={isDark ? "dark" : ""}>
-      <main className="min-h-screen pb-32 bg-background text-foreground transition-colors">
+      <main className="min-h-screen pb-28 bg-background text-foreground transition-colors">
         {/* Top toolbar */}
         <div className="sticky top-0 z-20 backdrop-blur-md border-b border-border bg-card/85">
           <div className="max-w-lg mx-auto px-4 py-3 flex items-center gap-2">
@@ -278,8 +278,10 @@ const BookReader = () => {
           </div>
         </article>
 
-        {/* Bottom nav for sections */}
-        <div className="fixed bottom-20 left-0 right-0 z-20">
+        {/* Section prev/next — sits above safe area; app BottomNav is hidden on this route */}
+        <div
+          className="fixed bottom-0 left-0 right-0 z-20 pb-[max(1rem,env(safe-area-inset-bottom))]"
+        >
           <div className="max-w-lg mx-auto px-4">
             <div className="flex items-center gap-2 rounded-full p-1.5 shadow-elegant border border-border bg-card/90 backdrop-blur-md">
               <Button

@@ -48,9 +48,10 @@ const BottomNav = () => {
     return location.pathname.startsWith(path);
   };
 
-  const hideOnVerse =
+  const hideOnImmersive =
     /^\/chapters\/\d+\/verses\/\d+$/.test(location.pathname) ||
-    location.pathname === "/verse-studio";
+    location.pathname === "/verse-studio" ||
+    /^\/library\/[^/]+\/read$/.test(location.pathname);
 
   const TabButton = ({ path, label, icon: Icon }: { path: string; label: string; icon: typeof Home }) => {
     const active = isActive(path);
@@ -74,9 +75,9 @@ const BottomNav = () => {
   return (
     <nav
       className={`fixed bottom-0 left-0 right-0 z-50 max-w-lg mx-auto pointer-events-none ${
-        hideOnVerse ? "opacity-0 translate-y-4" : ""
-      } transition-all duration-300`}
-      aria-hidden={hideOnVerse}
+        hideOnImmersive ? "invisible pointer-events-none" : ""
+      }`}
+      aria-hidden={hideOnImmersive}
     >
       <div className="relative h-[88px] pointer-events-auto">
         <svg
