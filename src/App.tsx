@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import BottomNav from "@/components/BottomNav";
+import ScrollToTop from "@/components/ScrollToTop";
 import LaunchScreen from "@/components/LaunchScreen";
 import Home from "@/pages/Home";
 import ChapterList from "@/pages/ChapterList";
@@ -45,6 +46,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <div className="max-w-lg mx-auto min-h-screen">
           <Routes>
             <Route path="/welcome" element={<LanguageSelect initial />} />
