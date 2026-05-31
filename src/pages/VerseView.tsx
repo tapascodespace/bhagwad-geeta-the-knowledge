@@ -14,8 +14,10 @@ import {
 import { chapters, getChapterName, pickText } from "@/data/gita";
 import { useBookmarks } from "@/hooks/useBookmarks";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useSubscription } from "@/contexts/SubscriptionContext";
 import VerseAudioPlayer from "@/components/VerseAudioPlayer";
 import PlayAllButton from "@/components/PlayAllButton";
+import PaywallModal from "@/components/PaywallModal";
 import { toast } from "@/hooks/use-toast";
 
 const VerseView = () => {
@@ -23,6 +25,8 @@ const VerseView = () => {
   const navigate = useNavigate();
   const { isBookmarked, toggleBookmark } = useBookmarks();
   const { t, language } = useLanguage();
+  const { isFreeVerse } = useSubscription();
+  const [showPaywall, setShowPaywall] = useState(false);
 
   const chapter = chapters.find((c) => c.id === Number(chapterId));
   const verseIdx = chapter?.verses.findIndex((v) => v.id === Number(verseId)) ?? -1;
@@ -46,11 +50,40 @@ const VerseView = () => {
     }
   }, [cacheKey]);
 
+  const verseLocked = !!(chapter && verse && !isFreeVerse(chapter.id, verse.id));
+
   if (!chapter || !verse) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
         <p className="text-muted-foreground text-lg">{t("notFound")}</p>
       </div>
+    );
+  }
+
+  if (verseLocked) {
+    return (
+      <>
+        <div className="flex flex-col items-center justify-center min-h-[60vh] px-6 text-center">
+          <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center mb-4">
+            <BookOpen className="w-8 h-8 text-muted-foreground" />
+          </div>
+          <h2 className="text-xl font-display font-semibold text-foreground mb-2">{t("premiumVerse")}</h2>
+          <p className="text-sm text-muted-foreground mb-6 max-w-xs">{t("subscribeToReadFull")}</p>
+          <button
+            onClick={() => setShowPaywall(true)}
+            className="px-6 py-3 rounded-2xl bg-gradient-primary text-primary-foreground font-semibold shadow-elegant active:scale-[0.98] transition-all"
+          >
+            {t("unlockNow")}
+          </button>
+          <button
+            onClick={() => navigate(`/chapters/${chapter.id}`)}
+            className="mt-3 text-sm text-primary font-medium active:opacity-70"
+          >
+            {t("back")}
+          </button>
+        </div>
+        <PaywallModal open={showPaywall} onClose={() => setShowPaywall(false)} />
+      </>
     );
   }
 

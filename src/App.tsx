@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import BottomNav from "@/components/BottomNav";
 import ScrollToTop from "@/components/ScrollToTop";
 import LaunchScreen from "@/components/LaunchScreen";
+import { SubscriptionProvider } from "@/contexts/SubscriptionContext";
 import Home from "@/pages/Home";
 import ChapterList from "@/pages/ChapterList";
 import ChapterDetail from "@/pages/ChapterDetail";
@@ -46,6 +47,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <SubscriptionProvider>
         <ScrollToTop />
         <div className="max-w-lg mx-auto min-h-screen">
           <Routes>
@@ -69,6 +71,7 @@ const App = () => (
           </Routes>
           <BottomNav />
         </div>
+        </SubscriptionProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

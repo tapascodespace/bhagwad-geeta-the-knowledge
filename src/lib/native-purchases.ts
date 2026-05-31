@@ -105,5 +105,94 @@ export async function getBookPrice(bookId: string): Promise<string | null> {
   }
 }
 
+// ── Subscription helpers ─────────────────────────────────────────────
+
+const SUBSCRIPTION_PRODUCT_ID = "premium_yearly";
+const SUBSCRIPTION_PLAN_ID = "yearly-plan";
+
+export interface SubscriptionResult {
+  success: boolean;
+  active: boolean;
+  productId?: string;
+  expiresAt?: number;
+  transactionId?: string;
+}
+
+/**
+ * Purchase the yearly subscription via Google Play Billing.
+ * On web, returns { success: false, active: false }.
+ */
+export async function purchaseSubscription(): Promise<SubscriptionResult> {
+  const mod = await getPurchases();
+  if (!mod) return { success: false, active: false };
+
+  try {
+    const result = await mod.NativePurchases.purchaseProduct({
+      productIdentifier: SUBSCRIPTION_PRODUCT_ID,
+      planIdentifier: SUBSCRIPTION_PLAN_ID,
+      productType: "subs",
+    });
+    return {
+      success: true,
+      active: true,
+      productId: SUBSCRIPTION_PRODUCT_ID,
+      transactionId: result.transactionId,
+    };
+  } catch (err) {
+    console.error("Subscription purchase failed:", err);
+    return { success: false, active: false };
+  }
+}
+
+/**
+ * Restore/check subscription status via Google Play.
+ * Returns whether the subscription is currently active.
+ */
+export async function restoreSubscription(): Promise<SubscriptionResult> {
+  const mod = await getPurchases();
+  if (!mod) return { success: false, active: false };
+
+  try {
+    const result = await mod.NativePurchases.restorePurchases();
+    const sub = (result.purchases ?? []).find(
+      (p) => p.productIdentifier === SUBSCRIPTION_PRODUCT_ID,
+    );
+    if (sub) {
+      return {
+        success: true,
+        active: true,
+        productId: SUBSCRIPTION_PRODUCT_ID,
+        transactionId: sub.transactionId,
+      };
+    }
+    return { success: true, active: false };
+  } catch (err) {
+    console.error("Restore subscription failed:", err);
+    return { success: false, active: false };
+  }
+}
+
+/**
+ * Get the localized subscription price string from the Play Store.
+ * Returns null on web or if the product isn't found.
+ */
+export async function getSubscriptionPrice(): Promise<string | null> {
+  const mod = await getPurchases();
+  if (!mod) return null;
+
+  try {
+    const result = await mod.NativePurchases.getProducts({
+      productIdentifiers: [SUBSCRIPTION_PRODUCT_ID],
+      productType: "subs",
+    });
+    const product = result.products?.find(
+      (p) => p.productIdentifier === SUBSCRIPTION_PRODUCT_ID,
+    );
+    return product?.priceString ?? null;
+  } catch {
+    return null;
+  }
+}
+
 /** Whether we're running on a native platform with billing support */
 export { isNative as isNativePlatform };
