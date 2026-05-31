@@ -42,6 +42,7 @@ import {
 import { useBookmarks } from "@/hooks/useBookmarks";
 import { useAuthSession } from "@/hooks/useAuthSession";
 import { LANGUAGES, type Language } from "@/i18n/translations";
+import { useTutorial } from "@/contexts/TutorialContext";
 import {
   books as ALL_BOOKS,
   getBook,
@@ -174,6 +175,7 @@ const STR = {
     terms: "नियम और शर्तें",
     soon: "जल्द आ रहा है",
     back: "वापस",
+    tutorialRestart: "ट्यूटोरियल फिर से देखें",
   },
   en: {
     title: "Settings",
@@ -235,6 +237,7 @@ const STR = {
     terms: "Terms & Conditions",
     soon: "Coming soon",
     back: "Back",
+    tutorialRestart: "Restart tutorial",
   },
   bn: {
     title: "সেটিংস",
@@ -296,6 +299,7 @@ const STR = {
     terms: "নিয়ম ও শর্ত",
     soon: "শীঘ্রই আসছে",
     back: "ফিরে যান",
+    tutorialRestart: "টিউটোরিয়াল পুনরায় দেখুন",
   },
 } as const;
 
@@ -311,6 +315,7 @@ const Settings = () => {
   const { items: bookBookmarks } = useBookBookmarks();
   const { bookmarks: verseBookmarks } = useBookmarks();
   const { user, loading: authLoading, signInWithGoogle, signInWithEmail, signOut } = useAuthSession();
+  const { restart: restartTutorial } = useTutorial();
   const [email, setEmail] = useState("");
   const [authBusy, setAuthBusy] = useState(false);
   const s = STR[language] ?? STR.en;
@@ -831,6 +836,13 @@ const Settings = () => {
               <span className="flex items-center gap-3">
                 <ScrollText className="w-4 h-4 text-primary" />
                 <span className="text-sm font-medium text-foreground">{s.terms}</span>
+              </span>
+              <ChevronRight className="w-4 h-4 text-muted-foreground" />
+            </Row>
+            <Row onClick={restartTutorial}>
+              <span className="flex items-center gap-3">
+                <PlayCircle className="w-4 h-4 text-primary" />
+                <span className="text-sm font-medium text-foreground">{s.tutorialRestart}</span>
               </span>
               <ChevronRight className="w-4 h-4 text-muted-foreground" />
             </Row>

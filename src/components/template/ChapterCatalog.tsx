@@ -47,7 +47,7 @@ const ChapterCatalog = ({ showVerseOfDay = true, title, subtitle }: ChapterCatal
       {filtered.length === 0 ? (
         <p className="text-center text-muted-foreground py-12 text-lg">{t("noChaptersFound")}</p>
       ) : (
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-4" data-tutorial-id="chapters-grid">
           {filtered.map((ch, i) => (
             <ChapterGridCard
               key={ch.id}

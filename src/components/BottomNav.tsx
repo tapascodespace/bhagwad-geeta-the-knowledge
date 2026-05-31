@@ -31,12 +31,12 @@ const BottomNav = () => {
   const dailyVersePath = useMemo(getDailyVersePath, []);
 
   const leftTabs = [
-    { path: "/", label: t("home"), icon: Home },
-    { path: "/chapters", label: t("chapters"), icon: BookOpen },
+    { path: "/", label: t("home"), icon: Home, tutorialId: undefined as string | undefined },
+    { path: "/chapters", label: t("chapters"), icon: BookOpen, tutorialId: "nav-chapters" as string | undefined },
   ];
   const rightTabs = [
-    { path: "/library", label: t("library"), icon: LibraryIcon },
-    { path: "/bookmarks", label: t("bookmarks"), icon: Heart },
+    { path: "/library", label: t("library"), icon: LibraryIcon, tutorialId: "nav-library" as string | undefined },
+    { path: "/bookmarks", label: t("bookmarks"), icon: Heart, tutorialId: undefined as string | undefined },
   ];
 
   if (location.pathname === "/welcome" || location.pathname === "/settings/language") {
@@ -53,7 +53,7 @@ const BottomNav = () => {
     location.pathname === "/verse-studio" ||
     /^\/library\/[^/]+\/read$/.test(location.pathname);
 
-  const TabButton = ({ path, label, icon: Icon }: { path: string; label: string; icon: typeof Home }) => {
+  const TabButton = ({ path, label, icon: Icon, tutorialId }: { path: string; label: string; icon: typeof Home; tutorialId?: string }) => {
     const active = isActive(path);
     return (
       <button
@@ -62,6 +62,7 @@ const BottomNav = () => {
         className="flex flex-col items-center gap-0.5 justify-end min-h-[44px]"
         aria-label={label}
         aria-current={active ? "page" : undefined}
+        {...(tutorialId ? { "data-tutorial-id": tutorialId } : {})}
       >
         <Icon
           className={`h-6 w-6 ${active ? "text-primary-foreground" : "text-primary-foreground/65"}`}

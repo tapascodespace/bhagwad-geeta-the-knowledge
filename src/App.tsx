@@ -6,6 +6,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import BottomNav from "@/components/BottomNav";
 import ScrollToTop from "@/components/ScrollToTop";
 import LaunchScreen from "@/components/LaunchScreen";
+import TutorialOverlay from "@/components/TutorialOverlay";
+import { TutorialProvider } from "@/contexts/TutorialContext";
 import Home from "@/pages/Home";
 import ChapterList from "@/pages/ChapterList";
 import ChapterDetail from "@/pages/ChapterDetail";
@@ -46,6 +48,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <TutorialProvider>
         <ScrollToTop />
         <div className="max-w-lg mx-auto min-h-screen">
           <Routes>
@@ -69,6 +72,8 @@ const App = () => (
           </Routes>
           <BottomNav />
         </div>
+        <TutorialOverlay />
+        </TutorialProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

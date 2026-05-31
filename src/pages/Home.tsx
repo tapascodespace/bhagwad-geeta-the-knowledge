@@ -20,7 +20,7 @@ const Home = () => {
     <div className="pb-32 px-5 pt-6 animate-fade-in-slow min-h-screen bg-background">
       <AppScreenHeader />
 
-      <div className="mb-6">
+      <div className="mb-6" data-tutorial-id="home-verse-of-day">
         <VerseOfTheDay />
       </div>
 
@@ -28,7 +28,7 @@ const Home = () => {
         {t("quickStart")}
       </p>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-4" data-tutorial-id="home-quick-start">
         {quickLinks.map((item) => (
           <button
             key={item.path}

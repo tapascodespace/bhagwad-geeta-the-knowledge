@@ -282,6 +282,53 @@ export const t: Record<string, Dict> = {
     hi: "यह पुस्तक अभी उपलब्ध नहीं है। बने रहिए!",
     en: "This book is not available yet. Stay tuned!",
   },
+
+  // Tutorial / Onboarding
+  tutorialVerseOfDay: {
+    bn: "এটি আজকের শ্লোক — প্রতিদিন একটি নতুন শ্লোক এখানে দেখা যায়। পড়তে ট্যাপ করুন!",
+    hi: "यह आज का श्लोक है — हर दिन यहाँ एक नया श्लोक दिखता है। पढ़ने के लिए टैप करें!",
+    en: "This is the Verse of the Day — a new verse appears here daily. Tap to read it!",
+  },
+  tutorialQuickStart: {
+    bn: "দ্রুত শুরু করুন — এখানে থেকে অধ্যায়, পুস্তকালয়, শ্লোক কার্ড ও আরও অনেক কিছু খুলুন।",
+    hi: "त्वरित प्रारंभ — यहाँ से अध्याय, पुस्तकालय, श्लोक कार्ड और बहुत कुछ खोलें।",
+    en: "Quick Start — jump to Chapters, Library, Verse Cards, and more from here.",
+  },
+  tutorialNavChapters: {
+    bn: "অধ্যায় ট্যাবে ট্যাপ করে সমস্ত ১৮টি অধ্যায় ব্রাউজ করুন।",
+    hi: "अध्याय टैब पर टैप करके सभी 18 अध्यायों को ब्राउज़ करें।",
+    en: "Tap Chapters to browse all 18 chapters of the Bhagavad Gita.",
+  },
+  tutorialNavLibrary: {
+    bn: "পুস্তকালয় ট্যাবে ই-বুক, ওয়ালপেপার ও আরও অনেক কিছু পাবেন।",
+    hi: "पुस्तकालय टैब में ई-बुक, वॉलपेपर और बहुत कुछ मिलेगा।",
+    en: "The Library tab has e-books, wallpapers, and supplementary readings.",
+  },
+  tutorialChaptersGrid: {
+    bn: "এখানে সমস্ত অধ্যায় কার্ড আকারে দেখা যায়। যেকোনো অধ্যায়ে ট্যাপ করে শ্লোক পড়ুন।",
+    hi: "यहाँ सभी अध्याय कार्ड के रूप में दिखते हैं। किसी भी अध्याय पर टैप करके श्लोक पढ़ें।",
+    en: "All chapters are shown as cards. Tap any chapter to start reading its verses.",
+  },
+  tutorialLibraryBooks: {
+    bn: "এখানে আধ্যাত্মিক বইয়ের সংগ্রহ রয়েছে। শুরু করতে যেকোনো বইতে ট্যাপ করুন!",
+    hi: "यहाँ आध्यात्मिक पुस्तकों का संग्रह है। शुरू करने के लिए किसी भी पुस्तक पर टैप करें!",
+    en: "Browse a curated collection of spiritual books. Tap any book to start reading!",
+  },
+  tutorialSkip: {
+    bn: "এড়িয়ে যান",
+    hi: "छोड़ दें",
+    en: "Skip tutorial",
+  },
+  tutorialDone: {
+    bn: "শুরু করুন!",
+    hi: "शुरू करें!",
+    en: "Get started!",
+  },
+  tutorialRestart: {
+    bn: "টিউটোরিয়াল পুনরায় দেখুন",
+    hi: "ट्यूटोरियल फिर से देखें",
+    en: "Restart tutorial",
+  },
 };
 
 // Chapter names per language

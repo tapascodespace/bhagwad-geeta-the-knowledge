@@ -104,8 +104,8 @@ const Library = () => {
       <AppScreenHeader title={t("libraryTitle")} subtitle={t("librarySubtitle")} showAvatar={false} />
 
       <div className="space-y-7">
-        {rows.map((row) => (
-          <section key={row.id}>
+        {rows.map((row, rowIndex) => (
+          <section key={row.id} {...(rowIndex === 0 ? { "data-tutorial-id": "library-first-row" } : {})}>
             <h2 className="px-5 mb-3 font-display text-lg font-semibold text-foreground">
               {t(CATEGORY_LABEL_KEYS[row.id])}
             </h2>
