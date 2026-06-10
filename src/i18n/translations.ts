@@ -120,9 +120,9 @@ export const t: Record<string, Dict> = {
   bookmark: { bn: "পছন্দ", hi: "पसंद", en: "Bookmark" },
   share: { bn: "শেয়ার", hi: "साझा करें", en: "Share" },
   shareDownloadPrompt: {
-    bn: "অ্যাপটি পান:",
+    bn: "অ্যাপটি ডাউনলোড করুন:",
     hi: "ऐप डाउनलोड करें:",
-    en: "Get the app:",
+    en: "Download the app:",
   },
   copy: { bn: "কপি", hi: "कॉपी", en: "Copy" },
   copied: { bn: "কপি হয়েছে", hi: "कॉपी हो गया", en: "Copied" },

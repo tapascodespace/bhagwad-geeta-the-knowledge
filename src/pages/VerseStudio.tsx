@@ -74,8 +74,8 @@ const VerseStudio = () => {
   const handleShare = async () => {
     setBusy(true);
     try {
-      const appUrl = window.location.origin;
-      const text = `${cardContent.meta}\n\n${sanskrit}\n\n${translation}\n\n${t("shareDownloadPrompt")} ${appUrl}`;
+      const storeUrl = "https://play.google.com/store/apps/details?id=com.bhagwadgeeta.knowledge";
+      const text = `${cardContent.meta}\n\n${sanskrit}\n\n${translation}\n\n${t("shareDownloadPrompt")} ${storeUrl}`;
 
       if (Capacitor.isNativePlatform()) {
         await Share.share({
