@@ -11,7 +11,6 @@ export const SHARE_BACKGROUNDS = [
   "/share-backgrounds/bg-6.png",
   "/share-backgrounds/bg-7.png",
   "/share-backgrounds/bg-8.png",
-  "/share-backgrounds/bg-9.png",
 ] as const;
 
 export const pickBackgroundBySeed = (seed: string) => {

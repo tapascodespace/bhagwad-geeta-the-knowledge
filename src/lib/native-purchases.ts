@@ -27,11 +27,22 @@ export const toBookId = (productId: string): string =>
 const isNative = (): boolean => Capacitor.isNativePlatform();
 
 let purchasesModule: typeof import("@capgo/native-purchases") | null = null;
+let configured = false;
 
 async function getPurchases() {
   if (!isNative()) return null;
   if (!purchasesModule) {
     purchasesModule = await import("@capgo/native-purchases");
+  }
+  if (!configured) {
+    try {
+      await purchasesModule.NativePurchases.configure({
+        apiKey: "goog_placeholder",
+      });
+      configured = true;
+    } catch (err) {
+      console.warn("NativePurchases.configure() failed:", err);
+    }
   }
   return purchasesModule;
 }

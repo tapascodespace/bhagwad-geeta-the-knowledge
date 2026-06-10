@@ -8,9 +8,10 @@ import {
   Headphones,
   Lightbulb,
   Share2,
-  Copy,
   ArrowRight,
 } from "lucide-react";
+import { Share } from "@capacitor/share";
+import { Capacitor } from "@capacitor/core";
 import { chapters, getChapterName, pickText } from "@/data/gita";
 import { useBookmarks } from "@/hooks/useBookmarks";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -100,23 +101,18 @@ const VerseView = () => {
     if (hasPrev) navigate(`/chapters/${chapter.id}/verses/${chapter.verses[verseIdx - 1].id}`, { replace: true });
   };
 
-  const handleCopy = async () => {
-    const text = `${verse.sanskrit}\n\n${translation}${explanation ? `\n\n${explanation}` : ""}`;
-    try {
-      await navigator.clipboard.writeText(text);
-      toast({ title: t("copied"), description: t("copiedDesc") });
-    } catch {
-      toast({ title: t("copyFailed"), variant: "destructive" });
-    }
-  };
-
   const handleShare = async () => {
-    const verseUrl = window.location.href;
     const appUrl = window.location.origin;
     const text = `${chapterName} • ${t("verse")} ${verse.id}\n\n${verse.sanskrit}\n\n${translation}\n\n${t("shareDownloadPrompt")} ${appUrl}`;
     try {
-      if (navigator.share) {
-        await navigator.share({ title: `Bhagavad Gita ${chapter.id}.${verse.id}`, text, url: verseUrl });
+      if (Capacitor.isNativePlatform()) {
+        await Share.share({
+          title: `Bhagavad Gita ${chapter.id}.${verse.id}`,
+          text,
+          dialogTitle: t("share"),
+        });
+      } else if (navigator.share) {
+        await navigator.share({ title: `Bhagavad Gita ${chapter.id}.${verse.id}`, text });
       } else {
         await navigator.clipboard.writeText(text);
         toast({ title: t("copied") });
@@ -309,7 +305,7 @@ const VerseView = () => {
         )}
 
         {/* Action row */}
-        <div className="grid grid-cols-5 gap-2 pt-6 mt-6 border-t border-gold/20">
+        <div className="grid grid-cols-4 gap-2 pt-6 mt-6 border-t border-gold/20">
           <button
             onClick={goPrev}
             disabled={!hasPrev}
@@ -341,15 +337,6 @@ const VerseView = () => {
               <Share2 className="w-5 h-5" />
             </span>
             <span className="text-xs text-foreground/80 font-medium text-center leading-tight">{t("share")}</span>
-          </button>
-          <button
-            onClick={handleCopy}
-            className="flex flex-col items-center gap-1.5 p-3 rounded-2xl bg-muted/40 hover:bg-muted/60 transition-colors active:scale-95"
-          >
-            <div className="w-10 h-10 rounded-full bg-background flex items-center justify-center shadow-sm">
-              <Copy className="w-5 h-5" />
-            </div>
-            <span className="text-xs text-foreground/80 font-medium text-center leading-tight">{t("copy")}</span>
           </button>
           <button
             onClick={goNext}
