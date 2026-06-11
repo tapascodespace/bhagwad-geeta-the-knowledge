@@ -4,8 +4,8 @@
 //
 // SETUP REQUIRED:
 // 1. Create products in Google Play Console matching the IDs in PRODUCT_IDS
-// 2. The product IDs follow the pattern: "book_<bookId-with-underscores>"
-//    e.g. book ID "bhagavad-gita" → product ID "book_bhagavad_gita"
+// 2. The product IDs follow the pattern: "book-<bookId>"
+//    e.g. book ID "bhagavad-gita" → product ID "book-bhagavad-gita"
 
 import { Capacitor } from "@capacitor/core";
 
@@ -18,11 +18,11 @@ export interface NativePurchaseResult {
 
 /** Convert a book ID to a Google Play product ID */
 export const toProductId = (bookId: string): string =>
-  `book_${bookId.replace(/-/g, "_")}`;
+  `book-${bookId}`;
 
 /** Convert a Google Play product ID back to a book ID */
 export const toBookId = (productId: string): string =>
-  productId.replace(/^book_/, "").replace(/_/g, "-");
+  productId.replace(/^book-/, "");
 
 const isNative = (): boolean => Capacitor.isNativePlatform();
 
@@ -87,7 +87,7 @@ export async function restorePurchases(): Promise<string[]> {
   try {
     const result = await mod.NativePurchases.restorePurchases();
     return (result.purchases ?? [])
-      .filter((p) => p.productIdentifier.startsWith("book_"))
+      .filter((p) => p.productIdentifier.startsWith("book-"))
       .map((p) => toBookId(p.productIdentifier));
   } catch (err) {
     console.error("Restore purchases failed:", err);
@@ -118,7 +118,7 @@ export async function getBookPrice(bookId: string): Promise<string | null> {
 
 // ── Subscription helpers ─────────────────────────────────────────────
 
-const SUBSCRIPTION_PRODUCT_ID = "premium_yearly";
+const SUBSCRIPTION_PRODUCT_ID = "premium-yearly";
 const SUBSCRIPTION_PLAN_ID = "yearly-plan";
 
 export interface SubscriptionResult {
