@@ -118,7 +118,7 @@ export async function getBookPrice(bookId: string): Promise<string | null> {
 
 // ── Subscription helpers ─────────────────────────────────────────────
 
-const SUBSCRIPTION_PRODUCT_ID = "premium-yearly";
+const SUBSCRIPTION_PRODUCT_ID = "premium_yearly";
 const SUBSCRIPTION_PLAN_ID = "yearly-plan";
 
 export interface SubscriptionResult {

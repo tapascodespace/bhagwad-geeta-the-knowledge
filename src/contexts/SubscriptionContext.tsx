@@ -25,7 +25,7 @@ interface SubscriptionContextValue extends SubscriptionState {
 const SubscriptionContext = createContext<SubscriptionContextValue | null>(null);
 
 // ── Product configuration ────────────────────────────────────────────
-export const SUBSCRIPTION_PRODUCT_ID = "premium-yearly";
+export const SUBSCRIPTION_PRODUCT_ID = "premium_yearly";
 export const SUBSCRIPTION_PLAN_ID = "yearly-plan"; // Base Plan ID in Google Play Console
 
 // ── Persistence helpers ──────────────────────────────────────────────
