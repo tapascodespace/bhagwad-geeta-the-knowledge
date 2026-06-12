@@ -40,7 +40,7 @@ export default defineConfig(({ mode }) => ({
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
         runtimeCaching: [
           {
-            urlPattern: /^https:\/\/iiddeudiakdfmpqoynks\.supabase\.co\/storage\/v1\/object\/public\/verse-audio\/.*/i,
+            urlPattern: /^https:\/\/oczkinultzflofespdog\.supabase\.co\/storage\/v1\/object\/public\/verse-audio\/.*/i,
             handler: "CacheFirst",
             options: {
               cacheName: "verse-audio-cache",
