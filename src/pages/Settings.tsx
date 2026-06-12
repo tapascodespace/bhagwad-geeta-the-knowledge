@@ -25,6 +25,8 @@ import {
   BookOpen,
   Check,
   PlayCircle,
+  Crown,
+  Loader2,
 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -34,6 +36,8 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme, type Theme } from "@/contexts/ThemeContext";
 import { useAppearance } from "@/hooks/useAppearance";
 import { usePurchases } from "@/hooks/usePurchases";
+import { useSubscription } from "@/contexts/SubscriptionContext";
+import { isNativePlatform } from "@/lib/native-purchases";
 import {
   readProgressMap,
   useUnlockedBooks,
@@ -174,6 +178,17 @@ const STR = {
     terms: "नियम और शर्तें",
     soon: "जल्द आ रहा है",
     back: "वापस",
+    subscription: "सदस्यता",
+    subscriptionSub: "गीता के सभी अध्याय अनलॉक करें",
+    subscriptionActive: "सक्रिय सदस्यता",
+    subscriptionActiveDesc: "आपके पास सभी 18 अध्यायों तक पहुँच है",
+    subscriptionInactive: "सदस्यता लें",
+    subscriptionInactiveDesc: "₹99/वर्ष में सभी 700 श्लोक अनलॉक करें",
+    subscriptionRestore: "सदस्यता पुनर्स्थापित करें",
+    subscriptionManage: "सदस्यता प्रबंधित करें",
+    subscriptionRestored: "सदस्यता पुनर्स्थापित!",
+    subscriptionNotFound: "कोई सक्रिय सदस्यता नहीं मिली।",
+    subscriptionWebOnly: "सदस्यता केवल ऐप में उपलब्ध है।",
   },
   en: {
     title: "Settings",
@@ -235,6 +250,17 @@ const STR = {
     terms: "Terms & Conditions",
     soon: "Coming soon",
     back: "Back",
+    subscription: "Subscription",
+    subscriptionSub: "Unlock all chapters of the Gita",
+    subscriptionActive: "Active subscription",
+    subscriptionActiveDesc: "You have access to all 18 chapters",
+    subscriptionInactive: "Subscribe",
+    subscriptionInactiveDesc: "Unlock all 700 verses for ₹99/year",
+    subscriptionRestore: "Restore subscription",
+    subscriptionManage: "Manage subscription",
+    subscriptionRestored: "Subscription restored!",
+    subscriptionNotFound: "No active subscription found.",
+    subscriptionWebOnly: "Subscription is only available in the app.",
   },
   bn: {
     title: "সেটিংস",
@@ -296,6 +322,17 @@ const STR = {
     terms: "নিয়ম ও শর্ত",
     soon: "শীঘ্রই আসছে",
     back: "ফিরে যান",
+    subscription: "সদস্যতা",
+    subscriptionSub: "গীতার সব অধ্যায় আনলক করুন",
+    subscriptionActive: "সক্রিয় সদস্যতা",
+    subscriptionActiveDesc: "আপনার সমস্ত ১৮ অধ্যায়ে অ্যাক্সেস আছে",
+    subscriptionInactive: "সদস্যতা নিন",
+    subscriptionInactiveDesc: "₹৯৯/বছরে সমস্ত ৭০০ শ্লোক আনলক করুন",
+    subscriptionRestore: "সদস্যতা পুনরুদ্ধার করুন",
+    subscriptionManage: "সদস্যতা পরিচালনা",
+    subscriptionRestored: "সদস্যতা পুনরুদ্ধার হয়েছে!",
+    subscriptionNotFound: "কোনো সক্রিয় সদস্যতা পাওয়া যায়নি।",
+    subscriptionWebOnly: "সদস্যতা শুধুমাত্র অ্যাপে পাওয়া যায়।",
   },
 } as const;
 
@@ -308,6 +345,7 @@ const Settings = () => {
   const { appearance, update, reset } = useAppearance();
   const { purchases } = usePurchases();
   const { unlock } = useUnlockedBooks();
+  const { active: subActive, subscribe, restore: restoreSub, loading: subLoading } = useSubscription();
   const { items: bookBookmarks } = useBookBookmarks();
   const { bookmarks: verseBookmarks } = useBookmarks();
   const { user, loading: authLoading, signInWithGoogle, signInWithEmail, signOut } = useAuthSession();
@@ -453,6 +491,75 @@ const Settings = () => {
       </header>
 
       <div className="space-y-5">
+        {/* Subscription */}
+        <SectionCard icon={Crown} title={s.subscription} subtitle={s.subscriptionSub} delayMs={20}>
+          {subActive ? (
+            <div className="rounded-2xl bg-gradient-primary p-4 text-primary-foreground shadow-soft">
+              <div className="flex items-center gap-2 mb-1">
+                <Crown className="w-5 h-5" />
+                <span className="font-semibold text-base">{s.subscriptionActive}</span>
+              </div>
+              <p className="text-sm opacity-90">{s.subscriptionActiveDesc}</p>
+              {isNativePlatform() && (
+                <button
+                  onClick={() => {
+                    // Deep link to Google Play subscriptions
+                    window.open("https://play.google.com/store/account/subscriptions", "_blank");
+                  }}
+                  className="mt-3 inline-flex items-center gap-1 text-xs font-semibold bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-full transition-colors"
+                >
+                  {s.subscriptionManage} <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+              )}
+            </div>
+          ) : (
+            <div className="space-y-3">
+              <div className="rounded-2xl bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800/40 p-4">
+                <p className="text-sm font-semibold text-amber-900 dark:text-amber-300 mb-1">{s.subscriptionInactive}</p>
+                <p className="text-xs text-amber-800 dark:text-amber-400">{s.subscriptionInactiveDesc}</p>
+              </div>
+              <button
+                onClick={async () => {
+                  if (!isNativePlatform()) {
+                    toast.info(s.subscriptionWebOnly);
+                    return;
+                  }
+                  const ok = await subscribe();
+                  if (ok) toast.success(s.subscriptionRestored);
+                }}
+                disabled={subLoading}
+                className="w-full py-3 rounded-2xl bg-gradient-primary text-primary-foreground font-semibold text-sm shadow-elegant active:scale-[0.98] transition-all disabled:opacity-60"
+              >
+                {subLoading ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <Loader2 className="w-4 h-4 animate-spin" /> ...
+                  </span>
+                ) : (
+                  s.subscriptionInactive
+                )}
+              </button>
+              <button
+                onClick={async () => {
+                  if (!isNativePlatform()) {
+                    toast.info(s.subscriptionWebOnly);
+                    return;
+                  }
+                  const ok = await restoreSub();
+                  if (ok) {
+                    toast.success(s.subscriptionRestored);
+                  } else {
+                    toast.info(s.subscriptionNotFound);
+                  }
+                }}
+                disabled={subLoading}
+                className="w-full text-center text-sm text-primary font-medium py-2 active:opacity-70 transition-opacity"
+              >
+                {s.subscriptionRestore}
+              </button>
+            </div>
+          )}
+        </SectionCard>
+
         {/* Purchase History */}
         <SectionCard icon={Receipt} title={s.purchases} subtitle={s.purchasesSub} delayMs={40}>
           {sortedPurchases.length === 0 ? (

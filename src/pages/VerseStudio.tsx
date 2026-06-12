@@ -8,6 +8,8 @@ import {
   Share2,
   Sparkles,
 } from "lucide-react";
+import { Share } from "@capacitor/share";
+import { Capacitor } from "@capacitor/core";
 import { pickText, getChapterName } from "@/data/gita";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { pickVerseBySeed } from "@/lib/verse-pick";
@@ -72,26 +74,23 @@ const VerseStudio = () => {
   const handleShare = async () => {
     setBusy(true);
     try {
-      const blob = await buildImage();
-      const file = new File([blob], `gita-${chapter.id}-${verse.id}.png`, { type: "image/png" });
-      const verseUrl = `${window.location.origin}/chapters/${chapter.id}/verses/${verse.id}`;
-      const text = `${cardContent.meta}\n\n${sanskrit}\n\n${translation}`;
+      const storeUrl = "https://play.google.com/store/apps/details?id=com.bhagwadgeeta.knowledge";
+      const text = `${cardContent.meta}\n\n${sanskrit}\n\n${translation}\n\n${t("shareDownloadPrompt")} ${storeUrl}`;
 
-      if (navigator.canShare?.({ files: [file] })) {
-        await navigator.share({
+      if (Capacitor.isNativePlatform()) {
+        await Share.share({
           title: `Bhagavad Gita ${chapter.id}.${verse.id}`,
           text,
-          files: [file],
-          url: verseUrl,
+          dialogTitle: t("share"),
         });
       } else if (navigator.share) {
         await navigator.share({
           title: `Bhagavad Gita ${chapter.id}.${verse.id}`,
-          text: `${text}\n\n${verseUrl}`,
-          url: verseUrl,
+          text,
         });
       } else {
-        await handleSave();
+        await navigator.clipboard.writeText(text);
+        toast({ title: t("copied") });
       }
     } catch {
       /* dismissed */

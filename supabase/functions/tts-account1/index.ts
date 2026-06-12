@@ -19,6 +19,7 @@ const ALLOWED_VOICES = new Set([
   "XrExE9yKIg1WjnnlVkGX", // Matilda
   "onwK4e9ZLuTAKqWW03F9", // Daniel
   "pFZP5JQG7iQjIQuC4Bku", // Lily
+  "nzFihrBIvB34imQBuxub", // Josh (Teacher for kids)
 ]);
 const ALLOWED_MODELS = new Set([
   "eleven_multilingual_v2",

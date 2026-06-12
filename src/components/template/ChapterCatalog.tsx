@@ -1,12 +1,15 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { chapters, getChapterName } from "@/data/gita";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useSubscription } from "@/contexts/SubscriptionContext";
 import { useChapterFilters, type ChapterRangeFilter } from "@/hooks/useChapterFilters";
 import AppScreenHeader from "@/components/template/AppScreenHeader";
 import SearchFilterBar from "@/components/template/SearchFilterBar";
 import FilterChips from "@/components/template/FilterChips";
 import ChapterGridCard from "@/components/template/ChapterGridCard";
 import VerseOfTheDay from "@/components/VerseOfTheDay";
+import PaywallModal from "@/components/PaywallModal";
 
 type ChapterCatalogProps = {
   showVerseOfDay?: boolean;
@@ -17,7 +20,9 @@ type ChapterCatalogProps = {
 const ChapterCatalog = ({ showVerseOfDay = true, title, subtitle }: ChapterCatalogProps) => {
   const navigate = useNavigate();
   const { t, language } = useLanguage();
+  const { active } = useSubscription();
   const { query, setQuery, range, setRange, filtered } = useChapterFilters(language);
+  const [showPaywall, setShowPaywall] = useState(false);
 
   const chips = [
     { id: "all" as ChapterRangeFilter, label: t("filterAll") },
@@ -25,6 +30,8 @@ const ChapterCatalog = ({ showVerseOfDay = true, title, subtitle }: ChapterCatal
     { id: "7-12" as ChapterRangeFilter, label: t("chaptersRange2") },
     { id: "13-18" as ChapterRangeFilter, label: t("chaptersRange3") },
   ];
+
+  const isChapterLocked = (chapterId: number) => !active && chapterId > 1;
 
   return (
     <div className="pb-32 px-5 pt-6 animate-fade-in bg-background min-h-screen">
@@ -48,15 +55,25 @@ const ChapterCatalog = ({ showVerseOfDay = true, title, subtitle }: ChapterCatal
         <p className="text-center text-muted-foreground py-12 text-lg">{t("noChaptersFound")}</p>
       ) : (
         <div className="grid grid-cols-2 gap-4">
-          {filtered.map((ch, i) => (
-            <ChapterGridCard
-              key={ch.id}
-              chapter={ch}
-              name={getChapterName(ch, language)}
-              onClick={() => navigate(`/chapters/${ch.id}`)}
-              style={{ animationDelay: `${i * 40}ms` }}
-            />
-          ))}
+          {filtered.map((ch, i) => {
+            const locked = isChapterLocked(ch.id);
+            return (
+              <ChapterGridCard
+                key={ch.id}
+                chapter={ch}
+                name={getChapterName(ch, language)}
+                locked={locked}
+                onClick={() => {
+                  if (locked) {
+                    setShowPaywall(true);
+                  } else {
+                    navigate(`/chapters/${ch.id}`);
+                  }
+                }}
+                style={{ animationDelay: `${i * 40}ms` }}
+              />
+            );
+          })}
         </div>
       )}
 
@@ -65,6 +82,8 @@ const ChapterCatalog = ({ showVerseOfDay = true, title, subtitle }: ChapterCatal
           {filtered.length} / {chapters.length} {t("chapters")}
         </p>
       )}
+
+      <PaywallModal open={showPaywall} onClose={() => setShowPaywall(false)} />
     </div>
   );
 };

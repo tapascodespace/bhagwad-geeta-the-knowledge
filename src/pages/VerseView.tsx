@@ -8,14 +8,17 @@ import {
   Headphones,
   Lightbulb,
   Share2,
-  Copy,
   ArrowRight,
 } from "lucide-react";
+import { Share } from "@capacitor/share";
+import { Capacitor } from "@capacitor/core";
 import { chapters, getChapterName, pickText } from "@/data/gita";
 import { useBookmarks } from "@/hooks/useBookmarks";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useSubscription } from "@/contexts/SubscriptionContext";
 import VerseAudioPlayer from "@/components/VerseAudioPlayer";
 import PlayAllButton from "@/components/PlayAllButton";
+import PaywallModal from "@/components/PaywallModal";
 import { toast } from "@/hooks/use-toast";
 
 const VerseView = () => {
@@ -23,6 +26,8 @@ const VerseView = () => {
   const navigate = useNavigate();
   const { isBookmarked, toggleBookmark } = useBookmarks();
   const { t, language } = useLanguage();
+  const { isFreeVerse } = useSubscription();
+  const [showPaywall, setShowPaywall] = useState(false);
 
   const chapter = chapters.find((c) => c.id === Number(chapterId));
   const verseIdx = chapter?.verses.findIndex((v) => v.id === Number(verseId)) ?? -1;
@@ -46,11 +51,40 @@ const VerseView = () => {
     }
   }, [cacheKey]);
 
+  const verseLocked = !!(chapter && verse && !isFreeVerse(chapter.id, verse.id));
+
   if (!chapter || !verse) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
         <p className="text-muted-foreground text-lg">{t("notFound")}</p>
       </div>
+    );
+  }
+
+  if (verseLocked) {
+    return (
+      <>
+        <div className="flex flex-col items-center justify-center min-h-[60vh] px-6 text-center">
+          <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center mb-4">
+            <BookOpen className="w-8 h-8 text-muted-foreground" />
+          </div>
+          <h2 className="text-xl font-display font-semibold text-foreground mb-2">{t("premiumVerse")}</h2>
+          <p className="text-sm text-muted-foreground mb-6 max-w-xs">{t("subscribeToReadFull")}</p>
+          <button
+            onClick={() => setShowPaywall(true)}
+            className="px-6 py-3 rounded-2xl bg-gradient-primary text-primary-foreground font-semibold shadow-elegant active:scale-[0.98] transition-all"
+          >
+            {t("unlockNow")}
+          </button>
+          <button
+            onClick={() => navigate(`/chapters/${chapter.id}`)}
+            className="mt-3 text-sm text-primary font-medium active:opacity-70"
+          >
+            {t("back")}
+          </button>
+        </div>
+        <PaywallModal open={showPaywall} onClose={() => setShowPaywall(false)} />
+      </>
     );
   }
 
@@ -67,23 +101,18 @@ const VerseView = () => {
     if (hasPrev) navigate(`/chapters/${chapter.id}/verses/${chapter.verses[verseIdx - 1].id}`, { replace: true });
   };
 
-  const handleCopy = async () => {
-    const text = `${verse.sanskrit}\n\n${translation}${explanation ? `\n\n${explanation}` : ""}`;
-    try {
-      await navigator.clipboard.writeText(text);
-      toast({ title: t("copied"), description: t("copiedDesc") });
-    } catch {
-      toast({ title: t("copyFailed"), variant: "destructive" });
-    }
-  };
-
   const handleShare = async () => {
-    const verseUrl = window.location.href;
-    const appUrl = window.location.origin;
-    const text = `${chapterName} • ${t("verse")} ${verse.id}\n\n${verse.sanskrit}\n\n${translation}\n\n${t("shareDownloadPrompt")} ${appUrl}`;
+    const storeUrl = "https://play.google.com/store/apps/details?id=com.bhagwadgeeta.knowledge";
+    const text = `${chapterName} • ${t("verse")} ${verse.id}\n\n${verse.sanskrit}\n\n${translation}\n\n${t("shareDownloadPrompt")} ${storeUrl}`;
     try {
-      if (navigator.share) {
-        await navigator.share({ title: `Bhagavad Gita ${chapter.id}.${verse.id}`, text, url: verseUrl });
+      if (Capacitor.isNativePlatform()) {
+        await Share.share({
+          title: `Bhagavad Gita ${chapter.id}.${verse.id}`,
+          text,
+          dialogTitle: t("share"),
+        });
+      } else if (navigator.share) {
+        await navigator.share({ title: `Bhagavad Gita ${chapter.id}.${verse.id}`, text });
       } else {
         await navigator.clipboard.writeText(text);
         toast({ title: t("copied") });
@@ -276,7 +305,7 @@ const VerseView = () => {
         )}
 
         {/* Action row */}
-        <div className="grid grid-cols-5 gap-2 pt-6 mt-6 border-t border-gold/20">
+        <div className="grid grid-cols-4 gap-2 pt-6 mt-6 border-t border-gold/20">
           <button
             onClick={goPrev}
             disabled={!hasPrev}
@@ -308,15 +337,6 @@ const VerseView = () => {
               <Share2 className="w-5 h-5" />
             </span>
             <span className="text-xs text-foreground/80 font-medium text-center leading-tight">{t("share")}</span>
-          </button>
-          <button
-            onClick={handleCopy}
-            className="flex flex-col items-center gap-1.5 p-3 rounded-2xl bg-muted/40 hover:bg-muted/60 transition-colors active:scale-95"
-          >
-            <div className="w-10 h-10 rounded-full bg-background flex items-center justify-center shadow-sm">
-              <Copy className="w-5 h-5" />
-            </div>
-            <span className="text-xs text-foreground/80 font-medium text-center leading-tight">{t("copy")}</span>
           </button>
           <button
             onClick={goNext}

@@ -120,9 +120,9 @@ export const t: Record<string, Dict> = {
   bookmark: { bn: "পছন্দ", hi: "पसंद", en: "Bookmark" },
   share: { bn: "শেয়ার", hi: "साझा करें", en: "Share" },
   shareDownloadPrompt: {
-    bn: "অ্যাপটি পান:",
+    bn: "অ্যাপটি ডাউনলোড করুন:",
     hi: "ऐप डाउनलोड करें:",
-    en: "Get the app:",
+    en: "Download the app:",
   },
   copy: { bn: "কপি", hi: "कॉपी", en: "Copy" },
   copied: { bn: "কপি হয়েছে", hi: "कॉपी हो गया", en: "Copied" },
@@ -281,6 +281,26 @@ export const t: Record<string, Dict> = {
     bn: "এই বইটি এখনও উপলব্ধ নয়। সাথে থাকুন!",
     hi: "यह पुस्तक अभी उपलब्ध नहीं है। बने रहिए!",
     en: "This book is not available yet. Stay tuned!",
+  },
+  subscribeToRead: {
+    bn: "পড়তে সদস্যতা নিন",
+    hi: "पढ़ने के लिए सदस्यता लें",
+    en: "Subscribe to read",
+  },
+  premiumVerse: {
+    bn: "প্রিমিয়াম শ্লোক",
+    hi: "प्रीमियम श्लोक",
+    en: "Premium Verse",
+  },
+  subscribeToReadFull: {
+    bn: "এই শ্লোকটি পড়তে ₹৯৯/বছরে সদস্যতা নিন এবং সমস্ত ৭০০ শ্লোক আনলক করুন।",
+    hi: "इस श्लोक को पढ़ने के लिए ₹99/वर्ष में सदस्यता लें और सभी 700 श्लोक अनलॉक करें।",
+    en: "Subscribe for ₹99/year to read this verse and unlock all 700 verses across 18 chapters.",
+  },
+  unlockNow: {
+    bn: "এখনই আনলক করুন",
+    hi: "अभी अनलॉक करें",
+    en: "Unlock Now",
   },
 };
 
